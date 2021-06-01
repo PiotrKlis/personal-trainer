@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_trainer/register_screen.dart';
 
 void main() {
   runApp(PersonalTrainerApp());
@@ -62,7 +63,12 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegisterScreen()),
+                );
+              },
               child: Text('Register'),
             ),
           )
