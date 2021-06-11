@@ -6,9 +6,14 @@ class TrainerScreen extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Image from assets"),
+          title: Text("Trainer"),
         ),
-        body: Image.asset('assets/images/fafcio_2.jpg'), //   <--- image
+        body: Column(
+          children: [
+            Image.asset('assets/images/fafcio_2.jpg'),
+            Text('I am powerful trainer screen')
+          ],
+        ),
       ),
     );
   }
