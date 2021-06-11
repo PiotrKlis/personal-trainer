@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:personal_trainer/register_screen.dart';
+import 'package:personal_trainer/trainer_screen.dart';
+
+import 'client_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -7,6 +10,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String? login;
+  String? password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +25,9 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              onSubmitted: (value) {
+                login = value;
+              },
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Login'),
             ),
@@ -26,6 +35,9 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              onSubmitted: (value) {
+                password = value;
+              },
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Password'),
             ),
@@ -33,7 +45,9 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                validateInputs();
+              },
               child: Text('Login'),
             ),
           ),
@@ -60,5 +74,20 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  void validateInputs() {
+    if (login == "trainer" && password == "trainer") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => TrainerScreen()),
+      );
+    }
+    if (login == "client" && password == "client") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ClientScreen()),
+      );
+    }
   }
 }
