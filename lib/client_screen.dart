@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class ClientScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('Client')
         ),
@@ -14,7 +13,6 @@ class ClientScreen extends StatelessWidget {
             Text('I am powerful client screen')
           ],
         ),
-      ),
     );
   }
 }

@@ -10,9 +10,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String? login;
-  String? password;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,32 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onSubmitted: (value) {
-                login = value;
-              },
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Login'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onSubmitted: (value) {
-                password = value;
-              },
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Password'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                validateInputs();
-              },
-              child: Text('Login'),
-            ),
+            child: MyCustomForm(),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -75,19 +47,97 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
 
-  void validateInputs() {
-    if (login == "trainer" && password == "trainer") {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => TrainerScreen()),
-      );
+class MyCustomForm extends StatefulWidget {
+  @override
+  _MyCustomFormState createState() => _MyCustomFormState();
+}
+
+class _MyCustomFormState extends State<MyCustomForm> {
+  final _formKey = GlobalKey<FormState>();
+  String? _login;
+  String? _password;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              validator: (value) {
+                return validateLogin(value);
+              },
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), hintText: 'Login'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              obscureText: true,
+              validator: (value) {
+                return validatePassword(value);
+              },
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), hintText: 'Password'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  validateCredentials();
+                }
+              },
+              child: Text('Login'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String? validatePassword(String? value) {
+    _password = value;
+    if (value == 'password') {
+      return null;
+    } else {
+      return 'Invalid password';
     }
-    if (login == "client" && password == "client") {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ClientScreen()),
-      );
+  }
+
+  String? validateLogin(String? value) {
+    _login = value;
+    if (value == 'client' || value == 'trainer') {
+      return null;
+    } else {
+      return 'Invalid login';
+    }
+  }
+
+  void validateCredentials() {
+    switch (_login) {
+      case 'trainer':
+        {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => TrainerScreen()),
+          );
+        }
+        break;
+      case 'client':
+        {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => ClientScreen()),
+          );
+        }
+        break;
     }
   }
 }

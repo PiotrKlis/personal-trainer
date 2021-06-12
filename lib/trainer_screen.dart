@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class TrainerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("Trainer"),
         ),
@@ -14,7 +13,6 @@ class TrainerScreen extends StatelessWidget {
             Text('I am powerful trainer screen')
           ],
         ),
-      ),
     );
   }
 }
