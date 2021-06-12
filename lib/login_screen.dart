@@ -4,12 +4,7 @@ import 'package:personal_trainer/trainer_screen.dart';
 
 import 'client_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: MyCustomForm(),
+            child: LoginForm(),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -49,12 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-class MyCustomForm extends StatefulWidget {
-  @override
-  _MyCustomFormState createState() => _MyCustomFormState();
-}
-
-class _MyCustomFormState extends State<MyCustomForm> {
+class LoginForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   String? _login;
   String? _password;
@@ -72,7 +62,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                 return validateLogin(value);
               },
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Login'),
+                  border: OutlineInputBorder(), hintText: 'Email'),
             ),
           ),
           Padding(
@@ -91,7 +81,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
             child: ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  validateCredentials();
+                  validateCredentials(context);
                 }
               },
               child: Text('Login'),
@@ -120,7 +110,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
     }
   }
 
-  void validateCredentials() {
+  void validateCredentials(BuildContext context) {
     switch (_login) {
       case 'trainer':
         {

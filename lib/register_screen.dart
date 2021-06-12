@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class RegisterScreen extends StatelessWidget {
   @override
@@ -7,41 +8,55 @@ class RegisterScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Register'),
       ),
-      body: Column(
+      body: RegisterForm(),
+    );
+  }
+}
+
+class RegisterForm extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
+            child: TextFormField(
+              validator: EmailValidator(errorText: "Enter valid email"),
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Login'),
+                  border: OutlineInputBorder(), hintText: 'Email'),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
+            child: TextFormField(
+              obscureText: true,
+              validator: MinLengthValidator(6,
+                  errorText: "Password should be atleast 6 characters"),
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Password'),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
+            child: TextFormField(
+              obscureText: true,
+              validator: MinLengthValidator(6,
+                  errorText: "Password should be atleast 6 characters"),
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Confirm password'),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Email address'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                if (_formKey.currentState!.validate()) {
+                  validateInputs(context);
+                }
               },
               child: Text('Register'),
             ),
@@ -49,5 +64,9 @@ class RegisterScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void validateInputs(BuildContext context) {
+    Navigator.pop(context);
   }
 }
