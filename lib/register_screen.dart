@@ -13,8 +13,15 @@ class RegisterScreen extends StatelessWidget {
   }
 }
 
-class RegisterForm extends StatelessWidget {
+class RegisterForm extends StatefulWidget {
+
+  @override
+  _RegisterFormState createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
+  UserType _userType = UserType.client;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +32,18 @@ class RegisterForm extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              validator: EmailValidator(errorText: "Enter valid email"),
+              validator: RequiredValidator(errorText: 'Name is required'),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(), hintText: 'Name'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              validator: MultiValidator([
+                EmailValidator(errorText: "Enter valid email"),
+                RequiredValidator(errorText: 'Email is required')
+              ]),
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Email'),
             ),
@@ -43,11 +61,26 @@ class RegisterForm extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              obscureText: true,
-              validator: MinLengthValidator(6,
-                  errorText: "Password should be atleast 6 characters"),
+              validator: MultiValidator([
+                EmailValidator(errorText: "Enter valid email"),
+                RequiredValidator(errorText: 'Trainer email is required')
+              ]),
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Confirm password'),
+                border: OutlineInputBorder(),
+                hintText: 'Trainer email',
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                RadioListTile(
+                    value: 'Trainer',
+                    groupValue: _userType,
+                    onChanged: (Object? value) {
+                    }),
+              ],
             ),
           ),
           Padding(
@@ -70,3 +103,5 @@ class RegisterForm extends StatelessWidget {
     Navigator.pop(context);
   }
 }
+
+enum UserType { trainer, client }
