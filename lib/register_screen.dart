@@ -5,6 +5,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Register'),
       ),
@@ -14,7 +15,6 @@ class RegisterScreen extends StatelessWidget {
 }
 
 class RegisterForm extends StatefulWidget {
-
   @override
   _RegisterFormState createState() => _RegisterFormState();
 }
@@ -71,17 +71,25 @@ class _RegisterFormState extends State<RegisterForm> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                RadioListTile(
+          Row(
+            children: [
+              SizedBox(width: 24),
+              Expanded(
+                child: RadioListTile(
                     value: 'Trainer',
                     groupValue: _userType,
-                    onChanged: (Object? value) {
-                    }),
-              ],
-            ),
+                    onChanged: (Object? value) {}),
+              ),
+              Expanded(child: Text('Trainer')),
+              SizedBox(width: 24),
+              Expanded(
+                child: RadioListTile(
+                    value: 'Trainer',
+                    groupValue: _userType,
+                    onChanged: (Object? value) {}),
+              ),
+              Expanded(child: Text('Client')),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
