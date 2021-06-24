@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:personal_trainer/trainer_client_screen.dart';
 
 class TrainerScreen extends StatelessWidget {
   final List<String> entries = <String>[
@@ -23,9 +24,10 @@ class TrainerScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TrainerClientScreen(
-                          index: index,
-                        ),
+                        builder: (context) =>
+                            TrainerClientScreen(
+                              index: index,
+                            ),
                       ),
                     );
                   },
@@ -34,14 +36,8 @@ class TrainerScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final Email email = Email(
-            body:
-                'This is an invitation to Personal Trainer app from ${'TrainerName'}. Click link to download the app',
-            subject: 'Personal Trainer app invitation',
-            recipients: ['example@example.com'],
-            isHTML: false,
-          );
-          await FlutterEmailSender.send(email);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => EmailScreen()));
         },
         child: const Icon(Icons.add),
       ),
@@ -49,19 +45,25 @@ class TrainerScreen extends StatelessWidget {
   }
 }
 
-class TrainerClientScreen extends StatelessWidget {
-  final int index;
-
-  //requiring the list of todos
-  TrainerClientScreen({Key? key, required this.index}) : super(key: key);
-
+class EmailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Todos'),
-        ),
-        //passing in the ListView.builder
-        body: ListTile(title: Text('$index')));
+    sendEmail(context);
+    return Container();
+  }
+
+  void sendEmail(BuildContext context) async {
+    final Email email = Email(
+      body:
+      'This is an invitation to Personal Trainer app from ${'TrainerName'}. Click link to download the app',
+      subject: 'Personal Trainer app invitation',
+      recipients: ['example@example.com'],
+      isHTML: false,
+    );
+    try {
+      await FlutterEmailSender.send(email);
+    } catch (error) {
+      Navigator.pop(context);
+    }
   }
 }
