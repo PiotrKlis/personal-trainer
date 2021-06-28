@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:personal_trainer/trainer_client_screen.dart';
 
 class TrainerScreen extends StatelessWidget {
@@ -37,7 +39,7 @@ class TrainerScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => EmailScreen()));
+              context, MaterialPageRoute(builder: (context) => EmailScreen())).then((value) => value);
         },
         child: const Icon(Icons.add),
       ),
@@ -45,11 +47,22 @@ class TrainerScreen extends StatelessWidget {
   }
 }
 
-class EmailScreen extends StatelessWidget {
+class EmailScreen extends StatefulWidget {
+  @override
+  _EmailScreenState createState() => _EmailScreenState();
+}
+
+class _EmailScreenState extends State<EmailScreen> {
   @override
   Widget build(BuildContext context) {
     sendEmail(context);
-    return Container();
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text('Client invitation'),
+      ),
+      body: Container(),
+    );
   }
 
   void sendEmail(BuildContext context) async {
@@ -63,6 +76,17 @@ class EmailScreen extends StatelessWidget {
     try {
       await FlutterEmailSender.send(email);
     } catch (error) {
+      String? message = (error as PlatformException).message;
+      if (message == null) message = 'Something went wrong';
+      Fluttertoast.showToast(
+          msg: message,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
       Navigator.pop(context);
     }
   }
