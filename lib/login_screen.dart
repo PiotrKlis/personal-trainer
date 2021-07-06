@@ -16,6 +16,30 @@ class LoginScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TrainerScreen()),
+                );
+              },
+              child: Text('Trainer shortcut'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                );
+              },
+              child: Text('Client shortcut'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: LoginForm(),
           ),
           Padding(

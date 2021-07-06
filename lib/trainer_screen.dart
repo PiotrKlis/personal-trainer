@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:personal_trainer/trainer_client_screen.dart';
+import 'package:personal_trainer/calendar_exercise_screen.dart';
 
 class TrainerScreen extends StatelessWidget {
   final List<String> entries = <String>[
@@ -27,7 +27,7 @@ class TrainerScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            TrainerClientScreen(
+                            CalendarExerciseScreen(
                               index: index,
                             ),
                       ),
