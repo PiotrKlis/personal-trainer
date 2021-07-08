@@ -1,9 +1,17 @@
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:video_player/video_player.dart';
 
 import 'VideoItem.dart';
+
+class Exercise {
+  final String title;
+  final String videoPath;
+  final List<String> tags;
+
+  const Exercise(
+      {required this.title, required this.videoPath, required this.tags});
+}
 
 class CalendarExerciseScreen extends StatefulWidget {
   final int index;
@@ -15,56 +23,81 @@ class CalendarExerciseScreen extends StatefulWidget {
 }
 
 class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
+  final List<Exercise> listOfExercises = <Exercise>[
+    Exercise(
+        title: 'Push press',
+        videoPath:
+            'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+        tags: ['#CARDIO', '#STRENGTH']),
+    Exercise(
+        title: 'Hollow',
+        videoPath: 'https://youtu.be/m9xqO9kKqyk',
+        tags: ['#STOMACH', '#DURABILITY'])
+  ];
   final videoPlayerController = VideoPlayerController.network(
       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4');
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Calendar'),
       ),
       //passing in the ListView.builder
-      body: Column(children: [
-        CalendarWidget(),
-        Divider(),
-        Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const ListTile(
-                leading: Icon(Icons.fitness_center),
-                title: Text('I am a title'),
-              ),
-              VideoItem(
-                videoPlayerController: VideoPlayerController.network(
-                    'https://assets.mixkit.co/videos/preview/mixkit-a-girl-blowing-a-bubble-gum-at-an-amusement-park-1226-large.mp4'
-                ),
-                looping: false,
-                autoplay: true,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: const Text(
-                        '#CARDIO',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )),
-                  Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: const Text(
-                        '#STRENGTH',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )),
-                ],
-              ),
-            ],
+      body: Column(
+        children: [
+          CalendarWidget(),
+          Divider(),
+          Expanded(
+            child: ListView.builder(
+              itemCount: listOfExercises.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        leading: Icon(Icons.fitness_center),
+                        title: Text(
+                          listOfExercises[index].title,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 200,
+                        child: VideoItem(
+                          videoPlayerController: VideoPlayerController.network(
+                              listOfExercises[index].videoPath),
+                          looping: false,
+                          autoplay: true,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ListView.builder(
+                            itemBuilder:
+                                (BuildContext context, int tagIndex) {
+                              return Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  listOfExercises[index].tags[tagIndex],
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }
@@ -119,5 +152,3 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     }
   }
 }
-
-
