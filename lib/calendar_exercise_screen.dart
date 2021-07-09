@@ -28,11 +28,11 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
         title: 'Push press',
         videoPath:
             'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-        tags: ['#CARDIO', '#STRENGTH']),
+        tags: ['#CARDIO', '#STRENGTH','#CARDIO', '#STRENGTH','#CARDIO', '#STRENGTH','#CARDIO', '#STRENGTH',]),
     Exercise(
         title: 'Hollow',
         videoPath: 'https://youtu.be/m9xqO9kKqyk',
-        tags: ['#STOMACH', '#DURABILITY'])
+        tags: ['#STOMACH', '#DURABILITY']),
   ];
   final videoPlayerController = VideoPlayerController.network(
       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4');
@@ -50,6 +50,7 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
           Divider(),
           Expanded(
             child: ListView.builder(
+              scrollDirection: Axis.vertical,
               itemCount: listOfExercises.length,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
@@ -72,23 +73,28 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
                           autoplay: true,
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          ListView.builder(
-                            itemBuilder:
-                                (BuildContext context, int tagIndex) {
-                              return Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  listOfExercises[index].tags[tagIndex],
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              );
-                            },
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: 24.0,
+                          child: Expanded(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: listOfExercises[index].tags.length,
+                              itemBuilder:
+                                  (BuildContext context, int tagIndex) {
+                                return Row(children: [
+                                  Text(
+                                    listOfExercises[index].tags[tagIndex],
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  SizedBox(width: 4)
+                                ]);
+                              },
+                            ),
                           ),
-                        ],
+                        ),
                       ),
                     ],
                   ),
