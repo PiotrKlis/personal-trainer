@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:personal_trainer/register_screen.dart';
-import 'package:personal_trainer/trainer_screen.dart';
-
+import 'package:personal_trainer/screen/register_screen.dart';
+import 'package:personal_trainer/screen/trainer_screen.dart';
 import 'client_screen.dart';
 
 class LoginScreen extends StatelessWidget {
