@@ -8,8 +8,13 @@ class ApplicationState extends ChangeNotifier {
   ApplicationLoginState get loginState => _loginState;
   ApplicationLoginState _loginState = ApplicationLoginState.LOGGED_OUT;
   String? _email;
-
   String? get email => _email;
+  String? _password;
+  String? get password => _password;
+  String? _name;
+  String? get name => _name;
+  String? _userType;
+  String? get userType => _userType;
 
   ApplicationState() {
     init();
@@ -72,7 +77,7 @@ class ApplicationState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void registerAccount(String email, String displayName, String password,
+  Future<void> registerAccount(String email, String displayName, String password,
       void Function(FirebaseAuthException e) errorCallback) async {
     try {
       var credential = await FirebaseAuth.instance
@@ -86,4 +91,6 @@ class ApplicationState extends ChangeNotifier {
   void signOut() {
     FirebaseAuth.instance.signOut();
   }
+
+  void error() {}
 }

@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:personal_trainer/application_state.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
   @override
@@ -10,12 +13,23 @@ class RegisterScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Register'),
       ),
-      body: RegisterForm(),
+      body: Consumer<ApplicationState>(
+        builder: (context, appState, _) => RegisterForm(
+          registerAccount: appState.registerAccount,
+          error: appState.error,
+        ),
+      ),
     );
   }
 }
 
 class RegisterForm extends StatefulWidget {
+  const RegisterForm({required this.registerAccount, required this.error});
+
+  final void Function(String email, String displayName, String password,
+      void Function(FirebaseAuthException e) errorCallback) registerAccount;
+  final void Function() error;
+
   @override
   _RegisterFormState createState() => _RegisterFormState();
 }
@@ -23,6 +37,10 @@ class RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
   UserType? _userType = UserType.Client;
+  String? _email;
+  String? _password;
+  String? _displayName;
+  String? _trainerEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +54,7 @@ class _RegisterFormState extends State<RegisterForm> {
               validator: RequiredValidator(errorText: 'Name is required'),
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Name'),
+              onChanged: (value) => _displayName = value,
             ),
           ),
           Padding(
@@ -47,6 +66,7 @@ class _RegisterFormState extends State<RegisterForm> {
               ]),
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Email'),
+              onChanged: (value) => _email = value,
             ),
           ),
           Padding(
@@ -57,6 +77,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   errorText: "Password should be at least 6 characters"),
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Password'),
+              onChanged: (value) => _password = value,
             ),
           ),
           Padding(
@@ -72,6 +93,7 @@ class _RegisterFormState extends State<RegisterForm> {
                   border: OutlineInputBorder(),
                   hintText: 'Trainer email',
                 ),
+                onChanged: (value) => _trainerEmail = value,
               ),
             ),
           ),
@@ -116,6 +138,7 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void validateInputs(BuildContext context) {
+    widget.registerAccount(_email, _displayName, _password, widget.error);
     Navigator.pop(context);
   }
 }
