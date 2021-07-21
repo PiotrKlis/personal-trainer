@@ -15,8 +15,7 @@ class RegisterScreen extends StatelessWidget {
       ),
       body: Consumer<ApplicationState>(
         builder: (context, appState, _) => RegisterForm(
-          registerAccount: appState.registerAccount,
-          error: appState.error,
+          registerAccount: appState.registerAccount
         ),
       ),
     );
@@ -24,11 +23,9 @@ class RegisterScreen extends StatelessWidget {
 }
 
 class RegisterForm extends StatefulWidget {
-  const RegisterForm({required this.registerAccount, required this.error});
+  const RegisterForm({required this.registerAccount});
 
-  final void Function(String email, String displayName, String password,
-      void Function(FirebaseAuthException e) errorCallback) registerAccount;
-  final void Function() error;
+  final void Function(String email, String displayName, String password) registerAccount;
 
   @override
   _RegisterFormState createState() => _RegisterFormState();
@@ -138,7 +135,7 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void validateInputs(BuildContext context) {
-    widget.registerAccount(_email, _displayName, _password, widget.error);
+    widget.registerAccount(_email!, _displayName!, _password!);
     Navigator.pop(context);
   }
 }
