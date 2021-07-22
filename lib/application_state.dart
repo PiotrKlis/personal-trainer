@@ -1,10 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'main.dart';
 
-class ApplicationState extends ChangeNotifier {
+class LoginState extends ChangeNotifier {
   ApplicationLoginState get loginState => _loginState;
   ApplicationLoginState _loginState = ApplicationLoginState.LOGGED_OUT;
   String? _email;
@@ -20,13 +19,12 @@ class ApplicationState extends ChangeNotifier {
 
   String? get userType => _userType;
 
-  ApplicationState() {
+  LoginState() {
     init();
   }
 
   Future<void> init() async {
     await Firebase.initializeApp();
-
     FirebaseAuth.instance.userChanges().listen((user) {
       if (user != null) {
         _loginState = ApplicationLoginState.LOGGED_IN;
@@ -37,51 +35,19 @@ class ApplicationState extends ChangeNotifier {
     });
   }
 
-  void startLoginFlow() {
-    // _loginState = ApplicationLoginState.emailAddress;
-    notifyListeners();
-  }
-
-  void verifyEmail(
-    String email,
-    void Function(FirebaseAuthException e) errorCallback,
-  ) async {
-    try {
-      var methods =
-          await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
-      if (methods.contains('password')) {
-        // _loginState = ApplicationLoginState.password;
-      } else {
-        // _loginState = ApplicationLoginState.register;
-      }
-      _email = email;
-      notifyListeners();
-    } on FirebaseAuthException catch (e) {
-      errorCallback(e);
-    }
-  }
-
-  void signInWithEmailAndPassword(
-    String email,
-    String password,
-    void Function(FirebaseAuthException e) errorCallback,
-  ) async {
+  Future<void> signInWithEmailAndPassword(String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-    } on FirebaseAuthException catch (e) {
-      errorCallback(e);
+    } on FirebaseAuthException catch (error) {
+      showErrorMessage(error);
     }
   }
 
-  void cancelRegistration() {
-    // _loginState = ApplicationLoginState.emailAddress;
-    notifyListeners();
-  }
-
-  Future<void> registerAccount(String email, String displayName, String password) async {
+  Future<void> registerAccount(
+      String email, String displayName, String password) async {
     try {
       var credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -106,3 +72,5 @@ class ApplicationState extends ChangeNotifier {
         fontSize: 16.0);
   }
 }
+
+enum ApplicationLoginState { LOGGED_IN, LOGGED_OUT }

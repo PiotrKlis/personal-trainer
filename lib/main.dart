@@ -6,7 +6,7 @@ import 'application_state.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
-    create: (BuildContext context) => ApplicationState(),
+    create: (BuildContext context) => LoginState(),
     builder: (context, _) => PersonalTrainerApp(),
   ));
 }
@@ -27,4 +27,3 @@ class PersonalTrainerApp extends StatelessWidget {
   }
 }
 
-enum ApplicationLoginState { LOGGED_IN, LOGGED_OUT }
