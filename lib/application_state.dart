@@ -35,14 +35,17 @@ class LoginState extends ChangeNotifier {
     });
   }
 
-  Future<void> loginUser(String email, String password) async {
+  Future<ApplicationLoginState> loginUser(String email, String password) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      var val = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      _loginState = ApplicationLoginState.LOGGED_IN;
+      return _loginState;
     } on FirebaseAuthException catch (error) {
       showErrorMessage(error);
+      return _loginState;
     }
   }
 
@@ -59,6 +62,7 @@ class LoginState extends ChangeNotifier {
 
   void signOut() {
     FirebaseAuth.instance.signOut();
+    _loginState = ApplicationLoginState.LOGGED_OUT;
   }
 
   void showErrorMessage(FirebaseAuthException error) {

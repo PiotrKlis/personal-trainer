@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:personal_trainer/screen/register_screen.dart';
 import 'package:personal_trainer/screen/trainer_screen.dart';
 import 'package:provider/provider.dart';
@@ -76,14 +77,21 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   LoginForm({required this.loginUser});
 
-  final void Function(String email, String password)
-      loginUser;
+  final Future<ApplicationLoginState> Function(String email, String password)
+  loginUser;
 
+  @override
+  _LoginFormState createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
+
   String? _login;
+
   String? _password;
 
   @override
@@ -131,40 +139,62 @@ class LoginForm extends StatelessWidget {
 
   String? validatePassword(String? value) {
     _password = value;
-    if (value == 'password') {
-      return null;
-    } else {
-      return 'Invalid password';
-    }
+    // if (value == 'password') {
+    //   return null;
+    // } else {
+    //   return 'Invalid password';
+    // }
   }
 
   String? validateLogin(String? value) {
     _login = value;
-    if (value == 'client' || value == 'trainer') {
-      return null;
-    } else {
-      return 'Invalid login';
-    }
+    // if (value == 'client' || value == 'trainer') {
+    //   return null;
+    // } else {
+    //   return 'Invalid login';
+    // }
   }
 
   void validateCredentials(BuildContext context) {
-    switch (_login) {
-      case 'trainer':
-        {
+    widget
+        .loginUser(_login ?? "", _password ?? "")
+        .then((loginState) {
+      switch (loginState) {
+        case ApplicationLoginState.LOGGED_IN:
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => TrainerScreen()),
           );
-        }
-        break;
-      case 'client':
-        {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => ClientScreen()),
-          );
-        }
-        break;
+          break;
+        case ApplicationLoginState.LOGGED_OUT:
+          Fluttertoast.showToast(
+              msg: "Something went wrong. Try again.",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+      break;
+      }
     }
-  }
-}
+  );
+// switch (_login) {
+//   case 'trainer':
+//     {
+//       Navigator.pushReplacement(
+//         context,
+//         MaterialPageRoute(builder: (context) => TrainerScreen()),
+//       );
+//     }
+//     break;
+//   case 'client':
+//     {
+//       Navigator.pushReplacement(
+//         context,
+//         MaterialPageRoute(builder: (context) => ClientScreen()),
+//       );
+//     }
+//     break;
+// }
+}}
