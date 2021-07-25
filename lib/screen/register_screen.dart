@@ -15,7 +15,7 @@ class RegisterScreen extends StatelessWidget {
       ),
       body: Consumer<LoginState>(
         builder: (context, appState, _) => RegisterForm(
-          registerAccount: appState.registerAccount
+          registerAccount: appState.registerUser
         ),
       ),
     );

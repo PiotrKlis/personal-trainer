@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
         ),
         body: Consumer<LoginState>(
           builder: (context, appState, _) {
-            Column(
+            return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
@@ -45,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: LoginForm(),
+                  child: LoginForm(loginUser: appState.loginUser),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -77,6 +77,11 @@ class LoginScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatelessWidget {
+  LoginForm({required this.loginUser});
+
+  final void Function(String email, String password)
+      loginUser;
+
   final _formKey = GlobalKey<FormState>();
   String? _login;
   String? _password;

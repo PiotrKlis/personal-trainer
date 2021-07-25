@@ -35,7 +35,7 @@ class LoginState extends ChangeNotifier {
     });
   }
 
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
+  Future<void> loginUser(String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
@@ -46,7 +46,7 @@ class LoginState extends ChangeNotifier {
     }
   }
 
-  Future<void> registerAccount(
+  Future<void> registerUser(
       String email, String displayName, String password) async {
     try {
       var credential = await FirebaseAuth.instance
