@@ -14,9 +14,8 @@ class RegisterScreen extends StatelessWidget {
         title: Text('Register'),
       ),
       body: Consumer<LoginState>(
-        builder: (context, appState, _) => RegisterForm(
-          registerAccount: appState.registerUser
-        ),
+        builder: (context, appState, _) =>
+            RegisterForm(registerAccount: appState.registerUser),
       ),
     );
   }
@@ -25,7 +24,8 @@ class RegisterScreen extends StatelessWidget {
 class RegisterForm extends StatefulWidget {
   const RegisterForm({required this.registerAccount});
 
-  final void Function(String email, String displayName, String password) registerAccount;
+  final void Function(String email, String displayName, String password,
+      String trainerEmail, UserType userType) registerAccount;
 
   @override
   _RegisterFormState createState() => _RegisterFormState();
@@ -33,11 +33,11 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
-  UserType? _userType = UserType.Client;
-  String? _email;
-  String? _password;
-  String? _displayName;
-  String? _trainerEmail;
+  UserType? _userType = UserType.CLIENT;
+  String _email = "";
+  String _password = "";
+  String _displayName = "";
+  String _trainerEmail = "";
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class _RegisterFormState extends State<RegisterForm> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Visibility(
-              visible: _userType == UserType.Client,
+              visible: _userType == UserType.CLIENT,
               child: TextFormField(
                 validator: MultiValidator([
                   EmailValidator(errorText: "Enter valid email"),
@@ -95,9 +95,9 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
           ),
           ListTile(
-            title: Text('${describeEnum(UserType.Client)}'),
+            title: Text('${describeEnum(UserType.CLIENT)}'),
             leading: Radio<UserType>(
-              value: UserType.Client,
+              value: UserType.CLIENT,
               groupValue: _userType,
               onChanged: (UserType? value) {
                 setState(() {
@@ -107,9 +107,9 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
           ),
           ListTile(
-            title: Text('${describeEnum(UserType.Trainer)}'),
+            title: Text('${describeEnum(UserType.TRAINER)}'),
             leading: Radio<UserType>(
-              value: UserType.Trainer,
+              value: UserType.TRAINER,
               groupValue: _userType,
               onChanged: (UserType? value) {
                 setState(() {
@@ -135,9 +135,20 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void validateInputs(BuildContext context) {
-    widget.registerAccount(_email!, _displayName!, _password!);
+    widget.registerAccount(_email, _displayName, _password, _trainerEmail, _userType!);
     Navigator.pop(context);
   }
 }
 
-enum UserType { Trainer, Client }
+enum UserType { TRAINER, CLIENT }
+
+extension UserTypeExtension on UserType {
+  String get name {
+    switch (this) {
+      case UserType.TRAINER:
+        return 'trainer';
+      case UserType.CLIENT:
+        return 'client';
+    }
+  }
+}

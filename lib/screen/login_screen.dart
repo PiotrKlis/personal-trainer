@@ -81,7 +81,7 @@ class LoginForm extends StatefulWidget {
   LoginForm({required this.loginUser});
 
   final Future<ApplicationLoginState> Function(String email, String password)
-  loginUser;
+      loginUser;
 
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -89,9 +89,7 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-
   String? _login;
-
   String? _password;
 
   @override
@@ -139,26 +137,14 @@ class _LoginFormState extends State<LoginForm> {
 
   String? validatePassword(String? value) {
     _password = value;
-    // if (value == 'password') {
-    //   return null;
-    // } else {
-    //   return 'Invalid password';
-    // }
   }
 
   String? validateLogin(String? value) {
     _login = value;
-    // if (value == 'client' || value == 'trainer') {
-    //   return null;
-    // } else {
-    //   return 'Invalid login';
-    // }
   }
 
   void validateCredentials(BuildContext context) {
-    widget
-        .loginUser(_login ?? "", _password ?? "")
-        .then((loginState) {
+    widget.loginUser(_login ?? "", _password ?? "").then((loginState) {
       switch (loginState) {
         case ApplicationLoginState.LOGGED_IN:
           Navigator.pushReplacement(
@@ -167,34 +153,16 @@ class _LoginFormState extends State<LoginForm> {
           );
           break;
         case ApplicationLoginState.LOGGED_OUT:
-          Fluttertoast.showToast(
-              msg: "Something went wrong. Try again.",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
-      break;
+          // Fluttertoast.showToast(
+          //     msg: "Something went wrong. Try again.",
+          //     toastLength: Toast.LENGTH_SHORT,
+          //     gravity: ToastGravity.CENTER,
+          //     timeInSecForIosWeb: 1,
+          //     backgroundColor: Colors.red,
+          //     textColor: Colors.white,
+          //     fontSize: 16.0);
+          break;
       }
-    }
-  );
-// switch (_login) {
-//   case 'trainer':
-//     {
-//       Navigator.pushReplacement(
-//         context,
-//         MaterialPageRoute(builder: (context) => TrainerScreen()),
-//       );
-//     }
-//     break;
-//   case 'client':
-//     {
-//       Navigator.pushReplacement(
-//         context,
-//         MaterialPageRoute(builder: (context) => ClientScreen()),
-//       );
-//     }
-//     break;
-// }
-}}
+    });
+  }
+}
