@@ -1,5 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/application_state.dart';
@@ -95,7 +93,7 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
           ),
           ListTile(
-            title: Text('${describeEnum(UserType.CLIENT)}'),
+            title: Text('${(UserType.CLIENT.name)}'),
             leading: Radio<UserType>(
               value: UserType.CLIENT,
               groupValue: _userType,
@@ -107,7 +105,7 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
           ),
           ListTile(
-            title: Text('${describeEnum(UserType.TRAINER)}'),
+            title: Text('${(UserType.TRAINER.name)}'),
             leading: Radio<UserType>(
               value: UserType.TRAINER,
               groupValue: _userType,

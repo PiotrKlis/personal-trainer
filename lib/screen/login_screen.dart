@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:personal_trainer/screen/register_screen.dart';
 import 'package:personal_trainer/screen/trainer_screen.dart';
 import 'package:provider/provider.dart';
@@ -153,14 +152,6 @@ class _LoginFormState extends State<LoginForm> {
           );
           break;
         case ApplicationLoginState.LOGGED_OUT:
-          // Fluttertoast.showToast(
-          //     msg: "Something went wrong. Try again.",
-          //     toastLength: Toast.LENGTH_SHORT,
-          //     gravity: ToastGravity.CENTER,
-          //     timeInSecForIosWeb: 1,
-          //     backgroundColor: Colors.red,
-          //     textColor: Colors.white,
-          //     fontSize: 16.0);
           break;
       }
     });
