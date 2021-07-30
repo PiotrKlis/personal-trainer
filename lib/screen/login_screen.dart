@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:personal_trainer/model/client.dart';
+import 'package:personal_trainer/model/trainer.dart';
+import 'package:personal_trainer/model/app_user.dart';
 import 'package:personal_trainer/screen/register_screen.dart';
 import 'package:personal_trainer/screen/trainer_screen.dart';
 import 'package:provider/provider.dart';
@@ -79,8 +82,7 @@ class LoginScreen extends StatelessWidget {
 class LoginForm extends StatefulWidget {
   LoginForm({required this.loginUser});
 
-  final Future<ApplicationLoginState> Function(String email, String password)
-      loginUser;
+  final Future<AppUser?> Function(String email, String password) loginUser;
 
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -143,13 +145,21 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   void validateCredentials(BuildContext context) {
-    widget.loginUser(_login ?? "", _password ?? "").then((loginState) {
-      switch (loginState) {
-        case ApplicationLoginState.LOGGED_IN:
-
-          break;
-        case ApplicationLoginState.LOGGED_OUT:
-          break;
+    widget.loginUser(_login ?? "", _password ?? "").then((appUser) {
+      if (appUser is Trainer) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => TrainerScreen()),
+        );
+      } else if (appUser is Client) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ClientScreen()),
+        );
+      } else {
+        //showError?
       }
     });
   }
