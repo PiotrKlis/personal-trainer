@@ -146,10 +146,7 @@ class _LoginFormState extends State<LoginForm> {
     widget.loginUser(_login ?? "", _password ?? "").then((loginState) {
       switch (loginState) {
         case ApplicationLoginState.LOGGED_IN:
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => TrainerScreen()),
-          );
+
           break;
         case ApplicationLoginState.LOGGED_OUT:
           break;

@@ -8,21 +8,45 @@ import 'package:personal_trainer/screen/register_screen.dart';
 class LoginState extends ChangeNotifier {
   ApplicationLoginState get loginState => _loginState;
   ApplicationLoginState _loginState = ApplicationLoginState.LOGGED_OUT;
-  String? _email;
-
-  String? get email => _email;
-  String? _password;
-
-  String? get password => _password;
-  String? _name;
-
-  String? get name => _name;
-  String? _userType;
-
-  String? get userType => _userType;
 
   LoginState() {
     init();
+  }
+
+  Future<void> registerUser(String userEmail, String name, String password,
+      String trainerEmail, UserType userType) async {
+    try {
+      await createUser(userEmail, password);
+      addNewUserData(userType, trainerEmail, userEmail, name);
+    } on FirebaseAuthException catch (error) {
+      showErrorMessage(error);
+    }
+  }
+
+  void addNewUserData(
+      UserType userType, String trainerEmail, String userEmail, String name) {
+    var collectionName = 'users';
+    switch (userType) {
+      case UserType.TRAINER:
+        createTrainerDataInDb(collectionName, userEmail, name);
+        break;
+      case UserType.CLIENT:
+        createClientDataInDb(collectionName, userEmail, name, trainerEmail);
+        updateTrainerDataWithNewClientData(
+            collectionName, trainerEmail, userEmail);
+        break;
+    }
+  }
+
+  void updateTrainerDataWithNewClientData(
+      String collectionName, String trainerEmail, String userEmail) {
+    var fieldName = 'clients';
+    FirebaseFirestore.instance
+        .collection(collectionName)
+        .doc(trainerEmail)
+        .set({
+      fieldName: FieldValue.arrayUnion([userEmail])
+    }, SetOptions(merge: true));
   }
 
   Future<void> init() async {
@@ -49,40 +73,14 @@ class LoginState extends ChangeNotifier {
     });
   }
 
-  Future<void> addNewTrainerToDb(String trainerEmail) {
-    return FirebaseFirestore.instance
-        .collection('trainers')
-        .doc(trainerEmail)
-        .set({
-      'name': FirebaseAuth.instance.currentUser!.displayName,
-      'id': FirebaseAuth.instance.currentUser!.uid,
-      'email': trainerEmail
-    });
-  }
-
-  Future<void> addClientDataToTrainerData(String trainerEmail,
-      String clientEmail) {
-    return FirebaseFirestore.instance
-        .collection('trainers')
-        .doc(trainerEmail)
-        .set({
-      'clients': FieldValue.arrayUnion([clientEmail])
-    }, SetOptions(merge: true));
-  }
-
-  /*// Add from here
-  StreamSubscription<QuerySnapshot>? _guestBookSubscription;
-  List<GuestBookMessage> _guestBookMessages = [];
-  List<GuestBookMessage> get guestBookMessages => _guestBookMessages;
-  // to here.*/
-
   Future<ApplicationLoginState> loginUser(String email, String password) async {
     try {
       var userCredentials =
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      getUserData();
       _loginState = ApplicationLoginState.LOGGED_IN;
       return _loginState;
     } on FirebaseAuthException catch (error) {
@@ -91,35 +89,30 @@ class LoginState extends ChangeNotifier {
     }
   }
 
-  Future<void> registerUser(String email, String displayName, String password,
-      String trainerEmail, UserType userType) async {
-    try {
-      await createUserInFirebaseAuthenticator(email, password, displayName);
-      addNewUsersToDb(userType, trainerEmail, email);
-    } on FirebaseAuthException catch (error) {
-      showErrorMessage(error);
-    }
-  }
-
-  Future<void> createUserInFirebaseAuthenticator(String email, String password,
-      String displayName) async {
+  Future<void> createUser(String email, String password) async {
     var credential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
-    await credential.user!.updateDisplayName(displayName);
   }
 
-  void addNewUsersToDb(UserType userType,
-      String trainerEmail,
-      String userEmail) {
-    switch (userType) {
-      case UserType.TRAINER:
-        addNewTrainerToDb(userEmail);
-        break;
-      case UserType.CLIENT:
-        addNewClientToDb(trainerEmail, userEmail);
-        addClientDataToTrainerData(trainerEmail, userEmail);
-        break;
-    }
+  void createClientDataInDb(String collectionName, String userEmail,
+      String name, String trainerEmail) {
+    FirebaseFirestore.instance.collection(collectionName).doc(userEmail).set({
+      'id': FirebaseAuth.instance.currentUser!.uid,
+      'name': name,
+      'email': userEmail,
+      'trainerEmail': trainerEmail,
+      'userType': 'client'
+    });
+  }
+
+  void createTrainerDataInDb(
+      String collectionName, String userEmail, String name) {
+    FirebaseFirestore.instance.collection(collectionName).doc(userEmail).set({
+      'id': FirebaseAuth.instance.currentUser!.uid,
+      'name': name,
+      'email': userEmail,
+      'userType': 'trainer'
+    });
   }
 
   void signOut() {
@@ -138,7 +131,14 @@ class LoginState extends ChangeNotifier {
         fontSize: 16.0);
   }
 
-
+  void getUserData() {
+    Stream collectionStream =
+        FirebaseFirestore.instance.collection('users').snapshots();
+    Stream documentStream = FirebaseFirestore.instance
+        .collection('users')
+        .doc('ABC123')
+        .snapshots();
+  }
 }
 
 enum ApplicationLoginState { LOGGED_IN, LOGGED_OUT }
