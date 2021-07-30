@@ -37,7 +37,7 @@ class LoginState extends ChangeNotifier {
     });
   }
 
-  Future<void> addClientData(String trainerId, String clientEmail) {
+  Future<void> addNewClientToDb(String trainerId, String clientEmail) {
     return FirebaseFirestore.instance
         .collection('clients')
         .doc(clientEmail)
@@ -49,7 +49,7 @@ class LoginState extends ChangeNotifier {
     });
   }
 
-  Future<void> addTrainerData(String trainerEmail) {
+  Future<void> addNewTrainerToDb(String trainerEmail) {
     return FirebaseFirestore.instance
         .collection('trainers')
         .doc(trainerEmail)
@@ -58,6 +58,16 @@ class LoginState extends ChangeNotifier {
       'id': FirebaseAuth.instance.currentUser!.uid,
       'email': trainerEmail
     });
+  }
+
+  Future<void> addClientDataToTrainerData(String trainerEmail,
+      String clientEmail) {
+    return FirebaseFirestore.instance
+        .collection('trainers')
+        .doc(trainerEmail)
+        .set({
+      'clients': FieldValue.arrayUnion([clientEmail])
+    }, SetOptions(merge: true));
   }
 
   /*// Add from here
@@ -69,7 +79,7 @@ class LoginState extends ChangeNotifier {
   Future<ApplicationLoginState> loginUser(String email, String password) async {
     try {
       var userCredentials =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -85,27 +95,29 @@ class LoginState extends ChangeNotifier {
       String trainerEmail, UserType userType) async {
     try {
       await createUserInFirebaseAuthenticator(email, password, displayName);
-      addDataToFirestore(userType, trainerEmail, email);
+      addNewUsersToDb(userType, trainerEmail, email);
     } on FirebaseAuthException catch (error) {
       showErrorMessage(error);
     }
   }
 
-  Future<void> createUserInFirebaseAuthenticator(
-      String email, String password, String displayName) async {
+  Future<void> createUserInFirebaseAuthenticator(String email, String password,
+      String displayName) async {
     var credential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
     await credential.user!.updateDisplayName(displayName);
   }
 
-  void addDataToFirestore(
-      UserType userType, String trainerEmail, String userEmail) {
+  void addNewUsersToDb(UserType userType,
+      String trainerEmail,
+      String userEmail) {
     switch (userType) {
       case UserType.TRAINER:
-        addTrainerData(userEmail);
+        addNewTrainerToDb(userEmail);
         break;
       case UserType.CLIENT:
-        addClientData(trainerEmail, userEmail);
+        addNewClientToDb(trainerEmail, userEmail);
+        addClientDataToTrainerData(trainerEmail, userEmail);
         break;
     }
   }
@@ -125,6 +137,8 @@ class LoginState extends ChangeNotifier {
         textColor: Colors.white,
         fontSize: 16.0);
   }
+
+
 }
 
 enum ApplicationLoginState { LOGGED_IN, LOGGED_OUT }
