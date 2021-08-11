@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:personal_trainer/model/client.dart';
-import 'package:personal_trainer/model/trainer.dart';
-import 'package:personal_trainer/model/app_user.dart';
-import 'package:personal_trainer/screen/register_screen.dart';
-import 'package:personal_trainer/screen/trainer_screen.dart';
+import 'package:personal_trainer/app/screen/register_screen.dart';
+import 'package:personal_trainer/app/screen/trainer_screen.dart';
+import 'package:personal_trainer/domain/model/app_user.dart';
+import 'package:personal_trainer/domain/model/client.dart';
+import 'package:personal_trainer/domain/model/trainer.dart';
 import 'package:provider/provider.dart';
-
-import '../application_state.dart';
+import '../state/application_state.dart';
 import 'client_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -149,14 +148,12 @@ class _LoginFormState extends State<LoginForm> {
       if (appUser is Trainer) {
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => TrainerScreen()),
+          MaterialPageRoute(builder: (context) => TrainerScreen()),
         );
       } else if (appUser is Client) {
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => ClientScreen()),
+          MaterialPageRoute(builder: (context) => ClientScreen()),
         );
       } else {
         //showError?

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:personal_trainer/screen/login_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'application_state.dart';
+import 'screen/login_screen.dart';
+import 'state/application_state.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(

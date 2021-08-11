@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:personal_trainer/application_state.dart';
+import 'package:personal_trainer/app/state/application_state.dart';
+import 'package:personal_trainer/domain/model/user_type.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -138,15 +139,3 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 }
 
-enum UserType { TRAINER, CLIENT }
-
-extension UserTypeExtension on UserType {
-  String get name {
-    switch (this) {
-      case UserType.TRAINER:
-        return 'trainer';
-      case UserType.CLIENT:
-        return 'client';
-    }
-  }
-}

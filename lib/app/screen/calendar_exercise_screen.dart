@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:personal_trainer/model/exercise.dart';
+import 'package:personal_trainer/app/widget/video_item.dart';
+import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:video_player/video_player.dart';
-
-import '../model/video_item.dart';
 import 'exercise_search_screen.dart';
 
 class CalendarExerciseScreen extends StatefulWidget {
