@@ -4,10 +4,10 @@ import 'package:personal_trainer/app/state/firebase_state.dart';
 class FirebaseProvider {
   Future<FirebaseState> init() async {
     await Firebase.initializeApp();
-    return isFirebaseInitialized();
+    return isInitialized();
   }
 
-  FirebaseState isFirebaseInitialized() {
+  FirebaseState isInitialized() {
     try {
       Firebase.app();
       return FirebaseInitialized();

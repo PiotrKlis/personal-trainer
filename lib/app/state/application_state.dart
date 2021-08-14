@@ -10,7 +10,7 @@ import '../../domain/model/app_user.dart';
 import '../../domain/model/client.dart';
 import '../../domain/model/trainer.dart';
 
-class LoginState extends ChangeNotifier {
+class LoginStateos extends ChangeNotifier {
 
   void showErrorMessage(FirebaseAuthException error) {
     Fluttertoast.showToast(

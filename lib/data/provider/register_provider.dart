@@ -4,17 +4,15 @@ import 'package:personal_trainer/app/state/register_state.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
-
 class RegisterProvider {
-  Stream<RegisterState> registerUser(String userEmail, String name,
-      String password, String trainerEmail, UserType userType) async* {
-    yield RegisterLoading();
+  Future<RegisterState> registerUser(String userEmail, String name,
+      String password, String trainerEmail, UserType userType) async {
     try {
       await _createUser(userEmail, password);
       _addNewUserData(userType, trainerEmail, userEmail, name);
-      yield Registered();
+      return Registered();
     } on FirebaseAuthException catch (error) {
-      yield RegisterFailed(error.toString());
+      return RegisterFailed(error.toString());
     }
   }
 

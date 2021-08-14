@@ -7,16 +7,15 @@ import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
 
 class LoginProvider {
-  Stream<LoginState> loginUser(String email, String password) async* {
-    yield LoginLoading();
+  Future<LoginState> loginUser(String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      yield await _getUserData(email);
+      return await _getUserData(email);
     } on FirebaseAuthException catch (error) {
-    yield LoginFailed(error.toString());
+      return LoginFailed(error.toString());
     }
   }
 
@@ -54,6 +53,6 @@ class LoginProvider {
   }
 
   Stream<LoginState> listenForLoginStatus() async* {
-    yield FirebaseAuth.instance.authStateChanges().listen((user) {  })
+    // yield FirebaseAuth.instance.authStateChanges().listen((user) {})
   }
 }
