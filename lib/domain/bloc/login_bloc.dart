@@ -9,11 +9,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc(LoginState initialState, this.loginProvider) : super(initialState);
 
   @override
-  Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    switch (event.runtimeType) {
+  Stream<LoginState> mapEventToState(LoginEvent loginEvent) async* {
+    switch (loginEvent.runtimeType) {
       case UserLoginEvent:
-        var userLoginEvent = event as UserLoginEvent;
-        yield await loginProvider.loginUser(userLoginEvent.login, userLoginEvent.password);
+        var event = loginEvent as UserLoginEvent;
+        yield await loginProvider.loginUser(event.login, event.password);
+        break;
+      case UserAlreadyLoggedInEvent:
+        var event = loginEvent as UserAlreadyLoggedInEvent;
+        yield await loginProvider.loginUser(event.login, event.password);
+        break;
     }
   }
 }

@@ -52,7 +52,5 @@ class LoginProvider {
     FirebaseAuth.instance.signOut();
   }
 
-  Stream<LoginState> listenForLoginStatus() async* {
-    // yield FirebaseAuth.instance.authStateChanges().listen((user) {})
-  }
+  bool isUserLoggedIn() => FirebaseAuth.instance.currentUser != null;
 }

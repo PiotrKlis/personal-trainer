@@ -5,3 +5,12 @@ class UserLoginEvent extends LoginEvent {
 
   UserLoginEvent(this.login, this.password);
 }
+
+class UserAlreadyLoggedInEvent extends LoginEvent {
+  final String login;
+  final String password;
+
+  UserAlreadyLoggedInEvent(this.login, this.password);
+}
+
+class UserNotLoggedInEvent extends Login

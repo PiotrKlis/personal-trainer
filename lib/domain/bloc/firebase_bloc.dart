@@ -12,8 +12,7 @@ class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
   @override
   Stream<FirebaseState> mapEventToState(FirebaseEvent event) async* {
     switch (event.runtimeType) {
-      case FirebaseRegisterEvent:
-        yield FirebaseLoading();
+      case FirebaseReglisterEvent:
         yield await firebaseProvider.init();
     }
   }
