@@ -1,19 +1,22 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:personal_trainer/app/event/firebase_event.dart';
 import 'package:personal_trainer/app/state/firebase_state.dart';
 import 'package:personal_trainer/data/provider/firebase_provider.dart';
+import 'package:personal_trainer/data/util/response.dart';
 
-class FirebaseBloc extends Bloc<FirebaseEvent, FirebaseState> {
-  final FirebaseProvider firebaseProvider;
-
-  FirebaseBloc(FirebaseState initialState, this.firebaseProvider)
+class FirebaseCubit extends Cubit<FirebaseState> {
+  FirebaseCubit(FirebaseState initialState, this.firebaseProvider)
       : super(initialState);
 
-  @override
-  Stream<FirebaseState> mapEventToState(FirebaseEvent event) async* {
-    switch (event.runtimeType) {
-      case FirebaseReglisterEvent:
-        yield await firebaseProvider.init();
+  final FirebaseProvider firebaseProvider;
+
+  Future<FirebaseState> firebaseInit() async {
+    var response = await firebaseProvider.init();
+    if (response is Success) {
+      return FirebaseInitialized();
+    } else if (response is Failure) {
+      return FirebaseNotInitialized(response.error);
+    } else {
+      return FirebaseNotInitialized("firebaseInit undefined error");
     }
   }
 }

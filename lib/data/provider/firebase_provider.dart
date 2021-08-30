@@ -1,19 +1,18 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:personal_trainer/app/state/firebase_state.dart';
+import 'package:personal_trainer/data/util/response.dart';
 
 class FirebaseProvider {
-  Future<FirebaseState> init() async {
+  Future<Response> init() async {
     await Firebase.initializeApp();
     return isInitialized();
   }
 
-  FirebaseState isInitialized() {
+  Response isInitialized() {
     try {
       Firebase.app();
-      return FirebaseInitialized();
+      return Success();
     } catch (throwable) {
-      return FirebaseNotInitialized(throwable.toString());
+      return Failure(throwable.toString());
     }
   }
 }

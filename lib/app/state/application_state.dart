@@ -22,3 +22,4 @@ class LoginStateos extends ChangeNotifier {
         textColor: Colors.white,
         fontSize: 16.0);
   }
+}

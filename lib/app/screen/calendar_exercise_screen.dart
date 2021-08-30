@@ -6,9 +6,9 @@ import 'package:video_player/video_player.dart';
 import 'exercise_search_screen.dart';
 
 class CalendarExerciseScreen extends StatefulWidget {
-  final int index;
+  // final int index;
 
-  CalendarExerciseScreen({Key? key, required this.index}) : super(key: key);
+  // CalendarExerciseScreen({Key? key, required this.index}) : super(key: key);
 
   @override
   _CalendarExerciseScreenState createState() => _CalendarExerciseScreenState();
