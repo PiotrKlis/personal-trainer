@@ -9,14 +9,14 @@ class FirebaseCubit extends Cubit<FirebaseState> {
 
   final FirebaseProvider firebaseProvider;
 
-  Future<FirebaseState> firebaseInit() async {
+  void firebaseInit() async {
     var response = await firebaseProvider.init();
     if (response is Success) {
-      return FirebaseInitialized();
+      emit(FirebaseInitialized());
     } else if (response is Failure) {
-      return FirebaseNotInitialized(response.error);
+      emit(FirebaseNotInitialized(response.error));
     } else {
-      return FirebaseNotInitialized("firebaseInit undefined error");
+      emit(FirebaseNotInitialized("firebaseInit undefined error"));
     }
   }
 }

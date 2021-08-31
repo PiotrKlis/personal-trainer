@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:personal_trainer/app/state/application_state.dart';
+import 'package:personal_trainer/app/state/login_state.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 import 'package:provider/provider.dart';
 
@@ -14,17 +14,19 @@ class RegisterScreen extends StatelessWidget {
       ),
       body: Consumer<LoginState>(
         builder: (context, appState, _) =>
-            RegisterForm(registerAccount: appState.registerUser),
+            RegisterForm(
+                // registerAccount: appState.registerUser
+            ),
       ),
     );
   }
 }
 
 class RegisterForm extends StatefulWidget {
-  const RegisterForm({required this.registerAccount});
+  // const RegisterForm({required this.registerAccount});
 
-  final void Function(String email, String displayName, String password,
-      String trainerEmail, UserType userType) registerAccount;
+  // final void Function(String email, String displayName, String password,
+  //     String trainerEmail, UserType userType) registerAccount;
 
   @override
   _RegisterFormState createState() => _RegisterFormState();
@@ -134,7 +136,7 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void validateInputs(BuildContext context) {
-    widget.registerAccount(_email, _displayName, _password, _trainerEmail, _userType!);
+    // widget.registerAccount(_email, _displayName, _password, _trainerEmail, _userType!);
     Navigator.pop(context);
   }
 }

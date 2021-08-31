@@ -12,5 +12,3 @@ class UserAlreadyLoggedInEvent extends LoginEvent {
 
   UserAlreadyLoggedInEvent(this.login, this.password);
 }
-
-class UserNotLoggedInEvent extends Login

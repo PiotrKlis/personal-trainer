@@ -28,7 +28,7 @@ class TrainerScreen extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) =>
                             CalendarExerciseScreen(
-                              index: index,
+                              // index: index,
                             ),
                       ),
                     );
