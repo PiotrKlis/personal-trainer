@@ -13,70 +13,64 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Login'),
-        ),
-        body: Consumer<LoginState>(
-          builder: (context, appState, _) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TrainerScreen()),
-                      );
-                    },
-                    child: Text('Trainer shortcut'),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ClientScreen()),
-                      );
-                    },
-                    child: Text('Client shortcut'),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: LoginForm(),
-                  // child: LoginForm(loginUser: appState.loginUser),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Divider(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                      'No account yet? Register by clicking button below!'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RegisterScreen()),
-                      );
-                    },
-                    child: Text('Register'),
-                  ),
-                )
-              ],
-            );
-          },
-        ));
+      appBar: AppBar(
+        title: Text('Login'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TrainerScreen()),
+                );
+              },
+              child: Text('Trainer shortcut'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                );
+              },
+              child: Text('Client shortcut'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: LoginForm(),
+            // child: LoginForm(loginUser: appState.loginUser),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Divider(),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text('No account yet? Register by clicking button below!'),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegisterScreen()),
+                );
+              },
+              child: Text('Register'),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 

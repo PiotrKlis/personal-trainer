@@ -35,6 +35,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => CalendarExerciseScreen(),
         );
+      case '/login':
+        return MaterialPageRoute(
+          builder: (_) => LoginScreen(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => LoginScreen(),

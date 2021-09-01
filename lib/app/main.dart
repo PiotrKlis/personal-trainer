@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:personal_trainer/app/app_router.dart';
 import 'package:personal_trainer/app/state/firebase_state.dart';
 import 'package:personal_trainer/app/state/login_state.dart';
 import 'package:personal_trainer/app/state/register_state.dart';
@@ -26,11 +27,10 @@ class PersonalTrainerApp extends StatelessWidget {
   final LoginProvider loginProvider;
   final RegisterProvider registerProvider;
 
-  const PersonalTrainerApp(
-      {Key? key,
-      required this.firebaseProvider,
-      required this.loginProvider,
-      required this.registerProvider})
+  const PersonalTrainerApp({Key? key,
+    required this.firebaseProvider,
+    required this.loginProvider,
+    required this.registerProvider})
       : super(key: key);
 
   @override
@@ -53,6 +53,7 @@ class PersonalTrainerApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Personal Trainer',
           theme: ThemeData.light(),
+          onGenerateRoute: AppRouter().onGenerateRoute,
           home: BlocBuilder<FirebaseCubit, FirebaseState>(
             builder: (firebaseContext, state) {
               switch (state.runtimeType) {
@@ -63,7 +64,7 @@ class PersonalTrainerApp extends StatelessWidget {
                   handleErrorState();
                   break;
                 case FirebaseInitialized:
-                  handleInitialized(context);
+                  handleInitilized(firebaseContext);
                   break;
                 default:
                   break;
@@ -88,35 +89,50 @@ class PersonalTrainerApp extends StatelessWidget {
     return Container(
         child: Text("Error! Check internet connection and try again!"));
   }
-
-  handleInitialized(BuildContext contextor) {
-    BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
-      var loginCubit = BlocProvider.of<LoginCubit>(context);
-      loginCubit.isUserLoggedIn().then((value) {
-        bool isUserLoggedIn = value;
-        if (isUserLoggedIn) {
-          handleUserAlreadyLoggedIn(loginCubit, context);
-        } else {
-          Navigator.pushNamed(context, '/login');
-        }
-      });
-      return Container();
-    });
-    // );
-    // }
-  }
-
-  void handleUserAlreadyLoggedIn(LoginCubit loginCubit, BuildContext context) {
-    loginCubit.getUserData(loginCubit.getUserEmail()).then((loginState) {
-      if (loginState is LoginSuccess) {
-        if (loginState.appUser is Trainer) {
-          Navigator.pushNamed(context, '/trainer');
-        } else if (loginState.appUser is Client) {
-          Navigator.pushNamed(context, '/client');
-        }
-      } else {
-        Navigator.pushNamed(context, '/login');
-      }
-    });
-  }
 }
+
+Widget handleInitilized(BuildContext context) {
+  var loginCubit = BlocProvider.of<LoginCubit>(context);
+  loginCubit.isUserLoggedIn().then((isUserLoggedIn) {
+    if (isUserLoggedIn) {
+      handleUserAlreadyLoggedIn(loginCubit, context);
+    } else {
+      Navigator.pushNamed(context, '/login');
+    }
+  });
+  return Container();
+}
+
+// class HandleInitilized extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     // BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
+//       var loginCubit = BlocProvider.of<LoginCubit>(context);
+//       loginCubit.isUserLoggedIn().then((value) {
+//         bool isUserLoggedIn = value;
+//         if (isUserLoggedIn) {
+//           handleUserAlreadyLoggedIn(loginCubit, context);
+//         } else {
+//           Navigator.pushNamed(context, '/login');
+//         }
+//       });
+//       return Container();
+//     // });
+//     return Container();
+//   }
+
+void handleUserAlreadyLoggedIn(LoginCubit loginCubit, BuildContext context) {
+  loginCubit.getUserData(loginCubit.getUserEmail()).then((loginState) {
+    if (loginState is LoginSuccess) {
+      if (loginState.appUser is Trainer) {
+        Navigator.pushNamed(context, '/trainer');
+      } else if (loginState.appUser is Client) {
+        Navigator.pushNamed(context, '/client');
+      }
+    } else {
+      Navigator.pushNamed(context, '/login');
+    }
+  });
+}
+// }
+
