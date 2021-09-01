@@ -55,16 +55,16 @@ class PersonalTrainerApp extends StatelessWidget {
           theme: ThemeData.light(),
           onGenerateRoute: AppRouter().onGenerateRoute,
           home: BlocBuilder<FirebaseCubit, FirebaseState>(
-            builder: (firebaseContext, state) {
+            builder: (childContext, state) {
               switch (state.runtimeType) {
                 case FirebaseLoading:
-                  handleLoadingState(firebaseContext);
+                  handleLoadingState(childContext);
                   break;
                 case FirebaseNotInitialized:
                   handleErrorState();
                   break;
                 case FirebaseInitialized:
-                  handleInitilized(firebaseContext);
+                  handleInitilized(childContext);
                   break;
                 default:
                   break;
@@ -89,50 +89,29 @@ class PersonalTrainerApp extends StatelessWidget {
     return Container(
         child: Text("Error! Check internet connection and try again!"));
   }
-}
 
-Widget handleInitilized(BuildContext context) {
-  var loginCubit = BlocProvider.of<LoginCubit>(context);
-  loginCubit.isUserLoggedIn().then((isUserLoggedIn) {
-    if (isUserLoggedIn) {
-      handleUserAlreadyLoggedIn(loginCubit, context);
-    } else {
-      Navigator.pushNamed(context, '/login');
-    }
-  });
-  return Container();
-}
-
-// class HandleInitilized extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     // BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
-//       var loginCubit = BlocProvider.of<LoginCubit>(context);
-//       loginCubit.isUserLoggedIn().then((value) {
-//         bool isUserLoggedIn = value;
-//         if (isUserLoggedIn) {
-//           handleUserAlreadyLoggedIn(loginCubit, context);
-//         } else {
-//           Navigator.pushNamed(context, '/login');
-//         }
-//       });
-//       return Container();
-//     // });
-//     return Container();
-//   }
-
-void handleUserAlreadyLoggedIn(LoginCubit loginCubit, BuildContext context) {
-  loginCubit.getUserData(loginCubit.getUserEmail()).then((loginState) {
-    if (loginState is LoginSuccess) {
-      if (loginState.appUser is Trainer) {
-        Navigator.pushNamed(context, '/trainer');
-      } else if (loginState.appUser is Client) {
-        Navigator.pushNamed(context, '/client');
+  void handleInitilized(BuildContext context) {
+    var loginCubit = BlocProvider.of<LoginCubit>(context);
+    loginCubit.isUserLoggedIn().then((isUserLoggedIn) {
+      if (isUserLoggedIn) {
+        handleUserAlreadyLoggedIn(loginCubit, context);
+      } else {
+        Navigator.pushNamed(context, '/login');
       }
-    } else {
-      Navigator.pushNamed(context, '/login');
-    }
-  });
-}
-// }
+    });
+  }
 
+  void handleUserAlreadyLoggedIn(LoginCubit loginCubit, BuildContext context) {
+    loginCubit.getUserData(loginCubit.getUserEmail()).then((loginState) {
+      if (loginState is LoginSuccess) {
+        if (loginState.appUser is Trainer) {
+          Navigator.pushNamed(context, '/trainer');
+        } else if (loginState.appUser is Client) {
+          Navigator.pushNamed(context, '/client');
+        }
+      } else {
+        Navigator.pushNamed(context, '/login');
+      }
+    });
+  }
+}
