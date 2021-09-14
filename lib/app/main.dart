@@ -45,6 +45,7 @@ class PersonalTrainerApp extends StatelessWidget {
           title: 'Personal Trainer',
           theme: ThemeData.light(),
           onGenerateRoute: AppRouter().onGenerateRoute,
+          //TODO: Probably firebase loading should be separate widget
           home: BlocBuilder<FirebaseCubit, FirebaseState>(
             builder: (childContext, state) {
               switch (state.runtimeType) {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_trainer/app/screen/register_screen.dart';
 import 'package:personal_trainer/app/screen/trainer_screen.dart';
 import 'package:personal_trainer/app/state/login_state.dart';
+import 'package:personal_trainer/domain/bloc/login_bloc.dart';
 import 'package:personal_trainer/domain/model/app_user.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
@@ -46,7 +48,6 @@ class LoginScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: LoginForm(),
-            // child: LoginForm(loginUser: appState.loginUser),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -75,10 +76,6 @@ class LoginScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatefulWidget {
-  // LoginForm({required this.loginUser});
-
-  // final Future<AppUser?> Function(String email, String password) loginUser;
-
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -140,6 +137,8 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   void validateCredentials(BuildContext context) {
+    var loginCubit = BlocProvider.of<LoginCubit>(context);
+    
     // widget.loginUser(_login ?? "", _password ?? "").then((appUser) {
     //   if (appUser is Trainer) {
     //     Navigator.push(
