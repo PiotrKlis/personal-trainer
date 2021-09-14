@@ -41,10 +41,7 @@ class PersonalTrainerApp extends StatelessWidget {
             create: (context) =>
                 FirebaseCubit(FirebaseLoading(), firebaseProvider)),
         BlocProvider(
-            create: (context) => LoginCubit(LoginLoading(), loginProvider)),
-        BlocProvider(
-            create: (context) =>
-                RegisterBloc(RegisterLoading(), registerProvider)),
+            create: (context) => LoginCubit(LoginLoading(), loginProvider))
       ],
       child: GestureDetector(
         onTap: () {
@@ -61,15 +58,19 @@ class PersonalTrainerApp extends StatelessWidget {
                   handleLoadingState(childContext);
                   break;
                 case FirebaseNotInitialized:
-                  handleErrorState();
+                  handleErrorState(childContext);
                   break;
                 case FirebaseInitialized:
-                  handleInitilized(childContext);
+                  handleInitialized(childContext);
                   break;
                 default:
                   break;
               }
-              return Container();
+              return Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
             },
           ),
         ),
@@ -77,26 +78,21 @@ class PersonalTrainerApp extends StatelessWidget {
     );
   }
 
-  Widget handleLoadingState(BuildContext context) {
+  void handleLoadingState(BuildContext context) {
     BlocProvider.of<FirebaseCubit>(context).firebaseInit();
-    return Align(
-      alignment: Alignment.center,
-      child: new CircularProgressIndicator(),
-    );
   }
 
-  Widget handleErrorState() {
-    return Container(
-        child: Text("Error! Check internet connection and try again!"));
+  void handleErrorState(BuildContext context) {
+    Navigator.pushReplacementNamed(context, '/login');
   }
 
-  void handleInitilized(BuildContext context) {
+  void handleInitialized(BuildContext context) {
     var loginCubit = BlocProvider.of<LoginCubit>(context);
     loginCubit.isUserLoggedIn().then((isUserLoggedIn) {
       if (isUserLoggedIn) {
         handleUserAlreadyLoggedIn(loginCubit, context);
       } else {
-        Navigator.pushNamed(context, '/login');
+        Navigator.pushReplacementNamed(context, '/login');
       }
     });
   }
@@ -105,12 +101,12 @@ class PersonalTrainerApp extends StatelessWidget {
     loginCubit.getUserData(loginCubit.getUserEmail()).then((loginState) {
       if (loginState is LoginSuccess) {
         if (loginState.appUser is Trainer) {
-          Navigator.pushNamed(context, '/trainer');
+          Navigator.pushReplacementNamed(context, '/trainer');
         } else if (loginState.appUser is Client) {
-          Navigator.pushNamed(context, '/client');
+          Navigator.pushReplacementNamed(context, '/client');
         }
       } else {
-        Navigator.pushNamed(context, '/login');
+        Navigator.pushReplacementNamed(context, '/login');
       }
     });
   }
