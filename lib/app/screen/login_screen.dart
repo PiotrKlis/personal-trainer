@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/app/screen/register_screen.dart';
 import 'package:personal_trainer/app/screen/trainer_screen.dart';
 import 'package:personal_trainer/app/state/login_state.dart';
 import 'package:personal_trainer/domain/bloc/login_bloc.dart';
-import 'package:personal_trainer/domain/model/app_user.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
-import 'package:provider/provider.dart';
 
 import 'client_screen.dart';
 
@@ -21,6 +20,15 @@ class LoginScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          BlocListener<LoginCubit, LoginState>(listener: (context, state) {
+            if (state is LoginSuccess) {
+              if (state.appUser is Trainer) {
+                Navigator.pushReplacementNamed(context, '/trainer');
+              } else if (state.appUser is Client) {
+                Navigator.pushReplacementNamed(context, '/client');
+              }
+            }
+          }),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
@@ -49,6 +57,17 @@ class LoginScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: LoginForm(),
           ),
+          BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
+            return Column(
+              children: [
+                if (state is LoginFailed)
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                          'Login Failed. Check internet connection or register account'))
+              ],
+            );
+          }),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Divider(),
@@ -68,7 +87,7 @@ class LoginScreen extends StatelessWidget {
               },
               child: Text('Register'),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -94,9 +113,10 @@ class _LoginFormState extends State<LoginForm> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              validator: (value) {
-                return validateLogin(value);
-              },
+              validator: MultiValidator([
+                EmailValidator(errorText: "Enter valid email"),
+                RequiredValidator(errorText: 'Email is required')
+              ]),
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Email'),
             ),
@@ -105,9 +125,8 @@ class _LoginFormState extends State<LoginForm> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               obscureText: true,
-              validator: (value) {
-                return validatePassword(value);
-              },
+              validator: MinLengthValidator(6,
+                  errorText: "Password should be at least 6 characters"),
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Password'),
             ),
@@ -116,9 +135,10 @@ class _LoginFormState extends State<LoginForm> {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  validateCredentials(context);
-                }
+                _formKey.currentState!.validate();
+                // if (_formKey.currentState!.validate()) {
+                // validateCredentials(context);
+                // }
               },
               child: Text('Login'),
             ),
@@ -136,23 +156,7 @@ class _LoginFormState extends State<LoginForm> {
     _login = value;
   }
 
-  void validateCredentials(BuildContext context) {
-    var loginCubit = BlocProvider.of<LoginCubit>(context);
-    
-    // widget.loginUser(_login ?? "", _password ?? "").then((appUser) {
-    //   if (appUser is Trainer) {
-    //     Navigator.push(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => TrainerScreen()),
-    //     );
-    //   } else if (appUser is Client) {
-    //     Navigator.push(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => ClientScreen()),
-    //     );
-    //   } else {
-    //     //showError?
-    //   }
-    // });
-  }
+// void validateCredentials(BuildContext context) async {
+//
+// }
 }
