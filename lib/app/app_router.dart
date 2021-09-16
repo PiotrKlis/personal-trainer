@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_trainer/app/screen/calendar_exercise_screen.dart';
 import 'package:personal_trainer/app/screen/client_screen.dart';
 import 'package:personal_trainer/app/screen/exercise_search_screen.dart';
+import 'package:personal_trainer/app/screen/firebase_screen.dart';
 import 'package:personal_trainer/app/screen/login_screen.dart';
 import 'package:personal_trainer/app/screen/register_screen.dart';
 import 'package:personal_trainer/app/screen/trainer_screen.dart';
@@ -36,7 +37,7 @@ class AppRouter {
         );
       default:
         return MaterialPageRoute(
-          builder: (_) => LoginScreen(),
+          builder: (_) => FirebaseLoadingScreen(),
         );
     }
   }

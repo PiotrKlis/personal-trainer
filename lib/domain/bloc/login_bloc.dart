@@ -7,14 +7,14 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit(LoginState initialState, this.loginProvider) : super(initialState);
   final LoginProvider loginProvider;
 
-  Future<LoginState> loginUser(String email, String password) async {
+  void loginUser(String email, String password) async {
     var response = await loginProvider.loginUser(email, password);
     if (response is UserLoginSuccess) {
-      return LoginSuccess(response.appUser);
+      emit(LoginSuccess(response.appUser));
     } else if (response is Failure) {
-      return LoginFailed(response.error);
+      emit(LoginFailed(response.error));
     } else {
-      return LoginFailed("Unknown login error");
+      emit(LoginFailed("Unknown login error"));
     }
   }
 
@@ -29,14 +29,14 @@ class LoginCubit extends Cubit<LoginState> {
 
   String? getUserEmail() => loginProvider.getUserEmail();
 
-  Future<LoginState> getUserData(String? email) async {
+  void getUserData(String? email) async {
     var response = await loginProvider.getUserData(email);
     if (response is UserLoginSuccess) {
-      return LoginSuccess(response.appUser);
+      emit(LoginSuccess(response.appUser));
     } else if (response is Failure) {
-      return LoginFailed(response.error);
+      emit(LoginFailed(response.error));
     } else {
-      return LoginFailed('getUserData unknown error');
+      emit(LoginFailed('getUserData unknown error'));
     }
   }
 }

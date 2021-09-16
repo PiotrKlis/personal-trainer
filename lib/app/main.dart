@@ -32,10 +32,10 @@ class PersonalTrainerApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) =>
-                FirebaseCubit(FirebaseLoading(), firebaseProvider)),
+            create: (loginContext) => LoginCubit(LoginLoading(), loginProvider)),
         BlocProvider(
-            create: (context) => LoginCubit(LoginLoading(), loginProvider))
+            create: (firebaseContext) =>
+                FirebaseCubit(FirebaseLoading(), firebaseProvider)),
       ],
       child: GestureDetector(
         onTap: () {
@@ -46,28 +46,30 @@ class PersonalTrainerApp extends StatelessWidget {
           theme: ThemeData.light(),
           onGenerateRoute: AppRouter().onGenerateRoute,
           //TODO: Probably firebase loading should be separate widget
-          home: BlocBuilder<FirebaseCubit, FirebaseState>(
-            builder: (childContext, state) {
-              switch (state.runtimeType) {
-                case FirebaseLoading:
-                  handleLoadingState(childContext);
-                  break;
-                case FirebaseNotInitialized:
-                  handleErrorState(childContext);
-                  break;
-                case FirebaseInitialized:
-                  handleInitializedState(childContext);
-                  break;
-                default:
-                  break;
-              }
-              return Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            },
-          ),
+          // home: Scaffold(
+          //   body: Center(
+          //     child: Row(
+          //       children: [
+          //         BlocListener(listener: (childContext, state) {
+          //           switch (state.runtimeType) {
+          //             case FirebaseLoading:
+          //               handleLoadingState(childContext);
+          //               break;
+          //             case FirebaseNotInitialized:
+          //               handleErrorState(childContext);
+          //               break;
+          //             case FirebaseInitialized:
+          //               handleInitializedState(childContext);
+          //               break;
+          //             default:
+          //               break;
+          //           }
+          //         }),
+          //         CircularProgressIndicator()
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ),
       ),
     );
@@ -93,16 +95,19 @@ class PersonalTrainerApp extends StatelessWidget {
   }
 
   void _handleUserAlreadyLoggedIn(LoginCubit loginCubit, BuildContext context) {
-    loginCubit.getUserData(loginCubit.getUserEmail()).then((loginState) {
-      if (loginState is LoginSuccess) {
-        if (loginState.appUser is Trainer) {
-          Navigator.pushReplacementNamed(context, '/trainer');
-        } else if (loginState.appUser is Client) {
-          Navigator.pushReplacementNamed(context, '/client');
+    BlocListener<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state is LoginSuccess) {
+          if (state.appUser is Trainer) {
+            Navigator.pushReplacementNamed(context, '/trainer');
+          } else if (state.appUser is Client) {
+            Navigator.pushReplacementNamed(context, '/client');
+          }
+        } else {
+          Navigator.pushReplacementNamed(context, '/login');
         }
-      } else {
-        Navigator.pushReplacementNamed(context, '/login');
-      }
-    });
+      },
+    );
+    loginCubit.getUserData(loginCubit.getUserEmail());
   }
 }
