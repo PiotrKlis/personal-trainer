@@ -2,17 +2,29 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:personal_trainer/app/state/register_state.dart';
 import 'package:personal_trainer/data/util/const.dart';
+import 'package:personal_trainer/data/util/response.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
 class RegisterProvider {
-  Future<RegisterState> registerUser(String userEmail, String name,
-      String password, String trainerEmail, UserType userType) async {
+  Future<Response> registerClient(String userEmail, String name,
+      String password, String trainerEmail) async {
     try {
       await _createUser(userEmail, password);
-      _addNewUserData(userType, trainerEmail, userEmail, name);
-      return Registered();
-    } on FirebaseAuthException catch (error) {
-      return RegisterFailed(error.toString());
+      await _addNewClientData(trainerEmail, userEmail, name);
+      return Success();
+    } catch (error) {
+      return Failure(error.toString());
+    }
+  }
+
+  Future<Response> registerTrainer(String userEmail, String name,
+      String password) async {
+    try {
+      await _createUser(userEmail, password);
+      await _createTrainerDataInDb(firebaseCollectionName, userEmail, name);
+      return Success();
+    } catch (error) {
+      return Failure(error.toString());
     }
   }
 
@@ -21,24 +33,19 @@ class RegisterProvider {
         .createUserWithEmailAndPassword(email: email, password: password);
   }
 
-  void _addNewUserData(
-      UserType userType, String trainerEmail, String userEmail, String name) {
-    switch (userType) {
-      case UserType.TRAINER:
-        _createTrainerDataInDb(firebaseCollectionName, userEmail, name);
-        break;
-      case UserType.CLIENT:
-        _createClientDataInDb(
-            firebaseCollectionName, userEmail, name, trainerEmail);
-        _updateTrainerDataWithNewClientData(
-            firebaseCollectionName, trainerEmail, userEmail);
-        break;
-    }
+  Future<void> _addNewClientData(String trainerEmail, String userEmail, String name) async {
+    await _createClientDataInDb(
+        firebaseCollectionName, userEmail, name, trainerEmail);
+    await _updateTrainerDataWithNewClientData(
+        firebaseCollectionName, trainerEmail, userEmail);
   }
 
-  void _createTrainerDataInDb(
-      String collectionName, String userEmail, String name) {
-    FirebaseFirestore.instance.collection(collectionName).doc(userEmail).set({
+  Future<void> _createTrainerDataInDb(
+      String collectionName, String userEmail, String name) async {
+    await FirebaseFirestore.instance
+        .collection(collectionName)
+        .doc(userEmail)
+        .set({
       'id': FirebaseAuth.instance.currentUser!.uid,
       'name': name,
       'email': userEmail,
@@ -46,9 +53,9 @@ class RegisterProvider {
     });
   }
 
-  void _createClientDataInDb(String collectionName, String userEmail,
-      String name, String trainerEmail) {
-    FirebaseFirestore.instance.collection(collectionName).doc(userEmail).set({
+  Future<void> _createClientDataInDb(String collectionName, String userEmail,
+      String name, String trainerEmail) async {
+    await FirebaseFirestore.instance.collection(collectionName).doc(userEmail).set({
       'id': FirebaseAuth.instance.currentUser!.uid,
       'name': name,
       'email': userEmail,
@@ -57,11 +64,11 @@ class RegisterProvider {
     });
   }
 
-  void _updateTrainerDataWithNewClientData(
-      String collectionName, String trainerEmail, String userEmail) {
+  Future<void> _updateTrainerDataWithNewClientData(
+      String collectionName, String trainerEmail, String userEmail) async {
     //TODO: check if trainerEmail is valid, throw if not
     var fieldName = 'clients';
-    FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection(collectionName)
         .doc(trainerEmail)
         .set({

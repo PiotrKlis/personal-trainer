@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:personal_trainer/app/bloc/firebase_cubit.dart';
+import 'package:personal_trainer/app/bloc/login_cubit.dart';
 import 'package:personal_trainer/app/state/firebase_state.dart';
 import 'package:personal_trainer/app/state/login_state.dart';
-import 'package:personal_trainer/domain/bloc/firebase_bloc.dart';
-import 'package:personal_trainer/domain/bloc/login_bloc.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
 

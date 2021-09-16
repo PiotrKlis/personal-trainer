@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:personal_trainer/app/state/login_state.dart';
+import 'package:personal_trainer/app/bloc/register_cubit.dart';
+import 'package:personal_trainer/app/state/register_state.dart';
+import 'package:personal_trainer/app/widget/error_toast.dart';
+import 'package:personal_trainer/data/provider/register_provider.dart';
+import 'package:personal_trainer/data/util/response.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
-import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text('Register'),
-      ),
-      body: Consumer<LoginState>(
-        builder: (context, appState, _) =>
-            RegisterForm(
-                // registerAccount: appState.registerUser
-            ),
+    return BlocProvider(
+      create: (context) => RegisterCubit(RegisterLoading(), RegisterProvider()),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: Text('Register'),
+        ),
+        body: RegisterForm(),
       ),
     );
   }
 }
 
 class RegisterForm extends StatefulWidget {
-  // const RegisterForm({required this.registerAccount});
-
-  // final void Function(String email, String displayName, String password,
-  //     String trainerEmail, UserType userType) registerAccount;
-
   @override
   _RegisterFormState createState() => _RegisterFormState();
 }
@@ -136,8 +133,17 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void validateInputs(BuildContext context) {
-    // widget.registerAccount(_email, _displayName, _password, _trainerEmail, _userType!);
-    Navigator.pop(context);
+    var registerCubit = BlocProvider.of<RegisterCubit>(context);
+    registerCubit.register(
+        _email, _displayName, _password, _trainerEmail, _userType);
+    BlocListener<RegisterCubit, RegisterState>(
+      listener: (context, state) {
+        if (state is Success) {
+          Navigator.pop(context);
+        } else if (state is Failure) {
+          ErrorView.showErrorToast('Register failed, try again');
+        }
+      },
+    );
   }
 }
-

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:personal_trainer/app/bloc/login_cubit.dart';
 import 'package:personal_trainer/app/screen/register_screen.dart';
 import 'package:personal_trainer/app/screen/trainer_screen.dart';
 import 'package:personal_trainer/app/state/login_state.dart';
 import 'package:personal_trainer/app/widget/error_toast.dart';
-import 'package:personal_trainer/domain/bloc/login_bloc.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
 
@@ -100,6 +100,7 @@ class _LoginFormState extends State<LoginForm> {
               ]),
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Email'),
+              onChanged: (value) => _login = value,
             ),
           ),
           Padding(
@@ -110,6 +111,7 @@ class _LoginFormState extends State<LoginForm> {
                   errorText: "Password should be at least 6 characters"),
               decoration: InputDecoration(
                   border: OutlineInputBorder(), hintText: 'Password'),
+              onChanged: (value) => _password = value,
             ),
           ),
           Padding(
@@ -142,13 +144,5 @@ class _LoginFormState extends State<LoginForm> {
         ],
       ),
     );
-  }
-
-  String? validatePassword(String? value) {
-    _password = value;
-  }
-
-  String? validateLogin(String? value) {
-    _login = value;
   }
 }
