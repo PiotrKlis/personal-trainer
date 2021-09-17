@@ -144,6 +144,7 @@ class _RegisterFormState extends State<RegisterForm> {
           ErrorView.showErrorToast('Register failed, try again');
         }
       },
+      child: Container(),
     );
   }
 }

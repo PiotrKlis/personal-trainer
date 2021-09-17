@@ -31,10 +31,10 @@ class PersonalTrainerApp extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) =>
-                LoginCubit(LoginLoading(), loginProvider)),
+                FirebaseCubit(FirebaseLoading(), firebaseProvider)),
         BlocProvider(
             create: (context) =>
-                FirebaseCubit(FirebaseLoading(), firebaseProvider)),
+                LoginCubit(LoginLoading(), loginProvider)),
       ],
       child: GestureDetector(
         onTap: () {

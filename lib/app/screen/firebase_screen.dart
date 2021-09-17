@@ -14,6 +14,7 @@ class FirebaseLoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           BlocBuilder<FirebaseCubit, FirebaseState>(
               builder: (listenerContext, state) {
@@ -32,6 +33,20 @@ class FirebaseLoadingScreen extends StatelessWidget {
             }
             return Center(child: CircularProgressIndicator());
           }),
+          BlocListener<LoginCubit, LoginState>(
+            listener: (context, state) {
+              if (state is LoginSuccess) {
+                if (state.appUser is Trainer) {
+                  Navigator.pushReplacementNamed(context, '/trainer');
+                } else if (state.appUser is Client) {
+                  Navigator.pushReplacementNamed(context, '/client');
+                }
+              } else {
+                Navigator.pushReplacementNamed(context, '/login');
+              }
+            },
+            child: Container(),
+          )
         ],
       ),
     );
@@ -49,27 +64,14 @@ class FirebaseLoadingScreen extends StatelessWidget {
     var loginCubit = BlocProvider.of<LoginCubit>(context);
     loginCubit.isUserLoggedIn().then((isUserLoggedIn) {
       if (isUserLoggedIn) {
-        _handleUserAlreadyLoggedIn(loginCubit, context);
+        _handleUserAlreadyLoggedIn(loginCubit);
       } else {
         Navigator.pushReplacementNamed(context, '/login');
       }
     });
   }
 
-  void _handleUserAlreadyLoggedIn(LoginCubit loginCubit, BuildContext context) {
-    BlocListener<LoginCubit, LoginState>(
-      listener: (context, state) {
-        if (state is LoginSuccess) {
-          if (state.appUser is Trainer) {
-            Navigator.pushReplacementNamed(context, '/trainer');
-          } else if (state.appUser is Client) {
-            Navigator.pushReplacementNamed(context, '/client');
-          }
-        } else {
-          Navigator.pushReplacementNamed(context, '/login');
-        }
-      },
-    );
+  void _handleUserAlreadyLoggedIn(LoginCubit loginCubit) {
     loginCubit.getUserData(loginCubit.getUserEmail());
   }
 }
