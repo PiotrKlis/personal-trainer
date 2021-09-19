@@ -5,8 +5,7 @@ import 'package:personal_trainer/data/util/response.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
 class RegisterProvider {
-  Future<Response> registerTrainerAndClient(
-      String userEmail,
+  Future<Response> registerTrainerAndClient(String userEmail,
       String name,
       String password,
       String trainerEmail,
@@ -44,8 +43,8 @@ class RegisterProvider {
     await _updateTrainerDataWithNewClientData(trainerEmail, userEmail);
   }
 
-  Future<void> _addTrainerDataToDB(
-      String userEmail, String name, String password) async {
+  Future<void> _addTrainerDataToDB(String userEmail, String name,
+      String password) async {
     await FirebaseFirestore.instance
         .collection(firebaseCollectionName)
         .doc(userEmail)
@@ -59,8 +58,8 @@ class RegisterProvider {
     });
   }
 
-  Future<void> _createClientDataInDb(
-      String userEmail, String name, String trainerEmail) async {
+  Future<void> _createClientDataInDb(String userEmail, String name,
+      String trainerEmail) async {
     await FirebaseFirestore.instance
         .collection(firebaseCollectionName)
         .doc(userEmail)
@@ -75,17 +74,27 @@ class RegisterProvider {
     });
   }
 
-  Future<void> _updateTrainerDataWithNewClientData(
-      String trainerEmail, String userEmail) async {
-    //TODO: check if trainerEmail is valid, throw if not
-    var fieldName = 'clients';
+  Future<void> _updateTrainerDataWithNewClientData(String trainerEmail,
+      String userEmail) async {
     await FirebaseFirestore.instance
         .collection(firebaseCollectionName)
         .doc(trainerEmail)
         .collection("trainer")
         .doc("data")
-        .set({
-      fieldName: FieldValue.arrayUnion([userEmail])
-    }, SetOptions(merge: true));
+        .get()
+        .then((data) {
+      if (data.exists) {
+        FirebaseFirestore.instance
+            .collection(firebaseCollectionName)
+            .doc(trainerEmail)
+            .collection("trainer")
+            .doc("data")
+            .set({
+          "clients": FieldValue.arrayUnion([userEmail])
+        }, SetOptions(merge: true));
+      } else {
+        throw Exception("Trainer email is invalid");
+      }
+    });
   }
 }
