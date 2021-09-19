@@ -10,12 +10,17 @@ class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit(RegisterState initialState, this.registerProvider)
       : super(initialState);
 
-  void register(String userEmail, String name, String password,
-      String trainerEmail, UserType? userType) async {
+  void register(String userEmail,
+      String name,
+      String password,
+      String trainerEmail,
+      UserType? userType,
+      String? additionalPassword) async {
     switch (userType) {
       case UserType.TRAINER:
-        var response =
-            await registerProvider.registerTrainer(userEmail, name, password);
+        var response = await registerProvider.registerTrainerAndClient(
+            userEmail, name, password, trainerEmail, additionalPassword,
+            userType);
         if (response is Success) {
           emit(Registered());
         } else if (response is Failure) {
@@ -34,5 +39,17 @@ class RegisterCubit extends Cubit<RegisterState> {
       default:
         emit(RegisterFailed('wrong userType'));
     }
+  }
+
+  String getPasswordHintText(UserType? userType) {
+    if (userType == UserType.TRAINER) {
+      return "Trainer account password";
+    } else {
+      return "Password";
+    }
+  }
+
+  void changeUserType() {
+    emit(NotRegistered());
   }
 }
