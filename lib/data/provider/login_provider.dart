@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:personal_trainer/app/state/login_state.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/data/util/response.dart';
@@ -41,32 +42,37 @@ class LoginProvider {
 
   Future<Response> getUserData(String? email) async {
     try {
-      late AppUser appUser;
-      var value = await FirebaseFirestore.instance
+      var trainerData = await FirebaseFirestore.instance
           .collection(firebaseCollectionName)
           .doc(email)
+          .collection("trainer")
+          .doc("data")
           .get();
-      var userType = value.data()?['userType'];
-      switch (userType) {
-        case 'trainer':
-          appUser = Trainer(
-              id: value.data()?['id'],
-              email: value.data()?['email'],
-              name: value.data()?['name'],
-              clientEmails: List.from(value.data()?['clients']));
-          return UserLoginSuccess(appUser);
-        case 'client':
-          appUser = Client(
-              id: value.data()?['id'],
-              email: value.data()?['email'],
-              name: value.data()?['name'],
-              trainerEmail: value.data()?['trainerEmail']);
-          return UserLoginSuccess(appUser);
-        default:
-          return Failure("Wrong userType");
+
+      var clientData = await FirebaseFirestore.instance
+          .collection(firebaseCollectionName)
+          .doc(email)
+          .collection("trainer")
+          .doc("data")
+          .get();
+
+      if (trainerData.exists && clientData.exists) {
+        return UserLoginSuccess(Trainer(
+            id: trainerData.data()?['id'],
+            email: trainerData.data()?['email'],
+            name: trainerData.data()?['name'],
+            clientEmails: List.from(trainerData.data()?['clients'])));
+      } else if (!trainerData.exists && clientData.exists) {
+        return UserLoginSuccess(Client(
+            id: clientData.data()?['id'],
+            email: clientData.data()?['email'],
+            name: clientData.data()?['name'],
+            trainerEmail: clientData.data()?['trainerEmail']));
+      } else {
+        throw Failure("No user data found");
       }
-    } catch (throwable) {
-      return Failure(throwable.toString());
+    } catch (error) {
+      return Failure(error.toString());
     }
   }
 }
