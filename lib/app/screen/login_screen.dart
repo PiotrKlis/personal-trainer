@@ -131,7 +131,7 @@ class _LoginFormState extends State<LoginForm> {
             listener: (context, state) {
               if (state is LoginSuccess) {
                 if (state.appUser is Trainer) {
-                  Navigator.pushReplacementNamed(context, '/trainer');
+                  Navigator.pushReplacementNamed(context, '/chooseAccount');
                 } else if (state.appUser is Client) {
                   Navigator.pushReplacementNamed(context, '/client');
                 }

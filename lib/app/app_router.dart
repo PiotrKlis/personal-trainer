@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_trainer/app/screen/account_choose_screen.dart';
 import 'package:personal_trainer/app/screen/calendar_exercise_screen.dart';
 import 'package:personal_trainer/app/screen/client_screen.dart';
 import 'package:personal_trainer/app/screen/exercise_search_screen.dart';
@@ -34,6 +35,10 @@ class AppRouter {
       case '/login':
         return MaterialPageRoute(
           builder: (_) => LoginScreen(),
+        );
+      case '/chooseAccount':
+        return MaterialPageRoute(
+          builder: (_) => ChooseAccountScreen(),
         );
       default:
         return MaterialPageRoute(

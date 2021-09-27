@@ -3,18 +3,10 @@ import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:video_player/video_player.dart';
+
 import 'exercise_search_screen.dart';
 
-class CalendarExerciseScreen extends StatefulWidget {
-  // final int index;
-
-  // CalendarExerciseScreen({Key? key, required this.index}) : super(key: key);
-
-  @override
-  _CalendarExerciseScreenState createState() => _CalendarExerciseScreenState();
-}
-
-class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
+class CalendarExerciseScreen extends StatelessWidget {
   final List<Exercise> listOfExercises = <Exercise>[
     Exercise(
         title: 'Push press',
@@ -32,7 +24,8 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
         ]),
     Exercise(
         title: 'Hollow',
-        videoPath: 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+        videoPath:
+            'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
         tags: ['#STOMACH', '#DURABILITY']),
   ];
 
@@ -44,16 +37,12 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
       ),
       //passing in the ListView.builder
       body: Column(
-        children: [
-          CalendarWidget(),
-          Divider(),
-          listOfCards()
-        ],
+        children: [CalendarWidget(), Divider(), listOfCards()],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => ExerciseSearchScreen()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ExerciseSearchScreen()));
         },
         child: const Icon(Icons.add),
       ),
@@ -81,7 +70,7 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
                       videoPlayerController: VideoPlayerController.network(
                           listOfExercises[index].videoPath),
                       looping: false,
-                      autoplay: true,
+                      autoplay: false,
                     ),
                   ),
                   Padding(
@@ -112,8 +101,6 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
         ),
       );
 }
-
-
 
 class CalendarWidget extends StatefulWidget {
   const CalendarWidget({Key? key}) : super(key: key);
