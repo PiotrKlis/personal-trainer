@@ -14,14 +14,20 @@ class ChooseAccount extends StatelessWidget {
               child: Text('Choose which account you would like to access')),
           Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(onPressed: () {  },
-              child: Text('Choose which account you would like to access'))),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/trainer');
+                  },
+                  child:
+                      Text('TRAINER'))),
           Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(onPressed: () {  },
-              child: Text('Choose which account you would like to access'))),
-
-
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/client');
+                  },
+                  child:
+                      Text('CLIENT'))),
         ],
       ),
     );

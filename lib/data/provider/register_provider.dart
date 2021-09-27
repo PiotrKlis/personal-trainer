@@ -17,6 +17,8 @@ class RegisterProvider {
       await _addClientDataToDB(userEmail, name, password, userEmail);
       return Success();
     } catch (error) {
+      FirebaseAuth.instance.currentUser?.delete();
+      _deleteUserData(userEmail);
       return Failure(error.toString());
     }
   }
@@ -28,8 +30,19 @@ class RegisterProvider {
       await _addClientDataToDB(userEmail, name, password, trainerEmail);
       return Success();
     } catch (error) {
+      _deleteUserData(userEmail);
+      FirebaseAuth.instance.currentUser?.delete();
       return Failure(error.toString());
     }
+  }
+
+  void _deleteUserData(String userEmail) async {
+    await FirebaseFirestore.instance
+        .collection(firebaseCollectionName)
+        .doc(userEmail)
+        .delete()
+        .then((value) => print("User Deleted"))
+        .catchError((error) => print("Failed to delete user: $error"));
   }
 
   Future<void> _createUser(String email, String password) async {
