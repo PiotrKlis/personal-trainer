@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_trainer/app/util/example_exercises.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -7,27 +8,8 @@ import 'package:video_player/video_player.dart';
 import 'exercise_search_screen.dart';
 
 class CalendarExerciseScreen extends StatelessWidget {
-  final List<Exercise> listOfExercises = <Exercise>[
-    Exercise(
-        title: 'Push press',
-        videoPath:
-            'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-        tags: [
-          '#CARDIO',
-          '#STRENGTH',
-          '#CARDIO',
-          '#STRENGTH',
-          '#CARDIO',
-          '#STRENGTH',
-          '#CARDIO',
-          '#STRENGTH',
-        ]),
-    Exercise(
-        title: 'Hollow',
-        videoPath:
-            'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-        tags: ['#STOMACH', '#DURABILITY']),
-  ];
+  final List<Exercise> listOfExercises = ExampleExercises.list;
+  List<String> listOfExpandedExercises = [];
 
   @override
   Widget build(BuildContext context) {
@@ -49,57 +31,63 @@ class CalendarExerciseScreen extends StatelessWidget {
     );
   }
 
-  Widget listOfCards() => Expanded(
-        child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: listOfExercises.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: Icon(Icons.fitness_center),
-                    title: Text(
-                      listOfExercises[index].title,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 240,
-                    child: VideoItem(
-                      videoPlayerController: VideoPlayerController.network(
-                          listOfExercises[index].videoPath),
-                      looping: false,
-                      autoplay: false,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 24.0,
-                      child: Expanded(
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: listOfExercises[index].tags.length,
-                          itemBuilder: (BuildContext context, int tagIndex) {
-                            return Row(children: [
-                              Text(
-                                listOfExercises[index].tags[tagIndex],
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(width: 4)
-                            ]);
-                          },
+  Widget listOfCards() => ExpansionPanelList(
+      expansionCallback: (index, isExpanded) {},
+      children: listOfExercises
+          .map((exercise) => _buildExpansionPanel(exercise))
+          .toList());
+
+  ExpansionPanel _buildExpansionPanel(Exercise exercise) {
+    return ExpansionPanel(
+      isExpanded: listOfExpandedExercises.contains(exercise.id),
+      canTapOnHeader: true,
+      headerBuilder: (context, isExpanded) {
+        return ListTile(
+          leading: Icon(Icons.fitness_center),
+          title: Text(
+            exercise.title,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        );
+      },
+      body: Column(
+        children: [
+          SizedBox(
+            height: 240,
+            child: VideoItem(
+              videoPlayerController:
+                  VideoPlayerController.network(exercise.videoPath),
+              looping: false,
+              autoplay: false,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 24.0,
+              child: Flex(direction: Axis.vertical, children: [
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: exercise.tags.length,
+                    itemBuilder: (BuildContext context, int tagIndex) {
+                      return Row(children: [
+                        Text(
+                          exercise.tags[tagIndex],
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                      ),
-                    ),
+                        SizedBox(width: 4)
+                      ]);
+                    },
                   ),
-                ],
-              ),
-            );
-          },
-        ),
-      );
+                ),
+              ]),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class CalendarWidget extends StatefulWidget {
