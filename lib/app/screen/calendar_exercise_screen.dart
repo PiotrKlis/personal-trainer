@@ -7,8 +7,14 @@ import 'package:video_player/video_player.dart';
 
 import 'exercise_search_screen.dart';
 
-class CalendarExerciseScreen extends StatelessWidget {
+class CalendarExerciseScreen extends StatefulWidget {
+  @override
+  State<CalendarExerciseScreen> createState() => _CalendarExerciseScreenState();
+}
+
+class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
   final List<Exercise> listOfExercises = ExampleExercises.list;
+
   List<String> listOfExpandedExercises = [];
 
   @override
@@ -18,8 +24,8 @@ class CalendarExerciseScreen extends StatelessWidget {
         title: Text('Plan Exercises'),
       ),
       //passing in the ListView.builder
-      body: Column(
-        children: [CalendarWidget(), Divider(), listOfCards()],
+      body: ListView(
+          children: [CalendarWidget(), Divider(), listOfCards()],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -31,11 +37,23 @@ class CalendarExerciseScreen extends StatelessWidget {
     );
   }
 
-  Widget listOfCards() => ExpansionPanelList(
-      expansionCallback: (index, isExpanded) {},
-      children: listOfExercises
-          .map((exercise) => _buildExpansionPanel(exercise))
-          .toList());
+  Widget listOfCards() =>
+      ExpansionPanelList(
+          expandedHeaderPadding: EdgeInsets.all(0),
+          expansionCallback: (index, isExpanded) {
+            setState(() {
+              String id = listOfExercises[index].id;
+              if (listOfExpandedExercises.contains(id)) {
+                listOfExpandedExercises.remove(id);
+              } else {
+                listOfExpandedExercises.add(id);
+              }
+              print(listOfExpandedExercises.toString());
+            });
+          },
+          children: listOfExercises
+              .map((exercise) => _buildExpansionPanel(exercise))
+              .toList());
 
   ExpansionPanel _buildExpansionPanel(Exercise exercise) {
     return ExpansionPanel(
@@ -52,11 +70,12 @@ class CalendarExerciseScreen extends StatelessWidget {
       },
       body: Column(
         children: [
+          Divider(),
           SizedBox(
             height: 240,
             child: VideoItem(
               videoPlayerController:
-                  VideoPlayerController.network(exercise.videoPath),
+              VideoPlayerController.network(exercise.videoPath),
               looping: false,
               autoplay: false,
             ),

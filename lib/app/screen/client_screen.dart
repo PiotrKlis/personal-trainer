@@ -1,31 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:personal_trainer/app/util/example_exercises.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:video_player/video_player.dart';
 
 class ClientScreen extends StatelessWidget {
-  final List<Exercise> listOfExercises = <Exercise>[
-    Exercise(
-        title: 'Push press',
-        videoPath:
-            'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-        tags: [
-          '#CARDIO',
-          '#STRENGTH',
-          '#CARDIO',
-          '#STRENGTH',
-          '#CARDIO',
-          '#STRENGTH',
-          '#CARDIO',
-          '#STRENGTH',
-        ]),
-    Exercise(
-        title: 'Hollow',
-        videoPath:
-            'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-        tags: ['#STOMACH', '#DURABILITY']),
-  ];
+  final List<Exercise> listOfExercises = ExampleExercises.list;
 
   @override
   Widget build(BuildContext context) {

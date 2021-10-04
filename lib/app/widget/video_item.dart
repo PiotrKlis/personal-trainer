@@ -49,11 +49,8 @@ class _VideoItemsState extends State<VideoItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Chewie(
-        controller: _chewieController,
-      ),
+    return Chewie(
+      controller: _chewieController,
     );
   }
 }
