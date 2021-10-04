@@ -1,7 +1,6 @@
 TODO
 
 Add exercise screen
-- make videos shorter (number of rows on screen)
 - dodaj liczbę serii do exercisow
 - stworz baze exercisow na firestore
 - dodaj exercisy do firestore dla clienta od trenera
@@ -10,3 +9,4 @@ Add exercise screen
 Done
 - Navigate client to calendar exercises
 - Check if choose client work properly with both screens
+- make videos shorter (number of rows on screen)

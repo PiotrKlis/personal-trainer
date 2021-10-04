@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_trainer/app/util/example_exercises.dart';
+import 'package:personal_trainer/app/widget/error_toast.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -56,6 +57,7 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
               .toList());
 
   ExpansionPanel _buildExpansionPanel(Exercise exercise) {
+    var _controller = TextEditingController(text: '1');
     return ExpansionPanel(
       isExpanded: listOfExpandedExercises.contains(exercise.id),
       canTapOnHeader: true,
@@ -65,6 +67,21 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
           title: Text(
             exercise.title,
             style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          trailing: SizedBox(
+            height: 32,
+            width: 32,
+            //TODO migrate to TextFormField with validator
+            child: TextField(
+              onSubmitted: (value) {
+                if (value is int) {
+                  _controller.text = value;
+                } else {
+                  ErrorView.showErrorToast('Type correct number of series');
+                }
+              },
+              controller: _controller,
+            ),
           ),
         );
       },
