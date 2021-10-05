@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:personal_trainer/app/util/example_exercises.dart';
 import 'package:personal_trainer/app/widget/error_toast.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
@@ -26,7 +27,7 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
       ),
       //passing in the ListView.builder
       body: ListView(
-          children: [CalendarWidget(), Divider(), listOfCards()],
+        children: [CalendarWidget(), Divider(), listOfCards()],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -38,26 +39,28 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
     );
   }
 
-  Widget listOfCards() =>
-      ExpansionPanelList(
-          expandedHeaderPadding: EdgeInsets.all(0),
-          expansionCallback: (index, isExpanded) {
-            setState(() {
-              String id = listOfExercises[index].id;
-              if (listOfExpandedExercises.contains(id)) {
-                listOfExpandedExercises.remove(id);
-              } else {
-                listOfExpandedExercises.add(id);
-              }
-              print(listOfExpandedExercises.toString());
-            });
-          },
-          children: listOfExercises
-              .map((exercise) => _buildExpansionPanel(exercise))
-              .toList());
+  Widget listOfCards() => ExpansionPanelList(
+      animationDuration: Duration(seconds: 1),
+      elevation: 1.0,
+      expandedHeaderPadding: EdgeInsets.all(0),
+      expansionCallback: (index, isExpanded) {
+        setState(() {
+          String id = listOfExercises[index].id;
+          if (listOfExpandedExercises.contains(id)) {
+            listOfExpandedExercises.remove(id);
+          } else {
+            listOfExpandedExercises.add(id);
+          }
+          print(listOfExpandedExercises.toString());
+        });
+      },
+      children: listOfExercises
+          .map((exercise) => _buildExpansionPanel(exercise))
+          .toList());
 
   ExpansionPanel _buildExpansionPanel(Exercise exercise) {
-    var _controller = TextEditingController(text: '1');
+    var _setsController = TextEditingController(text: '1');
+    var _repsController = TextEditingController(text: '8');
     return ExpansionPanel(
       isExpanded: listOfExpandedExercises.contains(exercise.id),
       canTapOnHeader: true,
@@ -68,31 +71,57 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
             exercise.title,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          trailing: SizedBox(
-            height: 32,
-            width: 32,
-            //TODO migrate to TextFormField with validator
-            child: TextField(
-              onSubmitted: (value) {
-                if (value is int) {
-                  _controller.text = value;
-                } else {
-                  ErrorView.showErrorToast('Type correct number of series');
-                }
-              },
-              controller: _controller,
-            ),
-          ),
         );
       },
       body: Column(
         children: [
           Divider(),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                  padding: const EdgeInsets.only(left: 24.0),
+                  child: Text('Sets')),
+              Padding(
+                padding: const EdgeInsets.only(left: 24.0),
+                child: SizedBox(
+                  width: 24,
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    textAlign: TextAlign.center,
+                    onSubmitted: (value) {
+                      //TODO: Send sets value to remote
+                    },
+                    controller: _setsController,
+                  ),
+                ),
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 24.0),
+                  child: Text('Reps')),
+              Padding(
+                padding: const EdgeInsets.only(left: 24.0),
+                child: SizedBox(
+                  width: 24,
+                  child: TextField(
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    onSubmitted: (value) {
+                      //TODO: Send reps value to remote
+                    },
+                    controller: _repsController,
+                  ),
+                ),
+              ),
+            ],
+          ),
           SizedBox(
             height: 240,
             child: VideoItem(
               videoPlayerController:
-              VideoPlayerController.network(exercise.videoPath),
+                  VideoPlayerController.network(exercise.videoPath),
               looping: false,
               autoplay: false,
             ),
