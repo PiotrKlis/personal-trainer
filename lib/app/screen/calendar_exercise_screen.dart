@@ -27,7 +27,7 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
       ),
       //passing in the ListView.builder
       body: ListView(
-        children: [CalendarWidget(), Divider(), listOfCards()],
+        children: [CalendarWidget(), Divider(), _listOfCards()],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -39,9 +39,9 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
     );
   }
 
-  Widget listOfCards() => ExpansionPanelList(
+  Widget _listOfCards() => ExpansionPanelList(
       animationDuration: Duration(seconds: 1),
-      elevation: 1.0,
+      elevation: 4.0,
       expandedHeaderPadding: EdgeInsets.all(0),
       expansionCallback: (index, isExpanded) {
         setState(() {
