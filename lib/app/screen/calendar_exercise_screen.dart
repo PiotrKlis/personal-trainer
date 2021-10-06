@@ -25,7 +25,6 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
       appBar: AppBar(
         title: Text('Plan Exercises'),
       ),
-      //passing in the ListView.builder
       body: ListView(
         children: [CalendarWidget(), Divider(), _listOfCards()],
       ),

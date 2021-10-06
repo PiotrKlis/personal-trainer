@@ -20,27 +20,28 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
       appBar: AppBar(
         title: Text('Search Exercises'),
       ),
-      body: Container(
-        margin: EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
-        child: Column(
-          children: <Widget>[_searchView(), _listOfResults()],
-        ),
+      body: Column(
+        children: [
+          _searchView(),
+          // _listOfResults()
+        ],
       ),
     );
   }
 
   Widget _searchView() {
     var _searchController = TextEditingController();
-    return Container(
-      decoration: BoxDecoration(border: Border.all(width: 1.0)),
-      child: new TextField(
-        controller: _searchController,
-        decoration: InputDecoration(
-          hintText: "Search",
+    return Row(children: [
+      Padding(padding: const EdgeInsets.all(24.0), child: Icon(Icons.search)),
+      Expanded(
+        child: TextField(
+          controller: _searchController,
+          decoration: InputDecoration(
+            hintText: "Search",
+          ),
         ),
-        textAlign: TextAlign.center,
       ),
-    );
+    ]);
   }
 
   Widget _listOfResults() {
@@ -65,8 +66,6 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
   }
 
   ExpansionPanel _buildExpansionPanel(Exercise exercise) {
-    var _setsController = TextEditingController(text: '1');
-    var _repsController = TextEditingController(text: '8');
     return ExpansionPanel(
       isExpanded: listOfExpandedExercises.contains(exercise.id),
       canTapOnHeader: true,
