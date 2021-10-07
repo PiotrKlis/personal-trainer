@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:personal_trainer/app/util/example_exercises.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:video_player/video_player.dart';
@@ -12,25 +14,34 @@ class ExerciseSearchScreen extends StatefulWidget {
 
 class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
   List<String> listOfExpandedExercises = [];
-  List<Exercise> listOfExercises = [];
+  List<Exercise> listOfExercises = ExampleExercises.list;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Search Exercises'),
-      ),
-      body: Column(
-        children: [
-          _searchView(),
-          // _listOfResults()
-        ],
-      ),
+    return BlocProvider(
+      create: (_) => ExerciseSearchCubit(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Search Exercises'),
+        ),
+        body: ListView(
+          children: [
+            _searchView(),
+            _listOfResults()],
+        ),
+      )
     );
   }
 
   Widget _searchView() {
     var _searchController = TextEditingController();
+    _searchController.addListener(() {
+      if (_searchController.text.isEmpty) {
+
+      } else {
+
+      }
+    });
     return Row(children: [
       Padding(padding: const EdgeInsets.all(24.0), child: Icon(Icons.search)),
       Expanded(
@@ -118,3 +129,5 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
     );
   }
 }
+
+
