@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:personal_trainer/app/bloc/exercise_search_cubit.dart';
 import 'package:personal_trainer/app/util/example_exercises.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
+import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:video_player/video_player.dart';
+
 
 class ExerciseSearchScreen extends StatefulWidget {
   const ExerciseSearchScreen({Key? key}) : super(key: key);
@@ -19,40 +22,17 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ExerciseSearchCubit(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Search Exercises'),
-        ),
-        body: ListView(
-          children: [
-            _searchView(),
-            _listOfResults()],
-        ),
-      )
-    );
-  }
-
-  Widget _searchView() {
-    var _searchController = TextEditingController();
-    _searchController.addListener(() {
-      if (_searchController.text.isEmpty) {
-
-      } else {
-
-      }
-    });
-    return Row(children: [
-      Padding(padding: const EdgeInsets.all(24.0), child: Icon(Icons.search)),
-      Expanded(
-        child: TextField(
-          controller: _searchController,
-          decoration: InputDecoration(
-            hintText: "Search",
+        lazy: false,
+        create: (context) => ExerciseSearchCubit(
+            ExerciseSearchState(), ExerciseSearchProvider()),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Search Exercises'),
           ),
-        ),
-      ),
-    ]);
+          body: ListView(
+            children: [SearchWidget(), _listOfResults()],
+          ),
+        ));
   }
 
   Widget _listOfResults() {
@@ -130,4 +110,33 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
   }
 }
 
+class SearchWidget extends StatelessWidget {
+  const SearchWidget({Key? key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    var _searchController = TextEditingController();
+    _searchController.addListener(() {
+      if (_searchController.text.isEmpty) {
+        print("I am empty");
+      } else {
+        context
+            .read<ExerciseSearchCubit>()
+            .searchExercises(_searchController.text);
+        // BlocProvider.of<ExerciseSearchCubit>(context)
+        //     .searchExercises(_searchController.text);
+      }
+    });
+    return Row(children: [
+      Padding(padding: const EdgeInsets.all(24.0), child: Icon(Icons.search)),
+      Expanded(
+        child: TextField(
+          controller: _searchController,
+          decoration: InputDecoration(
+            hintText: "Search",
+          ),
+        ),
+      ),
+    ]);
+  }
+}

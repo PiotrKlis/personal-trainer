@@ -16,8 +16,9 @@ class LoginProvider {
         password: password,
       );
       return await getUserData(email);
+
     } on FirebaseAuthException catch (error) {
-      return Failure(error.toString());
+      return Future.error(error);
     }
   }
 

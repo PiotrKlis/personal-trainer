@@ -8,6 +8,8 @@ class LoginCubit extends Cubit<LoginState> {
   final LoginProvider loginProvider;
 
   void loginUser(String email, String password) async {
+    loginProvider.loginUser(email, password).then((value) => "");
+
     var response = await loginProvider.loginUser(email, password);
     if (response is UserLoginSuccess) {
       emit(LoginSuccess(response.appUser));
