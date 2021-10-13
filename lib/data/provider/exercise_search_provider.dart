@@ -3,43 +3,35 @@ import 'package:personal_trainer/domain/model/exercise.dart';
 
 class ExerciseSearchProvider {
   Future<List<Exercise>> searchForExercises(String query) async {
-    // FirebaseFirestore.instance
-    //     .collection('users')
-    //     .where('age', isGreaterThan: 20)
-    //     .get()
-    //     .then();
-    //
-    var test = await FirebaseFirestore.instance
-        .collection('exercises')
-        .where('title', isGreaterThanOrEqualTo: query)
-        .where('title', isLessThanOrEqualTo: '$query\uf7ff')
-        .get();
-    // .then((result) => result.docs.forEach((snapshot) {
-    //       print(snapshot.data());
-    //     }));
+    try {
+      String modifiedQuery = '#${query.toUpperCase()}';
+      var titleResult = await FirebaseFirestore.instance
+          .collection('exercises')
+          .where('title', isGreaterThanOrEqualTo: query)
+          .where('title', isLessThanOrEqualTo: '$query\uf7ff')
+          .get();
 
-    String modifiedQuery = query.toUpperCase();
-    var test2 = await FirebaseFirestore.instance
-        .collection('exercises')
-        .where('tags', arrayContains: '#$modifiedQuery') //works!
-        // .where('tags', whereIn: ['#$modifiedQuery'])
-        // .where('tags', arrayContainsAny: ['#$query'])
-        //     .where('tags', isGreaterThanOrEqualTo: '#$modifiedQuery')
-        //     .where('title', isLessThanOrEqualTo: '$query\uf7ff')
-        .get();
+      var tagResult = await FirebaseFirestore.instance
+          .collection('exercises')
+          .where('tags', arrayContains: modifiedQuery)
+          .get();
 
-    var titleMappedExercises =
-        test.docs.map((value) => mapToExercise(value.data())).toList();
+      var titleMappedExercises =
+      titleResult.docs.map((value) => _mapToExercise(value.data())).toList();
 
-    var tagsMappedExercises =
-        test2.docs.map((value) => mapToExercise(value.data())).toList();
+      var tagsMappedExercises =
+      tagResult.docs.map((value) => _mapToExercise(value.data())).toList();
 
-    print('title mapped: $titleMappedExercises');
-    print('tags mapped: $tagsMappedExercises');
-    return Future.value(titleMappedExercises);
+      var result = titleMappedExercises + tagsMappedExercises;
+      return Future.value(result);
+    }
+    catch (error) {
+      //TODO: Check stacktrace on error
+      return Future.error(error, StackTrace.current);
+    }
   }
 
-  Exercise mapToExercise(Map<String, dynamic> data) {
+  Exercise _mapToExercise(Map<String, dynamic> data) {
     return Exercise(
         id: data['id'],
         title: data['title'],

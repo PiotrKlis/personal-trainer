@@ -8,8 +8,8 @@ class ExerciseSearchCubit extends Cubit<ExerciseSearchState> {
 
   final ExerciseSearchProvider searchProvider;
 
-  Future<List<Exercise>> searchExercises(String query) async {
-    return searchProvider.searchForExercises(query);
+  void searchExercises(String query) async {
+    searchProvider.searchForExercises(query).then((value) => , onError: );
   }
 }
 
