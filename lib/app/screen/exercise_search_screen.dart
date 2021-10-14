@@ -7,7 +7,6 @@ import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:video_player/video_player.dart';
 
-
 class ExerciseSearchScreen extends StatefulWidget {
   const ExerciseSearchScreen({Key? key}) : super(key: key);
 
@@ -23,8 +22,9 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
         lazy: false,
-        create: (context) => ExerciseSearchCubit(
-            ExerciseSearchState(), ExerciseSearchProvider()),
+        create: (context) =>
+            ExerciseSearchCubit(
+                ExerciseSearchState(), ExerciseSearchProvider()),
         child: Scaffold(
           appBar: AppBar(
             title: Text('Search Exercises'),
@@ -36,78 +36,90 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
   }
 
   Widget _listOfResults() {
-    return ExpansionPanelList(
-        animationDuration: Duration(seconds: 1),
-        elevation: 4.0,
-        expandedHeaderPadding: EdgeInsets.all(0),
-        expansionCallback: (index, isExpanded) {
-          setState(() {
-            String id = listOfExercises[index].id;
-            if (listOfExpandedExercises.contains(id)) {
-              listOfExpandedExercises.remove(id);
-            } else {
-              listOfExpandedExercises.add(id);
-            }
-            print(listOfExpandedExercises.toString());
-          });
-        },
-        children: listOfExercises
-            .map((exercise) => _buildExpansionPanel(exercise))
-            .toList());
+    return BlocBuilder<ExerciseSearchCubit, ExerciseSearchState>(
+        builder: (context, state) {
+          if (state is SearchSuccess) {
+            listOfExercises = state.exercises;
+          }
+          return ExpansionPanelList(
+              animationDuration: Duration(seconds: 1),
+              elevation: 4,
+              expandedHeaderPadding: EdgeInsets.all(0),
+              expansionCallback: (index, isExpanded) {
+                setState(() {
+                  String id = listOfExercises[index].id;
+                  if (listOfExpandedExercises.contains(id)) {
+                    listOfExpandedExercises.remove(id);
+                  } else {
+                    listOfExpandedExercises.add(id);
+                  }
+                  print(listOfExpandedExercises.toString());
+                });
+              },
+              children: listOfExercises
+                  .map((exercise) =>
+                  _buildExpansionPanel(
+                      exercise, isExpanded(exercise, listOfExpandedExercises)))
+                  .toList());
+        });
   }
+}
 
-  ExpansionPanel _buildExpansionPanel(Exercise exercise) {
-    return ExpansionPanel(
-      isExpanded: listOfExpandedExercises.contains(exercise.id),
-      canTapOnHeader: true,
-      headerBuilder: (context, isExpanded) {
-        return ListTile(
-          leading: Icon(Icons.fitness_center),
-          title: Text(
-            exercise.title,
-            style: TextStyle(fontWeight: FontWeight.bold),
+bool isExpanded(Exercise exercise, List<String> listOfExpandedExercises) {
+  return listOfExpandedExercises.contains(exercise.id);
+}
+
+ExpansionPanel _buildExpansionPanel(Exercise exercise, bool isExpanded) {
+  return ExpansionPanel(
+    isExpanded: isExpanded,
+    canTapOnHeader: true,
+    headerBuilder: (context, isExpanded) {
+      return ListTile(
+        leading: Icon(Icons.fitness_center),
+        title: Text(
+          exercise.title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      );
+    },
+    body: Column(
+      children: [
+        Divider(),
+        SizedBox(
+          height: 240,
+          child: VideoItem(
+            videoPlayerController:
+            VideoPlayerController.network(exercise.videoPath),
+            looping: false,
+            autoplay: false,
           ),
-        );
-      },
-      body: Column(
-        children: [
-          Divider(),
-          SizedBox(
-            height: 240,
-            child: VideoItem(
-              videoPlayerController:
-                  VideoPlayerController.network(exercise.videoPath),
-              looping: false,
-              autoplay: false,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 24.0,
-              child: Flex(direction: Axis.vertical, children: [
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: exercise.tags.length,
-                    itemBuilder: (BuildContext context, int tagIndex) {
-                      return Row(children: [
-                        Text(
-                          exercise.tags[tagIndex],
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(width: 4)
-                      ]);
-                    },
-                  ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            height: 24.0,
+            child: Flex(direction: Axis.vertical, children: [
+              Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: exercise.tags.length,
+                  itemBuilder: (BuildContext context, int tagIndex) {
+                    return Row(children: [
+                      Text(
+                        exercise.tags[tagIndex],
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(width: 4)
+                    ]);
+                  },
                 ),
-              ]),
-            ),
+              ),
+            ]),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
 }
 
 class SearchWidget extends StatelessWidget {
@@ -123,8 +135,6 @@ class SearchWidget extends StatelessWidget {
         context
             .read<ExerciseSearchCubit>()
             .searchExercises(_searchController.text);
-        // BlocProvider.of<ExerciseSearchCubit>(context)
-        //     .searchExercises(_searchController.text);
       }
     });
     return Row(children: [

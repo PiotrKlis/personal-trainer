@@ -40,7 +40,7 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
 
   Widget _listOfExercises() => ExpansionPanelList(
       animationDuration: Duration(seconds: 1),
-      elevation: 4.0,
+      elevation: 4,
       expandedHeaderPadding: EdgeInsets.all(0),
       expansionCallback: (index, isExpanded) {
         setState(() {
