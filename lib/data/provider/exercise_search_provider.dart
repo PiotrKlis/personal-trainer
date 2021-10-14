@@ -38,4 +38,17 @@ class ExerciseSearchProvider {
         videoPath: data['videoPath'],
         tags: List.from(data['tags']));
   }
+
+  Future<List<Exercise>> getAllExercises() async {
+    try {
+      var exercises = await FirebaseFirestore.instance
+          .collection('exercises')
+          .get();
+
+      var mappedExercises = exercises.docs.map((value) => _mapToExercise(value.data())).toList();
+      return Future.value(mappedExercises);
+    } catch (error) {
+      return Future.error(error, StackTrace.current);
+    }
+  }
 }

@@ -130,7 +130,9 @@ class SearchWidget extends StatelessWidget {
     var _searchController = TextEditingController();
     _searchController.addListener(() {
       if (_searchController.text.isEmpty) {
-        print("I am empty");
+        context
+            .read<ExerciseSearchCubit>()
+            .getAllExercises();
       } else {
         context
             .read<ExerciseSearchCubit>()
