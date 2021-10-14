@@ -16,7 +16,7 @@ class ExerciseSearchScreen extends StatefulWidget {
 
 class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
   List<String> listOfExpandedExercises = [];
-  List<Exercise> listOfExercises = ExampleExercises.list;
+  List<Exercise> listOfExercises = [];
 
   @override
   Widget build(BuildContext context) {
