@@ -27,6 +27,15 @@ class ExerciseSearchCubit extends Cubit<ExerciseSearchState> {
       // ,onError:  print("error");
     );
   }
+
+  void addExercise(String id) {
+    searchProvider.addExercise(id).then(
+            (exercises) {
+          emit(AddExerciseEvent());
+        }
+      // ,onError:  print("error");
+    );
+  }
 }
 
 class SearchSuccess extends ExerciseSearchState {
@@ -39,3 +48,5 @@ class SearchFailure extends ExerciseSearchState {}
 
 
 class ExerciseSearchState {}
+
+class AddExerciseEvent extends ExerciseSearchState {}

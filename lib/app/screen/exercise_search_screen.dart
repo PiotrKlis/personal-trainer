@@ -68,7 +68,7 @@ bool isExpanded(Exercise exercise, List<String> listOfExpandedExercises) {
 
 ExpansionPanel _buildExpansionPanel(Exercise exercise, bool isExpanded) {
   void _onDeleteItemPressed() {
-    print("I am adding stuff!");
+
   }
 
   return ExpansionPanel(
@@ -87,7 +87,9 @@ ExpansionPanel _buildExpansionPanel(Exercise exercise, bool isExpanded) {
                 size: 20.0,
               ),
               onTap: () {
-                _onDeleteItemPressed();
+                context
+                    .read<ExerciseSearchCubit>()
+                    .addExercise(exercise.id);
               }));
     },
     body: Column(
