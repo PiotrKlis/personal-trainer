@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
-import 'package:personal_trainer/data/util/response.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
 class ExerciseSearchCubit extends Cubit<ExerciseSearchState> {
@@ -11,30 +9,27 @@ class ExerciseSearchCubit extends Cubit<ExerciseSearchState> {
   final ExerciseSearchProvider searchProvider;
 
   void searchExercises(String query) async {
-    searchProvider.searchForExercises(query).then(
-        (exercises) {
-          emit(SearchSuccess(exercises));
-        }
+    searchProvider.searchForExercises(query).then((exercises) {
+      emit(SearchSuccess(exercises));
+    }
         // ,onError:  print("error");
-    );
+        );
   }
 
   void getAllExercises() {
-    searchProvider.getAllExercises().then(
-            (exercises) {
-          emit(SearchSuccess(exercises));
-        }
-      // ,onError:  print("error");
-    );
+    searchProvider.getAllExercises().then((exercises) {
+      emit(SearchSuccess(exercises));
+    }
+        // ,onError:  print("error");
+        );
   }
 
-  void addExercise(String id) {
-    searchProvider.addExercise(id).then(
-            (exercises) {
-          emit(AddExerciseEvent());
-        }
-      // ,onError:  print("error");
-    );
+  void addExercise(String id, DateTime selectedDay) {
+    searchProvider.addExercise(id, selectedDay).then((value) {
+      emit(ExerciseAddedEvent());
+    }
+        // ,onError:  print("error");
+        );
   }
 }
 
@@ -46,7 +41,6 @@ class SearchSuccess extends ExerciseSearchState {
 
 class SearchFailure extends ExerciseSearchState {}
 
-
 class ExerciseSearchState {}
 
-class AddExerciseEvent extends ExerciseSearchState {}
+class ExerciseAddedEvent extends ExerciseSearchState {}

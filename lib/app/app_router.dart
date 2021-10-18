@@ -22,7 +22,7 @@ class AppRouter {
         );
       case '/exercise_search':
         return MaterialPageRoute(
-          builder: (_) => ExerciseSearchScreen(),
+          builder: (_) => ExerciseSearchScreen(DateTime.now()),
         );
       case '/client':
         return MaterialPageRoute(

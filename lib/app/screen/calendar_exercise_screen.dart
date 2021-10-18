@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:personal_trainer/app/util/example_exercises.dart';
-import 'package:personal_trainer/app/widget/error_toast.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:video_player/video_player.dart';
 
 import 'exercise_search_screen.dart';
+
+DateTime _selectedDay = DateTime.now();
 
 class CalendarExerciseScreen extends StatefulWidget {
   @override
@@ -16,8 +17,7 @@ class CalendarExerciseScreen extends StatefulWidget {
 
 class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
   final List<Exercise> listOfExercises = ExampleExercises.list;
-
-  List<String> listOfExpandedExercises = [];
+  List<String> _listOfExpandedExercises = [];
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,10 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ExerciseSearchScreen()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ExerciseSearchScreen(_selectedDay)));
         },
         child: const Icon(Icons.add),
       ),
@@ -45,12 +47,12 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
       expansionCallback: (index, isExpanded) {
         setState(() {
           String id = listOfExercises[index].id;
-          if (listOfExpandedExercises.contains(id)) {
-            listOfExpandedExercises.remove(id);
+          if (_listOfExpandedExercises.contains(id)) {
+            _listOfExpandedExercises.remove(id);
           } else {
-            listOfExpandedExercises.add(id);
+            _listOfExpandedExercises.add(id);
           }
-          print(listOfExpandedExercises.toString());
+          print(_listOfExpandedExercises.toString());
         });
       },
       children: listOfExercises
@@ -61,7 +63,7 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
     var _setsController = TextEditingController(text: '1');
     var _repsController = TextEditingController(text: '8');
     return ExpansionPanel(
-      isExpanded: listOfExpandedExercises.contains(exercise.id),
+      isExpanded: _listOfExpandedExercises.contains(exercise.id),
       canTapOnHeader: true,
       headerBuilder: (context, isExpanded) {
         return ListTile(
@@ -162,7 +164,6 @@ class CalendarWidget extends StatefulWidget {
 }
 
 class _CalendarWidgetState extends State<CalendarWidget> {
-  DateTime _selectedDay = DateTime.now();
   CalendarFormat _calendarFormat = CalendarFormat.week;
   List<bool> _list = <bool>[];
 
@@ -171,8 +172,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     _list.add(true);
 
     return TableCalendar<bool>(
-      firstDay: DateTime.utc(2010, 10, 16),
-      lastDay: DateTime.utc(2030, 3, 14),
+      firstDay: DateTime.utc(2021, 09, 01),
+      lastDay: DateTime.utc(2022, 12, 31),
       focusedDay: _selectedDay,
       calendarFormat: _calendarFormat,
       startingDayOfWeek: StartingDayOfWeek.monday,
@@ -192,9 +193,9 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   }
 
   void _onDaySelected(DateTime selectedDay) {
-    if (!isSameDay(_selectedDay, selectedDay)) {
+    if (!isSameDay(selectedDay, selectedDay)) {
       setState(() {
-        _selectedDay = selectedDay;
+        selectedDay = selectedDay;
       });
     }
   }
