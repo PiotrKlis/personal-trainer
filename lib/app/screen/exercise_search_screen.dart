@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_trainer/app/bloc/exercise_search_cubit.dart';
-import 'package:personal_trainer/app/screen/calendar_exercise_screen.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
@@ -24,8 +23,8 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
         lazy: false,
-        create: (context) => ExerciseSearchCubit(
-            ExerciseSearchState(), ExerciseSearchProvider()),
+        create: (context) =>
+            ExerciseSearchCubit(InitialEmptySearch(), ExerciseSearchProvider()),
         child: Scaffold(
           appBar: AppBar(
             title: Text('Search Exercises'),
@@ -41,6 +40,8 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
         builder: (context, state) {
       if (state is SearchSuccess) {
         listOfExercises = state.exercises;
+      } else if (state is InitialEmptySearch) {
+        context.read<ExerciseSearchCubit>().getAllExercises();
       }
       return ExpansionPanelList(
           animationDuration: Duration(seconds: 1),
@@ -88,9 +89,7 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
                 ),
                 onTap: () {
                   context.read<ExerciseSearchCubit>().addExercise(
-                        exercise.id,
-                        DateUtils.dateOnly(widget.selectedDay)
-                      );
+                      exercise.id, DateUtils.dateOnly(widget.selectedDay));
                 }));
       },
       body: Column(
@@ -141,7 +140,9 @@ class SearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var _searchController = TextEditingController();
     _searchController.addListener(() {
+      print("search controller text: ${_searchController.text}");
       if (_searchController.text.isEmpty) {
+      print("search controller text: ${_searchController.text.isEmpty}");
         context.read<ExerciseSearchCubit>().getAllExercises();
       } else {
         context

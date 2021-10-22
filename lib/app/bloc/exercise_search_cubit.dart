@@ -33,14 +33,17 @@ class ExerciseSearchCubit extends Cubit<ExerciseSearchState> {
   }
 }
 
+class ExerciseSearchState {}
+
 class SearchSuccess extends ExerciseSearchState {
   final List<Exercise> exercises;
 
   SearchSuccess(this.exercises);
+
 }
 
 class SearchFailure extends ExerciseSearchState {}
 
-class ExerciseSearchState {}
+class InitialEmptySearch extends ExerciseSearchState {}
 
 class ExerciseAddedEvent extends ExerciseSearchState {}
