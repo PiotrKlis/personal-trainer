@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../app_router.dart';
 import 'calendar_exercise_screen.dart';
 
-class TrainerScreen extends StatelessWidget {
+class ClientChooseScreen extends StatelessWidget {
+
+  //TODO: Get user data from firestore
   final List<String> entries = <String>[
     'Captain Jack Sparrow',
     'Adam Małysz',
@@ -23,23 +26,17 @@ class TrainerScreen extends StatelessWidget {
           return Card(
               child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            CalendarExerciseScreen(
-                              // index: index,
-                            ),
-                      ),
-                    );
+                    Navigator.pushNamed(context, AppRouter.CALENDAR_EXERCISE,
+                        arguments: CalendarExerciseArguments("userId"));
                   },
                   title: Text('${entries[index]}')));
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => EmailScreen())).then((value) => value);
+          Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => EmailScreen()))
+              .then((value) => value);
         },
         child: const Icon(Icons.add),
       ),
@@ -68,7 +65,7 @@ class _EmailScreenState extends State<EmailScreen> {
   void sendEmail(BuildContext context) async {
     final Email email = Email(
       body:
-      'This is an invitation to Personal Trainer app from ${'TrainerName'}. Click link to download the app',
+          'This is an invitation to Personal Trainer app from ${'TrainerName'}. Click link to download the app',
       subject: 'Personal Trainer app invitation',
       recipients: ['example@example.com'],
       isHTML: false,
@@ -85,8 +82,7 @@ class _EmailScreenState extends State<EmailScreen> {
           timeInSecForIosWeb: 1,
           backgroundColor: Colors.red,
           textColor: Colors.white,
-          fontSize: 16.0
-      );
+          fontSize: 16.0);
       Navigator.pop(context);
     }
   }

@@ -11,6 +11,10 @@ import 'exercise_search_screen.dart';
 DateTime _selectedDay = DateTime.now();
 
 class CalendarExerciseScreen extends StatefulWidget {
+  final userId;
+
+  const CalendarExerciseScreen({Key? key, this.userId}) : super(key: key);
+
   @override
   State<CalendarExerciseScreen> createState() => _CalendarExerciseScreenState();
 }
@@ -21,6 +25,9 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _args =
+        ModalRoute.of(context)?.settings.arguments as CalendarExerciseArguments;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Plan Exercises'),
@@ -199,4 +206,10 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       });
     }
   }
+}
+
+class CalendarExerciseArguments {
+  final String userId;
+
+  CalendarExerciseArguments(this.userId);
 }

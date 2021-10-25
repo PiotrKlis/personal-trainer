@@ -37,7 +37,7 @@ class FirebaseLoadingScreen extends StatelessWidget {
             listener: (context, state) {
               if (state is LoginSuccess) {
                 if (state.appUser is Trainer) {
-                  Navigator.pushReplacementNamed(context, '/chooseAccount');
+                  Navigator.pushReplacementNamed(context, '/accountChoose');
                 } else if (state.appUser is Client) {
                   Navigator.pushReplacementNamed(context, '/client');
                 }

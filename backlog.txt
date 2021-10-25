@@ -1,12 +1,12 @@
 TODO
 
 Add exercise screen
-- stworz baze exercisow na firestore
-- dodaj exercisy do firestore dla clienta od trenera
-- pobieraj video z remote repo na calendar exercise screen
+- pobieraj dane z remote repo na calendar exercise screen
 
 Done
 - Navigate client to calendar exercises
+- stworz baze exercisow na firestore
+- dodaj exercisy do firestore dla clienta od trenera
 - Check if choose client work properly with both screens
 - make videos shorter (number of rows on screen)
 - dodaj liczbę serii do exercisow

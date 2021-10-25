@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/app/bloc/login_cubit.dart';
 import 'package:personal_trainer/app/screen/register_screen.dart';
-import 'package:personal_trainer/app/screen/trainer_screen.dart';
+import 'package:personal_trainer/app/screen/client_choose_screen.dart';
 import 'package:personal_trainer/app/state/login_state.dart';
 import 'package:personal_trainer/app/widget/error_toast.dart';
 import 'package:personal_trainer/domain/model/client.dart';
@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TrainerScreen()),
+                  MaterialPageRoute(builder: (context) => ClientChooseScreen()),
                 );
               },
               child: Text('Trainer shortcut'),
@@ -131,7 +131,7 @@ class _LoginFormState extends State<LoginForm> {
             listener: (context, state) {
               if (state is LoginSuccess) {
                 if (state.appUser is Trainer) {
-                  Navigator.pushReplacementNamed(context, '/chooseAccount');
+                  Navigator.pushReplacementNamed(context, '/accountChoose');
                 } else if (state.appUser is Client) {
                   Navigator.pushReplacementNamed(context, '/client');
                 }

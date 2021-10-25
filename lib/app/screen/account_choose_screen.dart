@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ChooseAccountScreen extends StatelessWidget {
+import '../app_router.dart';
+
+class AccountChooseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,14 +19,14 @@ class ChooseAccountScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/trainer');
+                      Navigator.pushNamed(context, AppRouter.CHOOSE_CLIENT);
                     },
                     child: Text('TRAINER'))),
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/client');
+                      Navigator.pushNamed(context, AppRouter.CLIENT);
                     },
                     child: Text('CLIENT'))),
           ],

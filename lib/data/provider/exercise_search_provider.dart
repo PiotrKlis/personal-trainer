@@ -70,6 +70,7 @@ class ExerciseSearchProvider {
           .get()
           .then((exercise) {
         if (exercise.exists) {
+          //TODO: change user email to passed one from previous screens
           FirebaseFirestore.instance
               .collection('users')
               .doc('p@p.com')
