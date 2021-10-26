@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/app/bloc/login_cubit.dart';
-import 'package:personal_trainer/app/screen/register_screen.dart';
-import 'package:personal_trainer/app/screen/client_choose_screen.dart';
 import 'package:personal_trainer/app/state/login_state.dart';
 import 'package:personal_trainer/app/widget/error_toast.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
 
-import 'client_screen.dart';
+import '../app_router.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -22,30 +20,6 @@ class LoginScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ClientChooseScreen()),
-                );
-              },
-              child: Text('Trainer shortcut'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ClientScreen()),
-                );
-              },
-              child: Text('Client shortcut'),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: LoginForm(),
@@ -62,10 +36,7 @@ class LoginScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RegisterScreen()),
-                );
+                Navigator.pushNamed(context, AppRouter.REGISTER);
               },
               child: Text('Register'),
             ),
@@ -131,9 +102,10 @@ class _LoginFormState extends State<LoginForm> {
             listener: (context, state) {
               if (state is LoginSuccess) {
                 if (state.appUser is Trainer) {
-                  Navigator.pushReplacementNamed(context, '/accountChoose');
+                  Navigator.pushReplacementNamed(
+                      context, AppRouter.CHOOSE_ACCOUNT);
                 } else if (state.appUser is Client) {
-                  Navigator.pushReplacementNamed(context, '/client');
+                  Navigator.pushReplacementNamed(context, AppRouter.CLIENT);
                 }
               } else if (state is LoginFailed) {
                 ErrorView.showErrorToast(

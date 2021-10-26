@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:personal_trainer/app/state/login_state.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/data/util/response.dart';
-import 'package:personal_trainer/domain/model/app_user.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
 

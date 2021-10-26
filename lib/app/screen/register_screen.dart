@@ -6,7 +6,6 @@ import 'package:personal_trainer/app/state/register_state.dart';
 import 'package:personal_trainer/app/util/custom_validator.dart';
 import 'package:personal_trainer/app/widget/error_toast.dart';
 import 'package:personal_trainer/data/provider/register_provider.dart';
-import 'package:personal_trainer/data/util/response.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
 class RegisterScreen extends StatelessWidget {

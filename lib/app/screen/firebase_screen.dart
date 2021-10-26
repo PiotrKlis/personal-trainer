@@ -7,6 +7,8 @@ import 'package:personal_trainer/app/state/login_state.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
 
+import '../app_router.dart';
+
 class FirebaseLoadingScreen extends StatelessWidget {
   const FirebaseLoadingScreen({Key? key}) : super(key: key);
 
@@ -31,18 +33,25 @@ class FirebaseLoadingScreen extends StatelessWidget {
               default:
                 break;
             }
-            return Center(child: CircularProgressIndicator());
+            return Container(
+              color: Colors.blue,
+              child: Row(children: [
+                Center(child: Image.asset('assets/images/fafcio.png')),
+                Center(child: CircularProgressIndicator()),
+              ]),
+            );
           }),
           BlocListener<LoginCubit, LoginState>(
             listener: (context, state) {
               if (state is LoginSuccess) {
                 if (state.appUser is Trainer) {
-                  Navigator.pushReplacementNamed(context, '/accountChoose');
+                  Navigator.pushReplacementNamed(
+                      context, AppRouter.CHOOSE_ACCOUNT);
                 } else if (state.appUser is Client) {
-                  Navigator.pushReplacementNamed(context, '/client');
+                  Navigator.pushReplacementNamed(context, AppRouter.CLIENT);
                 }
               } else {
-                Navigator.pushReplacementNamed(context, '/login');
+                Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
               }
             },
             child: Container(),
@@ -57,7 +66,7 @@ class FirebaseLoadingScreen extends StatelessWidget {
   }
 
   void handleErrorState(BuildContext context) {
-    Navigator.pushReplacementNamed(context, '/login');
+    Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
   }
 
   void handleInitializedState(BuildContext context) {
@@ -66,7 +75,7 @@ class FirebaseLoadingScreen extends StatelessWidget {
       if (isUserLoggedIn) {
         _handleUserAlreadyLoggedIn(loginCubit);
       } else {
-        Navigator.pushReplacementNamed(context, '/login');
+        Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
       }
     });
   }
