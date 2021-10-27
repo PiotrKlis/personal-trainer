@@ -24,19 +24,43 @@ class ClientsData extends ClientChooseState {
   ClientsData(this.clients);
 }
 
+class Loading extends ClientChooseState {}
+
 class ClientChooseProvider {
   Future<List<Client>> getClientsFor(String trainerId) async {
     try {
-      await FirebaseFirestore.instance
+      var trainerData = await FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser?.email)
           .collection('trainer')
           .doc('data')
-          .get().then((trainerData) {
-        return Future.value(List.from(trainerData.data()?['clients']));
-      });
+          .get();
+
+      var clientIds = List.from(trainerData.get('clients'));
+      List<Client> testData = <Client>[];
+
+      clientIds.map((clientId) {
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(clientId)
+            .collection('client')
+            .doc('data')
+            .get()
+            .then((clientData) {
+          testData.add(_mapToClient(clientData.data()!));
+        });
+      }).toList();
+      return testData;
     } catch (error) {
       return Future.error(error, StackTrace.current);
     }
+  }
+
+  Client _mapToClient(Map<String, dynamic> data) {
+    return Client(
+        id: data['id'],
+        email: data['email'],
+        name: data['name'],
+        trainerEmail: data['trainerEmail']);
   }
 }

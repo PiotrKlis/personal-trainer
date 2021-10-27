@@ -7,6 +7,9 @@ import 'package:video_player/video_player.dart';
 
 class ClientScreen extends StatelessWidget {
   final List<Exercise> listOfExercises = ExampleExercises.list;
+  final id;
+
+  ClientScreen({Key? key, this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -118,4 +121,10 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       });
     }
   }
+}
+
+class ClientScreenArguments {
+  final id;
+
+  ClientScreenArguments(this.id);
 }

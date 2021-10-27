@@ -22,7 +22,6 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        lazy: false,
         create: (context) =>
             ExerciseSearchCubit(InitialEmptySearch(), ExerciseSearchProvider()),
         child: Scaffold(

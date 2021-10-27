@@ -5,6 +5,7 @@ class ExerciseSearchProvider {
   Future<List<Exercise>> searchForExercises(String query) async {
     try {
       String modifiedQuery = '#${query.toUpperCase()}';
+
       var titleResult = await FirebaseFirestore.instance
           .collection('exercises')
           .where('title', isGreaterThanOrEqualTo: query)
@@ -78,9 +79,9 @@ class ExerciseSearchProvider {
               .doc("exercises")
               .collection(selectedDate.toString())
               .add(exercise.data()!);
-          Future.value();
+          return Future.value();
         } else {
-          Future.error('exercise does not exist!');
+          return Future.error('exercise does not exist!');
         }
       });
     } catch (error) {

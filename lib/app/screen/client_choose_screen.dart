@@ -1,44 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:personal_trainer/app/bloc/client_choose_cubit.dart';
 import '../app_router.dart';
 import 'calendar_exercise_screen.dart';
 
 class ClientChooseScreen extends StatelessWidget {
+  final trainerId;
+  List<String> entries = <String>[];
 
-  //TODO: Get user data from firestore
-  final List<String> entries = <String>[
-    'Captain Jack Sparrow',
-    'Adam Małysz',
-    'Krystyna Czubówna'
-  ];
+  ClientChooseScreen({Key? key, this.trainerId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Trainer"),
-      ),
-      body: ListView.builder(
-        itemCount: entries.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-              child: ListTile(
-                  onTap: () {
-                    Navigator.pushNamed(context, AppRouter.CALENDAR_EXERCISE,
-                        arguments: CalendarExerciseArguments("userId"));
-                  },
-                  title: Text('${entries[index]}')));
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => EmailScreen()))
-              .then((value) => value);
-        },
-        child: const Icon(Icons.add),
+    return BlocProvider(
+      create: (context) => ClientChooseCubit(Loading(), ClientChooseProvider()),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Trainer"),
+        ),
+        body: BlocBuilder<ClientChooseCubit, ClientChooseState>(
+            builder: (BuildContext context, state) {
+              if (state is Loading) {
+                context.read<ClientChooseCubit>().getClientsData(trainerId);
+              } else if (state is ClientsData) {
+                entries = state.clients.map((client) => client.name).toList();
+              }
+              return ListView.builder(
+                itemCount: entries.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                      child: ListTile(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, AppRouter.CALENDAR_EXERCISE,
+                                arguments: CalendarExerciseArguments("userId"));
+                          },
+                          title: Text('${entries[index]}')));
+                },
+              );
+            }
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => EmailScreen()))
+                .then((value) => value);
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
@@ -65,7 +77,7 @@ class _EmailScreenState extends State<EmailScreen> {
   void sendEmail(BuildContext context) async {
     final Email email = Email(
       body:
-          'This is an invitation to Personal Trainer app from ${'TrainerName'}. Click link to download the app',
+      'This is an invitation to Personal Trainer app from ${'TrainerName'}. Click link to download the app',
       subject: 'Personal Trainer app invitation',
       recipients: ['example@example.com'],
       isHTML: false,
@@ -86,4 +98,10 @@ class _EmailScreenState extends State<EmailScreen> {
       Navigator.pop(context);
     }
   }
+}
+
+class ClientChooseArguments {
+  final trainerId;
+
+  ClientChooseArguments(this.trainerId);
 }

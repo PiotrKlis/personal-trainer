@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/app/bloc/login_cubit.dart';
+import 'package:personal_trainer/app/screen/account_choose_screen.dart';
+import 'package:personal_trainer/app/screen/client_screen.dart';
 import 'package:personal_trainer/app/state/login_state.dart';
 import 'package:personal_trainer/app/widget/error_toast.dart';
 import 'package:personal_trainer/domain/model/client.dart';
@@ -102,10 +104,14 @@ class _LoginFormState extends State<LoginForm> {
             listener: (context, state) {
               if (state is LoginSuccess) {
                 if (state.appUser is Trainer) {
+                  var id = (state.appUser as Trainer).email;
                   Navigator.pushReplacementNamed(
-                      context, AppRouter.CHOOSE_ACCOUNT);
+                      context, AppRouter.CHOOSE_ACCOUNT,
+                      arguments: AccountChooseArguments(id));
                 } else if (state.appUser is Client) {
-                  Navigator.pushReplacementNamed(context, AppRouter.CLIENT);
+                  var id = (state.appUser as Client).email;
+                  Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
+                      arguments: ClientScreen(id: id));
                 }
               } else if (state is LoginFailed) {
                 ErrorView.showErrorToast(

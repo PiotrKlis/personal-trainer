@@ -8,6 +8,8 @@ import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
 
 import '../app_router.dart';
+import 'account_choose_screen.dart';
+import 'client_screen.dart';
 
 class FirebaseLoadingScreen extends StatelessWidget {
   const FirebaseLoadingScreen({Key? key}) : super(key: key);
@@ -33,22 +35,20 @@ class FirebaseLoadingScreen extends StatelessWidget {
               default:
                 break;
             }
-            return Container(
-              color: Colors.blue,
-              child: Row(children: [
-                Center(child: Image.asset('assets/images/fafcio.png')),
-                Center(child: CircularProgressIndicator()),
-              ]),
-            );
+            return Center(child: CircularProgressIndicator());
           }),
           BlocListener<LoginCubit, LoginState>(
             listener: (context, state) {
               if (state is LoginSuccess) {
                 if (state.appUser is Trainer) {
+                  var id = (state.appUser as Trainer).email;
                   Navigator.pushReplacementNamed(
-                      context, AppRouter.CHOOSE_ACCOUNT);
+                      context, AppRouter.CHOOSE_ACCOUNT,
+                      arguments: AccountChooseArguments(id));
                 } else if (state.appUser is Client) {
-                  Navigator.pushReplacementNamed(context, AppRouter.CLIENT);
+                  var id = (state.appUser as Client).email;
+                  Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
+                      arguments: ClientScreen(id: id));
                 }
               } else {
                 Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
