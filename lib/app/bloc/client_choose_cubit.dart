@@ -37,20 +37,16 @@ class ClientChooseProvider {
           .get();
 
       var clientIds = List.from(trainerData.get('clients'));
-      List<Client> testData = <Client>[];
 
-      clientIds.map((clientId) {
-        FirebaseFirestore.instance
+      return Future.wait(clientIds.map((clientId) {
+        return FirebaseFirestore.instance
             .collection('users')
             .doc(clientId)
             .collection('client')
             .doc('data')
             .get()
-            .then((clientData) {
-          testData.add(_mapToClient(clientData.data()!));
-        });
-      }).toList();
-      return testData;
+            .then((clientData) => _mapToClient(clientData.data()!));
+      }).toList());
     } catch (error) {
       return Future.error(error, StackTrace.current);
     }
