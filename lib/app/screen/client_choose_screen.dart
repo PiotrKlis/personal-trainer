@@ -4,12 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:personal_trainer/app/bloc/client_choose_cubit.dart';
+import 'package:personal_trainer/domain/model/client.dart';
 import '../app_router.dart';
 import 'calendar_exercise_screen.dart';
 
 class ClientChooseScreen extends StatelessWidget {
   final trainerId;
-  List<String> entries = <String>[];
+  List<Client> clients = <Client>[];
 
   ClientChooseScreen({Key? key, this.trainerId}) : super(key: key);
 
@@ -19,26 +20,26 @@ class ClientChooseScreen extends StatelessWidget {
       create: (context) => ClientChooseCubit(Loading(), ClientChooseProvider()),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Trainer"),
+          title: Text("Choose client"),
         ),
         body: BlocBuilder<ClientChooseCubit, ClientChooseState>(
             builder: (BuildContext context, state) {
               if (state is Loading) {
                 context.read<ClientChooseCubit>().getClientsData(trainerId);
               } else if (state is ClientsData) {
-                entries = state.clients.map((client) => client.name).toList();
+                clients = state.clients;
               }
               return ListView.builder(
-                itemCount: entries.length,
+                itemCount: clients.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                       child: ListTile(
                           onTap: () {
                             Navigator.pushNamed(
                                 context, AppRouter.CALENDAR_EXERCISE,
-                                arguments: CalendarExerciseArguments("userId"));
+                                arguments: CalendarExerciseArguments(clients[index].id));
                           },
-                          title: Text('${entries[index]}')));
+                          title: Text('${clients[index].name}')));
                 },
               );
             }

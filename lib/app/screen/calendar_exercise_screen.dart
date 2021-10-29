@@ -25,9 +25,7 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _args =
-        ModalRoute.of(context)?.settings.arguments as CalendarExerciseArguments;
-
+    //todo add bloc provider 
     return Scaffold(
       appBar: AppBar(
         title: Text('Plan Exercises'),
