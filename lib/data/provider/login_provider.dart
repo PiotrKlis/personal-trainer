@@ -1,45 +1,48 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:personal_trainer/app/screen/login/login_state.dart';
 import 'package:personal_trainer/data/util/const.dart';
-import 'package:personal_trainer/data/util/response.dart';
+import 'package:personal_trainer/domain/model/app_user.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
 
 class LoginProvider {
-  Future<Response> loginUser(String email, String password) async {
+  Future<AppUser> loginUser(String email, String password) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      return FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
-      );
-      return await getUserData(email);
-
-    } on FirebaseAuthException catch (error) {
+      ).then((credentials) {
+        var userId = credentials.user?.uid;
+        return getUserData(userId);
+      });
+    } catch (error) {
       return Future.error(error);
     }
   }
 
-  Future<Response> signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      return Success();
-    } catch (throwable) {
-      return Failure(throwable.toString());
-    }
+  //todo add signOut feature
+  // Future<Response> signOut() async {
+  //   try {
+  //     await FirebaseAuth.instance.signOut();
+  //     return Success();
+  //   } catch (throwable) {
+  //     return Failure(throwable.toString());
+  //   }
+  // }
+
+  Future<User> getUser() async {
+    return FirebaseAuth.instance.authStateChanges().single.then((user) {
+      if (user != null) {
+        return user;
+      } else {
+        return Future.error("User is not logged in");
+      }
+    });
   }
 
-  Response isUserLoggedIn() {
-    if (FirebaseAuth.instance.currentUser != null) {
-      return Success();
-    } else {
-      return Failure("User is not logged in");
-    }
-  }
+  String? getUserId() => FirebaseAuth.instance.currentUser?.uid;
 
-  String? getUserEmail() => FirebaseAuth.instance.currentUser?.email;
-
-  Future<Response> getUserData(String? email) async {
+  Future<AppUser> getUserData(String? email) async {
     try {
       var trainerData = await FirebaseFirestore.instance
           .collection(firebaseCollectionName)
@@ -56,22 +59,22 @@ class LoginProvider {
           .get();
 
       if (trainerData.exists && clientData.exists) {
-        return UserLoginSuccess(Trainer(
+        return Trainer(
             id: trainerData.data()?['id'],
             email: trainerData.data()?['email'],
             name: trainerData.data()?['name'],
-            clientEmails: List.from(trainerData.data()?['clients'])));
+            clientEmails: List.from(trainerData.data()?['clients']));
       } else if (!trainerData.exists && clientData.exists) {
-        return UserLoginSuccess(Client(
+        return Client(
             id: clientData.data()?['id'],
             email: clientData.data()?['email'],
             name: clientData.data()?['name'],
-            trainerEmail: clientData.data()?['trainerEmail']));
+            trainerEmail: clientData.data()?['trainerEmail']);
       } else {
-        throw Failure("No user data found");
+        return Future.error("No user data found");
       }
     } catch (error) {
-      return Failure(error.toString());
+      return Future.error(error, StackTrace.current);
     }
   }
 }

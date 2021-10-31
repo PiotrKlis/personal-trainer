@@ -16,9 +16,3 @@ class LoginFailed extends LoginState {
 
   LoginFailed(this.error);
 }
-
-class UserLoginSuccess extends Success {
-  final AppUser appUser;
-
-  UserLoginSuccess(this.appUser);
-}
