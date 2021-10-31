@@ -52,6 +52,7 @@ class AppRouter {
           builder: (_) => CalendarExerciseScreen(userId: args.userId),
         );
       case EXERCISE_SEARCH:
+        //todo make exercise search work on firebase with correct id
         return MaterialPageRoute(
           builder: (_) => ExerciseSearchScreen(DateTime.now()),
         );

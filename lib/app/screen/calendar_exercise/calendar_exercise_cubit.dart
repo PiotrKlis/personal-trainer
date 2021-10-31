@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
-import 'package:table_calendar/src/shared/utils.dart';
-
+import 'package:table_calendar/table_calendar.dart';
 import 'calendar_exercise_state.dart';
 
 class CalendarExerciseCubit extends Cubit<CalendarExerciseState> {
