@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:personal_trainer/app/state/login_state.dart';
+import 'package:personal_trainer/app/screen/login/login_state.dart';
 import 'package:personal_trainer/data/provider/login_provider.dart';
 import 'package:personal_trainer/data/util/response.dart';
 

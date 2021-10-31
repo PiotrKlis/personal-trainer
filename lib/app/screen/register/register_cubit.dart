@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:personal_trainer/app/state/register_state.dart';
+import 'package:personal_trainer/app/screen/register/register_state.dart';
 import 'package:personal_trainer/data/provider/register_provider.dart';
 import 'package:personal_trainer/data/util/response.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';

@@ -6,7 +6,7 @@ import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:video_player/video_player.dart';
 
-import 'exercise_search_screen.dart';
+import '../exercise_search/exercise_search_screen.dart';
 
 DateTime _selectedDay = DateTime.now();
 
@@ -18,7 +18,8 @@ class CalendarExerciseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => CalendarExerciseCubit(Loading()),
+      create: (BuildContext context) =>
+          CalendarExerciseCubit(Loading(), CalendarExerciseProvider()),
       child: Scaffold(
         appBar: AppBar(
           title: Text('Plan Exercises'),
@@ -173,7 +174,7 @@ class ExerciseCards extends StatelessWidget {
 class CalendarExerciseCubit extends Cubit<CalendarExerciseState> {
   final CalendarExerciseProvider _calendarExerciseProvider;
 
-  CalendarExerciseCubit(CalendarExerciseProvider calendarExerciseProvider,
+  CalendarExerciseCubit(
       CalendarExerciseState initialState, this._calendarExerciseProvider)
       : super(initialState);
 
@@ -183,9 +184,7 @@ class CalendarExerciseCubit extends Cubit<CalendarExerciseState> {
 }
 
 class CalendarExerciseProvider {
-  void getExerciseFor(DateTime selectedDay) {
-    
-  }
+  void getExerciseFor(DateTime selectedDay) {}
 }
 
 abstract class CalendarExerciseState {}

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_trainer/app/screen/client_choose_screen.dart';
-import 'package:personal_trainer/app/screen/client_screen.dart';
+import 'package:personal_trainer/app/screen/client_choose/client_choose_screen.dart';
+import 'package:personal_trainer/app/screen/client/client_screen.dart';
 
-import '../app_router.dart';
+import '../../app_router.dart';
 
 class AccountChooseScreen extends StatelessWidget {
   final id;

@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:personal_trainer/app/state/firebase_state.dart';
+import 'package:personal_trainer/app/screen/firebase_loading/firebase_state.dart';
 import 'package:personal_trainer/data/provider/firebase_provider.dart';
 import 'package:personal_trainer/data/util/response.dart';
 

@@ -24,7 +24,7 @@ class ClientsData extends ClientChooseState {
   ClientsData(this.clients);
 }
 
-class Loading extends ClientChooseState {}
+class ClientChooseLoading extends ClientChooseState {}
 
 class ClientChooseProvider {
   Future<List<Client>> getClientsFor(String trainerId) async {

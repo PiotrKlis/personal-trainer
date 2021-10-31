@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class ErrorView {
+class ErrorMessage {
   static void showErrorToast(String error) {
     Fluttertoast.showToast(
         msg: error,

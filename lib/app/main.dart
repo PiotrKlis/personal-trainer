@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_trainer/app/app_router.dart';
-import 'package:personal_trainer/app/state/firebase_state.dart';
-import 'package:personal_trainer/app/state/login_state.dart';
+import 'package:personal_trainer/app/screen/firebase_loading/firebase_state.dart';
+import 'package:personal_trainer/app/screen/login/login_state.dart';
 import 'package:personal_trainer/data/provider/firebase_provider.dart';
 import 'package:personal_trainer/data/provider/login_provider.dart';
-import 'bloc/firebase_cubit.dart';
-import 'bloc/login_cubit.dart';
+import 'screen/firebase_loading/firebase_cubit.dart';
+import 'screen/login/login_cubit.dart';
 
 void main() {
   runApp(PersonalTrainerApp(

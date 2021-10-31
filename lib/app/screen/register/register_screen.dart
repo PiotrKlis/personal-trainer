@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:personal_trainer/app/bloc/register_cubit.dart';
-import 'package:personal_trainer/app/state/register_state.dart';
+import 'package:personal_trainer/app/screen/register/register_cubit.dart';
+import 'package:personal_trainer/app/screen/register/register_state.dart';
 import 'package:personal_trainer/app/util/custom_validator.dart';
-import 'package:personal_trainer/app/widget/error_toast.dart';
+import 'package:personal_trainer/app/widget/error_message.dart';
 import 'package:personal_trainer/data/provider/register_provider.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
@@ -49,7 +49,7 @@ class RegisterForm extends StatelessWidget {
                 if (state is Registered) {
                   Navigator.pop(context);
                 } else if (state is RegisterFailed) {
-                  ErrorView.showErrorToast(state.error);
+                  ErrorMessage.showErrorToast(state.error);
                 }
               },
               child: Container(),
