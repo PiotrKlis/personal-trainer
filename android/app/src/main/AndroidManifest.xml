@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pk.mobileapps.personal_trainer">
    <application
-        android:label="personal_trainer"
+        android:label="Personal Trainer"
         android:icon="@mipmap/ic_launcher">
 
         <activity

@@ -5,7 +5,11 @@ import 'package:personal_trainer/app/app_router.dart';
 import 'package:personal_trainer/app/util/localisation_keys.dart';
 
 void main() {
-  runApp(PersonalTrainerApp());
+  try {
+    runApp(PersonalTrainerApp());
+  } catch (error) {
+    print(error.toString());
+  }
 }
 
 class PersonalTrainerApp extends StatelessWidget {
