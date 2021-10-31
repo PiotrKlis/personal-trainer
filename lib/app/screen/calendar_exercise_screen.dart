@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:personal_trainer/app/util/example_exercises.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -10,65 +10,74 @@ import 'exercise_search_screen.dart';
 
 DateTime _selectedDay = DateTime.now();
 
-class CalendarExerciseScreen extends StatefulWidget {
+class CalendarExerciseScreen extends StatelessWidget {
   final userId;
 
-  const CalendarExerciseScreen({Key? key, this.userId}) : super(key: key);
-
-  @override
-  State<CalendarExerciseScreen> createState() => _CalendarExerciseScreenState();
-}
-
-class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
-  final List<Exercise> listOfExercises = ExampleExercises.list;
-  List<String> _listOfExpandedExercises = [];
+  CalendarExerciseScreen({Key? key, this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //todo add bloc provider 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Plan Exercises'),
-      ),
-      body: ListView(
-        children: [CalendarWidget(), Divider(), _listOfExercises()],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ExerciseSearchScreen(_selectedDay)));
-        },
-        child: const Icon(Icons.add),
+    return BlocProvider(
+      create: (BuildContext context) => CalendarExerciseCubit(Loading()),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Plan Exercises'),
+        ),
+        body: ListView(
+          children: [CalendarWidget(), Divider(), ExerciseCards()],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ExerciseSearchScreen(_selectedDay)));
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
+}
 
-  Widget _listOfExercises() => ExpansionPanelList(
-      animationDuration: Duration(seconds: 1),
-      elevation: 4,
-      expandedHeaderPadding: EdgeInsets.all(0),
-      expansionCallback: (index, isExpanded) {
-        setState(() {
-          String id = listOfExercises[index].id;
-          if (_listOfExpandedExercises.contains(id)) {
-            _listOfExpandedExercises.remove(id);
-          } else {
-            _listOfExpandedExercises.add(id);
-          }
-          print(_listOfExpandedExercises.toString());
-        });
-      },
-      children: listOfExercises
-          .map((exercise) => _buildExpansionPanel(exercise))
-          .toList());
+class ExerciseCards extends StatelessWidget {
+  ExerciseCards({Key? key}) : super(key: key);
+
+  List<Exercise> _listOfExercises = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CalendarExerciseCubit, CalendarExerciseState>(
+        builder: (context, state) {
+      return ExpansionPanelList(
+          animationDuration: Duration(seconds: 1),
+          elevation: 4,
+          expandedHeaderPadding: EdgeInsets.all(0),
+          expansionCallback: (index, isExpanded) {
+            //todo migrate to cubit event
+            // setState(() {
+            //   String id = listOfExercises[index].id;
+            //   if (_listOfExpandedExercises.contains(id)) {
+            //     _listOfExpandedExercises.remove(id);
+            //   } else {
+            //     _listOfExpandedExercises.add(id);
+            //   }
+            //   print(_listOfExpandedExercises.toString());
+            // });
+          },
+          children: _listOfExercises
+              .map((exercise) => _buildExpansionPanel(exercise))
+              .toList());
+    });
+  }
 
   ExpansionPanel _buildExpansionPanel(Exercise exercise) {
     var _setsController = TextEditingController(text: '1');
     var _repsController = TextEditingController(text: '8');
     return ExpansionPanel(
-      isExpanded: _listOfExpandedExercises.contains(exercise.id),
+      isExpanded: false,
+      //todo move to cubit
+      // isExpanded: _listOfExpandedExercises.contains(exercise.id),
       canTapOnHeader: true,
       headerBuilder: (context, isExpanded) {
         return ListTile(
@@ -161,14 +170,31 @@ class _CalendarExerciseScreenState extends State<CalendarExerciseScreen> {
   }
 }
 
-class CalendarWidget extends StatefulWidget {
-  const CalendarWidget({Key? key}) : super(key: key);
+class CalendarExerciseCubit extends Cubit<CalendarExerciseState> {
+  final CalendarExerciseProvider _calendarExerciseProvider;
 
-  @override
-  _CalendarWidgetState createState() => _CalendarWidgetState();
+  CalendarExerciseCubit(CalendarExerciseProvider calendarExerciseProvider,
+      CalendarExerciseState initialState, this._calendarExerciseProvider)
+      : super(initialState);
+
+  void onDaySelected(DateTime selectedDay) {
+    _calendarExerciseProvider.getExerciseFor(selectedDay);
+  }
 }
 
-class _CalendarWidgetState extends State<CalendarWidget> {
+class CalendarExerciseProvider {
+  void getExerciseFor(DateTime selectedDay) {
+    
+  }
+}
+
+abstract class CalendarExerciseState {}
+
+class Loading extends CalendarExerciseState {}
+
+class CalendarWidget extends StatelessWidget {
+  CalendarWidget({Key? key}) : super(key: key);
+
   CalendarFormat _calendarFormat = CalendarFormat.week;
   List<bool> _list = <bool>[];
 
@@ -183,7 +209,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       calendarFormat: _calendarFormat,
       startingDayOfWeek: StartingDayOfWeek.monday,
       selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-      onDaySelected: (selectedDay, focusedDay) => _onDaySelected(selectedDay),
+      onDaySelected: (selectedDay, focusedDay) =>
+          context.read<CalendarExerciseCubit>().onDaySelected(selectedDay),
       onFormatChanged: (format) => _onFormatChanged(format),
       eventLoader: (date) => _list,
     );
@@ -191,17 +218,19 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
   void _onFormatChanged(CalendarFormat format) {
     if (_calendarFormat != format) {
-      setState(() {
-        _calendarFormat = format;
-      });
+      // todo migrate to cubit
+      // setState(() {
+      //   _calendarFormat = format;
+      // });
     }
   }
 
   void _onDaySelected(DateTime selectedDay) {
     if (!isSameDay(selectedDay, selectedDay)) {
-      setState(() {
-        selectedDay = selectedDay;
-      });
+      //todo migrate to cubit
+      // setState(() {
+      //   selectedDay = selectedDay;
+      // });
     }
   }
 }
