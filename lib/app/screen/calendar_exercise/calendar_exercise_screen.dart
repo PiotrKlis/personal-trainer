@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
+import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:video_player/video_player.dart';
 
 import '../exercise_search/exercise_search_screen.dart';
+import 'calendar_exercise_cubit.dart';
+import 'calendar_exercise_state.dart';
 
 DateTime _selectedDay = DateTime.now();
 
@@ -18,14 +21,14 @@ class CalendarExerciseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>
-          CalendarExerciseCubit(Loading(), CalendarExerciseProvider()),
+      create: (BuildContext context) => CalendarExerciseCubit(
+          CalendarExerciseLoading(), CalendarExerciseProvider()),
       child: Scaffold(
         appBar: AppBar(
           title: Text('Plan Exercises'),
         ),
         body: ListView(
-          children: [CalendarWidget(), Divider(), ExerciseCards()],
+          children: [CalendarWidget(userId), Divider(), ExerciseCards(userId)],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
@@ -42,14 +45,30 @@ class CalendarExerciseScreen extends StatelessWidget {
 }
 
 class ExerciseCards extends StatelessWidget {
-  ExerciseCards({Key? key}) : super(key: key);
-
+  final String userId;
   List<Exercise> _listOfExercises = [];
+
+  ExerciseCards(this.userId);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CalendarExerciseCubit, CalendarExerciseState>(
         builder: (context, state) {
+      if (state is CalendarExerciseLoading) {
+        context
+            .read<CalendarExerciseCubit>()
+            .onDaySelected(_selectedDay, userId);
+        return Center(child: CircularProgressIndicator());
+      }
+      if (state is CalendarExerciseData) {
+        if (state.listOfExercises.isEmpty) {
+          return Center(
+              child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text('No exercises for this day')));
+        }
+        _listOfExercises = state.listOfExercises;
+      }
       return ExpansionPanelList(
           animationDuration: Duration(seconds: 1),
           elevation: 4,
@@ -171,65 +190,42 @@ class ExerciseCards extends StatelessWidget {
   }
 }
 
-class CalendarExerciseCubit extends Cubit<CalendarExerciseState> {
-  final CalendarExerciseProvider _calendarExerciseProvider;
-
-  CalendarExerciseCubit(
-      CalendarExerciseState initialState, this._calendarExerciseProvider)
-      : super(initialState);
-
-  void onDaySelected(DateTime selectedDay) {
-    _calendarExerciseProvider.getExerciseFor(selectedDay);
-  }
-}
-
-class CalendarExerciseProvider {
-  void getExerciseFor(DateTime selectedDay) {}
-}
-
-abstract class CalendarExerciseState {}
-
-class Loading extends CalendarExerciseState {}
-
 class CalendarWidget extends StatelessWidget {
-  CalendarWidget({Key? key}) : super(key: key);
-
+  final String userId;
   CalendarFormat _calendarFormat = CalendarFormat.week;
   List<bool> _list = <bool>[];
+
+  CalendarWidget(this.userId);
 
   @override
   Widget build(BuildContext context) {
     _list.add(true);
-
-    return TableCalendar<bool>(
-      firstDay: DateTime.utc(2021, 09, 01),
-      lastDay: DateTime.utc(2022, 12, 31),
-      focusedDay: _selectedDay,
-      calendarFormat: _calendarFormat,
-      startingDayOfWeek: StartingDayOfWeek.monday,
-      selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-      onDaySelected: (selectedDay, focusedDay) =>
-          context.read<CalendarExerciseCubit>().onDaySelected(selectedDay),
-      onFormatChanged: (format) => _onFormatChanged(format),
-      eventLoader: (date) => _list,
+    return BlocBuilder<CalendarExerciseCubit, CalendarExerciseState>(
+      builder: (context, state) {
+        return TableCalendar<bool>(
+          firstDay: DateTime.utc(2021, 09, 01),
+          lastDay: DateTime.utc(2022, 12, 31),
+          focusedDay: _selectedDay,
+          calendarFormat: getCalendarFormat(state),
+          startingDayOfWeek: StartingDayOfWeek.monday,
+          selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+          onDaySelected: (selectedDay, focusedDay) => context
+              .read<CalendarExerciseCubit>()
+              .onDaySelected(selectedDay, userId),
+          onFormatChanged: (format) =>
+              context.read<CalendarExerciseCubit>().onFormatChanged(format),
+          eventLoader: (date) => _list,
+        );
+      },
     );
   }
 
-  void _onFormatChanged(CalendarFormat format) {
-    if (_calendarFormat != format) {
-      // todo migrate to cubit
-      // setState(() {
-      //   _calendarFormat = format;
-      // });
-    }
-  }
-
-  void _onDaySelected(DateTime selectedDay) {
-    if (!isSameDay(selectedDay, selectedDay)) {
-      //todo migrate to cubit
-      // setState(() {
-      //   selectedDay = selectedDay;
-      // });
+  CalendarFormat getCalendarFormat(state) {
+    if (state is CalendarFormatChanged) {
+      _calendarFormat = state.format;
+      return _calendarFormat;
+    } else {
+      return _calendarFormat;
     }
   }
 }

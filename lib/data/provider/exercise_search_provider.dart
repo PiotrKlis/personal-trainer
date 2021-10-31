@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
 class ExerciseSearchProvider {
@@ -65,6 +66,7 @@ class ExerciseSearchProvider {
   Future<void> _updateTrainerDataWithNewClientData(
       String id, DateTime selectedDate) async {
     try {
+      var formattedDate = DateUtils.dateOnly(selectedDate).toString();
       await FirebaseFirestore.instance
           .collection('exercises')
           .doc(id)
@@ -77,7 +79,7 @@ class ExerciseSearchProvider {
               .doc('p@p.com')
               .collection("client")
               .doc("exercises")
-              .collection(selectedDate.toString())
+              .collection(formattedDate)
               .add(exercise.data()!);
           return Future.value();
         } else {

@@ -88,7 +88,7 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
                 ),
                 onTap: () {
                   context.read<ExerciseSearchCubit>().addExercise(
-                      exercise.id, DateUtils.dateOnly(widget.selectedDay));
+                      exercise.id, widget.selectedDay);
                 }));
       },
       body: Column(
