@@ -1,4 +1,3 @@
-import 'package:personal_trainer/data/util/response.dart';
 import 'package:personal_trainer/domain/model/app_user.dart';
 
 abstract class LoginState {}

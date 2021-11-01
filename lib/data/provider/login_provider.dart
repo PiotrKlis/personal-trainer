@@ -31,6 +31,7 @@ class LoginProvider {
   // }
 
   Future<User> getUser() async {
+
     return FirebaseAuth.instance.authStateChanges().single.then((user) {
       if (user != null) {
         return user;

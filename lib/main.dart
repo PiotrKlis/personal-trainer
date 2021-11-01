@@ -5,11 +5,7 @@ import 'package:personal_trainer/app/app_router.dart';
 import 'package:personal_trainer/app/util/localisation_keys.dart';
 
 void main() {
-  try {
-    runApp(PersonalTrainerApp());
-  } catch (error) {
-    print(error.toString());
-  }
+  runApp(PersonalTrainerApp());
 }
 
 class PersonalTrainerApp extends StatelessWidget {
@@ -20,7 +16,7 @@ class PersonalTrainerApp extends StatelessWidget {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: MaterialApp(
-        title: AppLocalizations.of(context)!.app_title,
+        title: 'Personal Trainer',
         localizationsDelegates: [
           AppLocalizations.delegate, // Add this line
           GlobalMaterialLocalizations.delegate,

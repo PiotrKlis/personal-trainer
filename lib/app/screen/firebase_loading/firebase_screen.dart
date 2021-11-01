@@ -19,67 +19,52 @@ class FirebaseLoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            create: (context) =>
-                FirebaseCubit(FirebaseLoading(), firebaseProvider)),
-        BlocProvider(
-            create: (context) => LoginCubit(LoginLoading(), loginProvider)),
-      ],
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            BlocBuilder<FirebaseCubit, FirebaseState>(
-                builder: (context, state) {
-              switch (state.runtimeType) {
-                case FirebaseLoading:
-                  context.read<FirebaseCubit>().firebaseInit();
-                  break;
-                case FirebaseNotInitialized:
-                  Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
-                  break;
-                case FirebaseInitialized:
-                  handleInitializedState(context);
-                  break;
-                default:
-                  break;
-              }
-              return Center(child: CircularProgressIndicator());
-            }),
-            BlocListener<LoginCubit, LoginState>(
-              listener: (context, state) {
-                if (state is LoginSuccess) {
-                  if (state.appUser is Trainer) {
-                    var id = (state.appUser as Trainer).id;
-                    Navigator.pushReplacementNamed(
-                        context, AppRouter.CHOOSE_ACCOUNT,
-                        arguments: AccountChooseArguments(id));
-                  } else if (state.appUser is Client) {
-                    var id = (state.appUser as Client).id;
-                    Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
-                        arguments: ClientScreen(id: id));
-                  }
-                } else if (state is LoginFailed) {
-                  print(state.error);
-                  Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
-                }
-              },
-              child: Container(),
-            )
-          ],
-        ),
-      ),
-    );
+    return MultiBlocProvider(providers: [
+      BlocProvider(
+          create: (context) =>
+              FirebaseCubit(FirebaseLoading(), firebaseProvider)),
+      BlocProvider(
+          create: (context) => LoginCubit(LoginLoading(), loginProvider)),
+    ], child: FirebaseHandler());
   }
+}
 
-  void handleInitializedState(BuildContext context) {
-    context.read<LoginCubit>().handleInitializedFirebase();
+class FirebaseHandler extends StatelessWidget {
+  const FirebaseHandler({Key? key}) : super(key: key);
 
-    // loginCubit.getUser().then((user) {
-    //   loginCubit.getUserData(loginCubit.getUserId());
-    // })
-    //     .catchError((_) => Navigator.pushReplacementNamed(context, AppRouter.LOGIN));
+  @override
+  Widget build(BuildContext context) {
+    BlocListener<LoginCubit, LoginState>(listener: (context, state) {
+      if (state is LoginSuccess) {
+        if (state.appUser is Trainer) {
+          var id = (state.appUser as Trainer).id;
+          Navigator.pushReplacementNamed(context, AppRouter.CHOOSE_ACCOUNT,
+              arguments: AccountChooseArguments(id));
+        } else if (state.appUser is Client) {
+          var id = (state.appUser as Client).id;
+          Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
+              arguments: ClientScreen(id: id));
+        }
+      } else if (state is LoginFailed) {
+        print(state.error);
+        Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
+      }
+    });
+    return BlocBuilder<FirebaseCubit, FirebaseState>(builder: (context, state) {
+      switch (state.runtimeType) {
+        case FirebaseLoading:
+          context.read<FirebaseCubit>().firebaseInit();
+          break;
+        case FirebaseNotInitialized:
+          Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
+          break;
+        case FirebaseInitialized:
+          context.read<LoginCubit>().handleInitializedFirebase();
+          break;
+        default:
+          break;
+      }
+      return Center(child: CircularProgressIndicator());
+    });
   }
 }
