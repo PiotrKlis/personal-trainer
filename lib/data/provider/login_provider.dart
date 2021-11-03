@@ -8,10 +8,12 @@ import 'package:personal_trainer/domain/model/trainer.dart';
 class LoginProvider {
   Future<AppUser> loginUser(String email, String password) async {
     try {
-      return FirebaseAuth.instance.signInWithEmailAndPassword(
+      return FirebaseAuth.instance
+          .signInWithEmailAndPassword(
         email: email,
         password: password,
-      ).then((credentials) {
+      )
+          .then((credentials) {
         var userId = credentials.user?.uid;
         return getUserData(userId);
       });
@@ -31,14 +33,19 @@ class LoginProvider {
   // }
 
   Future<User> getUser() async {
-
-    return FirebaseAuth.instance.authStateChanges().single.then((user) {
-      if (user != null) {
-        return user;
-      } else {
-        return Future.error("User is not logged in");
-      }
-    });
+    var user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      return user;
+    } else {
+      return Future.error("User is not logged in");
+    }
+    // return FirebaseAuth.instance.authStateChanges().single.then((user) {
+    //   if (user != null) {
+    //     return user;
+    //   } else {
+    //     return Future.error("User is not logged in");
+    //   }
+    // });
   }
 
   String? getUserId() => FirebaseAuth.instance.currentUser?.uid;

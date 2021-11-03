@@ -34,7 +34,7 @@ class FirebaseHandler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocListener<LoginCubit, LoginState>(listener: (context, state) {
+    return BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
       if (state is LoginSuccess) {
         if (state.appUser is Trainer) {
           var id = (state.appUser as Trainer).id;
@@ -49,22 +49,39 @@ class FirebaseHandler extends StatelessWidget {
         print(state.error);
         Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
       }
+      return BlocBuilder<FirebaseCubit, FirebaseState>(
+          builder: (context, state) {
+        switch (state.runtimeType) {
+          case FirebaseLoading:
+            context.read<FirebaseCubit>().firebaseInit();
+            break;
+          case FirebaseNotInitialized:
+            Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
+            break;
+          case FirebaseInitialized:
+            context.read<LoginCubit>().handleInitializedFirebase();
+            break;
+          default:
+            break;
+        }
+        return Center(child: CircularProgressIndicator());
+      });
     });
-    return BlocBuilder<FirebaseCubit, FirebaseState>(builder: (context, state) {
-      switch (state.runtimeType) {
-        case FirebaseLoading:
-          context.read<FirebaseCubit>().firebaseInit();
-          break;
-        case FirebaseNotInitialized:
-          Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
-          break;
-        case FirebaseInitialized:
-          context.read<LoginCubit>().handleInitializedFirebase();
-          break;
-        default:
-          break;
-      }
-      return Center(child: CircularProgressIndicator());
-    });
+    // return BlocBuilder<FirebaseCubit, FirebaseState>(builder: (context, state) {
+    //   switch (state.runtimeType) {
+    //     case FirebaseLoading:
+    //       context.read<FirebaseCubit>().firebaseInit();
+    //       break;
+    //     case FirebaseNotInitialized:
+    //       Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
+    //       break;
+    //     case FirebaseInitialized:
+    //       context.read<LoginCubit>().handleInitializedFirebase();
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    //   return Center(child: CircularProgressIndicator());
+    // });
   }
 }

@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:personal_trainer/app/screen/login/login_cubit.dart';
 import 'package:personal_trainer/app/screen/account_choose/account_choose_screen.dart';
 import 'package:personal_trainer/app/screen/client/client_screen.dart';
+import 'package:personal_trainer/app/screen/login/login_cubit.dart';
 import 'package:personal_trainer/app/screen/login/login_state.dart';
 import 'package:personal_trainer/app/widget/error_message.dart';
+import 'package:personal_trainer/data/provider/login_provider.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
 
 import '../../app_router.dart';
 
 class LoginScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => LoginCubit(LoginLoading(), LoginProvider()),
+      child: LoginWidget(),
+    );
+  }
+}
+
+class LoginWidget extends StatelessWidget {
+  const LoginWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

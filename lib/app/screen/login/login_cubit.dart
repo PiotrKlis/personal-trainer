@@ -21,6 +21,8 @@ class LoginCubit extends Cubit<LoginState> {
       }).catchError((error) {
         emit(LoginFailed(error));
       });
+    }).catchError((error) {
+      emit(LoginFailed(error));
     });
   }
 }
