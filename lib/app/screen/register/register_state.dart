@@ -2,7 +2,7 @@ import 'package:personal_trainer/domain/model/user_type.dart';
 
 abstract class RegisterState {}
 
-class NotRegistered extends RegisterState {}
+class UserTypeChanged extends RegisterState {}
 
 class RegisterLoading extends RegisterState {}
 

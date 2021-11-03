@@ -2,23 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/data/util/response.dart';
+import 'package:personal_trainer/domain/model/register_data.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
 class RegisterProvider {
-  Future<Response> registerTrainerAndClient(String userEmail,
-      String name,
-      String password,
-      String trainerEmail,
-      String? additionalPassword,
-      UserType? userType) async {
+  Future<Response> registerTrainerAndClient(RegisterData registerData) async {
     try {
-      await _createUser(userEmail, password);
-      await _addTrainerDataToDB(userEmail, name, password);
-      await _addClientDataToDB(userEmail, name, password, userEmail);
+      await _createUser(registerData.email, registerData.password);
+      await _addTrainerDataToDB(registerData.email, registerData.displayName, registerData.password);
+      await _addClientDataToDB(registerData.email, registerData.displayName, registerData.password, registerData.trainerEmail);
       return Success();
     } catch (error) {
       FirebaseAuth.instance.currentUser?.delete();
-      _deleteUserData(userEmail);
+      _deleteUserData(registerData.email);
       return Failure(error.toString());
     }
   }

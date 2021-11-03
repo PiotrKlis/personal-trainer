@@ -6,6 +6,7 @@ import 'package:personal_trainer/app/screen/register/register_state.dart';
 import 'package:personal_trainer/app/util/custom_validator.dart';
 import 'package:personal_trainer/app/widget/error_message.dart';
 import 'package:personal_trainer/data/provider/register_provider.dart';
+import 'package:personal_trainer/domain/model/register_data.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -175,7 +176,7 @@ class RegisterForm extends StatelessWidget {
 
   void validateInputs(BuildContext context) {
     var registerCubit = BlocProvider.of<RegisterCubit>(context);
-    registerCubit.register(_email, _displayName, _password, _trainerEmail,
-        _userType, _additionalPassword);
+    registerCubit.register(RegisterData(_email, _displayName, _password,
+        _trainerEmail, _userType!, _additionalPassword));
   }
 }

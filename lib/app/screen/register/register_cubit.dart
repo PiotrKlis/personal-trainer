@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_trainer/app/screen/register/register_state.dart';
 import 'package:personal_trainer/data/provider/register_provider.dart';
 import 'package:personal_trainer/data/util/response.dart';
+import 'package:personal_trainer/domain/model/register_data.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
@@ -10,17 +11,11 @@ class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit(RegisterState initialState, this.registerProvider)
       : super(initialState);
 
-  void register(String userEmail,
-      String name,
-      String password,
-      String trainerEmail,
-      UserType? userType,
-      String? additionalPassword) async {
-    switch (userType) {
+  void register(RegisterData registerData) async {
+    switch (registerData.userType) {
       case UserType.TRAINER:
-        var response = await registerProvider.registerTrainerAndClient(
-            userEmail, name, password, trainerEmail, additionalPassword,
-            userType);
+        var response =
+            await registerProvider.registerTrainerAndClient(registerData);
         if (response is Success) {
           emit(Registered());
         } else if (response is Failure) {
@@ -29,7 +24,10 @@ class RegisterCubit extends Cubit<RegisterState> {
         break;
       case UserType.CLIENT:
         var response = await registerProvider.registerClient(
-            userEmail, name, password, trainerEmail);
+            registerData.email,
+            registerData.displayName,
+            registerData.password,
+            registerData.trainerEmail);
         if (response is Success) {
           emit(Registered());
         } else if (response is Failure) {
@@ -50,6 +48,6 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   void changeUserType() {
-    emit(NotRegistered());
+    emit(UserTypeChanged());
   }
 }
