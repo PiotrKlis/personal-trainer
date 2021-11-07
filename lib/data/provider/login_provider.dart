@@ -53,14 +53,14 @@ class LoginProvider {
   Future<AppUser> getUserData(String? email) async {
     try {
       var trainerData = await FirebaseFirestore.instance
-          .collection(firebaseCollectionName)
+          .collection(FirebaseConstants.usersCollection)
           .doc(email)
           .collection("trainer")
           .doc("data")
           .get();
 
       var clientData = await FirebaseFirestore.instance
-          .collection(firebaseCollectionName)
+          .collection(FirebaseConstants.usersCollection)
           .doc(email)
           .collection("trainer")
           .doc("data")
