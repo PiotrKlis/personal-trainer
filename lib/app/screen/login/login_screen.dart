@@ -6,6 +6,7 @@ import 'package:personal_trainer/app/screen/client/client_screen.dart';
 import 'package:personal_trainer/app/screen/login/login_cubit.dart';
 import 'package:personal_trainer/app/screen/login/login_state.dart';
 import 'package:personal_trainer/app/widget/error_message.dart';
+import 'package:personal_trainer/data/provider/firebase_provider.dart';
 import 'package:personal_trainer/data/provider/login_provider.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
@@ -16,7 +17,8 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(LoginLoading(), LoginProvider()),
+      create: (context) =>
+          LoginCubit(LoginLoading(), LoginProvider(), FirebaseProvider()),
       child: LoginWidget(),
     );
   }

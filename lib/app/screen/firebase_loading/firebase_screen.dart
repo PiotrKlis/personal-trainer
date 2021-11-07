@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:personal_trainer/app/screen/firebase_loading/firebase_cubit.dart';
-import 'package:personal_trainer/app/screen/firebase_loading/firebase_state.dart';
 import 'package:personal_trainer/app/screen/login/login_cubit.dart';
 import 'package:personal_trainer/app/screen/login/login_state.dart';
 import 'package:personal_trainer/data/provider/firebase_provider.dart';
@@ -22,66 +21,38 @@ class FirebaseLoadingScreen extends StatelessWidget {
     return MultiBlocProvider(providers: [
       BlocProvider(
           create: (context) =>
-              FirebaseCubit(FirebaseLoading(), firebaseProvider)),
-      BlocProvider(
-          create: (context) => LoginCubit(LoginLoading(), loginProvider)),
+              LoginCubit(LoginLoading(), loginProvider, firebaseProvider)),
     ], child: FirebaseHandler());
   }
 }
 
 class FirebaseHandler extends StatelessWidget {
-  const FirebaseHandler({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
-      if (state is LoginSuccess) {
-        if (state.appUser is Trainer) {
-          var id = (state.appUser as Trainer).id;
-          Navigator.pushReplacementNamed(context, AppRouter.CHOOSE_ACCOUNT,
-              arguments: AccountChooseArguments(id));
-        } else if (state.appUser is Client) {
-          var id = (state.appUser as Client).id;
-          Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
-              arguments: ClientScreen(id: id));
-        }
+      if (state is LoginLoading) {
+        context.read<LoginCubit>().firebaseInit();
+      } else if (state is LoginSuccess) {
+        navigateToUserScreen(state, context);
       } else if (state is LoginFailed) {
         print(state.error);
-        Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
+        SchedulerBinding.instance?.addPostFrameCallback((_) {
+          Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
+        });
       }
-      return BlocBuilder<FirebaseCubit, FirebaseState>(
-          builder: (context, state) {
-        switch (state.runtimeType) {
-          case FirebaseLoading:
-            context.read<FirebaseCubit>().firebaseInit();
-            break;
-          case FirebaseNotInitialized:
-            Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
-            break;
-          case FirebaseInitialized:
-            context.read<LoginCubit>().handleInitializedFirebase();
-            break;
-          default:
-            break;
-        }
-        return Center(child: CircularProgressIndicator());
-      });
+      return CircularProgressIndicator();
     });
-    // return BlocBuilder<FirebaseCubit, FirebaseState>(builder: (context, state) {
-    //   switch (state.runtimeType) {
-    //     case FirebaseLoading:
-    //       context.read<FirebaseCubit>().firebaseInit();
-    //       break;
-    //     case FirebaseNotInitialized:
-    //       Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
-    //       break;
-    //     case FirebaseInitialized:
-    //       context.read<LoginCubit>().handleInitializedFirebase();
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    //   return Center(child: CircularProgressIndicator());
-    // });
+  }
+
+  void navigateToUserScreen(LoginSuccess state, BuildContext context) {
+    if (state.appUser is Trainer) {
+      var id = (state.appUser as Trainer).id;
+      Navigator.pushReplacementNamed(context, AppRouter.CHOOSE_ACCOUNT,
+          arguments: AccountChooseArguments(id));
+    } else if (state.appUser is Client) {
+      var id = (state.appUser as Client).id;
+      Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
+          arguments: ClientScreenArguments(id));
+    }
   }
 }
