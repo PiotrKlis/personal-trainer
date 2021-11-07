@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/app/screen/register/register_cubit.dart';
 import 'package:personal_trainer/app/screen/register/register_state.dart';
-import 'package:personal_trainer/app/util/custom_validator.dart';
 import 'package:personal_trainer/app/widget/error_message.dart';
 import 'package:personal_trainer/data/provider/register_provider.dart';
 import 'package:personal_trainer/domain/model/register_data.dart';
@@ -30,12 +29,9 @@ class RegisterForm extends StatelessWidget {
   UserType? _userType = UserType.CLIENT;
   String _email = "";
   String _password = "";
-  String _additionalPassword = "";
   String _displayName = "";
   String _trainerEmail = "";
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _additionalPasswordController =
-      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +81,7 @@ class RegisterForm extends StatelessWidget {
                     errorText: "Password should be at least 6 characters"),
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: BlocProvider.of<RegisterCubit>(context)
-                        .getPasswordHintText(_userType)),
+                    hintText: 'Password'),
                 onChanged: (value) => _password = value,
               ),
             ),
@@ -104,34 +99,6 @@ class RegisterForm extends StatelessWidget {
                     hintText: 'Trainer email',
                   ),
                   onChanged: (value) => _trainerEmail = value,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Visibility(
-                  visible: _userType == UserType.TRAINER,
-                  child: Text(
-                      'As a trainer you will also get your own client account. Please specify different password to it below.')),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Visibility(
-                visible: _userType == UserType.TRAINER,
-                child: TextFormField(
-                  controller: _additionalPasswordController,
-                  obscureText: true,
-                  validator: MultiValidator([
-                    MinLengthValidator(6,
-                        errorText: "Password should be at least 6 characters"),
-                    NotMatchValidator(
-                        "Passwords for trainer and user accouent have to be different!",
-                        _passwordController.text)
-                  ]),
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Client account password'),
-                  onChanged: (value) => _additionalPassword = value,
                 ),
               ),
             ),
@@ -176,7 +143,7 @@ class RegisterForm extends StatelessWidget {
 
   void validateInputs(BuildContext context) {
     var registerCubit = BlocProvider.of<RegisterCubit>(context);
-    registerCubit.register(RegisterData(_email, _displayName, _password,
-        _trainerEmail, _userType!, _additionalPassword));
+    registerCubit.register(RegisterData(
+        _email, _displayName, _password, _trainerEmail, _userType!));
   }
 }

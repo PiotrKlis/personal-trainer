@@ -6,8 +6,7 @@ class RegisterData {
   final String password;
   final String trainerEmail;
   final UserType userType;
-  final String additionalPassword;
 
   RegisterData(this.email, this.displayName, this.password, this.trainerEmail,
-      this.userType, this.additionalPassword);
+      this.userType);
 }
