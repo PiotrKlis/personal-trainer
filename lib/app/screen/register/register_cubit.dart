@@ -27,7 +27,7 @@ class RegisterCubit extends Cubit<RegisterState> {
                 registerData.password, registerData.trainerEmail)
             .then((_) => emit(Registered()))
             .catchError((error) {
-          emit(RegisterFailed(error));
+          emit(RegisterFailed(error.toString()));
         });
         break;
       default:

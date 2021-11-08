@@ -13,6 +13,11 @@ class RegisterProvider {
           registerData.password, registerData.trainerEmail);
       return Future.value();
     } catch (error) {
+      if (error is FirebaseAuthException) {
+        if (error.code != 'email-already-in-use') {
+          return Future.error(error, StackTrace.current);
+        }
+      }
       FirebaseAuth.instance.currentUser?.delete();
       _deleteUserData();
       return Future.error(error, StackTrace.current);
@@ -77,24 +82,35 @@ class RegisterProvider {
     if (trainerEmail.isEmpty) {
       trainerEmail = FirebaseAuth.instance.currentUser!.email!;
     }
-    var id = FirebaseAuth.instance.currentUser!.uid;
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
-        .doc(id)
-        .collection(FirebaseConstants.clientCollection)
-        .doc(FirebaseConstants.dataCollection)
-        .set({
-      'id': id,
-      'name': name,
-      'email': userEmail,
-      'trainerEmail': trainerEmail,
-      'userType': 'client'
-    });
+        .where('email', isEqualTo: trainerEmail)
+        .get()
+        .then((trainerData) {
+      var trainerId = trainerData.docs.single.get('id');
+      var userId = FirebaseAuth.instance.currentUser!.uid;
 
-    await FirebaseFirestore.instance
-        .collection(FirebaseConstants.usersCollection)
-        .doc(id)
-        .set({'email': userEmail, 'id': id});
+      FirebaseFirestore.instance
+          .collection(FirebaseConstants.usersCollection)
+          .doc(userId)
+          .collection(FirebaseConstants.clientCollection)
+          .doc(FirebaseConstants.dataCollection)
+          .set({
+        'id': userId,
+        'name': name,
+        'email': userEmail,
+        'trainerEmail': trainerEmail,
+        'trainerId': trainerId,
+        'userType': 'client'
+      });
+
+      FirebaseFirestore.instance
+          .collection(FirebaseConstants.usersCollection)
+          .doc(userId)
+          .set({'email': userEmail, 'id': userId});
+    }).catchError((error) {
+      Future.error(error, StackTrace.current);
+    });
   }
 
   _updateTrainerDataWithNewClientData(String trainerEmail) async {
