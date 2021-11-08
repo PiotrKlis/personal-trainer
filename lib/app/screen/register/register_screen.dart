@@ -143,10 +143,7 @@ class RegisterForm extends StatelessWidget {
 
   void validateInputs(BuildContext context) {
     var registerCubit = BlocProvider.of<RegisterCubit>(context);
-    if (_trainerEmail.isEmpty) {
-      _trainerEmail = _email;
-    }
     registerCubit.register(RegisterData(_displayName, _password,
-         _userType!, _email));
+         _userType!, _email, _trainerEmail));
   }
 }

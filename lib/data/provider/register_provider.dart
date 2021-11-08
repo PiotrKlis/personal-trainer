@@ -74,6 +74,9 @@ class RegisterProvider {
 
   _createClientDataInDb(
       String userEmail, String name, String trainerEmail) async {
+    if (trainerEmail.isEmpty) {
+      trainerEmail = FirebaseAuth.instance.currentUser!.email!;
+    }
     var id = FirebaseAuth.instance.currentUser!.uid;
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)

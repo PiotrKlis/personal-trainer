@@ -8,5 +8,5 @@ class RegisterData {
   final String trainerEmail = "";
   final UserType userType;
 
-  RegisterData(this.displayName, this.password, this.userType, this.email);
+  RegisterData(this.displayName, this.password, this.userType, this.email, trainerEmail);
 }
