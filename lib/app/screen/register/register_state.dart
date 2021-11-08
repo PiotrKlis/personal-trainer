@@ -6,6 +6,8 @@ class UserTypeChanged extends RegisterState {}
 
 class RegisterLoading extends RegisterState {}
 
+class RegisterInit extends RegisterState {}
+
 class Registered extends RegisterState {}
 
 class RegisterFailed extends RegisterState {

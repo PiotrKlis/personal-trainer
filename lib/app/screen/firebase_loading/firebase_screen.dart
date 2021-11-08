@@ -40,7 +40,7 @@ class FirebaseHandler extends StatelessWidget {
           Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
         });
       }
-      return CircularProgressIndicator();
+      return Center(child: CircularProgressIndicator());
     });
   }
 

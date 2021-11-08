@@ -109,7 +109,7 @@ class RegisterProvider {
           .doc(userId)
           .set({'email': userEmail, 'id': userId});
     }).catchError((error) {
-      Future.error(error, StackTrace.current);
+      throw Exception("Wrong trainer email");
     });
   }
 
@@ -117,33 +117,24 @@ class RegisterProvider {
     if (trainerEmail.isEmpty) {
       trainerEmail = FirebaseAuth.instance.currentUser!.email!;
     }
-    var trainerData = await FirebaseFirestore.instance
-        .collection(FirebaseConstants.usersCollection)
-        .where('email', isEqualTo: trainerEmail)
-        .get();
-
-    var id = trainerData.docs.single.get('id');
-
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
-        .doc(id)
-        .collection(FirebaseConstants.trainerCollection)
-        .doc(FirebaseConstants.dataCollection)
+        .where('email', isEqualTo: trainerEmail)
         .get()
-        .then((data) {
-      if (data.exists) {
-        FirebaseFirestore.instance
-            .collection(FirebaseConstants.usersCollection)
-            .doc(id)
-            .collection(FirebaseConstants.trainerCollection)
-            .doc(FirebaseConstants.dataCollection)
-            .set({
-          "clients":
-              FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
-        }, SetOptions(merge: true));
-      } else {
-        throw Exception("Trainer email is invalid");
-      }
+        .then((trainerData) {
+      var trainerId = trainerData.docs.single.get('id');
+
+      FirebaseFirestore.instance
+          .collection(FirebaseConstants.usersCollection)
+          .doc(trainerId)
+          .collection(FirebaseConstants.trainerCollection)
+          .doc(FirebaseConstants.dataCollection)
+          .set({
+        "clients":
+            FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
+      }, SetOptions(merge: true));
+    }).catchError((error) {
+      throw Exception("Wrong trainer email");
     });
   }
 }

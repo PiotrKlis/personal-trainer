@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -13,7 +12,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterCubit(RegisterLoading(), RegisterProvider()),
+      create: (context) => RegisterCubit(RegisterInit(), RegisterProvider()),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -39,19 +38,17 @@ class RegisterForm extends StatelessWidget {
     return Form(
       key: _formKey,
       child:
-      BlocBuilder<RegisterCubit, RegisterState>(builder: (context, state) {
+          BlocBuilder<RegisterCubit, RegisterState>(builder: (context, state) {
+        if (state is Registered) {
+          Navigator.pop(context);
+        } else if (state is RegisterFailed) {
+          ErrorMessage.showErrorToast(state.error);
+        }
         return Column(
           children: [
-            BlocListener<RegisterCubit, RegisterState>(
-              listener: (context, state) {
-                if (state is Registered) {
-                  Navigator.pop(context);
-                } else if (state is RegisterFailed) {
-                  ErrorMessage.showErrorToast(state.error);
-                }
-              },
-              child: Container(),
-            ),
+            Visibility(
+                visible: state is RegisterLoading,
+                child: Center(child: CircularProgressIndicator())),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
@@ -128,7 +125,8 @@ class RegisterForm extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
+                  if (state != RegisterLoading() &&
+                      _formKey.currentState!.validate()) {
                     validateInputs(context);
                   }
                 },
@@ -143,7 +141,7 @@ class RegisterForm extends StatelessWidget {
 
   void validateInputs(BuildContext context) {
     var registerCubit = BlocProvider.of<RegisterCubit>(context);
-    registerCubit.register(RegisterData(_displayName, _password,
-         _userType!, _email, _trainerEmail));
+    registerCubit.register(RegisterData(
+        _displayName, _password, _userType!, _email, _trainerEmail));
   }
 }
