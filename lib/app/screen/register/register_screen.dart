@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -38,7 +39,7 @@ class RegisterForm extends StatelessWidget {
     return Form(
       key: _formKey,
       child:
-          BlocBuilder<RegisterCubit, RegisterState>(builder: (context, state) {
+      BlocBuilder<RegisterCubit, RegisterState>(builder: (context, state) {
         return Column(
           children: [
             BlocListener<RegisterCubit, RegisterState>(
@@ -80,8 +81,7 @@ class RegisterForm extends StatelessWidget {
                 validator: MinLengthValidator(6,
                     errorText: "Password should be at least 6 characters"),
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Password'),
+                    border: OutlineInputBorder(), hintText: 'Password'),
                 onChanged: (value) => _password = value,
               ),
             ),
@@ -143,7 +143,10 @@ class RegisterForm extends StatelessWidget {
 
   void validateInputs(BuildContext context) {
     var registerCubit = BlocProvider.of<RegisterCubit>(context);
-    registerCubit.register(RegisterData(
-        _email, _displayName, _password, _trainerEmail, _userType!));
+    if (_trainerEmail.isEmpty) {
+      _trainerEmail = _email;
+    }
+    registerCubit.register(RegisterData(_displayName, _password,
+         _userType!, _email));
   }
 }

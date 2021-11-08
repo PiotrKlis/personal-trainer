@@ -14,7 +14,7 @@ class RegisterProvider {
       return Future.value();
     } catch (error) {
       FirebaseAuth.instance.currentUser?.delete();
-      _deleteUserData(registerData.email);
+      _deleteUserData();
       return Future.error(error, StackTrace.current);
     }
   }
@@ -26,16 +26,16 @@ class RegisterProvider {
       await _addClientDataToDB(userEmail, name, password, trainerEmail);
       return Future.value();
     } catch (error) {
-      _deleteUserData(userEmail);
+      _deleteUserData();
       FirebaseAuth.instance.currentUser?.delete();
       return Future.error(error, StackTrace.current);
     }
   }
 
-  _deleteUserData(String userEmail) async {
+  _deleteUserData() async {
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
-        .doc(userEmail)
+        .doc(FirebaseAuth.instance.currentUser?.email ?? "")
         .delete()
         .then((value) => print("User Deleted"))
         .catchError((error) => print("Failed to delete user: $error"));
@@ -53,13 +53,14 @@ class RegisterProvider {
   }
 
   _addTrainerDataToDB(String userEmail, String name, String password) async {
+    var id = FirebaseAuth.instance.currentUser!.uid;
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(id)
         .collection(FirebaseConstants.trainerCollection)
         .doc(FirebaseConstants.dataCollection)
         .set({
-      'id': FirebaseAuth.instance.currentUser!.uid,
+      'id': id,
       'name': name,
       'email': userEmail,
       'userType': 'trainer'
@@ -67,19 +68,20 @@ class RegisterProvider {
 
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({'email': userEmail});
+        .doc(id)
+        .set({'email': userEmail, 'id': id});
   }
 
   _createClientDataInDb(
       String userEmail, String name, String trainerEmail) async {
+    var id = FirebaseAuth.instance.currentUser!.uid;
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
-        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .doc(id)
         .collection(FirebaseConstants.clientCollection)
         .doc(FirebaseConstants.dataCollection)
         .set({
-      'id': FirebaseAuth.instance.currentUser!.uid,
+      'id': id,
       'name': name,
       'email': userEmail,
       'trainerEmail': trainerEmail,
@@ -88,24 +90,24 @@ class RegisterProvider {
 
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({'email': userEmail});
+        .doc(id)
+        .set({'email': userEmail, 'id': id});
   }
 
   _updateTrainerDataWithNewClientData(String trainerEmail) async {
+    if (trainerEmail.isEmpty) {
+      trainerEmail = FirebaseAuth.instance.currentUser!.email!;
+    }
     var trainerData = await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
         .where('email', isEqualTo: trainerEmail)
         .get();
 
-    var id = trainerData.docs.map((value) {
-      var test = value.get('id');
-
-    });
+    var id = trainerData.docs.single.get('id');
 
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
-        .doc(id.toString())
+        .doc(id)
         .collection(FirebaseConstants.trainerCollection)
         .doc(FirebaseConstants.dataCollection)
         .get()
@@ -113,11 +115,12 @@ class RegisterProvider {
       if (data.exists) {
         FirebaseFirestore.instance
             .collection(FirebaseConstants.usersCollection)
-            .doc(id.toString())
+            .doc(id)
             .collection(FirebaseConstants.trainerCollection)
             .doc(FirebaseConstants.dataCollection)
             .set({
-          "clients": FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
+          "clients":
+              FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
         }, SetOptions(merge: true));
       } else {
         throw Exception("Trainer email is invalid");
