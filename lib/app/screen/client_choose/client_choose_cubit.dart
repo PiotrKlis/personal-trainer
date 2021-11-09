@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:personal_trainer/app/screen/client_choose/client_choose_state.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 
@@ -13,19 +14,11 @@ class ClientChooseCubit extends Cubit<ClientChooseState> {
   void getClientsData(String trainerId) async {
     clientChooseProvider.getClientsFor(trainerId).then((clients) {
       emit(ClientsData(clients));
+    }).catchError((error) {
+      emit(ClientChooseFetchFailed(error.toString()));
     });
   }
 }
-
-abstract class ClientChooseState {}
-
-class ClientsData extends ClientChooseState {
-  final List<Client> clients;
-
-  ClientsData(this.clients);
-}
-
-class ClientChooseLoading extends ClientChooseState {}
 
 class ClientChooseProvider {
   Future<List<Client>> getClientsFor(String trainerId) async {

@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:personal_trainer/app/screen/client_choose/client_choose_cubit.dart';
+import 'package:personal_trainer/app/screen/client_choose/client_choose_state.dart';
+import 'package:personal_trainer/app/widget/error_message.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import '../../app_router.dart';
 import '../calendar_exercise/calendar_exercise_screen.dart';
@@ -28,6 +30,8 @@ class ClientChooseScreen extends StatelessWidget {
                 context.read<ClientChooseCubit>().getClientsData(trainerId);
               } else if (state is ClientsData) {
                 clients = state.clients;
+              } else if (state is ClientChooseFetchFailed) {
+                ErrorMessage.showErrorToast(state.error)
               }
               return ListView.builder(
                 itemCount: clients.length,
