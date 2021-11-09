@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 
 class ClientChooseCubit extends Cubit<ClientChooseState> {
@@ -30,20 +31,20 @@ class ClientChooseProvider {
   Future<List<Client>> getClientsFor(String trainerId) async {
     try {
       var trainerData = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser?.email)
-          .collection('trainer')
-          .doc('data')
+          .collection(FirebaseConstants.usersCollection)
+          .doc(trainerId)
+          .collection(FirebaseConstants.trainerCollection)
+          .doc(FirebaseConstants.dataCollection)
           .get();
 
       var clientIds = List.from(trainerData.get('clients'));
 
       return Future.wait(clientIds.map((clientId) {
         return FirebaseFirestore.instance
-            .collection('users')
+            .collection(FirebaseConstants.usersCollection)
             .doc(clientId)
-            .collection('client')
-            .doc('data')
+            .collection(FirebaseConstants.clientCollection)
+            .doc(FirebaseConstants.dataCollection)
             .get()
             .then((clientData) => _mapToClient(clientData.data()!));
       }).toList());

@@ -39,7 +39,7 @@ class ClientChooseScreen extends StatelessWidget {
                                 context, AppRouter.CALENDAR_EXERCISE,
                                 arguments: CalendarExerciseArguments(clients[index].id));
                           },
-                          title: Text('${clients[index].name}')));
+                          title: Text('${clients[index].name} / ${clients[index].email}')));
                 },
               );
             }
