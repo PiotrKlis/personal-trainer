@@ -47,12 +47,16 @@ class FirebaseHandler extends StatelessWidget {
   void navigateToUserScreen(LoginSuccess state, BuildContext context) {
     if (state.appUser is Trainer) {
       var id = (state.appUser as Trainer).id;
-      Navigator.pushReplacementNamed(context, AppRouter.CHOOSE_ACCOUNT,
-          arguments: AccountChooseArguments(id));
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
+        Navigator.pushReplacementNamed(context, AppRouter.CHOOSE_ACCOUNT,
+            arguments: AccountChooseArguments(id));
+      });
     } else if (state.appUser is Client) {
       var id = (state.appUser as Client).id;
-      Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
-          arguments: ClientScreenArguments(id));
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
+        Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
+            arguments: ClientScreenArguments(id));
+      });
     }
   }
 }

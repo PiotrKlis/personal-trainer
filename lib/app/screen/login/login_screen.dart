@@ -126,7 +126,7 @@ class _LoginFormState extends State<LoginForm> {
                 } else if (state.appUser is Client) {
                   var id = (state.appUser as Client).email;
                   Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
-                      arguments: ClientScreen(id: id));
+                      arguments: ClientScreenArguments(id));
                 }
               } else if (state is LoginFailed) {
                 ErrorMessage.showErrorToast(

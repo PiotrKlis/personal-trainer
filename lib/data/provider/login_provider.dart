@@ -50,29 +50,29 @@ class LoginProvider {
 
   String? getUserId() => FirebaseAuth.instance.currentUser?.uid;
 
-  Future<AppUser> getUserData(String? email) async {
+  Future<AppUser> getUserData(String? id) async {
     try {
       var trainerData = await FirebaseFirestore.instance
           .collection(FirebaseConstants.usersCollection)
-          .doc(email)
-          .collection("trainer")
-          .doc("data")
+          .doc(id)
+          .collection(FirebaseConstants.trainerCollection)
+          .doc(FirebaseConstants.dataCollection)
           .get();
 
       var clientData = await FirebaseFirestore.instance
           .collection(FirebaseConstants.usersCollection)
-          .doc(email)
-          .collection("trainer")
-          .doc("data")
+          .doc(id)
+          .collection(FirebaseConstants.clientCollection)
+          .doc(FirebaseConstants.dataCollection)
           .get();
 
-      if (trainerData.exists && clientData.exists) {
+      if (trainerData.data() != null && clientData.data() != null) {
         return Trainer(
             id: trainerData.data()?['id'],
             email: trainerData.data()?['email'],
             name: trainerData.data()?['name'],
             clientEmails: List.from(trainerData.data()?['clients']));
-      } else if (!trainerData.exists && clientData.exists) {
+      } else if (trainerData.data() == null) {
         return Client(
             id: clientData.data()?['id'],
             email: clientData.data()?['email'],

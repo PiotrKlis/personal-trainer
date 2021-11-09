@@ -42,9 +42,7 @@ class AppRouter {
       case CLIENT:
         final args = settings.arguments as ClientScreenArguments;
         return MaterialPageRoute(
-          builder: (_) => ClientScreen(
-            id: args.id,
-          ),
+          builder: (_) => ClientScreen(id: args.id),
         );
       case CALENDAR_EXERCISE:
         final args = settings.arguments as CalendarExerciseArguments;
