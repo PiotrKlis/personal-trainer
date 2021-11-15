@@ -1,7 +1,9 @@
 TODO
 
 Add exercise screen
-- pobieraj dane z remote repo na calendar exercise screen
+- wejscie w account choose screen za pierwszym razem bad state
+- rejestracja client za pierwszym razem tez nie dziala
+- dodaj wylogowanie
 
 Done
 - Navigate client to calendar exercises

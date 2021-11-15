@@ -11,6 +11,7 @@ import '../../app_router.dart';
 import '../calendar_exercise/calendar_exercise_screen.dart';
 
 class ClientChooseScreen extends StatelessWidget {
+  final ClientChooseState clientChooseState = ClientChooseLoading();
   final trainerId;
   List<Client> clients = <Client>[];
 
@@ -31,7 +32,7 @@ class ClientChooseScreen extends StatelessWidget {
               } else if (state is ClientsData) {
                 clients = state.clients;
               } else if (state is ClientChooseFetchFailed) {
-                ErrorMessage.showErrorToast(state.error)
+                ErrorMessage.showErrorToast(state.error);
               }
               return ListView.builder(
                 itemCount: clients.length,

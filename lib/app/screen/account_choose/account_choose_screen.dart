@@ -20,7 +20,7 @@ class AccountChooseScreen extends StatelessWidget {
           children: [
             Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Choose which account you would like to access')),
+                child: Text('Choose which account you would like to access?')),
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
