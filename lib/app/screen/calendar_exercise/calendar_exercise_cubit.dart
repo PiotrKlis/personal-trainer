@@ -12,7 +12,7 @@ class CalendarExerciseCubit extends Cubit<CalendarExerciseState> {
 
   void onDaySelected(DateTime selectedDay, String userId) {
     _calendarExerciseProvider
-        .getExerciseFor(selectedDay = selectedDay, userId = userId)
+        .getExerciseFor(selectedDay, userId)
         .then((listOfExercises) => emit(CalendarExerciseData(listOfExercises)));
   }
 

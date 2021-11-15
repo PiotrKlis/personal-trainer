@@ -1,3 +1,6 @@
 {
-    "app_title": "Personal Trainer"
+    "comment" : "to upgrade run flutter gen-l10n",
+    "app_title": "Personal Trainer",
+    "calendar_exercise_screen_title": "Calendar Exercises"
 }
+

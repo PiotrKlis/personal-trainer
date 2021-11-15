@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:personal_trainer/app/app_router.dart';
 import 'package:personal_trainer/app/util/localisation_keys.dart';
@@ -18,7 +17,7 @@ class PersonalTrainerApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Personal Trainer',
         localizationsDelegates: [
-          AppLocalizations.delegate, // Add this line
+          AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
@@ -27,7 +26,7 @@ class PersonalTrainerApp extends StatelessWidget {
           Locale(LocalisationKeys.englishLocaleKey),
           Locale(LocalisationKeys.polishLocaleKey),
         ],
-        theme: ThemeData.light(),
+        theme: ThemeData.dark(),
         onGenerateRoute: AppRouter().onGenerateRoute,
       ),
     );

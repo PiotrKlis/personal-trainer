@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/mapper/exercise_mapper.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
@@ -11,10 +12,10 @@ class CalendarExerciseProvider {
     try {
       var formattedDate = DateUtils.dateOnly(selectedDay).toString();
       var exercisesResult = await FirebaseFirestore.instance
-          .collection('users')
+          .collection(FirebaseConstants.usersCollection)
           .doc(userId)
-          .collection('client')
-          .where('exercises', isEqualTo: formattedDate)
+          .collection(FirebaseConstants.clientCollection)
+          .where(FirebaseConstants.exercisesCollection, isEqualTo: formattedDate)
           .get();
 
       var exercises = exercisesResult.docs

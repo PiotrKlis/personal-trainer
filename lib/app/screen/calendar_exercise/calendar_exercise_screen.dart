@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:personal_trainer/app/util/date_util.dart';
+import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
@@ -14,19 +16,24 @@ import 'calendar_exercise_state.dart';
 DateTime _selectedDay = DateTime.now();
 
 class CalendarExerciseScreen extends StatelessWidget {
-  final userId;
+  late final CalendarExerciseState _calendarExerciseState =
+      CalendarExerciseLoading();
+  late final CalendarExerciseProvider _calendarExerciseProvider =
+      CalendarExerciseProvider();
+  final String userId;
 
-  CalendarExerciseScreen({Key? key, this.userId}) : super(key: key);
+  CalendarExerciseScreen({Key? key, required this.userId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => CalendarExerciseCubit(
-          CalendarExerciseLoading(), CalendarExerciseProvider()),
+          _calendarExerciseState, _calendarExerciseProvider),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Plan Exercises'),
-        ),
+          title: Text('dsa'
+              // AppLocalizations.of(context)!.calendar_exercise_screen_title),
+        )),
         body: ListView(
           children: [CalendarWidget(userId), Divider(), ExerciseCards(userId)],
         ),
@@ -199,12 +206,11 @@ class CalendarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _list.add(true);
     return BlocBuilder<CalendarExerciseCubit, CalendarExerciseState>(
       builder: (context, state) {
         return TableCalendar<bool>(
-          firstDay: DateTime.utc(2021, 09, 01),
-          lastDay: DateTime.utc(2022, 12, 31),
+          firstDay: DateUtil.calendarStartDate,
+          lastDay: DateUtil.calendarEndDate,
           focusedDay: _selectedDay,
           calendarFormat: getCalendarFormat(state),
           startingDayOfWeek: StartingDayOfWeek.monday,
@@ -225,6 +231,7 @@ class CalendarWidget extends StatelessWidget {
       _calendarFormat = state.format;
       return _calendarFormat;
     } else {
+      Log.d("Calendar changed to same format as previous");
       return _calendarFormat;
     }
   }
