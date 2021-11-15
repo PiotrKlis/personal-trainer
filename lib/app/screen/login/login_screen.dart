@@ -119,12 +119,12 @@ class _LoginFormState extends State<LoginForm> {
             listener: (context, state) {
               if (state is LoginSuccess) {
                 if (state.appUser is Trainer) {
-                  var id = (state.appUser as Trainer).email;
+                  var id = (state.appUser as Trainer).id;
                   Navigator.pushReplacementNamed(
                       context, AppRouter.CHOOSE_ACCOUNT,
                       arguments: AccountChooseArguments(id));
                 } else if (state.appUser is Client) {
-                  var id = (state.appUser as Client).email;
+                  var id = (state.appUser as Client).id;
                   Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
                       arguments: ClientScreenArguments(id));
                 }

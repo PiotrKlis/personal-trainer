@@ -6,9 +6,9 @@ import 'package:personal_trainer/app/screen/client/client_screen.dart';
 import '../../app_router.dart';
 
 class AccountChooseScreen extends StatelessWidget {
-  final id;
+  final trainerId;
 
-  const AccountChooseScreen({Key? key, this.id}) : super(key: key);
+  const AccountChooseScreen({Key? key, this.trainerId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class AccountChooseScreen extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, AppRouter.CHOOSE_CLIENT,
-                          arguments: ClientChooseArguments(id));
+                          arguments: ClientChooseArguments(trainerId));
                     },
                     child: Text('TRAINER'))),
             Padding(
@@ -34,7 +34,7 @@ class AccountChooseScreen extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, AppRouter.CLIENT,
-                          arguments: ClientScreenArguments(id));
+                          arguments: ClientScreenArguments(trainerId));
                     },
                     child: Text('CLIENT'))),
           ],

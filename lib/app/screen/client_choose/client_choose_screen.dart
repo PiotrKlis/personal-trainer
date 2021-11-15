@@ -11,7 +11,8 @@ import '../../app_router.dart';
 import '../calendar_exercise/calendar_exercise_screen.dart';
 
 class ClientChooseScreen extends StatelessWidget {
-  final ClientChooseState clientChooseState = ClientChooseLoading();
+  late final ClientChooseState _clientChooseState = ClientChooseLoading();
+  late final ClientChooseProvider _clientChooseProvider = ClientChooseProvider();
   final trainerId;
   List<Client> clients = <Client>[];
 
@@ -20,7 +21,7 @@ class ClientChooseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ClientChooseCubit(ClientChooseLoading(), ClientChooseProvider()),
+      create: (context) => ClientChooseCubit(_clientChooseState, _clientChooseProvider),
       child: Scaffold(
         appBar: AppBar(
           title: Text("Choose client"),

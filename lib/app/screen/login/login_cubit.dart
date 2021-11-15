@@ -21,7 +21,7 @@ class LoginCubit extends Cubit<LoginState> {
     loginProvider.loginUser(email, password).then((appUser) {
       emit(LoginSuccess(appUser));
     }).catchError((error) {
-      emit(LoginFailed(error));
+      emit(LoginFailed(error.toString()));
     });
   }
 
@@ -30,7 +30,7 @@ class LoginCubit extends Cubit<LoginState> {
       loginProvider.getUserData(user.uid).then((appUser) {
         emit(LoginSuccess(appUser));
       }).catchError((error) {
-        emit(LoginFailed(error));
+        emit(LoginFailed(error.toString()));
       });
     }).catchError((error) {
       emit(LoginFailed(error));

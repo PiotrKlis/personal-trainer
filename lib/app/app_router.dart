@@ -31,7 +31,7 @@ class AppRouter {
         final args = settings.arguments as AccountChooseArguments;
         return MaterialPageRoute(
           builder: (_) => AccountChooseScreen(
-            id: args.id,
+            trainerId: args.id,
           ),
         );
       case CHOOSE_CLIENT:
