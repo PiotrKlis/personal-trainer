@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:personal_trainer/app/util/date_util.dart';
 import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
@@ -31,9 +32,9 @@ class CalendarExerciseScreen extends StatelessWidget {
           _calendarExerciseState, _calendarExerciseProvider),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('dsa'
-              // AppLocalizations.of(context)!.calendar_exercise_screen_title),
-        )),
+          title: Text(
+              AppLocalizations.of(context)!.calendar_exercise_screen_title),
+        ),
         body: ListView(
           children: [CalendarWidget(userId), Divider(), ExerciseCards(userId)],
         ),
@@ -215,9 +216,12 @@ class CalendarWidget extends StatelessWidget {
           calendarFormat: getCalendarFormat(state),
           startingDayOfWeek: StartingDayOfWeek.monday,
           selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-          onDaySelected: (selectedDay, focusedDay) => context
-              .read<CalendarExerciseCubit>()
-              .onDaySelected(selectedDay, userId),
+          onDaySelected: (selectedDay, focusedDay) {
+            _selectedDay = selectedDay;
+            context
+                .read<CalendarExerciseCubit>()
+                .onDaySelected(selectedDay, userId);
+          },
           onFormatChanged: (format) =>
               context.read<CalendarExerciseCubit>().onFormatChanged(format),
           eventLoader: (date) => _list,
