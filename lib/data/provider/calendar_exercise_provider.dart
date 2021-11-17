@@ -15,7 +15,8 @@ class CalendarExerciseProvider {
           .collection(FirebaseConstants.usersCollection)
           .doc(userId)
           .collection(FirebaseConstants.clientCollection)
-          .where(FirebaseConstants.exercisesCollection, isEqualTo: formattedDate)
+          .doc(FirebaseConstants.exercisesCollection)
+          .collection(formattedDate)
           .get();
 
       var exercises = exercisesResult.docs

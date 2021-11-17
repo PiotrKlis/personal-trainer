@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
 class ExerciseSearchProvider {
@@ -8,13 +9,13 @@ class ExerciseSearchProvider {
       String modifiedQuery = '#${query.toUpperCase()}';
 
       var titleResult = await FirebaseFirestore.instance
-          .collection('exercises')
+          .collection(FirebaseConstants.exercisesCollection)
           .where('title', isGreaterThanOrEqualTo: query)
           .where('title', isLessThanOrEqualTo: '$query\uf7ff')
           .get();
 
       var tagResult = await FirebaseFirestore.instance
-          .collection('exercises')
+          .collection(FirebaseConstants.exercisesCollection)
           .where('tags', arrayContains: modifiedQuery)
           .get();
 
@@ -28,16 +29,15 @@ class ExerciseSearchProvider {
       var result = titleMappedExercises + tagsMappedExercises;
       return Future.value(result);
     } catch (error) {
-      //TODO: Check stacktrace on error
       return Future.error(error, StackTrace.current);
     }
   }
 
   Future<List<Exercise>> getAllExercises() async {
     try {
-      var exercises =
-          await FirebaseFirestore.instance.collection('exercises').get();
-
+      var exercises = await FirebaseFirestore.instance
+          .collection(FirebaseConstants.exercisesCollection)
+          .get();
       var mappedExercises =
           exercises.docs.map((value) => _mapToExercise(value.data())).toList();
       return Future.value(mappedExercises);
@@ -46,39 +46,23 @@ class ExerciseSearchProvider {
     }
   }
 
-  Future<void> addExercise(String id, DateTime selectedDay) {
-    try {
-      _updateTrainerDataWithNewClientData(id, selectedDay);
-      return Future.value();
-    } catch (error) {
-      return Future.error(error, StackTrace.current);
-    }
-  }
-
-  Exercise _mapToExercise(Map<String, dynamic> data) {
-    return Exercise(
-        id: data['id'],
-        title: data['title'],
-        videoPath: data['videoPath'],
-        tags: List.from(data['tags']));
-  }
-
-  Future<void> _updateTrainerDataWithNewClientData(
-      String id, DateTime selectedDate) async {
+  Future addExercise(
+      {required String exerciseId,
+      required DateTime selectedDate,
+      required String clientId}) async {
     try {
       var formattedDate = DateUtils.dateOnly(selectedDate).toString();
       await FirebaseFirestore.instance
-          .collection('exercises')
-          .doc(id)
+          .collection(FirebaseConstants.exercisesCollection)
+          .doc(exerciseId)
           .get()
           .then((exercise) {
-        if (exercise.exists) {
-          //TODO: change user email to passed one from previous screens
+        if (exercise.data() != null) {
           FirebaseFirestore.instance
-              .collection('users')
-              .doc('p@p.com')
-              .collection("client")
-              .doc("exercises")
+              .collection(FirebaseConstants.usersCollection)
+              .doc(clientId)
+              .collection(FirebaseConstants.clientCollection)
+              .doc(FirebaseConstants.exercisesCollection)
               .collection(formattedDate)
               .add(exercise.data()!);
           return Future.value();
@@ -90,4 +74,42 @@ class ExerciseSearchProvider {
       Future.error(error);
     }
   }
+
+  Exercise _mapToExercise(Map<String, dynamic> data) {
+    return Exercise(
+        id: data['id'],
+        title: data['title'],
+        videoPath: data['videoPath'],
+        tags: List.from(data['tags']));
+  }
+
+// Future _updateTrainerDataWithNewClientData(
+//     {required String exerciseId,
+//     required DateTime selectedDate,
+//     required String clientId}) async {
+//   try {
+//     var formattedDate = DateUtils.dateOnly(selectedDate).toString();
+//     await FirebaseFirestore.instance
+//         .collection(FirebaseConstants.exercisesCollection)
+//         .doc(id)
+//         .get()
+//         .then((exercise) {
+//       if (exercise.exists) {
+//         //TODO: change user email to passed one from previous screens
+//         FirebaseFirestore.instance
+//             .collection(FirebaseConstants.usersCollection)
+//             .doc('p@p.com')
+//             .collection("client")
+//             .doc("exercises")
+//             .collection(formattedDate)
+//             .add(exercise.data()!);
+//         return Future.value();
+//       } else {
+//         return Future.error('exercise does not exist!');
+//       }
+//     });
+//   } catch (error) {
+//     Future.error(error);
+//   }
+// }
 }

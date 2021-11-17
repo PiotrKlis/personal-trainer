@@ -33,7 +33,7 @@ class ClientChooseScreen extends StatelessWidget {
               } else if (state is ClientsData) {
                 clients = state.clients;
               } else if (state is ClientChooseFetchFailed) {
-                ErrorMessage.showErrorToast(state.error);
+                ToastMessage.show(state.error);
               }
               return ListView.builder(
                 itemCount: clients.length,

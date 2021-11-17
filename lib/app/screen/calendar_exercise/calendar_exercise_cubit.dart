@@ -6,14 +6,17 @@ import 'calendar_exercise_state.dart';
 class CalendarExerciseCubit extends Cubit<CalendarExerciseState> {
   final CalendarExerciseProvider _calendarExerciseProvider;
 
-  CalendarExerciseCubit(
-      CalendarExerciseState initialState, this._calendarExerciseProvider)
+  CalendarExerciseCubit(CalendarExerciseState initialState,
+      this._calendarExerciseProvider)
       : super(initialState);
 
   void onDaySelected(DateTime selectedDay, String userId) {
     _calendarExerciseProvider
         .getExerciseFor(selectedDay, userId)
-        .then((listOfExercises) => emit(CalendarExerciseData(listOfExercises)));
+        .then((listOfExercises) {
+      emit(CalendarExerciseData(listOfExercises));
+    }
+    );
   }
 
   onFormatChanged(CalendarFormat format) {

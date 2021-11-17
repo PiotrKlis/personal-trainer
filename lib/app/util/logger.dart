@@ -11,7 +11,7 @@ class Log {
     _logger?.d(message);
   }
 
-  void e(message) {
+  static void e(message) {
     if (_logger == null) {
       _logger = Logger();
     }

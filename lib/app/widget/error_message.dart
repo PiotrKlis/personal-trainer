@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class ErrorMessage {
-  static void showErrorToast(String error) {
+class ToastMessage {
+  static void show(String message) {
     Fluttertoast.showToast(
-        msg: error,
+        msg: message,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,

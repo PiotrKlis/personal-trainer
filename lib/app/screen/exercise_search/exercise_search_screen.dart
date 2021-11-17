@@ -1,67 +1,89 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:personal_trainer/app/bloc/exercise_search_cubit.dart';
+import 'package:personal_trainer/app/util/logger.dart';
+import 'package:personal_trainer/app/widget/error_message.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:video_player/video_player.dart';
 
-class ExerciseSearchScreen extends StatefulWidget {
+import 'exercise_search_state.dart';
+
+class ExerciseSearchScreen extends StatelessWidget {
   final DateTime selectedDay;
+  final String clientId;
 
-  ExerciseSearchScreen(this.selectedDay, {Key? key}) : super(key: key);
+  final ExerciseSearchState _exerciseSearchState = InitialEmptySearch();
+  final ExerciseSearchProvider _exerciseSearchProvider =
+  ExerciseSearchProvider();
 
-  @override
-  _ExerciseSearchScreenState createState() => _ExerciseSearchScreenState();
-}
-
-class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
-  List<String> listOfExpandedExercises = [];
-  List<Exercise> listOfExercises = [];
+  ExerciseSearchScreen(
+      {Key? key, required this.selectedDay, required this.clientId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) =>
-            ExerciseSearchCubit(InitialEmptySearch(), ExerciseSearchProvider()),
+            ExerciseSearchCubit(_exerciseSearchState, _exerciseSearchProvider),
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Search Exercises'),
-          ),
+              title: Text(
+                AppLocalizations.of(context)!.search_exercises_screen_title,
+              )),
           body: ListView(
-            children: [SearchWidget(), _listOfResults()],
+            children: [
+              SearchWidget(),
+              ListOfResults(selectedDay: selectedDay, clientId: clientId,)
+            ],
           ),
         ));
   }
+}
 
-  Widget _listOfResults() {
-    return BlocBuilder<ExerciseSearchCubit, ExerciseSearchState>(
+class ListOfResults extends StatelessWidget {
+  final selectedDay;
+  final clientId;
+
+  ListOfResults({required this.selectedDay, required this.clientId});
+
+  List<String> listOfExpandedExercises = [];
+  List<Exercise> listOfExercises = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<ExerciseSearchCubit, ExerciseSearchState>(
+        listener: (context, state) {
+          if (state is ExerciseAddedEvent) {
+            ToastMessage.show("exercise added!");
+          }
+        },
         builder: (context, state) {
-      if (state is SearchSuccess) {
-        listOfExercises = state.exercises;
-      } else if (state is InitialEmptySearch) {
-        context.read<ExerciseSearchCubit>().getAllExercises();
-      }
-      return ExpansionPanelList(
-          animationDuration: Duration(seconds: 1),
-          elevation: 4,
-          expandedHeaderPadding: EdgeInsets.all(0),
-          expansionCallback: (index, isExpanded) {
-            setState(() {
-              String id = listOfExercises[index].id;
-              if (listOfExpandedExercises.contains(id)) {
-                listOfExpandedExercises.remove(id);
-              } else {
-                listOfExpandedExercises.add(id);
-              }
-              print(listOfExpandedExercises.toString());
-            });
-          },
-          children: listOfExercises
-              .map((exercise) => _buildExpansionPanel(
-                  exercise, isExpanded(exercise, listOfExpandedExercises)))
-              .toList());
-    });
+          if (state is SearchSuccess) {
+            listOfExercises = state.exercises;
+          } else if (state is InitialEmptySearch) {
+            context.read<ExerciseSearchCubit>().getAllExercises();
+          } else if (state is CardExpansionEvent) {
+            listOfExpandedExercises = state.listOfExpandedExercises;
+          }
+          return ExpansionPanelList(
+              animationDuration: Duration(seconds: 1),
+              elevation: 4,
+              expandedHeaderPadding: EdgeInsets.all(0),
+              expansionCallback: (index, isExpanded) {
+                context
+                    .read<ExerciseSearchCubit>()
+                    .expansionCallback(index, isExpanded);
+              },
+              children: listOfExercises
+                  .map((exercise) =>
+                  _buildExpansionPanel(
+                      exercise, isExpanded(exercise, listOfExpandedExercises)))
+                  .toList());
+        });
   }
 
   bool isExpanded(Exercise exercise, List<String> listOfExpandedExercises) {
@@ -87,8 +109,11 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
                   size: 20.0,
                 ),
                 onTap: () {
-                  context.read<ExerciseSearchCubit>().addExercise(
-                      exercise.id, widget.selectedDay);
+                  context
+                      .read<ExerciseSearchCubit>()
+                      .addExercise(exerciseId: exercise.id,
+                      selectedDay: selectedDay,
+                      clientId: clientId);
                 }));
       },
       body: Column(
@@ -98,7 +123,7 @@ class _ExerciseSearchScreenState extends State<ExerciseSearchScreen> {
             height: 240,
             child: VideoItem(
               videoPlayerController:
-                  VideoPlayerController.network(exercise.videoPath),
+              VideoPlayerController.network(exercise.videoPath),
               looping: false,
               autoplay: false,
             ),
@@ -139,9 +164,8 @@ class SearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var _searchController = TextEditingController();
     _searchController.addListener(() {
-      print("search controller text: ${_searchController.text}");
+      Log.d("search controller text: ${_searchController.text}");
       if (_searchController.text.isEmpty) {
-      print("search controller text: ${_searchController.text.isEmpty}");
         context.read<ExerciseSearchCubit>().getAllExercises();
       } else {
         context
@@ -161,4 +185,11 @@ class SearchWidget extends StatelessWidget {
       ),
     ]);
   }
+}
+
+class ExerciseSearchArguments {
+  final DateTime selectedDay;
+  final String clientId;
+
+  ExerciseSearchArguments(this.selectedDay, this.clientId);
 }

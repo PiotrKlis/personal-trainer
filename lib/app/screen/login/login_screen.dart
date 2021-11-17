@@ -129,7 +129,7 @@ class _LoginFormState extends State<LoginForm> {
                       arguments: ClientScreenArguments(id));
                 }
               } else if (state is LoginFailed) {
-                ErrorMessage.showErrorToast(
+                ToastMessage.show(
                     'Login Failed - check internet connection or create new account');
               }
             },

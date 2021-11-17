@@ -42,7 +42,7 @@ class RegisterForm extends StatelessWidget {
         if (state is Registered) {
           Navigator.pop(context);
         } else if (state is RegisterFailed) {
-          ErrorMessage.showErrorToast(state.error);
+          ToastMessage.show(state.error);
         }
         return Column(
           children: [

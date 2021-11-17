@@ -10,6 +10,7 @@ import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../app_router.dart';
 import '../exercise_search/exercise_search_screen.dart';
 import 'calendar_exercise_cubit.dart';
 import 'calendar_exercise_state.dart';
@@ -40,10 +41,8 @@ class CalendarExerciseScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ExerciseSearchScreen(_selectedDay)));
+            Navigator.pushNamed(context, AppRouter.EXERCISE_SEARCH,
+                arguments: ExerciseSearchArguments(_selectedDay, userId));
           },
           child: const Icon(Icons.add),
         ),
@@ -235,7 +234,6 @@ class CalendarWidget extends StatelessWidget {
       _calendarFormat = state.format;
       return _calendarFormat;
     } else {
-      Log.d("Calendar changed to same format as previous");
       return _calendarFormat;
     }
   }

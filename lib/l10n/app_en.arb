@@ -2,5 +2,6 @@
     "upgrade" : "to update strings run 'flutter gen-l10n'",
     "import" : "import 'package:flutter_gen/gen_l10n/app_localizations.dart'",
     "app_title": "Personal Trainer",
-    "calendar_exercise_screen_title": "Calendar Exercises"
+    "calendar_exercise_screen_title": "Calendar Exercises",
+    "search_exercises_screen_title": "Search Exercises"
 }
