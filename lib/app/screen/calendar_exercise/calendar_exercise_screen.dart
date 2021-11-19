@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:personal_trainer/app/screen/calendar_exercise/calendar_exercise_event.dart';
 import 'package:personal_trainer/app/util/date_util.dart';
 import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
@@ -18,10 +19,8 @@ import 'calendar_exercise_state.dart';
 DateTime _selectedDay = DateTime.now();
 
 class CalendarExerciseScreen extends StatelessWidget {
-  late final CalendarExerciseState _calendarExerciseState =
-      CalendarExerciseLoading();
-  late final CalendarExerciseProvider _calendarExerciseProvider =
-      CalendarExerciseProvider();
+  late final CalendarExerciseEvent _calendarExerciseState = CalendarExerciseStarted();
+  late final CalendarExerciseProvider _calendarExerciseProvider = CalendarExerciseProvider();
   final String userId;
 
   CalendarExerciseScreen({Key? key, required this.userId}) : super(key: key);
@@ -42,7 +41,10 @@ class CalendarExerciseScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             Navigator.pushNamed(context, AppRouter.EXERCISE_SEARCH,
-                arguments: ExerciseSearchArguments(_selectedDay, userId));
+                    arguments: ExerciseSearchArguments(_selectedDay, userId))
+                .then((value) => context
+                    .read<CalendarExerciseCubit>()
+                    .onBackFromSearchScreen());
           },
           child: const Icon(Icons.add),
         ),

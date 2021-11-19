@@ -5,7 +5,7 @@ import 'package:personal_trainer/domain/mapper/exercise_mapper.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
 class CalendarExerciseProvider {
-  ExerciseMapper _exerciseMapper = ExerciseMapper();
+  late final ExerciseMapper _exerciseMapper = ExerciseMapper();
 
   Future<List<Exercise>> getExerciseFor(
       DateTime selectedDay, String userId) async {

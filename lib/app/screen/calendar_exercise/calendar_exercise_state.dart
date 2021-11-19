@@ -1,18 +1,18 @@
 import 'package:personal_trainer/domain/model/exercise.dart';
-import 'package:table_calendar/src/shared/utils.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 abstract class CalendarExerciseState {}
 
-class CalendarExerciseLoading extends CalendarExerciseState {}
+class CalendarExerciseLoadInProgress extends CalendarExerciseState {}
 
-class CalendarFormatChanged extends CalendarExerciseState {
+class CalendarFormatChangeSuccess extends CalendarExerciseState {
   final CalendarFormat format;
 
-  CalendarFormatChanged(this.format);
+  CalendarFormatChangeSuccess({required this.format});
 }
 
-class CalendarExerciseData extends CalendarExerciseState {
+class CalendarExerciseLoadSuccess extends CalendarExerciseState {
   final List<Exercise> listOfExercises;
 
-  CalendarExerciseData(this.listOfExercises);
+  CalendarExerciseLoadSuccess({required this.listOfExercises});
 }
