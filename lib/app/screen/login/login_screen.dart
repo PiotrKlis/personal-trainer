@@ -5,7 +5,7 @@ import 'package:personal_trainer/app/screen/account_choose/account_choose_screen
 import 'package:personal_trainer/app/screen/client/client_screen.dart';
 import 'package:personal_trainer/app/screen/login/login_cubit.dart';
 import 'package:personal_trainer/app/screen/login/login_state.dart';
-import 'package:personal_trainer/app/widget/error_message.dart';
+import 'package:personal_trainer/app/widget/toast_message.dart';
 import 'package:personal_trainer/data/provider/firebase_provider.dart';
 import 'package:personal_trainer/data/provider/login_provider.dart';
 import 'package:personal_trainer/domain/model/client.dart';

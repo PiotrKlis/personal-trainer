@@ -1,4 +1,3 @@
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -18,39 +17,40 @@ class VideoItem extends StatefulWidget {
 }
 
 class _VideoItemsState extends State<VideoItem> {
-  late ChewieController _chewieController;
+  // late ChewieController _chewieController;
 
   @override
   void initState() {
     super.initState();
-    var chewieController = ChewieController(
-      videoPlayerController: widget.videoPlayerController,
-      aspectRatio: 16 / 9,
-      autoInitialize: widget.autoplay,
-      autoPlay: widget.autoplay,
-      looping: widget.looping,
-      errorBuilder: (context, errorMessage) {
-        return Center(
-          child: Text(
-            errorMessage,
-            style: TextStyle(color: Colors.white),
-          ),
-        );
-      },
-    );
-    _chewieController = chewieController;
+    // var chewieController = ChewieController(
+    //   videoPlayerController: widget.videoPlayerController,
+    //   aspectRatio: 16 / 9,
+    //   autoInitialize: widget.autoplay,
+    //   autoPlay: widget.autoplay,
+    //   looping: widget.looping,
+    //   errorBuilder: (context, errorMessage) {
+    //     return Center(
+    //       child: Text(
+    //         errorMessage,
+    //         style: TextStyle(color: Colors.white),
+    //       ),
+    //     );
+    //   },
+    // );
+    // _chewieController = chewieController;
   }
 
   @override
   void dispose() {
     super.dispose();
-    _chewieController.dispose();
+    // _chewieController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Chewie(
-      controller: _chewieController,
-    );
+    return Container();
+    // return Chewie(
+    //   controller: _chewieController,
+    // );
   }
 }

@@ -3,5 +3,9 @@
     "import" : "import 'package:flutter_gen/gen_l10n/app_localizations.dart'",
     "app_title": "Personal Trainer",
     "calendar_exercise_screen_title": "Calendar Exercises",
-    "search_exercises_screen_title": "Search Exercises"
+    "search_exercises_screen_title": "Search Exercises",
+    "error": "Something went wrong, please try again",
+    "calendar_no_exercises": "No exercises for this day",
+    "expansion_panel_sets": "Sets",
+    "expansion_panel_reps": "Reps"
 }

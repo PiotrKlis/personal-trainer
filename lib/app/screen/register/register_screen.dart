@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/app/screen/register/register_cubit.dart';
 import 'package:personal_trainer/app/screen/register/register_state.dart';
-import 'package:personal_trainer/app/widget/error_message.dart';
+import 'package:personal_trainer/app/widget/toast_message.dart';
 import 'package:personal_trainer/data/provider/register_provider.dart';
 import 'package:personal_trainer/domain/model/register_data.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';

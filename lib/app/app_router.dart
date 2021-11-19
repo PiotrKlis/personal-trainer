@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_trainer/app/screen/account_choose/account_choose_screen.dart';
-import 'package:personal_trainer/app/screen/calendar_exercise/calendar_exercise_screen.dart';
+import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_arguments.dart';
+import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_screen.dart';
 import 'package:personal_trainer/app/screen/client/client_screen.dart';
 import 'package:personal_trainer/app/screen/client_choose/client_choose_screen.dart';
 import 'package:personal_trainer/app/screen/exercise_search/exercise_search_screen.dart';
@@ -14,7 +15,7 @@ class AppRouter {
   static const String CLIENT = "/client";
   static const String CHOOSE_CLIENT = "/choose_client";
   static const String EXERCISE_SEARCH = "/exercise_search";
-  static const String CALENDAR_EXERCISE = "/calendar_exercise";
+  static const String CALENDAR_EXERCISE = "/calendar_exercises";
   static const String CHOOSE_ACCOUNT = "/choose_account";
 
   Route onGenerateRoute(RouteSettings settings) {
@@ -45,9 +46,9 @@ class AppRouter {
           builder: (_) => ClientScreen(id: args.id),
         );
       case CALENDAR_EXERCISE:
-        final args = settings.arguments as CalendarExerciseArguments;
+        final args = settings.arguments as CalendarExercisesArguments;
         return MaterialPageRoute(
-          builder: (_) => CalendarExerciseScreen(userId: args.userId),
+          builder: (_) => CalendarExercisesScreen(clientId: args.clientId),
         );
       case EXERCISE_SEARCH:
         final args = settings.arguments as ExerciseSearchArguments;

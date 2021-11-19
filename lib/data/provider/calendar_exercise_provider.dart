@@ -7,13 +7,13 @@ import 'package:personal_trainer/domain/model/exercise.dart';
 class CalendarExerciseProvider {
   late final ExerciseMapper _exerciseMapper = ExerciseMapper();
 
-  Future<List<Exercise>> getExerciseFor(
-      DateTime selectedDay, String userId) async {
+  Future<List<Exercise>> getExercisesFor(
+  {required DateTime selectedDay,required String clientId}) async {
     try {
       var formattedDate = DateUtils.dateOnly(selectedDay).toString();
       var exercisesResult = await FirebaseFirestore.instance
           .collection(FirebaseConstants.usersCollection)
-          .doc(userId)
+          .doc(clientId)
           .collection(FirebaseConstants.clientCollection)
           .doc(FirebaseConstants.exercisesCollection)
           .collection(formattedDate)
