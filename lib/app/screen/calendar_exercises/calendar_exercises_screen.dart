@@ -65,8 +65,9 @@ class SearchExercisesButton extends StatelessWidget {
       onPressed: () async {
         Navigator.pushNamed(context, AppRouter.EXERCISE_SEARCH,
                 arguments: ExerciseSearchArguments(_selectedDate, clientId))
-            .then((value) =>
-                context.read<CalendarExercisesBloc>().onBackFromSearchScreen());
+            .then((value) => context
+                .read<CalendarExercisesBloc>()
+                .add(CalendarExercisesCameBackFromExercisesSearchScreen()));
       },
       child: const Icon(Icons.add),
     );
@@ -92,6 +93,8 @@ class ExerciseExpansionPanels extends StatelessWidget {
           return _handleDataLoadSuccess(state, context);
         case CalendarExercisesExpansionPanelClickSuccess:
           return _handleExpansionPanelClickSuccess(state, context);
+        case CalendarExercisesDataReloadSuccess:
+          return _handleDataReloadSuccess(state, context);
         default:
           return ErrorView.error(AppLocalizations.of(context)!.error);
       }
@@ -118,6 +121,16 @@ class ExerciseExpansionPanels extends StatelessWidget {
       CalendarExercisesState state, BuildContext context) {
     state as CalendarExercisesExpansionPanelClickSuccess;
     return _handleExercises(exercises: state.exercises, context: context);
+  }
+
+  Widget _handleDataReloadSuccess(
+      CalendarExercisesState state, BuildContext context) {
+    state as CalendarExercisesDataReloadSuccess;
+    if (state.exercises.isNotEmpty) {
+      return _handleExercises(exercises: state.exercises, context: context);
+    } else {
+      return _handleNoExercises(context: context);
+    }
   }
 
   ExpansionPanelList _handleExercises(

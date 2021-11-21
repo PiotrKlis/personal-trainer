@@ -25,3 +25,6 @@ class CalendarExercisesPanelExpanded extends CalendarExerciseEvent {
 
   CalendarExercisesPanelExpanded(this.index, this.isExpanded);
 }
+
+class CalendarExercisesCameBackFromExercisesSearchScreen
+    extends CalendarExerciseEvent {}

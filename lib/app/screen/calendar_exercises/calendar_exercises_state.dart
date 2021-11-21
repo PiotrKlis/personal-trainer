@@ -28,3 +28,9 @@ class CalendarExercisesExpansionPanelClickSuccess extends CalendarExercisesState
 
   CalendarExercisesExpansionPanelClickSuccess({required this.exercises});
 }
+
+class CalendarExercisesDataReloadSuccess extends CalendarExercisesState {
+  final List<Exercise> exercises;
+
+  CalendarExercisesDataReloadSuccess({required this.exercises});
+}

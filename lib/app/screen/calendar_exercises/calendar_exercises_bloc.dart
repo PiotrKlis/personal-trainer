@@ -42,9 +42,9 @@ class CalendarExercisesBloc
       }
       emit(CalendarExercisesExpansionPanelClickSuccess(exercises: _listOfExercises));
     });
-  }
 
-  void onBackFromSearchScreen() {
-    //TODO: Migrate to Bloc from Cubit and handle Events properly
+    on<CalendarExercisesCameBackFromExercisesSearchScreen>((event, emit) {
+      emit(CalendarExercisesDataReloadSuccess(exercises: _listOfExercises));
+    });
   }
 }
