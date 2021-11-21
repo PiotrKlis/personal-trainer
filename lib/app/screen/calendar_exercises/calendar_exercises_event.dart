@@ -34,3 +34,19 @@ class CalendarExercisesCameBackFromExercisesSearchScreen
   CalendarExercisesCameBackFromExercisesSearchScreen(
       {required this.selectedDate, required this.clientId});
 }
+
+class CalendarExercisesSetsSubmit extends CalendarExerciseEvent {
+  final clientId;
+  final setsNumber;
+
+  CalendarExercisesSetsSubmit(
+      {required this.clientId, required this.setsNumber});
+}
+
+class CalendarExercisesRepsSubmit extends CalendarExerciseEvent {
+  final clientId;
+  final repsNumber;
+
+  CalendarExercisesRepsSubmit(
+      {required this.clientId, required this.repsNumber});
+}

@@ -222,7 +222,9 @@ class ExerciseExpansionPanels extends StatelessWidget {
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               textAlign: TextAlign.center,
               onSubmitted: (value) {
-                //TODO: Send sets value to remote
+                context.read<CalendarExercisesBloc>().add(
+                    CalendarExercisesSetsSubmit(
+                        clientId: clientId, setsNumber: value));
               },
               controller: _setsController,
             ),
@@ -241,7 +243,9 @@ class ExerciseExpansionPanels extends StatelessWidget {
               keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
               onSubmitted: (value) {
-                //TODO: Send reps value to remote
+                context.read<CalendarExercisesBloc>().add(
+                    CalendarExercisesRepsSubmit(
+                        clientId: clientId, repsNumber: value));
               },
               controller: _repsController,
             ),

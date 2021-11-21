@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
@@ -54,6 +55,24 @@ class CalendarExercisesBloc
         emit(CalendarExercisesDataReloadSuccess(exercises: _listOfExercises));
       }).catchError((error) {
         emit(CalendarExercisesDataReloadFailed());
+      });
+    });
+
+    on<CalendarExercisesSetsSubmit>((event, emit) async {
+      await _calendarExerciseProvider
+          .updateSetsNumberForExercise(
+              clientId: event.clientId, setsNumber: event.setsNumber)
+          .then((value) {
+        Log.d("Sets number updated to ${event.setsNumber}");
+      });
+    });
+
+    on<CalendarExercisesRepsSubmit>((event, emit) async {
+      await _calendarExerciseProvider
+          .updateRepsNumberForExercise(
+              clientId: event.clientId, repsNumber: event.repsNumber)
+          .then((value) {
+        Log.d("Reps number updated ${event.repsNumber}");
       });
     });
   }

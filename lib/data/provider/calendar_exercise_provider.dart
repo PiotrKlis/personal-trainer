@@ -8,7 +8,7 @@ class CalendarExerciseProvider {
   late final ExerciseMapper _exerciseMapper = ExerciseMapper();
 
   Future<List<Exercise>> getExercisesFor(
-  {required DateTime selectedDay,required String clientId}) async {
+      {required DateTime selectedDay, required String clientId}) async {
     try {
       var formattedDate = DateUtils.dateOnly(selectedDay).toString();
       var exercisesResult = await FirebaseFirestore.instance
@@ -24,6 +24,26 @@ class CalendarExerciseProvider {
           .toList();
 
       return exercises;
+    } catch (error) {
+      return Future.error(error, StackTrace.current);
+    }
+  }
+
+  Future updateSetsNumberForExercise(
+      {required String clientId, required int setsNumber}) {
+    try {
+      //TODO: update sets number in firestore
+      return Future.value();
+    } catch (error) {
+      return Future.error(error, StackTrace.current);
+    }
+  }
+
+  Future updateRepsNumberForExercise(
+      {required String clientId, required int repsNumber}) {
+    try {
+      //TODO: update sets number in firestore
+      return Future.value();
     } catch (error) {
       return Future.error(error, StackTrace.current);
     }
