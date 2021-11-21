@@ -90,6 +90,8 @@ class ExerciseExpansionPanels extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         case CalendarExercisesDataLoadSuccess:
           return _handleDataLoadSuccess(state, context);
+        case CalendarExercisesExpansionPanelClickSuccess:
+          return _handleExpansionPanelClickSuccess(state, context);
         default:
           return ErrorView.error(AppLocalizations.of(context)!.error);
       }
@@ -104,38 +106,36 @@ class ExerciseExpansionPanels extends StatelessWidget {
 
   Widget _handleDataLoadSuccess(
       CalendarExercisesState state, BuildContext context) {
-    var _state = state as CalendarExercisesDataLoadSuccess;
-    if (_state.exercises.isNotEmpty) {
+    state as CalendarExercisesDataLoadSuccess;
+    if (state.exercises.isNotEmpty) {
       return _handleExercises(exercises: state.exercises, context: context);
     } else {
       return _handleNoExercises(context: context);
     }
   }
 
+  Widget _handleExpansionPanelClickSuccess(
+      CalendarExercisesState state, BuildContext context) {
+    state as CalendarExercisesExpansionPanelClickSuccess;
+    return _handleExercises(exercises: state.exercises, context: context);
+  }
+
   ExpansionPanelList _handleExercises(
       {required List<Exercise> exercises, required BuildContext context}) {
-    BlocBuilder<CalendarExercisesBloc, CalendarExercisesState>(
-        builder: (context, state) {
-          if (state == CalendarExercisesExpansionSuccess()) {
-
-          }
-      return ExpansionPanelList(
-          animationDuration:
-              Duration(seconds: Dimens.expansionPanelAnimationDuration),
-          elevation: Dimens.expansionPanelElevation,
-          expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
-          expansionCallback: (index, isExpanded) {
-            context
-                .read<CalendarExercisesBloc>()
-                .add(CalendarExercisesPanelExpanded(index, isExpanded));
-          },
-          children: exercises
-              .map((exercise) =>
-                  _buildExpansionPanel(exercise: exercise, context: context))
-              .toList());
-    });
-    //TODO: Change to reload whole widget on expansion or just this widget
-    return ExpansionPanelList();
+    return ExpansionPanelList(
+        animationDuration:
+            Duration(seconds: Dimens.expansionPanelAnimationDuration),
+        elevation: Dimens.expansionPanelElevation,
+        expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
+        expansionCallback: (index, isExpanded) {
+          context
+              .read<CalendarExercisesBloc>()
+              .add(CalendarExercisesPanelExpanded(index, isExpanded));
+        },
+        children: exercises
+            .map((exercise) =>
+                _buildExpansionPanel(exercise: exercise, context: context))
+            .toList());
   }
 
   ExpansionPanel _buildExpansionPanel(

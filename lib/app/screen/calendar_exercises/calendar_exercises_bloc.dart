@@ -40,7 +40,7 @@ class CalendarExercisesBloc
       } else {
         listOfExpandedExercises.add(id);
       }
-      emit(CalendarExercisesExpansionSuccess());
+      emit(CalendarExercisesExpansionPanelClickSuccess(exercises: _listOfExercises));
     });
   }
 

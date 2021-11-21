@@ -23,4 +23,8 @@ class CalendarFormatChangeSuccess extends CalendarExercisesState {
 
 class CalendarExercisesNavigateToExerciseSearchScreenSuccess extends CalendarExercisesState {}
 
-class CalendarExercisesExpansionSuccess extends CalendarExercisesState {}
+class CalendarExercisesExpansionPanelClickSuccess extends CalendarExercisesState {
+  final List<Exercise> exercises;
+
+  CalendarExercisesExpansionPanelClickSuccess({required this.exercises});
+}
