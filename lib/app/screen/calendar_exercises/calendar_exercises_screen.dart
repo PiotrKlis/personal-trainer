@@ -65,9 +65,9 @@ class SearchExercisesButton extends StatelessWidget {
       onPressed: () async {
         Navigator.pushNamed(context, AppRouter.EXERCISE_SEARCH,
                 arguments: ExerciseSearchArguments(_selectedDate, clientId))
-            .then((value) => context
-                .read<CalendarExercisesBloc>()
-                .add(CalendarExercisesCameBackFromExercisesSearchScreen()));
+            .then((value) => context.read<CalendarExercisesBloc>().add(
+                CalendarExercisesCameBackFromExercisesSearchScreen(
+                    selectedDate: _selectedDate, clientId: clientId)));
       },
       child: const Icon(Icons.add),
     );

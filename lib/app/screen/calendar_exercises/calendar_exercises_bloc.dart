@@ -11,14 +11,14 @@ class CalendarExercisesBloc
   List<Exercise> _listOfExercises = [];
   List<String> listOfExpandedExercises = [];
 
-  CalendarExercisesBloc(CalendarExercisesState initialState,
-      this._calendarExerciseProvider)
+  CalendarExercisesBloc(
+      CalendarExercisesState initialState, this._calendarExerciseProvider)
       : super(initialState) {
     on<CalendarExercisesNewDateSelected>((event, emit) async {
       emit(CalendarExercisesDataLoadInProgress());
       await _calendarExerciseProvider
           .getExercisesFor(
-          selectedDay: event.selectedDate, clientId: event.clientId)
+              selectedDay: event.selectedDate, clientId: event.clientId)
           .then((exercises) {
         _listOfExercises = exercises;
         emit(CalendarExercisesDataLoadSuccess(exercises: exercises));
@@ -40,11 +40,21 @@ class CalendarExercisesBloc
       } else {
         listOfExpandedExercises.add(id);
       }
-      emit(CalendarExercisesExpansionPanelClickSuccess(exercises: _listOfExercises));
+      emit(CalendarExercisesExpansionPanelClickSuccess(
+          exercises: _listOfExercises));
     });
 
-    on<CalendarExercisesCameBackFromExercisesSearchScreen>((event, emit) {
-      emit(CalendarExercisesDataReloadSuccess(exercises: _listOfExercises));
+    on<CalendarExercisesCameBackFromExercisesSearchScreen>((event, emit) async {
+      emit(CalendarExercisesDataLoadInProgress());
+      await _calendarExerciseProvider
+          .getExercisesFor(
+              selectedDay: event.selectedDate, clientId: event.clientId)
+          .then((exercises) {
+        _listOfExercises = exercises;
+        emit(CalendarExercisesDataReloadSuccess(exercises: _listOfExercises));
+      }).catchError((error) {
+        emit(CalendarExercisesDataReloadFailed());
+      });
     });
   }
 }

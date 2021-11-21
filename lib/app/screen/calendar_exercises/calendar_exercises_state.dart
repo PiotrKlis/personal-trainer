@@ -21,9 +21,11 @@ class CalendarFormatChangeSuccess extends CalendarExercisesState {
   CalendarFormatChangeSuccess({required this.format});
 }
 
-class CalendarExercisesNavigateToExerciseSearchScreenSuccess extends CalendarExercisesState {}
+class CalendarExercisesNavigateToExerciseSearchScreenSuccess
+    extends CalendarExercisesState {}
 
-class CalendarExercisesExpansionPanelClickSuccess extends CalendarExercisesState {
+class CalendarExercisesExpansionPanelClickSuccess
+    extends CalendarExercisesState {
   final List<Exercise> exercises;
 
   CalendarExercisesExpansionPanelClickSuccess({required this.exercises});
@@ -34,3 +36,5 @@ class CalendarExercisesDataReloadSuccess extends CalendarExercisesState {
 
   CalendarExercisesDataReloadSuccess({required this.exercises});
 }
+
+class CalendarExercisesDataReloadFailed extends CalendarExercisesState {}

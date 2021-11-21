@@ -27,4 +27,10 @@ class CalendarExercisesPanelExpanded extends CalendarExerciseEvent {
 }
 
 class CalendarExercisesCameBackFromExercisesSearchScreen
-    extends CalendarExerciseEvent {}
+    extends CalendarExerciseEvent {
+  final clientId;
+  final selectedDate;
+
+  CalendarExercisesCameBackFromExercisesSearchScreen(
+      {required this.selectedDate, required this.clientId});
+}
