@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
-import 'package:personal_trainer/domain/model/exercise.dart';
 
 import 'calendar_exercises_event.dart';
 import 'calendar_exercises_state.dart';
@@ -9,7 +8,6 @@ import 'calendar_exercises_state.dart';
 class CalendarExercisesBloc
     extends Bloc<CalendarExerciseEvent, CalendarExercisesState> {
   final CalendarExerciseProvider _calendarExerciseProvider;
-  List<Exercise> _listOfExercises = [];
   List<String> listOfExpandedExercises = [];
 
   CalendarExercisesBloc(
@@ -21,7 +19,6 @@ class CalendarExercisesBloc
           .getExercisesFor(
               selectedDay: event.selectedDate, clientId: event.clientId)
           .then((exercises) {
-        _listOfExercises = exercises;
         emit(CalendarExercisesDataLoadSuccess(exercises: exercises));
       }).catchError((error) {
         emit(CalendarExercisesDataLoadFailed());
@@ -35,14 +32,14 @@ class CalendarExercisesBloc
         emit(CalendarExercisesNavigateToExerciseSearchScreenSuccess()));
 
     on<CalendarExercisesPanelExpanded>((event, emit) {
-      String id = _listOfExercises[event.index].id;
+      var id = event.exerciseId;
       if (listOfExpandedExercises.contains(id)) {
         listOfExpandedExercises.remove(id);
       } else {
         listOfExpandedExercises.add(id);
       }
       emit(CalendarExercisesExpansionPanelClickSuccess(
-          exercises: _listOfExercises));
+          exercises: event.exercises));
     });
 
     on<CalendarExercisesCameBackFromExercisesSearchScreen>((event, emit) async {
@@ -51,8 +48,7 @@ class CalendarExercisesBloc
           .getExercisesFor(
               selectedDay: event.selectedDate, clientId: event.clientId)
           .then((exercises) {
-        _listOfExercises = exercises;
-        emit(CalendarExercisesDataReloadSuccess(exercises: _listOfExercises));
+        emit(CalendarExercisesDataReloadSuccess(exercises: exercises));
       }).catchError((error) {
         emit(CalendarExercisesDataReloadFailed());
       });

@@ -141,9 +141,9 @@ class ExerciseExpansionPanels extends StatelessWidget {
         elevation: Dimens.expansionPanelElevation,
         expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
         expansionCallback: (index, isExpanded) {
-          context
-              .read<CalendarExercisesBloc>()
-              .add(CalendarExercisesPanelExpanded(index, isExpanded));
+          context.read<CalendarExercisesBloc>().add(
+              CalendarExercisesPanelExpanded(
+                  exercises[index].id, isExpanded, exercises));
         },
         children: exercises
             .map((exercise) =>

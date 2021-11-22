@@ -1,3 +1,4 @@
+import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 abstract class CalendarExerciseEvent {}
@@ -20,10 +21,11 @@ class CalendarExercisesNavigatedToExerciseSearchScreen
     extends CalendarExerciseEvent {}
 
 class CalendarExercisesPanelExpanded extends CalendarExerciseEvent {
-  final int index;
+  final String exerciseId;
   final bool isExpanded;
+  final List<Exercise> exercises;
 
-  CalendarExercisesPanelExpanded(this.index, this.isExpanded);
+  CalendarExercisesPanelExpanded(this.exerciseId, this.isExpanded, this.exercises);
 }
 
 class CalendarExercisesCameBackFromExercisesSearchScreen

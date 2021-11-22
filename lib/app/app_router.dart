@@ -54,7 +54,7 @@ class AppRouter {
         final args = settings.arguments as ExerciseSearchArguments;
         return MaterialPageRoute(
           builder: (_) => ExerciseSearchScreen(
-            selectedDay: args.selectedDay,
+            selectedDate: args.selectedDay,
             clientId: args.clientId,
           ),
         );

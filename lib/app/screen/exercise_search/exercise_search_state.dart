@@ -2,21 +2,27 @@ import 'package:personal_trainer/domain/model/exercise.dart';
 
 abstract class ExerciseSearchState {}
 
-class SearchSuccess extends ExerciseSearchState {
+class ExerciseSearchSuccess extends ExerciseSearchState {
   final List<Exercise> exercises;
 
-  SearchSuccess(this.exercises);
-
+  ExerciseSearchSuccess(this.exercises);
 }
 
-class SearchFailure extends ExerciseSearchState {}
+class ExerciseSearchFailure extends ExerciseSearchState {
+  final String error;
 
-class InitialEmptySearch extends ExerciseSearchState {}
+  ExerciseSearchFailure(this.error);
+}
 
-class ExerciseAddedEvent extends ExerciseSearchState {}
+class ExerciseSearchAddExerciseFailure extends ExerciseSearchState {}
 
-class CardExpansionEvent extends ExerciseSearchState {
-  final listOfExpandedExercises;
+class ExerciseSearchAddExerciseSuccess extends ExerciseSearchState {}
 
-  CardExpansionEvent(this.listOfExpandedExercises);
+class ExerciseSearchAllExercises extends ExerciseSearchState {}
+
+class ExerciseSearcbExpansionPanelClickSuccess
+    extends ExerciseSearchState {
+  final List<Exercise> exercises;
+
+  ExerciseSearcbExpansionPanelClickSuccess({required this.exercises});
 }

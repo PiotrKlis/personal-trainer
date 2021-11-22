@@ -7,5 +7,6 @@
     "error": "Something went wrong, please try again",
     "calendar_no_exercises": "No exercises for this day",
     "expansion_panel_sets": "Sets",
-    "expansion_panel_reps": "Reps"
+    "expansion_panel_reps": "Reps",
+    "exercise_added_message": "Exercise added@"
 }

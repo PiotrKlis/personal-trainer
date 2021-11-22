@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:personal_trainer/app/bloc/exercise_search_cubit.dart';
+import 'package:personal_trainer/app/screen/exercise_search/exercise_search_bloc.dart';
+import 'package:personal_trainer/app/screen/exercise_search/exercise_search_event.dart';
+import 'package:personal_trainer/app/util/dimens.dart';
 import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/toast_message.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
@@ -13,31 +14,34 @@ import 'package:video_player/video_player.dart';
 import 'exercise_search_state.dart';
 
 class ExerciseSearchScreen extends StatelessWidget {
-  final DateTime selectedDay;
+  final DateTime selectedDate;
   final String clientId;
 
-  final ExerciseSearchState _exerciseSearchState = InitialEmptySearch();
+  final ExerciseSearchState _exerciseSearchState = ExerciseSearchAllExercises();
   final ExerciseSearchProvider _exerciseSearchProvider =
-  ExerciseSearchProvider();
+      ExerciseSearchProvider();
 
   ExerciseSearchScreen(
-      {Key? key, required this.selectedDay, required this.clientId})
+      {Key? key, required this.selectedDate, required this.clientId})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) =>
-            ExerciseSearchCubit(_exerciseSearchState, _exerciseSearchProvider),
+            ExerciseSearchBloc(_exerciseSearchState, _exerciseSearchProvider),
         child: Scaffold(
           appBar: AppBar(
               title: Text(
-                AppLocalizations.of(context)!.search_exercises_screen_title,
-              )),
+            AppLocalizations.of(context)!.search_exercises_screen_title,
+          )),
           body: ListView(
             children: [
               SearchWidget(),
-              ListOfResults(selectedDay: selectedDay, clientId: clientId,)
+              ListOfResults(
+                selectedDate: selectedDate,
+                clientId: clientId,
+              )
             ],
           ),
         ));
@@ -45,45 +49,46 @@ class ExerciseSearchScreen extends StatelessWidget {
 }
 
 class ListOfResults extends StatelessWidget {
-  final selectedDay;
+  final selectedDate;
   final clientId;
 
-  ListOfResults({required this.selectedDay, required this.clientId});
-
-  List<String> listOfExpandedExercises = [];
-  List<Exercise> listOfExercises = [];
+  ListOfResults({required this.selectedDate, required this.clientId});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ExerciseSearchCubit, ExerciseSearchState>(
+    return BlocConsumer<ExerciseSearchBloc, ExerciseSearchState>(
         listener: (context, state) {
-          if (state is ExerciseAddedEvent) {
-            ToastMessage.show("exercise added!");
+          switch (state.runtimeType) {
+            case ExerciseSearchAddExerciseSuccess:
+              state as ExerciseSearchAddExerciseSuccess;
+              ToastMessage.show(AppLocalizations.of(context)!.exercise_added_message)
           }
-        },
-        builder: (context, state) {
-          if (state is SearchSuccess) {
-            listOfExercises = state.exercises;
-          } else if (state is InitialEmptySearch) {
-            context.read<ExerciseSearchCubit>().getAllExercises();
-          } else if (state is CardExpansionEvent) {
-            listOfExpandedExercises = state.listOfExpandedExercises;
-          }
-          return ExpansionPanelList(
-              animationDuration: Duration(seconds: 1),
-              elevation: 4,
-              expandedHeaderPadding: EdgeInsets.all(0),
-              expansionCallback: (index, isExpanded) {
-                context
-                    .read<ExerciseSearchCubit>()
-                    .expansionCallback(index, isExpanded);
-              },
-              children: listOfExercises
-                  .map((exercise) =>
-                  _buildExpansionPanel(
-                      exercise, isExpanded(exercise, listOfExpandedExercises)))
-                  .toList());
-        });
+      if (state is ExerciseAddedEvent) {
+        ToastMessage.show("exercise added!");
+      }
+    }, builder: (context, state) {
+      if (state is ExerciseSearchSuccess) {
+        listOfExercises = state.exercises;
+      } else if (state is ExerciseSearchEmpty) {
+        context.read<ExerciseSearchBloc>().getAllExercises();
+      } else if (state is CardExpansionEvent) {
+        listOfExpandedExercises = state.listOfExpandedExercises;
+      }
+      return ExpansionPanelList(
+          animationDuration:
+              Duration(seconds: Dimens.expansionPanelAnimationDuration),
+          elevation: Dimens.expansionPanelElevation,
+          expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
+          expansionCallback: (index, isExpanded) {
+            context
+                .read<ExerciseSearchBloc>()
+                .expansionCallback(index, isExpanded);
+          },
+          children: listOfExercises
+              .map((exercise) => _buildExpansionPanel(
+                  exercise, isExpanded(exercise, listOfExpandedExercises)))
+              .toList());
+    });
   }
 
   bool isExpanded(Exercise exercise, List<String> listOfExpandedExercises) {
@@ -109,11 +114,11 @@ class ListOfResults extends StatelessWidget {
                   size: 20.0,
                 ),
                 onTap: () {
-                  context
-                      .read<ExerciseSearchCubit>()
-                      .addExercise(exerciseId: exercise.id,
-                      selectedDay: selectedDay,
-                      clientId: clientId);
+                  context.read<ExerciseSearchBloc>().add(
+                      ExerciseSearchExerciseAdded(
+                          exerciseId: exercise.id,
+                          selectedDate: selectedDate,
+                          clientId: clientId));
                 }));
       },
       body: Column(
@@ -123,7 +128,7 @@ class ListOfResults extends StatelessWidget {
             height: 240,
             child: VideoItem(
               videoPlayerController:
-              VideoPlayerController.network(exercise.videoPath),
+                  VideoPlayerController.network(exercise.videoPath),
               looping: false,
               autoplay: false,
             ),
@@ -166,10 +171,10 @@ class SearchWidget extends StatelessWidget {
     _searchController.addListener(() {
       Log.d("search controller text: ${_searchController.text}");
       if (_searchController.text.isEmpty) {
-        context.read<ExerciseSearchCubit>().getAllExercises();
+        context.read<ExerciseSearchBloc>().getAllExercises();
       } else {
         context
-            .read<ExerciseSearchCubit>()
+            .read<ExerciseSearchBloc>()
             .searchExercises(_searchController.text);
       }
     });
