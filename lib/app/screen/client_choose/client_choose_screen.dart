@@ -12,7 +12,6 @@ import '../../app_router.dart';
 
 class ClientChooseScreen extends StatelessWidget {
   late final ClientChooseState _clientChooseState = ClientChooseLoading();
-  late final ClientChooseProvider _clientChooseProvider = ClientChooseProvider();
   final trainerId;
   List<Client> clients = <Client>[];
 
@@ -21,7 +20,7 @@ class ClientChooseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ClientChooseCubit(_clientChooseState, _clientChooseProvider),
+      create: (context) => ClientChooseCubit(_clientChooseState),
       child: Scaffold(
         appBar: AppBar(
           title: Text("Choose client"),

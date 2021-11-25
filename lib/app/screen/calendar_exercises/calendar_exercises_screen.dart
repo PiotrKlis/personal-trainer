@@ -23,16 +23,13 @@ class CalendarExercisesScreen extends StatelessWidget {
   final String clientId;
   late final CalendarExercisesState _calendarExerciseState =
       CalendarExercisesStarted();
-  late final CalendarExerciseProvider _calendarExerciseProvider =
-      CalendarExerciseProvider();
 
   CalendarExercisesScreen({Key? key, required this.clientId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => CalendarExercisesBloc(
-          _calendarExerciseState, _calendarExerciseProvider),
+      create: (BuildContext context) => CalendarExercisesBloc(_calendarExerciseState),
       child: Scaffold(
         appBar: AppBar(
           title: Text(

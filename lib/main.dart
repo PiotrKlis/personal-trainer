@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:personal_trainer/app/app_router.dart';
+import 'package:personal_trainer/app/util/DependencyInjector.dart';
 import 'package:personal_trainer/app/util/localisation_keys.dart';
 
 void main() {
@@ -11,6 +12,7 @@ void main() {
 class PersonalTrainerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    initDependencyInjection();
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -31,5 +33,10 @@ class PersonalTrainerApp extends StatelessWidget {
         onGenerateRoute: AppRouter().onGenerateRoute,
       ),
     );
+  }
+
+  void initDependencyInjection() {
+    DependencyInjector _injector = GetItInjector();
+    _injector.init();
   }
 }

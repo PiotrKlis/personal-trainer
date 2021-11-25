@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
 
@@ -7,11 +8,11 @@ import 'calendar_exercises_state.dart';
 
 class CalendarExercisesBloc
     extends Bloc<CalendarExerciseEvent, CalendarExercisesState> {
-  final CalendarExerciseProvider _calendarExerciseProvider;
+  final CalendarExerciseProvider _calendarExerciseProvider =
+      GetIt.I.get<CalendarExerciseProvider>();
   List<String> listOfExpandedExercises = [];
 
-  CalendarExercisesBloc(
-      CalendarExercisesState initialState, this._calendarExerciseProvider)
+  CalendarExercisesBloc(CalendarExercisesState initialState)
       : super(initialState) {
     on<CalendarExercisesNewDateSelected>((event, emit) async {
       emit(CalendarExercisesDataLoadInProgress());

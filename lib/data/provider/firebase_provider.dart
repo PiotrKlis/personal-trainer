@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:personal_trainer/data/util/response.dart';
 
 class FirebaseProvider {
   Future init() async {

@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          LoginCubit(LoginLoading(), LoginProvider(), FirebaseProvider()),
+          LoginCubit(LoginLoading()),
       child: LoginWidget(),
     );
   }

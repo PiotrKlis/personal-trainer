@@ -4,7 +4,6 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/app/screen/register/register_cubit.dart';
 import 'package:personal_trainer/app/screen/register/register_state.dart';
 import 'package:personal_trainer/app/widget/toast_message.dart';
-import 'package:personal_trainer/data/provider/register_provider.dart';
 import 'package:personal_trainer/domain/model/register_data.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
@@ -12,7 +11,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterCubit(RegisterInit(), RegisterProvider()),
+      create: (context) => RegisterCubit(RegisterInit()),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(

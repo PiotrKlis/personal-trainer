@@ -13,15 +13,12 @@ import '../account_choose/account_choose_screen.dart';
 import '../client/client_screen.dart';
 
 class FirebaseLoadingScreen extends StatelessWidget {
-  final FirebaseProvider firebaseProvider = FirebaseProvider();
-  final LoginProvider loginProvider = LoginProvider();
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(
           create: (context) =>
-              LoginCubit(LoginLoading(), loginProvider, firebaseProvider)),
+              LoginCubit(LoginLoading())),
     ], child: FirebaseHandler());
   }
 }

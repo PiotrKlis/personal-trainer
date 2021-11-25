@@ -1,13 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
 
 class ExerciseSearchAddExerciseBloc extends Bloc<ExerciseSearchAddExerciseEvent,
     ExerciseSearchAddExerciseState> {
-  final ExerciseSearchProvider searchProvider;
+  final ExerciseSearchProvider searchProvider =
+      GetIt.I.get<ExerciseSearchProvider>();
 
-  ExerciseSearchAddExerciseBloc(
-      ExerciseSearchAddExerciseState initialState, this.searchProvider)
+  ExerciseSearchAddExerciseBloc(ExerciseSearchAddExerciseState initialState)
       : super(initialState) {
     on<ExerciseSearchExerciseAdded>((event, emit) async {
       await searchProvider

@@ -18,11 +18,7 @@ import 'exercise_search_state.dart';
 class ExerciseSearchScreen extends StatelessWidget {
   final DateTime selectedDate;
   final String clientId;
-
   final ExerciseSearchState _exerciseSearchState = ExerciseSearchAllExercises();
-  final ExerciseSearchProvider _exerciseSearchProvider =
-      ExerciseSearchProvider();
-
   final ExerciseSearchAddExerciseState _addExerciseState =
       ExerciseSearchAddStarted();
 
@@ -35,11 +31,9 @@ class ExerciseSearchScreen extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => ExerciseSearchBloc(
-                  _exerciseSearchState, _exerciseSearchProvider)),
+              create: (context) => ExerciseSearchBloc(_exerciseSearchState)),
           BlocProvider(
-              create: (context) => ExerciseSearchAddExerciseBloc(
-                  _addExerciseState, _exerciseSearchProvider))
+              create: (context) => ExerciseSearchAddExerciseBloc(_addExerciseState))
         ],
         child: Scaffold(
           appBar: AppBar(
