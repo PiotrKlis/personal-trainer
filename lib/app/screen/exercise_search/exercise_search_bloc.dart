@@ -12,34 +12,20 @@ class ExerciseSearchBloc
 
   ExerciseSearchBloc(ExerciseSearchState initialState, this.searchProvider)
       : super(initialState) {
-    on<ExerciseSearchEmpty>((event, emit) {
-      searchProvider.getAllExercises().then((exercises) {
+    on<ExerciseSearchEmpty>((event, emit) async {
+      await searchProvider.getAllExercises().then((exercises) {
         emit(ExerciseSearchSuccess(exercises));
       }).catchError((error) {
-        emit(ExerciseSearchFailure(error));
+        emit(ExerciseSearchFailure(error.toString()));
         Log.e(error.toString());
       });
     });
 
-    on<ExerciseSearchForInput>((event, emit) {
-      searchProvider.searchForExercises(event.input).then((exercises) {
+    on<ExerciseSearchForInput>((event, emit) async {
+      await searchProvider.searchForExercises(event.input).then((exercises) {
         emit(ExerciseSearchSuccess(exercises));
       }).catchError((error) {
         emit(ExerciseSearchFailure(error));
-        Log.e(error.toString());
-      });
-    });
-
-    on<ExerciseSearchExerciseAdded>((event, emit) {
-      searchProvider
-          .addExercise(
-              clientId: event.clientId,
-              selectedDate: event.selectedDate,
-              exerciseId: event.exerciseId)
-          .then((value) {
-        emit(ExerciseSearchAddExerciseSuccess());
-      }).catchError((error) {
-        emit(ExerciseSearchAddExerciseFailure());
         Log.e(error.toString());
       });
     });
@@ -52,7 +38,7 @@ class ExerciseSearchBloc
         listOfExpandedExercises.add(id);
       }
       emit(
-          ExerciseSearcbExpansionPanelClickSuccess(exercises: event.exercises));
+          ExerciseSearchExpansionPanelClickSuccess(exercises: event.exercises));
     });
   }
 }

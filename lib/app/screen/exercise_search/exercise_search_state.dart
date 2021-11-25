@@ -14,15 +14,11 @@ class ExerciseSearchFailure extends ExerciseSearchState {
   ExerciseSearchFailure(this.error);
 }
 
-class ExerciseSearchAddExerciseFailure extends ExerciseSearchState {}
-
-class ExerciseSearchAddExerciseSuccess extends ExerciseSearchState {}
-
 class ExerciseSearchAllExercises extends ExerciseSearchState {}
 
-class ExerciseSearcbExpansionPanelClickSuccess
+class ExerciseSearchExpansionPanelClickSuccess
     extends ExerciseSearchState {
   final List<Exercise> exercises;
 
-  ExerciseSearcbExpansionPanelClickSuccess({required this.exercises});
+  ExerciseSearchExpansionPanelClickSuccess({required this.exercises});
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:personal_trainer/app/screen/exercise_search/exercise_search_add_exercise_bloc.dart';
 import 'package:personal_trainer/app/screen/exercise_search/exercise_search_bloc.dart';
 import 'package:personal_trainer/app/screen/exercise_search/exercise_search_event.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
 import 'package:personal_trainer/app/util/logger.dart';
+import 'package:personal_trainer/app/widget/error_view.dart';
 import 'package:personal_trainer/app/widget/toast_message.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
@@ -21,30 +23,104 @@ class ExerciseSearchScreen extends StatelessWidget {
   final ExerciseSearchProvider _exerciseSearchProvider =
       ExerciseSearchProvider();
 
+  final ExerciseSearchAddExerciseState _addExerciseState =
+      ExerciseSearchAddStarted();
+
   ExerciseSearchScreen(
       {Key? key, required this.selectedDate, required this.clientId})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) =>
-            ExerciseSearchBloc(_exerciseSearchState, _exerciseSearchProvider),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) => ExerciseSearchBloc(
+                  _exerciseSearchState, _exerciseSearchProvider)),
+          BlocProvider(
+              create: (context) => ExerciseSearchAddExerciseBloc(
+                  _addExerciseState, _exerciseSearchProvider))
+        ],
         child: Scaffold(
           appBar: AppBar(
               title: Text(
             AppLocalizations.of(context)!.search_exercises_screen_title,
           )),
-          body: ListView(
-            children: [
-              SearchWidget(),
-              ListOfResults(
-                selectedDate: selectedDate,
-                clientId: clientId,
-              )
-            ],
+          body: SearchScreenContent(
+            selectedDate: selectedDate,
+            clientId: clientId,
           ),
         ));
+  }
+}
+
+class SearchScreenContent extends StatelessWidget {
+  final selectedDate;
+  final clientId;
+
+  const SearchScreenContent({this.selectedDate, this.clientId}) : super();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        _addExerciseBlocListener(),
+        SearchWidget(),
+        ListOfResults(
+          selectedDate: selectedDate,
+          clientId: clientId,
+        )
+      ],
+    );
+  }
+}
+
+BlocListener _addExerciseBlocListener() {
+  return BlocListener<ExerciseSearchAddExerciseBloc,
+      ExerciseSearchAddExerciseState>(
+    listener: (context, state) {
+      switch (state.runtimeType) {
+        case ExerciseSearchAddExerciseSuccess:
+          state as ExerciseSearchAddExerciseSuccess;
+          ToastMessage.show(
+              "${state.exerciseName} ${AppLocalizations.of(context)!.exercise_added_message}");
+          break;
+        case ExerciseSearchAddExerciseFailure:
+          state as ExerciseSearchAddExerciseFailure;
+          ToastMessage.show(
+              AppLocalizations.of(context)!.exercise_add_failure_message);
+          break;
+      }
+    },
+    child: Container(),
+  );
+}
+
+class SearchWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var _searchController = TextEditingController();
+    _searchController.addListener(() {
+      Log.d("search controller text: ${_searchController.text}");
+      if (_searchController.text.isEmpty) {
+        context.read<ExerciseSearchBloc>().add(ExerciseSearchEmpty());
+      } else {
+        context
+            .read<ExerciseSearchBloc>()
+            .add(ExerciseSearchForInput(input: _searchController.text));
+      }
+    });
+    return Row(children: [
+      Padding(
+          padding: const EdgeInsets.all(Dimens.biggerPadding),
+          child: Icon(Icons.search)),
+      Expanded(
+        child: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!.search)),
+      ),
+    ]);
   }
 }
 
@@ -56,50 +132,54 @@ class ListOfResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ExerciseSearchBloc, ExerciseSearchState>(
-        listener: (context, state) {
-          switch (state.runtimeType) {
-            case ExerciseSearchAddExerciseSuccess:
-              state as ExerciseSearchAddExerciseSuccess;
-              ToastMessage.show(AppLocalizations.of(context)!.exercise_added_message)
-          }
-      if (state is ExerciseAddedEvent) {
-        ToastMessage.show("exercise added!");
+    return BlocBuilder<ExerciseSearchBloc, ExerciseSearchState>(
+        builder: (context, state) {
+      switch (state.runtimeType) {
+        case ExerciseSearchAllExercises:
+          return _handleSearchAllExercises(context);
+        case ExerciseSearchSuccess:
+          state as ExerciseSearchSuccess;
+          return _handleDataLoadSuccess(state.exercises, context);
+        case ExerciseSearchExpansionPanelClickSuccess:
+          state as ExerciseSearchExpansionPanelClickSuccess;
+          return _handleDataLoadSuccess(state.exercises, context);
+        default:
+          return _handleNoExercises(context);
       }
-    }, builder: (context, state) {
-      if (state is ExerciseSearchSuccess) {
-        listOfExercises = state.exercises;
-      } else if (state is ExerciseSearchEmpty) {
-        context.read<ExerciseSearchBloc>().getAllExercises();
-      } else if (state is CardExpansionEvent) {
-        listOfExpandedExercises = state.listOfExpandedExercises;
-      }
-      return ExpansionPanelList(
-          animationDuration:
-              Duration(seconds: Dimens.expansionPanelAnimationDuration),
-          elevation: Dimens.expansionPanelElevation,
-          expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
-          expansionCallback: (index, isExpanded) {
-            context
-                .read<ExerciseSearchBloc>()
-                .expansionCallback(index, isExpanded);
-          },
-          children: listOfExercises
-              .map((exercise) => _buildExpansionPanel(
-                  exercise, isExpanded(exercise, listOfExpandedExercises)))
-              .toList());
     });
   }
 
-  bool isExpanded(Exercise exercise, List<String> listOfExpandedExercises) {
-    return listOfExpandedExercises.contains(exercise.id);
+  Center _handleNoExercises(BuildContext context) {
+    return Center(
+        child: Padding(
+            padding: EdgeInsets.all(Dimens.normalPadding),
+            child: ErrorView.error(
+                AppLocalizations.of(context)!.search_exercises_no_exercises)));
   }
 
-  ExpansionPanel _buildExpansionPanel(Exercise exercise, bool isExpanded) {
-    void _onDeleteItemPressed() {}
+  ExpansionPanelList _handleDataLoadSuccess(
+      List<Exercise> exercises, BuildContext context) {
+    return ExpansionPanelList(
+        animationDuration:
+            Duration(seconds: Dimens.expansionPanelAnimationDuration),
+        elevation: Dimens.expansionPanelElevation,
+        expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
+        expansionCallback: (index, isExpanded) {
+          context.read<ExerciseSearchBloc>().add(
+              ExerciseSearchExpansionPanelClicked(
+                  exerciseId: exercises[index].id, exercises: exercises));
+        },
+        children: exercises
+            .map((exercise) => _buildExpansionPanel(exercise, context))
+            .toList());
+  }
 
+  ExpansionPanel _buildExpansionPanel(Exercise exercise, BuildContext context) {
     return ExpansionPanel(
-      isExpanded: isExpanded,
+      isExpanded: context
+          .read<ExerciseSearchBloc>()
+          .listOfExpandedExercises
+          .contains(exercise.id),
       canTapOnHeader: true,
       headerBuilder: (context, isExpanded) {
         return ListTile(
@@ -111,21 +191,22 @@ class ListOfResults extends StatelessWidget {
             trailing: GestureDetector(
                 child: Icon(
                   Icons.add_rounded,
-                  size: 20.0,
+                  size: Dimens.iconRoundSize,
                 ),
                 onTap: () {
-                  context.read<ExerciseSearchBloc>().add(
+                  context.read<ExerciseSearchAddExerciseBloc>().add(
                       ExerciseSearchExerciseAdded(
                           exerciseId: exercise.id,
                           selectedDate: selectedDate,
-                          clientId: clientId));
+                          clientId: clientId,
+                          exerciseName: exercise.title));
                 }));
       },
       body: Column(
         children: [
           Divider(),
           SizedBox(
-            height: 240,
+            height: Dimens.videoContainerHeight,
             child: VideoItem(
               videoPlayerController:
                   VideoPlayerController.network(exercise.videoPath),
@@ -134,9 +215,9 @@ class ListOfResults extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(Dimens.smallPadding),
             child: Container(
-              height: 24.0,
+              height: Dimens.tagsRowHeight,
               child: Flex(direction: Axis.vertical, children: [
                 Expanded(
                   child: ListView.builder(
@@ -148,7 +229,7 @@ class ListOfResults extends StatelessWidget {
                           exercise.tags[tagIndex],
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(width: 4)
+                        SizedBox(width: Dimens.tagsRowDividerWidth)
                       ]);
                     },
                   ),
@@ -160,35 +241,14 @@ class ListOfResults extends StatelessWidget {
       ),
     );
   }
-}
 
-class SearchWidget extends StatelessWidget {
-  const SearchWidget({Key? key}) : super(key: key);
+  bool isExpanded(Exercise exercise, List<String> listOfExpandedExercises) {
+    return listOfExpandedExercises.contains(exercise.id);
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    var _searchController = TextEditingController();
-    _searchController.addListener(() {
-      Log.d("search controller text: ${_searchController.text}");
-      if (_searchController.text.isEmpty) {
-        context.read<ExerciseSearchBloc>().getAllExercises();
-      } else {
-        context
-            .read<ExerciseSearchBloc>()
-            .searchExercises(_searchController.text);
-      }
-    });
-    return Row(children: [
-      Padding(padding: const EdgeInsets.all(24.0), child: Icon(Icons.search)),
-      Expanded(
-        child: TextField(
-          controller: _searchController,
-          decoration: InputDecoration(
-            hintText: "Search",
-          ),
-        ),
-      ),
-    ]);
+  Center _handleSearchAllExercises(BuildContext context) {
+    context.read<ExerciseSearchBloc>().add(ExerciseSearchEmpty());
+    return Center(child: CircularProgressIndicator());
   }
 }
 

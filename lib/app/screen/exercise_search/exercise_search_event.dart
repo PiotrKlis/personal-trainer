@@ -1,16 +1,5 @@
 abstract class ExerciseSearchEvent {}
 
-class ExerciseSearchExerciseAdded extends ExerciseSearchEvent {
-  final exerciseId;
-  final selectedDate;
-  final clientId;
-
-  ExerciseSearchExerciseAdded(
-      {required this.exerciseId,
-      required this.selectedDate,
-      required this.clientId});
-}
-
 class ExerciseSearchExpansionPanelClicked extends ExerciseSearchEvent {
   final exerciseId;
   final exercises;
