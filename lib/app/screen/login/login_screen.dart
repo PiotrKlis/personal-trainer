@@ -1,24 +1,19 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:personal_trainer/app/screen/account_choose/account_choose_screen.dart';
-import 'package:personal_trainer/app/screen/client/client_screen.dart';
+import 'package:personal_trainer/app/app_router.gr.dart';
 import 'package:personal_trainer/app/screen/login/login_cubit.dart';
 import 'package:personal_trainer/app/screen/login/login_state.dart';
 import 'package:personal_trainer/app/widget/toast_message.dart';
-import 'package:personal_trainer/data/provider/firebase_provider.dart';
-import 'package:personal_trainer/data/provider/login_provider.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
-
-import '../../app_router.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          LoginCubit(LoginLoading()),
+      create: (context) => LoginCubit(LoginLoading()),
       child: LoginWidget(),
     );
   }
@@ -53,7 +48,7 @@ class LoginWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, AppRouter.REGISTER);
+                context.replaceRoute(RegisterRoute());
               },
               child: Text('Register'),
             ),
@@ -120,13 +115,10 @@ class _LoginFormState extends State<LoginForm> {
               if (state is LoginSuccess) {
                 if (state.appUser is Trainer) {
                   var id = (state.appUser as Trainer).id;
-                  Navigator.pushReplacementNamed(
-                      context, AppRouter.CHOOSE_ACCOUNT,
-                      arguments: AccountChooseArguments(id));
+                  context.replaceRoute(AccountChooseRoute(trainerId: id));
                 } else if (state.appUser is Client) {
                   var id = (state.appUser as Client).id;
-                  Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
-                      arguments: ClientScreenArguments(id));
+                  context.replaceRoute(ClientRoute(id: id));
                 }
               } else if (state is LoginFailed) {
                 ToastMessage.show(

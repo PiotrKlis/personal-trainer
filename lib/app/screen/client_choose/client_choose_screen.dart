@@ -1,8 +1,10 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:personal_trainer/app/app_router.gr.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_arguments.dart';
 import 'package:personal_trainer/app/screen/client_choose/client_choose_cubit.dart';
 import 'package:personal_trainer/app/screen/client_choose/client_choose_state.dart';
@@ -40,9 +42,8 @@ class ClientChooseScreen extends StatelessWidget {
                   return Card(
                       child: ListTile(
                           onTap: () {
-                            Navigator.pushNamed(
-                                context, AppRouter.CALENDAR_EXERCISE,
-                                arguments: CalendarExercisesArguments(clients[index].id));
+                            context.pushRoute(CalendarExercisesRoute(clientId: trainerId));
+
                           },
                           title: Text('${clients[index].name} / ${clients[index].email}')));
                 },

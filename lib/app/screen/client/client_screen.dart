@@ -9,7 +9,7 @@ class ClientScreen extends StatelessWidget {
   final List<Exercise> listOfExercises = ExampleExercises.list;
   final id;
 
-  ClientScreen({Key? key, this.id}) : super(key: key);
+  ClientScreen({this.id}) : super();
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_trainer/app/screen/account_choose/account_choose_screen.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_arguments.dart';
@@ -9,7 +10,21 @@ import 'package:personal_trainer/app/screen/firebase_loading/firebase_screen.dar
 import 'package:personal_trainer/app/screen/login/login_screen.dart';
 import 'package:personal_trainer/app/screen/register/register_screen.dart';
 
-class AppRouter {
+@MaterialAutoRouter(
+  replaceInRouteName: 'Screen,Route',
+  routes: <AutoRoute>[
+    AutoRoute(page: FirebaseLoadingScreen, initial: true),
+    AutoRoute(page: LoginScreen),
+    AutoRoute(page: RegisterScreen),
+    AutoRoute(page: AccountChooseScreen),
+    AutoRoute(page: ClientChooseScreen),
+    AutoRoute(page: ClientScreen),
+    AutoRoute(page: CalendarExercisesScreen),
+    AutoRoute(page: ExerciseSearchScreen),
+  ],
+)
+
+class $AppRouter {
   static const String REGISTER = "/register";
   static const String LOGIN = "/login";
   static const String CLIENT = "/client";
@@ -17,51 +32,4 @@ class AppRouter {
   static const String EXERCISE_SEARCH = "/exercise_search";
   static const String CALENDAR_EXERCISE = "/calendar_exercises";
   static const String CHOOSE_ACCOUNT = "/choose_account";
-
-  Route onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case LOGIN:
-        return MaterialPageRoute(
-          builder: (_) => LoginScreen(),
-        );
-      case REGISTER:
-        return MaterialPageRoute(
-          builder: (_) => RegisterScreen(),
-        );
-      case CHOOSE_ACCOUNT:
-        final args = settings.arguments as AccountChooseArguments;
-        return MaterialPageRoute(
-          builder: (_) => AccountChooseScreen(
-            trainerId: args.id,
-          ),
-        );
-      case CHOOSE_CLIENT:
-        final args = settings.arguments as ClientChooseArguments;
-        return MaterialPageRoute(
-          builder: (_) => ClientChooseScreen(trainerId: args.trainerId),
-        );
-      case CLIENT:
-        final args = settings.arguments as ClientScreenArguments;
-        return MaterialPageRoute(
-          builder: (_) => ClientScreen(id: args.id),
-        );
-      case CALENDAR_EXERCISE:
-        final args = settings.arguments as CalendarExercisesArguments;
-        return MaterialPageRoute(
-          builder: (_) => CalendarExercisesScreen(clientId: args.clientId),
-        );
-      case EXERCISE_SEARCH:
-        final args = settings.arguments as ExerciseSearchArguments;
-        return MaterialPageRoute(
-          builder: (_) => ExerciseSearchScreen(
-            selectedDate: args.selectedDay,
-            clientId: args.clientId,
-          ),
-        );
-      default:
-        return MaterialPageRoute(
-          builder: (_) => FirebaseLoadingScreen(),
-        );
-    }
-  }
 }

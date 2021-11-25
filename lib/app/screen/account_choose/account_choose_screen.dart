@@ -1,14 +1,13 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_trainer/app/screen/client_choose/client_choose_screen.dart';
-import 'package:personal_trainer/app/screen/client/client_screen.dart';
 
-import '../../app_router.dart';
+import '../../app_router.gr.dart';
 
 class AccountChooseScreen extends StatelessWidget {
   final trainerId;
 
-  const AccountChooseScreen({Key? key, this.trainerId}) : super(key: key);
+  const AccountChooseScreen({this.trainerId}) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +24,15 @@ class AccountChooseScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRouter.CHOOSE_CLIENT,
-                          arguments: ClientChooseArguments(trainerId));
+                      context
+                          .pushRoute(ClientChooseRoute(trainerId: trainerId));
                     },
                     child: Text('TRAINER'))),
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRouter.CLIENT,
-                          arguments: ClientScreenArguments(trainerId));
+                      context.replaceRoute(ClientRoute(id: trainerId));
                     },
                     child: Text('CLIENT'))),
           ],
@@ -42,10 +40,4 @@ class AccountChooseScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-class AccountChooseArguments {
-  final id;
-
-  AccountChooseArguments(this.id);
 }

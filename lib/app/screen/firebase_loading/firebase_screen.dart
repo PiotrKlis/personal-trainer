@@ -1,3 +1,4 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
 
 import '../../app_router.dart';
+import '../../app_router.gr.dart';
 import '../account_choose/account_choose_screen.dart';
 import '../client/client_screen.dart';
 
@@ -34,7 +36,7 @@ class FirebaseHandler extends StatelessWidget {
       } else if (state is LoginFailed) {
         print(state.error);
         SchedulerBinding.instance?.addPostFrameCallback((_) {
-          Navigator.pushReplacementNamed(context, AppRouter.LOGIN);
+          context.replaceRoute(LoginRoute());
         });
       }
       return Center(child: CircularProgressIndicator());
@@ -45,14 +47,13 @@ class FirebaseHandler extends StatelessWidget {
     if (state.appUser is Trainer) {
       var id = (state.appUser as Trainer).id;
       SchedulerBinding.instance?.addPostFrameCallback((_) {
-        Navigator.pushReplacementNamed(context, AppRouter.CHOOSE_ACCOUNT,
-            arguments: AccountChooseArguments(id));
+        context.replaceRoute(AccountChooseRoute(trainerId: id));
+
       });
     } else if (state.appUser is Client) {
       var id = (state.appUser as Client).id;
       SchedulerBinding.instance?.addPostFrameCallback((_) {
-        Navigator.pushReplacementNamed(context, AppRouter.CLIENT,
-            arguments: ClientScreenArguments(id));
+        context.replaceRoute(ClientRoute(id: id));
       });
     }
   }

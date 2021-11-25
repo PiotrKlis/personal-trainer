@@ -1,3 +1,4 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../app_router.dart';
+import '../../app_router.gr.dart';
 import '../exercise_search/exercise_search_screen.dart';
 import 'calendar_exercises_bloc.dart';
 import 'calendar_exercises_event.dart';
@@ -29,7 +31,8 @@ class CalendarExercisesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => CalendarExercisesBloc(_calendarExerciseState),
+      create: (BuildContext context) =>
+          CalendarExercisesBloc(_calendarExerciseState),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -60,8 +63,9 @@ class SearchExercisesButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () async {
-        Navigator.pushNamed(context, AppRouter.EXERCISE_SEARCH,
-                arguments: ExerciseSearchArguments(_selectedDate, clientId))
+        context
+            .pushRoute(ExerciseSearchRoute(
+                selectedDate: _selectedDate, clientId: clientId))
             .then((value) => context.read<CalendarExercisesBloc>().add(
                 CalendarExercisesCameBackFromExercisesSearchScreen(
                     selectedDate: _selectedDate, clientId: clientId)));
