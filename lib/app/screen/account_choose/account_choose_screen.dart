@@ -32,7 +32,7 @@ class AccountChooseScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                     onPressed: () {
-                      context.replaceRoute(ClientRoute(id: trainerId));
+                      context.pushRoute(ClientRoute(id: trainerId));
                     },
                     child: Text('CLIENT'))),
           ],
