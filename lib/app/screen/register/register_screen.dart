@@ -1,4 +1,6 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/app/screen/register/register_cubit.dart';
@@ -39,9 +41,9 @@ class RegisterForm extends StatelessWidget {
       child:
           BlocBuilder<RegisterCubit, RegisterState>(builder: (context, state) {
         if (state is Registered) {
-          Navigator.pop(context);
+          context.popRoute();
         } else if (state is RegisterFailed) {
-          ToastMessage.show(state.error);
+          ToastMessage.show(state.error.toString());
         }
         return Column(
           children: [

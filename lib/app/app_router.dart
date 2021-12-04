@@ -1,7 +1,5 @@
 import 'package:auto_route/annotations.dart';
-import 'package:flutter/material.dart';
 import 'package:personal_trainer/app/screen/account_choose/account_choose_screen.dart';
-import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_arguments.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_screen.dart';
 import 'package:personal_trainer/app/screen/client/client_screen.dart';
 import 'package:personal_trainer/app/screen/client_choose/client_choose_screen.dart';

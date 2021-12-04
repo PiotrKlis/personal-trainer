@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/app/app_router.dart';
 import 'package:personal_trainer/app/app_router.gr.dart';
 import 'package:personal_trainer/app/util/dependency_injector.dart';

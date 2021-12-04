@@ -9,7 +9,6 @@ import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/error_view.dart';
 import 'package:personal_trainer/app/widget/toast_message.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
-import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:video_player/video_player.dart';
 
