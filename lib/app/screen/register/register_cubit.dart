@@ -17,7 +17,7 @@ class RegisterCubit extends Cubit<RegisterState> {
             .registerTrainerAndClient(registerData)
             .then((_) => emit(Registered()))
             .catchError((error) {
-          emit(RegisterFailed(error));
+          emit(RegisterFailed(error.toString()));
         });
 
         break;

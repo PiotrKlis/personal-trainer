@@ -48,7 +48,7 @@ class LoginWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                context.replaceRoute(RegisterRoute());
+                context.pushRoute(RegisterRoute());
               },
               child: Text('Register'),
             ),
