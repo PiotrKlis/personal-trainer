@@ -29,20 +29,41 @@ class CalendarExerciseProvider {
     }
   }
 
-  Future updateSetsNumberForExercise(
-      {required String clientId, required int setsNumber}) {
+  Future updateSetsNumberForExercise({
+    required String clientId,
+    required int setsNumber,
+    required DateTime selectedDate,
+    required String exerciseId}) {
     try {
-      //TODO: update sets number in firestore
+      var formattedDate = DateUtils.dateOnly(selectedDate).toString()
+      FirebaseFirestore.instance
+          .collection(FirebaseConstants.usersCollection)
+          .doc(clientId)
+          .collection(FirebaseConstants.clientCollection)
+          .doc(FirebaseConstants.exercisesCollection)
+          .collection(formattedDate)
+          .doc(exerciseId)
+          .set({"sets": setsNumber});
       return Future.value();
     } catch (error) {
       return Future.error(error, StackTrace.current);
     }
   }
 
-  Future updateRepsNumberForExercise(
-      {required String clientId, required int repsNumber}) {
+  Future updateRepsNumberForExercise({required String clientId,
+    required int repsNumber,
+    required DateTime selectedDate,
+    required String exerciseId}) {
     try {
-      //TODO: update sets number in firestore
+      var formattedDate = DateUtils.dateOnly(selectedDate).toString()
+      FirebaseFirestore.instance
+          .collection(FirebaseConstants.usersCollection)
+          .doc(clientId)
+          .collection(FirebaseConstants.clientCollection)
+          .doc(FirebaseConstants.exercisesCollection)
+          .collection(formattedDate)
+          .doc(exerciseId)
+          .set({"reps": repsNumber});
       return Future.value();
     } catch (error) {
       return Future.error(error, StackTrace.current);

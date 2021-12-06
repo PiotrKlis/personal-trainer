@@ -58,7 +58,10 @@ class CalendarExercisesBloc
     on<CalendarExercisesSetsSubmit>((event, emit) async {
       await _calendarExerciseProvider
           .updateSetsNumberForExercise(
-              clientId: event.clientId, setsNumber: event.setsNumber)
+              clientId: event.clientId,
+              setsNumber: event.setsNumber,
+              exerciseId: event.exerciseId,
+              selectedDate: event.selectedDate)
           .then((value) {
         Log.d("Sets number updated to ${event.setsNumber}");
       });
@@ -67,7 +70,10 @@ class CalendarExercisesBloc
     on<CalendarExercisesRepsSubmit>((event, emit) async {
       await _calendarExerciseProvider
           .updateRepsNumberForExercise(
-              clientId: event.clientId, repsNumber: event.repsNumber)
+              clientId: event.clientId,
+              repsNumber: event.repsNumber,
+              exerciseId: event.exerciseId,
+              selectedDate: event.selectedDate)
           .then((value) {
         Log.d("Reps number updated ${event.repsNumber}");
       });

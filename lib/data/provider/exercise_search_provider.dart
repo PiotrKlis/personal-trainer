@@ -82,34 +82,4 @@ class ExerciseSearchProvider {
         videoPath: data['videoPath'],
         tags: List.from(data['tags']));
   }
-
-// Future _updateTrainerDataWithNewClientData(
-//     {required String exerciseId,
-//     required DateTime selectedDate,
-//     required String clientId}) async {
-//   try {
-//     var formattedDate = DateUtils.dateOnly(selectedDate).toString();
-//     await FirebaseFirestore.instance
-//         .collection(FirebaseConstants.exercisesCollection)
-//         .doc(id)
-//         .get()
-//         .then((exercise) {
-//       if (exercise.exists) {
-//         //TODO: change user email to passed one from previous screens
-//         FirebaseFirestore.instance
-//             .collection(FirebaseConstants.usersCollection)
-//             .doc('p@p.com')
-//             .collection("client")
-//             .doc("exercises")
-//             .collection(formattedDate)
-//             .add(exercise.data()!);
-//         return Future.value();
-//       } else {
-//         return Future.error('exercise does not exist!');
-//       }
-//     });
-//   } catch (error) {
-//     Future.error(error);
-//   }
-// }
 }

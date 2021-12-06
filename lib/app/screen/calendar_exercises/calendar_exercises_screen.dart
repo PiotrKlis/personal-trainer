@@ -225,7 +225,7 @@ class ExerciseExpansionPanels extends StatelessWidget {
               onSubmitted: (value) {
                 context.read<CalendarExercisesBloc>().add(
                     CalendarExercisesSetsSubmit(
-                        clientId: clientId, setsNumber: value));
+                        clientId: clientId, setsNumber: value, ));
               },
               controller: _setsController,
             ),
