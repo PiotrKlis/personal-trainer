@@ -201,9 +201,8 @@ class ExerciseExpansionPanels extends StatelessWidget {
 
   Row _expansionPanelInfoRow(
       {required BuildContext context, required Exercise exercise}) {
-    //TODO: Pass correct init data (probably add reps & sets as optionals in Exercise)
-    String _initialSetsValue = '3';
-    String _initialRepsValue = '12';
+    String _initialSetsValue = exercise.sets.toString();
+    String _initialRepsValue = exercise.reps.toString();
     var _setsController = TextEditingController(text: _initialSetsValue);
     var _repsController = TextEditingController(text: _initialRepsValue);
     return Row(

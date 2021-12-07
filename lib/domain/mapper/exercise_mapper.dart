@@ -6,6 +6,8 @@ class ExerciseMapper {
         id: data['id'],
         title: data['title'],
         videoPath: data['videoPath'],
-        tags: List.from(data['tags']));
+        tags: List.from(data['tags']),
+        reps: data['reps'],
+        sets: data['sets']);
   }
 }

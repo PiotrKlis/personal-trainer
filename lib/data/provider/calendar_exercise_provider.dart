@@ -31,7 +31,7 @@ class CalendarExerciseProvider {
 
   Future updateSetsNumberForExercise({
     required String clientId,
-    required int setsNumber,
+    required String setsNumber,
     required DateTime selectedDate,
     required String exerciseId}) {
     try {
@@ -43,7 +43,7 @@ class CalendarExerciseProvider {
           .doc(FirebaseConstants.exercisesCollection)
           .collection(formattedDate)
           .doc(exerciseId)
-          .set({"sets": setsNumber});
+          .update({"sets": setsNumber});
       return Future.value();
     } catch (error) {
       return Future.error(error, StackTrace.current);
@@ -51,7 +51,7 @@ class CalendarExerciseProvider {
   }
 
   Future updateRepsNumberForExercise({required String clientId,
-    required int repsNumber,
+    required String repsNumber,
     required DateTime selectedDate,
     required String exerciseId}) {
     try {
@@ -63,7 +63,7 @@ class CalendarExerciseProvider {
           .doc(FirebaseConstants.exercisesCollection)
           .collection(formattedDate)
           .doc(exerciseId)
-          .set({"reps": repsNumber});
+          .update({"reps": repsNumber});
       return Future.value();
     } catch (error) {
       return Future.error(error, StackTrace.current);

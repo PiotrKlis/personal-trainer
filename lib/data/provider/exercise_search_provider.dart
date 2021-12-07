@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/data/util/const.dart';
+import 'package:personal_trainer/domain/mapper/exercise_mapper.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
 class ExerciseSearchProvider {
+  final _exerciseMapper = GetIt.I.get<ExerciseMapper>();
+
   Future<List<Exercise>> searchForExercises(String query) async {
     try {
       String modifiedQuery = '#${query.toUpperCase()}';
@@ -20,11 +24,12 @@ class ExerciseSearchProvider {
           .get();
 
       var titleMappedExercises = titleResult.docs
-          .map((value) => _mapToExercise(value.data()))
+          .map((value) => _exerciseMapper.mapToExercise(value.data()))
           .toList();
 
-      var tagsMappedExercises =
-          tagResult.docs.map((value) => _mapToExercise(value.data())).toList();
+      var tagsMappedExercises = tagResult.docs
+          .map((value) => _exerciseMapper.mapToExercise(value.data()))
+          .toList();
 
       var result = titleMappedExercises + tagsMappedExercises;
       return Future.value(result);
@@ -38,8 +43,9 @@ class ExerciseSearchProvider {
       var exercises = await FirebaseFirestore.instance
           .collection(FirebaseConstants.exercisesCollection)
           .get();
-      var mappedExercises =
-          exercises.docs.map((value) => _mapToExercise(value.data())).toList();
+      var mappedExercises = exercises.docs
+          .map((value) => _exerciseMapper.mapToExercise(value.data()))
+          .toList();
       return Future.value(mappedExercises);
     } catch (error) {
       return Future.error(error, StackTrace.current);
@@ -64,7 +70,8 @@ class ExerciseSearchProvider {
               .collection(FirebaseConstants.clientCollection)
               .doc(FirebaseConstants.exercisesCollection)
               .collection(formattedDate)
-              .add(exercise.data()!);
+              .doc(exerciseId)
+              .set(exercise.data()!);
           return Future.value();
         } else {
           return Future.error('exercise does not exist!');
@@ -73,13 +80,5 @@ class ExerciseSearchProvider {
     } catch (error) {
       Future.error(error);
     }
-  }
-
-  Exercise _mapToExercise(Map<String, dynamic> data) {
-    return Exercise(
-        id: data['id'],
-        title: data['title'],
-        videoPath: data['videoPath'],
-        tags: List.from(data['tags']));
   }
 }

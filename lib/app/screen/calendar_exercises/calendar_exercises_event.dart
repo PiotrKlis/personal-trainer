@@ -31,18 +31,18 @@ class CalendarExercisesPanelExpanded extends CalendarExerciseEvent {
 
 class CalendarExercisesCameBackFromExercisesSearchScreen
     extends CalendarExerciseEvent {
-  final clientId;
-  final selectedDate;
+  final String clientId;
+  final DateTime selectedDate;
 
   CalendarExercisesCameBackFromExercisesSearchScreen(
       {required this.selectedDate, required this.clientId});
 }
 
 class CalendarExercisesSetsSubmit extends CalendarExerciseEvent {
-  final clientId;
-  final setsNumber;
-  final exerciseId;
-  final selectedDate;
+  final String clientId;
+  final String setsNumber;
+  final String exerciseId;
+  final DateTime selectedDate;
 
   CalendarExercisesSetsSubmit(
       {required this.clientId,
@@ -52,10 +52,10 @@ class CalendarExercisesSetsSubmit extends CalendarExerciseEvent {
 }
 
 class CalendarExercisesRepsSubmit extends CalendarExerciseEvent {
-  final clientId;
-  final repsNumber;
-  final exerciseId;
-  final selectedDate;
+  final String clientId;
+  final String repsNumber;
+  final String exerciseId;
+  final DateTime selectedDate;
 
   CalendarExercisesRepsSubmit(
       {required this.clientId,
