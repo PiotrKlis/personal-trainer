@@ -35,7 +35,7 @@ class CalendarExerciseProvider {
     required DateTime selectedDate,
     required String exerciseId}) {
     try {
-      var formattedDate = DateUtils.dateOnly(selectedDate).toString()
+      var formattedDate = DateUtils.dateOnly(selectedDate).toString();
       FirebaseFirestore.instance
           .collection(FirebaseConstants.usersCollection)
           .doc(clientId)
@@ -55,7 +55,7 @@ class CalendarExerciseProvider {
     required DateTime selectedDate,
     required String exerciseId}) {
     try {
-      var formattedDate = DateUtils.dateOnly(selectedDate).toString()
+      var formattedDate = DateUtils.dateOnly(selectedDate).toString();
       FirebaseFirestore.instance
           .collection(FirebaseConstants.usersCollection)
           .doc(clientId)

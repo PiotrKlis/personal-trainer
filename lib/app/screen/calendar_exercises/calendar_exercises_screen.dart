@@ -7,14 +7,11 @@ import 'package:personal_trainer/app/util/date_util.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
 import 'package:personal_trainer/app/widget/error_view.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
-import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../app_router.dart';
 import '../../app_router.gr.dart';
-import '../exercise_search/exercise_search_screen.dart';
 import 'calendar_exercises_bloc.dart';
 import 'calendar_exercises_event.dart';
 import 'calendar_exercises_state.dart';
@@ -164,9 +161,9 @@ class ExerciseExpansionPanels extends StatelessWidget {
       body: Column(
         children: [
           Divider(),
-          _expansionPanelInfoRow(context: context),
+          _expansionPanelInfoRow(context: context, exercise: exercise),
           SizedBox(
-            height: 240,
+            height: Dimens.videoContainerHeight,
             child: VideoItem(
               videoPlayerController:
                   VideoPlayerController.network(exercise.videoPath),
@@ -202,7 +199,9 @@ class ExerciseExpansionPanels extends StatelessWidget {
     );
   }
 
-  Row _expansionPanelInfoRow({required BuildContext context}) {
+  Row _expansionPanelInfoRow(
+      {required BuildContext context, required Exercise exercise}) {
+    //TODO: Pass correct init data (probably add reps & sets as optionals in Exercise)
     String _initialSetsValue = '3';
     String _initialRepsValue = '12';
     var _setsController = TextEditingController(text: _initialSetsValue);
@@ -225,7 +224,10 @@ class ExerciseExpansionPanels extends StatelessWidget {
               onSubmitted: (value) {
                 context.read<CalendarExercisesBloc>().add(
                     CalendarExercisesSetsSubmit(
-                        clientId: clientId, setsNumber: value, ));
+                        clientId: clientId,
+                        setsNumber: value,
+                        selectedDate: _selectedDate,
+                        exerciseId: exercise.id));
               },
               controller: _setsController,
             ),
@@ -246,7 +248,10 @@ class ExerciseExpansionPanels extends StatelessWidget {
               onSubmitted: (value) {
                 context.read<CalendarExercisesBloc>().add(
                     CalendarExercisesRepsSubmit(
-                        clientId: clientId, repsNumber: value));
+                        clientId: clientId,
+                        repsNumber: value,
+                        selectedDate: _selectedDate,
+                        exerciseId: exercise.id));
               },
               controller: _repsController,
             ),

@@ -44,8 +44,11 @@ class CalendarExercisesSetsSubmit extends CalendarExerciseEvent {
   final exerciseId;
   final selectedDate;
 
-  CalendarExercisesSetsSubmit,
-      {required this.clientId, required this.setsNumber});
+  CalendarExercisesSetsSubmit(
+      {required this.clientId,
+      required this.setsNumber,
+      required this.exerciseId,
+      required this.selectedDate});
 }
 
 class CalendarExercisesRepsSubmit extends CalendarExerciseEvent {
@@ -54,6 +57,9 @@ class CalendarExercisesRepsSubmit extends CalendarExerciseEvent {
   final exerciseId;
   final selectedDate;
 
-  CalendarExercisesRepsSubmit(this.exerciseId, this.selectedDate,
-      {required this.clientId, required this.repsNumber});
+  CalendarExercisesRepsSubmit(
+      {required this.clientId,
+        required this.repsNumber,
+        required this.exerciseId,
+        required this.selectedDate});
 }
