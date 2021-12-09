@@ -18,11 +18,11 @@ class _$CalendarExercisesStateTearOff {
   const _$CalendarExercisesStateTearOff();
 
   _Started started() {
-    return _Started();
+    return const _Started();
   }
 
   _Loading loading() {
-    return _Loading();
+    return const _Loading();
   }
 
   _Error error({required String error}) {
@@ -132,7 +132,7 @@ class __$StartedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Started with DiagnosticableTreeMixin implements _Started {
-  _$_Started();
+  const _$_Started();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -231,7 +231,7 @@ class _$_Started with DiagnosticableTreeMixin implements _Started {
 }
 
 abstract class _Started implements CalendarExercisesState {
-  factory _Started() = _$_Started;
+  const factory _Started() = _$_Started;
 }
 
 /// @nodoc
@@ -254,7 +254,7 @@ class __$LoadingCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loading with DiagnosticableTreeMixin implements _Loading {
-  _$_Loading();
+  const _$_Loading();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -353,7 +353,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
 }
 
 abstract class _Loading implements CalendarExercisesState {
-  factory _Loading() = _$_Loading;
+  const factory _Loading() = _$_Loading;
 }
 
 /// @nodoc
@@ -389,7 +389,7 @@ class __$ErrorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Error with DiagnosticableTreeMixin implements _Error {
-  _$_Error({required this.error});
+  const _$_Error({required this.error});
 
   @override
   final String error;
@@ -500,7 +500,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
 }
 
 abstract class _Error implements CalendarExercisesState {
-  factory _Error({required String error}) = _$_Error;
+  const factory _Error({required String error}) = _$_Error;
 
   String get error;
   @JsonKey(ignore: true)
@@ -540,7 +540,7 @@ class __$ContentCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Content with DiagnosticableTreeMixin implements _Content {
-  _$_Content({required this.exercises});
+  const _$_Content({required this.exercises});
 
   @override
   final List<Exercise> exercises;
@@ -651,7 +651,7 @@ class _$_Content with DiagnosticableTreeMixin implements _Content {
 }
 
 abstract class _Content implements CalendarExercisesState {
-  factory _Content({required List<Exercise> exercises}) = _$_Content;
+  const factory _Content({required List<Exercise> exercises}) = _$_Content;
 
   List<Exercise> get exercises;
   @JsonKey(ignore: true)

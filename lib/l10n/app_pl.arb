@@ -1,0 +1,15 @@
+{
+    "upgrade" : "to update strings run 'flutter gen-l10n'",
+    "import" : "import 'package:flutter_gen/gen_l10n/app_localizations.dart'",
+    "app_title": "Personal Trainer",
+    "calendar_exercise_screen_title": "Calendar Exercises",
+    "search_exercises_screen_title": "Search Exercises",
+    "error": "Something went wrong, check internet connection and try again",
+    "calendar_no_exercises": "No exercises for this day",
+    "expansion_panel_sets": "Sets",
+    "expansion_panel_reps": "Reps",
+    "exercise_added_message": "exercise added",
+    "exercise_add_failure_message": "Cannot add exercise, check internet connection and try again",
+    "search": "Search",
+    "search_exercises_no_exercises": "no exercises for input"
+}

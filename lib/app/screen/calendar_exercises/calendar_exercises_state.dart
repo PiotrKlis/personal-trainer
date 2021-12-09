@@ -5,11 +5,11 @@ import 'package:flutter/foundation.dart';
 part 'calendar_exercises_state.freezed.dart';
 
 @freezed
-abstract class CalendarExercisesState with _$CalendarExercisesState {
-  factory CalendarExercisesState.started() = _Started;
-  factory CalendarExercisesState.loading() = _Loading;
-  factory CalendarExercisesState.error({required String error}) = _Error;
-  factory CalendarExercisesState.content({required List<Exercise> exercises}) = _Content;
+class CalendarExercisesState with _$CalendarExercisesState {
+  const factory CalendarExercisesState.started() = _Started;
+  const factory CalendarExercisesState.loading() = _Loading;
+  const factory CalendarExercisesState.error({required String error}) = _Error;
+  const factory CalendarExercisesState.content({required List<Exercise> exercises}) = _Content;
 }
 
 // abstract class CalendarExercisesState {}
