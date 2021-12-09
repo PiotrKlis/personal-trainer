@@ -15,43 +15,46 @@ class CalendarExercisesBloc
   CalendarExercisesBloc(CalendarExercisesState initialState)
       : super(initialState) {
     on<CalendarExercisesNewDateSelected>((event, emit) async {
-      emit(CalendarExercisesDataLoadInProgress());
+      emit(CalendarExercisesState.loading());
       await _calendarExerciseProvider
           .getExercisesFor(
               selectedDay: event.selectedDate, clientId: event.clientId)
           .then((exercises) {
-        emit(CalendarExercisesDataLoadSuccess(exercises: exercises));
+        emit(CalendarExercisesState.content(exercises: exercises));
       }).catchError((error) {
-        emit(CalendarExercisesDataLoadFailed());
+        emit(CalendarExercisesState.error(error: error.toString()));
       });
     });
 
-    on<CalendarExercisesDateFormatChanged>((event, emit) =>
-        emit(CalendarFormatChangeSuccess(format: event.calendarFormat)));
+    //TODO: Migrate to reusable widget
+    // on<CalendarExercisesDateFormatChanged>((event, emit) =>
+    //     emit(CalendarFormatChangeSuccess(format: event.calendarFormat)));
 
-    on<CalendarExercisesNavigatedToExerciseSearchScreen>((event, emit) =>
-        emit(CalendarExercisesNavigateToExerciseSearchScreenSuccess()));
-
-    on<CalendarExercisesPanelExpanded>((event, emit) {
-      var id = event.exerciseId;
-      if (listOfExpandedExercises.contains(id)) {
-        listOfExpandedExercises.remove(id);
-      } else {
-        listOfExpandedExercises.add(id);
-      }
-      emit(CalendarExercisesExpansionPanelClickSuccess(
-          exercises: event.exercises));
+    on<CalendarExercisesNavigatedToExerciseSearchScreen>((event, emit) {
+      //TODO: use custom navigator with context inside
     });
 
+    //TODO: Migrate to reusable widget
+    // on<CalendarExercisesPanelExpanded>((event, emit) {
+    //   var id = event.exerciseId;
+    //   if (listOfExpandedExercises.contains(id)) {
+    //     listOfExpandedExercises.remove(id);
+    //   } else {
+    //     listOfExpandedExercises.add(id);
+    //   }
+    //   emit(CalendarExercisesExpansionPanelClickSuccess(
+    //       exercises: event.exercises));
+    // });
+
     on<CalendarExercisesCameBackFromExercisesSearchScreen>((event, emit) async {
-      emit(CalendarExercisesDataLoadInProgress());
+      emit(CalendarExercisesState.loading());
       await _calendarExerciseProvider
           .getExercisesFor(
               selectedDay: event.selectedDate, clientId: event.clientId)
           .then((exercises) {
-        emit(CalendarExercisesDataReloadSuccess(exercises: exercises));
+        emit(CalendarExercisesState.content(exercises: exercises));
       }).catchError((error) {
-        emit(CalendarExercisesDataReloadFailed());
+        emit(CalendarExercisesState.error(error: error.toString()));
       });
     });
 

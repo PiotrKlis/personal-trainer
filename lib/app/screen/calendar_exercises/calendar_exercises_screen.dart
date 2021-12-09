@@ -20,8 +20,7 @@ DateTime _selectedDate = DateTime.now();
 
 class CalendarExercisesScreen extends StatelessWidget {
   final String clientId;
-  late final CalendarExercisesState _calendarExerciseState =
-      CalendarExercisesStarted();
+  final CalendarExercisesState _calendarExerciseState = CalendarExercisesState.started();
 
   CalendarExercisesScreen({Key? key, required this.clientId}) : super(key: key);
 
@@ -74,7 +73,6 @@ class SearchExercisesButton extends StatelessWidget {
 
 class ExerciseExpansionPanels extends StatelessWidget {
   final String clientId;
-  List<Exercise> _listOfExercises = [];
 
   ExerciseExpansionPanels(this.clientId);
 
@@ -82,20 +80,12 @@ class ExerciseExpansionPanels extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CalendarExercisesBloc, CalendarExercisesState>(
         builder: (context, state) {
-      switch (state.runtimeType) {
-        case CalendarExercisesStarted:
-          return _handleInitialState(context);
-        case CalendarExercisesDataLoadInProgress:
-          return Center(child: CircularProgressIndicator());
-        case CalendarExercisesDataLoadSuccess:
-          return _handleDataLoadSuccess(state, context);
-        case CalendarExercisesExpansionPanelClickSuccess:
-          return _handleExpansionPanelClickSuccess(state, context);
-        case CalendarExercisesDataReloadSuccess:
-          return _handleDataReloadSuccess(state, context);
-        default:
-          return ErrorView.error(AppLocalizations.of(context)!.error);
-      }
+      return state.when(
+          started: () => _handleInitialState(context),
+          loading: () => Center(child: CircularProgressIndicator()),
+          content: (exercises) => _handleDataLoadSuccess(exercises, context),
+          error: (error) =>
+              ErrorView.error(AppLocalizations.of(context)!.error));
     });
   }
 
@@ -106,26 +96,9 @@ class ExerciseExpansionPanels extends StatelessWidget {
   }
 
   Widget _handleDataLoadSuccess(
-      CalendarExercisesState state, BuildContext context) {
-    state as CalendarExercisesDataLoadSuccess;
-    if (state.exercises.isNotEmpty) {
-      return _handleExercises(exercises: state.exercises, context: context);
-    } else {
-      return _handleNoExercises(context: context);
-    }
-  }
-
-  Widget _handleExpansionPanelClickSuccess(
-      CalendarExercisesState state, BuildContext context) {
-    state as CalendarExercisesExpansionPanelClickSuccess;
-    return _handleExercises(exercises: state.exercises, context: context);
-  }
-
-  Widget _handleDataReloadSuccess(
-      CalendarExercisesState state, BuildContext context) {
-    state as CalendarExercisesDataReloadSuccess;
-    if (state.exercises.isNotEmpty) {
-      return _handleExercises(exercises: state.exercises, context: context);
+      List<Exercise> exercises, BuildContext context) {
+    if (exercises.isNotEmpty) {
+      return _handleExercises(exercises: exercises, context: context);
     } else {
       return _handleNoExercises(context: context);
     }
@@ -220,7 +193,7 @@ class ExerciseExpansionPanels extends StatelessWidget {
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               textAlign: TextAlign.center,
-              onSubmitted: (value) {
+              onChanged: (value) {
                 context.read<CalendarExercisesBloc>().add(
                     CalendarExercisesSetsSubmit(
                         clientId: clientId,
@@ -244,7 +217,7 @@ class ExerciseExpansionPanels extends StatelessWidget {
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
-              onSubmitted: (value) {
+              onChanged: (value) {
                 context.read<CalendarExercisesBloc>().add(
                     CalendarExercisesRepsSubmit(
                         clientId: clientId,
@@ -313,11 +286,12 @@ class CalendarWidget extends StatelessWidget {
   }
 
   CalendarFormat getCalendarFormat(state) {
-    if (state is CalendarFormatChangeSuccess) {
-      _calendarFormat = state.format;
-      return _calendarFormat;
-    } else {
-      return _calendarFormat;
-    }
+    return _calendarFormat;
+  //   if (state is CalendarFormatChangeSuccess) {
+  //     _calendarFormat = state.format;
+  //     return _calendarFormat;
+  //   } else {
+  //     return _calendarFormat;
+  //   }
   }
 }
