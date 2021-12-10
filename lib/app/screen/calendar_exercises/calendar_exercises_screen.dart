@@ -20,7 +20,8 @@ DateTime _selectedDate = DateTime.now();
 
 class CalendarExercisesScreen extends StatelessWidget {
   final String clientId;
-  final CalendarExercisesState _calendarExerciseState = CalendarExercisesState.started();
+  final CalendarExercisesState _calendarExerciseState =
+      CalendarExercisesState.started();
 
   CalendarExercisesScreen({Key? key, required this.clientId}) : super(key: key);
 
@@ -98,25 +99,57 @@ class ExerciseExpansionPanels extends StatelessWidget {
   Widget _handleDataLoadSuccess(
       List<Exercise> exercises, BuildContext context) {
     if (exercises.isNotEmpty) {
-      return _handleExercises(exercises: exercises, context: context);
+      return ExpansionPanelListWidget(
+        exercises: exercises,
+        clientId: clientId,
+      );
     } else {
       return _handleNoExercises(context: context);
     }
   }
 
-  ExpansionPanelList _handleExercises(
-      {required List<Exercise> exercises, required BuildContext context}) {
+  Center _handleNoExercises({required BuildContext context}) {
+    return Center(
+        child: Padding(
+            padding: EdgeInsets.all(Dimens.normalPadding),
+            child: ErrorView.error(
+                AppLocalizations.of(context)!.calendar_no_exercises)));
+  }
+}
+
+class ExpansionPanelListWidget extends StatefulWidget {
+  final List<Exercise> exercises;
+  final String clientId;
+
+  const ExpansionPanelListWidget(
+      {required this.exercises, required this.clientId});
+
+  @override
+  _ExpansionPanelListWidgetState createState() =>
+      _ExpansionPanelListWidgetState();
+}
+
+class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
+  List<String> listOfExpandedExercises = [];
+
+  @override
+  Widget build(BuildContext context) {
     return ExpansionPanelList(
         animationDuration:
             Duration(seconds: Dimens.expansionPanelAnimationDuration),
         elevation: Dimens.expansionPanelElevation,
         expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
         expansionCallback: (index, isExpanded) {
-          context.read<CalendarExercisesBloc>().add(
-              CalendarExercisesPanelExpanded(
-                  exercises[index].id, isExpanded, exercises));
+          setState(() {
+            String id = widget.exercises[index].id;
+            if (listOfExpandedExercises.contains(id)) {
+              listOfExpandedExercises.remove(id);
+            } else {
+              listOfExpandedExercises.add(id);
+            }
+          });
         },
-        children: exercises
+        children: widget.exercises
             .map((exercise) =>
                 _buildExpansionPanel(exercise: exercise, context: context))
             .toList());
@@ -125,10 +158,7 @@ class ExerciseExpansionPanels extends StatelessWidget {
   ExpansionPanel _buildExpansionPanel(
       {required Exercise exercise, required BuildContext context}) {
     return ExpansionPanel(
-      isExpanded: context
-          .read<CalendarExercisesBloc>()
-          .listOfExpandedExercises
-          .contains(exercise.id),
+      isExpanded: listOfExpandedExercises.contains(exercise.id),
       canTapOnHeader: true,
       headerBuilder: (context, isExpanded) => _expansionPanelHeader(exercise),
       body: Column(
@@ -145,7 +175,7 @@ class ExerciseExpansionPanels extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(Dimens.smallPadding),
             child: Container(
               height: 24.0,
               child: Flex(direction: Axis.vertical, children: [
@@ -196,7 +226,7 @@ class ExerciseExpansionPanels extends StatelessWidget {
               onChanged: (value) {
                 context.read<CalendarExercisesBloc>().add(
                     CalendarExercisesSetsSubmit(
-                        clientId: clientId,
+                        clientId: widget.clientId,
                         setsNumber: value,
                         selectedDate: _selectedDate,
                         exerciseId: exercise.id));
@@ -220,7 +250,7 @@ class ExerciseExpansionPanels extends StatelessWidget {
               onChanged: (value) {
                 context.read<CalendarExercisesBloc>().add(
                     CalendarExercisesRepsSubmit(
-                        clientId: clientId,
+                        clientId: widget.clientId,
                         repsNumber: value,
                         selectedDate: _selectedDate,
                         exerciseId: exercise.id));
@@ -241,14 +271,6 @@ class ExerciseExpansionPanels extends StatelessWidget {
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
-  }
-
-  Center _handleNoExercises({required BuildContext context}) {
-    return Center(
-        child: Padding(
-            padding: EdgeInsets.all(Dimens.normalPadding),
-            child: ErrorView.error(
-                AppLocalizations.of(context)!.calendar_no_exercises)));
   }
 }
 
@@ -287,11 +309,11 @@ class CalendarWidget extends StatelessWidget {
 
   CalendarFormat getCalendarFormat(state) {
     return _calendarFormat;
-  //   if (state is CalendarFormatChangeSuccess) {
-  //     _calendarFormat = state.format;
-  //     return _calendarFormat;
-  //   } else {
-  //     return _calendarFormat;
-  //   }
+    //   if (state is CalendarFormatChangeSuccess) {
+    //     _calendarFormat = state.format;
+    //     return _calendarFormat;
+    //   } else {
+    //     return _calendarFormat;
+    //   }
   }
 }
