@@ -1,5 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
 import 'package:personal_trainer/data/provider/client_choose_provider.dart';
 import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
@@ -14,23 +13,21 @@ abstract class DependencyInjector {
 }
 
 class GetItInjector implements DependencyInjector {
+  var _getIt;
+
   @override
   void init() {
-    final getId = GetIt.instance;
-    try {
-      getId.registerLazySingleton<ExerciseMapper>(() => ExerciseMapper());
-      getId.registerLazySingleton<ClientMapper>(() => ClientMapper());
-      getId.registerLazySingleton<CalendarExerciseProvider>(
-          () => CalendarExerciseProvider());
-      getId.registerLazySingleton<ExerciseSearchProvider>(
-          () => ExerciseSearchProvider());
-      getId.registerLazySingleton<FirebaseProvider>(() => FirebaseProvider());
-      getId.registerLazySingleton<LoginProvider>(() => LoginProvider());
-      getId.registerLazySingleton<RegisterProvider>(() => RegisterProvider());
-      getId.registerLazySingleton<ClientChooseProvider>(
-          () => ClientChooseProvider());
-    } catch (error) {
-      Log.d(error.toString());
-    }
+    _getIt = GetIt.instance;
+    _getIt.registerLazySingleton<ExerciseMapper>(() => ExerciseMapper());
+    _getIt.registerLazySingleton<ClientMapper>(() => ClientMapper());
+    _getIt.registerLazySingleton<CalendarExerciseProvider>(
+        () => CalendarExerciseProvider());
+    _getIt.registerLazySingleton<ExerciseSearchProvider>(
+        () => ExerciseSearchProvider());
+    _getIt.registerLazySingleton<FirebaseProvider>(() => FirebaseProvider());
+    _getIt.registerLazySingleton<LoginProvider>(() => LoginProvider());
+    _getIt.registerLazySingleton<RegisterProvider>(() => RegisterProvider());
+    _getIt.registerLazySingleton<ClientChooseProvider>(
+        () => ClientChooseProvider());
   }
 }

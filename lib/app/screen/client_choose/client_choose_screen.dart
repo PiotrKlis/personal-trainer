@@ -5,12 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:personal_trainer/app/app_router.gr.dart';
-import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_arguments.dart';
 import 'package:personal_trainer/app/screen/client_choose/client_choose_cubit.dart';
 import 'package:personal_trainer/app/screen/client_choose/client_choose_state.dart';
 import 'package:personal_trainer/app/widget/toast_message.dart';
 import 'package:personal_trainer/domain/model/client.dart';
-import '../../app_router.dart';
 
 class ClientChooseScreen extends StatelessWidget {
   late final ClientChooseState _clientChooseState = ClientChooseLoading();
@@ -29,31 +27,31 @@ class ClientChooseScreen extends StatelessWidget {
         ),
         body: BlocBuilder<ClientChooseCubit, ClientChooseState>(
             builder: (BuildContext context, state) {
-              if (state is ClientChooseLoading) {
-                context.read<ClientChooseCubit>().getClientsData(trainerId);
-              } else if (state is ClientsData) {
-                clients = state.clients;
-              } else if (state is ClientChooseFetchFailed) {
-                ToastMessage.show(state.error);
-              }
-              return ListView.builder(
-                itemCount: clients.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                      child: ListTile(
-                          onTap: () {
-                            context.pushRoute(CalendarExercisesRoute(clientId: trainerId));
-
-                          },
-                          title: Text('${clients[index].name} / ${clients[index].email}')));
-                },
-              );
-            }
-        ),
+          if (state is ClientChooseLoading) {
+            context.read<ClientChooseCubit>().getClientsData(trainerId);
+          } else if (state is ClientsData) {
+            clients = state.clients;
+          } else if (state is ClientChooseFetchFailed) {
+            ToastMessage.show(state.error);
+          }
+          return ListView.builder(
+            itemCount: clients.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Card(
+                  child: ListTile(
+                      onTap: () {
+                        context.pushRoute(
+                            CalendarExercisesRoute(clientId: trainerId));
+                      },
+                      title: Text(
+                          '${clients[index].name} / ${clients[index].email}')));
+            },
+          );
+        }),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => EmailScreen()))
+                    MaterialPageRoute(builder: (context) => EmailScreen()))
                 .then((value) => value);
           },
           child: const Icon(Icons.add),
@@ -84,7 +82,7 @@ class _EmailScreenState extends State<EmailScreen> {
   void sendEmail(BuildContext context) async {
     final Email email = Email(
       body:
-      'This is an invitation to Personal Trainer app from ${'TrainerName'}. Click link to download the app',
+          'This is an invitation to Personal Trainer app from ${'TrainerName'}. Click link to download the app',
       subject: 'Personal Trainer app invitation',
       recipients: ['example@example.com'],
       isHTML: false,
