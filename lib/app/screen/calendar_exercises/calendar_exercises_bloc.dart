@@ -8,7 +8,8 @@ import 'calendar_exercises_state.dart';
 
 class CalendarExercisesBloc
     extends Bloc<CalendarExerciseEvent, CalendarExercisesState> {
-  final CalendarExerciseProvider _calendarExerciseProvider =   GetIt.I.get<CalendarExerciseProvider>();
+  final CalendarExerciseProvider _calendarExerciseProvider = GetIt.I.get<CalendarExerciseProvider>();
+  var _selectedDate = DateTime.now();
 
   CalendarExercisesBloc(CalendarExercisesState initialState)
       : super(initialState) {
@@ -19,6 +20,7 @@ class CalendarExercisesBloc
               selectedDay: event.selectedDate, clientId: event.clientId)
           .then((exercises) {
         emit(CalendarExercisesState.content(exercises: exercises));
+        _selectedDate = event.selectedDate;
       }).catchError((error) {
         emit(CalendarExercisesState.error(error: error.toString()));
       });
@@ -28,7 +30,7 @@ class CalendarExercisesBloc
       emit(CalendarExercisesState.loading());
       await _calendarExerciseProvider
           .getExercisesFor(
-              selectedDay: event.selectedDate, clientId: event.clientId)
+              selectedDay: _selectedDate, clientId: event.clientId)
           .then((exercises) {
         emit(CalendarExercisesState.content(exercises: exercises));
       }).catchError((error) {
@@ -42,7 +44,7 @@ class CalendarExercisesBloc
               clientId: event.clientId,
               setsNumber: event.setsNumber,
               exerciseId: event.exerciseId,
-              selectedDate: event.selectedDate)
+              selectedDate: _selectedDate)
           .then((value) {
         Log.d("Sets number updated to ${event.setsNumber}");
       });
@@ -54,7 +56,7 @@ class CalendarExercisesBloc
               clientId: event.clientId,
               repsNumber: event.repsNumber,
               exerciseId: event.exerciseId,
-              selectedDate: event.selectedDate)
+              selectedDate: _selectedDate)
           .then((value) {
         Log.d("Reps number updated ${event.repsNumber}");
       });

@@ -12,10 +12,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ExpansionPanelListWidget extends StatefulWidget {
   final List<Exercise> exercises;
   final String clientId;
-  final DateTime selectedDate;
 
   const ExpansionPanelListWidget(
-      {required this.exercises, required this.clientId, required this.selectedDate});
+      {required this.exercises, required this.clientId});
 
   @override
   _ExpansionPanelListWidgetState createState() =>
@@ -121,7 +120,6 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
                     CalendarExercisesSetsSubmit(
                         clientId: widget.clientId,
                         setsNumber: value,
-                        selectedDate: widget.selectedDate,
                         exerciseId: exercise.id));
               },
               controller: _setsController,
@@ -145,7 +143,6 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
                     CalendarExercisesRepsSubmit(
                         clientId: widget.clientId,
                         repsNumber: value,
-                        selectedDate: widget.selectedDate,
                         exerciseId: exercise.id));
               },
               controller: _repsController,

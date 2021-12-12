@@ -8,9 +8,8 @@ import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends StatefulWidget {
   final String clientId;
-  final selectedDate;
 
-  CalendarWidget({required this.clientId, required this.selectedDate});
+  CalendarWidget({required this.clientId});
 
   @override
   State<CalendarWidget> createState() => _CalendarWidgetState();
@@ -21,10 +20,10 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
   //TODO: list of dates with exercises
   List<bool> _list = <bool>[];
+  DateTime _selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    DateTime _selectedDate = widget.selectedDate;
     return BlocBuilder<CalendarExercisesBloc, CalendarExercisesState>(
       builder: (context, state) {
         return TableCalendar<bool>(
@@ -38,7 +37,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             _selectedDate = selectedDate;
             context.read<CalendarExercisesBloc>().add(
                 CalendarExercisesNewDateSelected(
-                    selectedDate: _selectedDate, clientId: widget.clientId));
+                    selectedDate: selectedDate, clientId: widget.clientId));
           },
           onFormatChanged: (calendarFormat) {
             setState(() {

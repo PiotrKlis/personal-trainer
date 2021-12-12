@@ -35,7 +35,8 @@ class CalendarExerciseProvider {
     required DateTime selectedDate,
     required String exerciseId}) {
     try {
-      var formattedDate = DateUtils.dateOnly(selectedDate).toString();
+      String formattedDate = DateUtils.dateOnly(selectedDate).toString();
+      int formattedSets = int.parse(setsNumber);
       FirebaseFirestore.instance
           .collection(FirebaseConstants.usersCollection)
           .doc(clientId)
@@ -43,7 +44,7 @@ class CalendarExerciseProvider {
           .doc(FirebaseConstants.exercisesCollection)
           .collection(formattedDate)
           .doc(exerciseId)
-          .update({"sets": setsNumber});
+          .update({"sets": formattedSets});
       return Future.value();
     } catch (error) {
       return Future.error(error, StackTrace.current);
@@ -55,7 +56,8 @@ class CalendarExerciseProvider {
     required DateTime selectedDate,
     required String exerciseId}) {
     try {
-      var formattedDate = DateUtils.dateOnly(selectedDate).toString();
+      String formattedDate = DateUtils.dateOnly(selectedDate).toString();
+      int formattedReps = int.parse(repsNumber);
       FirebaseFirestore.instance
           .collection(FirebaseConstants.usersCollection)
           .doc(clientId)
@@ -63,7 +65,7 @@ class CalendarExerciseProvider {
           .doc(FirebaseConstants.exercisesCollection)
           .collection(formattedDate)
           .doc(exerciseId)
-          .update({"reps": repsNumber});
+          .update({"reps": formattedReps});
       return Future.value();
     } catch (error) {
       return Future.error(error, StackTrace.current);

@@ -1,7 +1,7 @@
-import 'package:personal_trainer/domain/model/exercise.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:personal_trainer/domain/model/exercise.dart';
+
 part 'calendar_exercises_state.freezed.dart';
 
 @freezed

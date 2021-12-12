@@ -13,21 +13,19 @@ abstract class DependencyInjector {
 }
 
 class GetItInjector implements DependencyInjector {
-  var _getIt;
-
   @override
   void init() {
-    _getIt = GetIt.instance;
-    _getIt.registerLazySingleton<ExerciseMapper>(() => ExerciseMapper());
-    _getIt.registerLazySingleton<ClientMapper>(() => ClientMapper());
-    _getIt.registerLazySingleton<CalendarExerciseProvider>(
-        () => CalendarExerciseProvider());
-    _getIt.registerLazySingleton<ExerciseSearchProvider>(
-        () => ExerciseSearchProvider());
-    _getIt.registerLazySingleton<FirebaseProvider>(() => FirebaseProvider());
-    _getIt.registerLazySingleton<LoginProvider>(() => LoginProvider());
-    _getIt.registerLazySingleton<RegisterProvider>(() => RegisterProvider());
-    _getIt.registerLazySingleton<ClientChooseProvider>(
-        () => ClientChooseProvider());
+    var _getIt = GetIt.instance;
+      _getIt.registerLazySingleton<ExerciseMapper>(() => ExerciseMapper());
+      _getIt.registerLazySingleton<ClientMapper>(() => ClientMapper());
+      _getIt.registerLazySingleton<CalendarExerciseProvider>(
+          () => CalendarExerciseProvider());
+      _getIt.registerLazySingleton<ExerciseSearchProvider>(
+          () => ExerciseSearchProvider());
+      _getIt.registerLazySingleton<FirebaseProvider>(() => FirebaseProvider());
+      _getIt.registerLazySingleton<LoginProvider>(() => LoginProvider());
+      _getIt.registerLazySingleton<RegisterProvider>(() => RegisterProvider());
+      _getIt.registerLazySingleton<ClientChooseProvider>(
+          () => ClientChooseProvider());
   }
 }
