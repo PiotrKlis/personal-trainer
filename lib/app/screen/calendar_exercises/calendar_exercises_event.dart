@@ -17,9 +17,6 @@ class CalendarExercisesDateFormatChanged extends CalendarExerciseEvent {
   CalendarExercisesDateFormatChanged(this.calendarFormat);
 }
 
-class CalendarExercisesNavigatedToExerciseSearchScreen
-    extends CalendarExerciseEvent {}
-
 class CalendarExercisesPanelExpanded extends CalendarExerciseEvent {
   final String exerciseId;
   final bool isExpanded;

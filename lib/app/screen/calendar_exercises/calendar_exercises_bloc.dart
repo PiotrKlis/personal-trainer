@@ -8,9 +8,7 @@ import 'calendar_exercises_state.dart';
 
 class CalendarExercisesBloc
     extends Bloc<CalendarExerciseEvent, CalendarExercisesState> {
-  final CalendarExerciseProvider _calendarExerciseProvider =
-      GetIt.I.get<CalendarExerciseProvider>();
-  List<String> listOfExpandedExercises = [];
+  final CalendarExerciseProvider _calendarExerciseProvider =   GetIt.I.get<CalendarExerciseProvider>();
 
   CalendarExercisesBloc(CalendarExercisesState initialState)
       : super(initialState) {
@@ -25,26 +23,6 @@ class CalendarExercisesBloc
         emit(CalendarExercisesState.error(error: error.toString()));
       });
     });
-
-    //TODO: Migrate to reusable widget
-    // on<CalendarExercisesDateFormatChanged>((event, emit) =>
-    //     emit(CalendarFormatChangeSuccess(format: event.calendarFormat)));
-
-    on<CalendarExercisesNavigatedToExerciseSearchScreen>((event, emit) {
-      //TODO: use custom navigator with context inside
-    });
-
-    //TODO: Migrate to reusable widget
-    // on<CalendarExercisesPanelExpanded>((event, emit) {
-    //   var id = event.exerciseId;
-    //   if (listOfExpandedExercises.contains(id)) {
-    //     listOfExpandedExercises.remove(id);
-    //   } else {
-    //     listOfExpandedExercises.add(id);
-    //   }
-    //   emit(CalendarExercisesExpansionPanelClickSuccess(
-    //       exercises: event.exercises));
-    // });
 
     on<CalendarExercisesCameBackFromExercisesSearchScreen>((event, emit) async {
       emit(CalendarExercisesState.loading());

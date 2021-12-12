@@ -2,12 +2,11 @@ import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:personal_trainer/app/util/date_util.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
+import 'package:personal_trainer/app/widget/calendar_widget.dart';
 import 'package:personal_trainer/app/widget/error_view.dart';
 import 'package:personal_trainer/app/widget/expansion_panel_list_widget.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 import '../../app_router.gr.dart';
 import 'calendar_exercises_bloc.dart';
@@ -35,7 +34,7 @@ class CalendarExercisesScreen extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            CalendarWidget(clientId: clientId),
+            CalendarWidget(clientId: clientId, selectedDate: _selectedDate),
             Divider(),
             ExerciseExpansionPanels(clientId)
           ],
@@ -88,10 +87,10 @@ class ExerciseExpansionPanels extends StatelessWidget {
     });
   }
 
-  Center _handleInitialState(BuildContext context) {
+  Container _handleInitialState(BuildContext context) {
     context.read<CalendarExercisesBloc>().add(CalendarExercisesNewDateSelected(
         selectedDate: _selectedDate, clientId: clientId));
-    return Center(child: CircularProgressIndicator());
+    return Container();
   }
 
   Widget _handleDataLoadSuccess(
@@ -112,49 +111,5 @@ class ExerciseExpansionPanels extends StatelessWidget {
             padding: EdgeInsets.all(Dimens.normalPadding),
             child: ErrorView.error(
                 AppLocalizations.of(context)!.calendar_no_exercises)));
-  }
-}
-
-class CalendarWidget extends StatefulWidget {
-  final String clientId;
-
-  CalendarWidget({required this.clientId});
-
-  @override
-  State<CalendarWidget> createState() => _CalendarWidgetState();
-}
-
-class _CalendarWidgetState extends State<CalendarWidget> {
-  CalendarFormat _calendarFormat = CalendarFormat.week;
-
-  //TODO: list list list
-  List<bool> _list = <bool>[];
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CalendarExercisesBloc, CalendarExercisesState>(
-      builder: (context, state) {
-        return TableCalendar<bool>(
-          firstDay: DateUtil.calendarStartDate,
-          lastDay: DateUtil.calendarEndDate,
-          focusedDay: _selectedDate,
-          calendarFormat: _calendarFormat,
-          startingDayOfWeek: StartingDayOfWeek.monday,
-          selectedDayPredicate: (day) => isSameDay(_selectedDate, day),
-          onDaySelected: (selectedDate, focusedDay) {
-            context.read<CalendarExercisesBloc>().add(
-                CalendarExercisesNewDateSelected(
-                    selectedDate: selectedDate, clientId: widget.clientId));
-            _selectedDate = selectedDate;
-          },
-          onFormatChanged: (calendarFormat) {
-            setState(() {
-              _calendarFormat = calendarFormat;
-            });
-          },
-          eventLoader: (date) => _list,
-        );
-      },
-    );
   }
 }
