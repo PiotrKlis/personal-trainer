@@ -12,6 +12,11 @@ class CalendarExercisesState with _$CalendarExercisesState {
   const factory CalendarExercisesState.content({required List<Exercise> exercises}) = _Content;
 }
 
+@freezed
+class MyClass {
+  factory MyClass() = _MyClass;
+}
+
 // abstract class CalendarExercisesState {}
 
 // class CalendarExercisesStarted extends CalendarExercisesState {}

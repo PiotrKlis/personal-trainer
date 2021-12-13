@@ -658,3 +658,79 @@ abstract class _Content implements CalendarExercisesState {
   _$ContentCopyWith<_Content> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+class _$MyClassTearOff {
+  const _$MyClassTearOff();
+
+  _MyClass call() {
+    return _MyClass();
+  }
+}
+
+/// @nodoc
+const $MyClass = _$MyClassTearOff();
+
+/// @nodoc
+mixin _$MyClass {}
+
+/// @nodoc
+abstract class $MyClassCopyWith<$Res> {
+  factory $MyClassCopyWith(MyClass value, $Res Function(MyClass) then) =
+      _$MyClassCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$MyClassCopyWithImpl<$Res> implements $MyClassCopyWith<$Res> {
+  _$MyClassCopyWithImpl(this._value, this._then);
+
+  final MyClass _value;
+  // ignore: unused_field
+  final $Res Function(MyClass) _then;
+}
+
+/// @nodoc
+abstract class _$MyClassCopyWith<$Res> {
+  factory _$MyClassCopyWith(_MyClass value, $Res Function(_MyClass) then) =
+      __$MyClassCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$MyClassCopyWithImpl<$Res> extends _$MyClassCopyWithImpl<$Res>
+    implements _$MyClassCopyWith<$Res> {
+  __$MyClassCopyWithImpl(_MyClass _value, $Res Function(_MyClass) _then)
+      : super(_value, (v) => _then(v as _MyClass));
+
+  @override
+  _MyClass get _value => super._value as _MyClass;
+}
+
+/// @nodoc
+
+class _$_MyClass with DiagnosticableTreeMixin implements _MyClass {
+  _$_MyClass();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MyClass()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'MyClass'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _MyClass);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+}
+
+abstract class _MyClass implements MyClass {
+  factory _MyClass() = _$_MyClass;
+}

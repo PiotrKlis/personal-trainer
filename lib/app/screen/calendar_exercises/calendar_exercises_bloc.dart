@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/app/util/auto_route_navigator.dart';
 import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
+import 'package:personal_trainer/domain/model/exercise.dart';
 
 import 'calendar_exercises_event.dart';
 import 'calendar_exercises_state.dart';
@@ -13,6 +14,7 @@ class CalendarExercisesBloc
       CalendarExerciseProvider>();
   final AutoRouteNavigator _navigator = AutoRouteNavigator();
   var _selectedDate = DateTime.now();
+  List<Exercise>? _exercises;
 
   CalendarExercisesBloc(CalendarExercisesState initialState)
       : super(initialState) {
@@ -24,6 +26,7 @@ class CalendarExercisesBloc
           .then((exercises) {
         emit(CalendarExercisesState.content(exercises: exercises));
         _selectedDate = event.selectedDate;
+        _exercises = exercises;
       }).catchError((error) {
         emit(CalendarExercisesState.error(error: error.toString()));
       });
@@ -35,6 +38,7 @@ class CalendarExercisesBloc
           .getExercisesFor(
           selectedDay: _selectedDate, clientId: event.clientId)
           .then((exercises) {
+        _exercises = exercises;
         emit(CalendarExercisesState.content(exercises: exercises));
       }).catchError((error) {
         emit(CalendarExercisesState.error(error: error.toString()));
@@ -49,7 +53,9 @@ class CalendarExercisesBloc
           exerciseId: event.exerciseId,
           selectedDate: _selectedDate)
           .then((value) {
+            _exercises = _exercises;
         Log.d("Sets number updated to ${event.setsNumber}");
+        emit(CalendarExercisesState.content(exercises: _exercises!));
       });
     });
 
@@ -62,6 +68,7 @@ class CalendarExercisesBloc
           selectedDate: _selectedDate)
           .then((value) {
         Log.d("Reps number updated ${event.repsNumber}");
+        emit(CalendarExercisesState.content(exercises: _exercises!));
       });
     });
 
