@@ -54,3 +54,9 @@ class CalendarExercisesRepsSubmit extends CalendarExerciseEvent {
       required this.repsNumber,
       required this.exerciseId});
 }
+
+class CalendarExerciseToSearchNavigation extends CalendarExerciseEvent {
+  final String clientId;
+
+  CalendarExerciseToSearchNavigation(this.clientId);
+}

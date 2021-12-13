@@ -4,23 +4,19 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_trainer/app/screen/login/login_cubit.dart';
 import 'package:personal_trainer/app/screen/login/login_state.dart';
-import 'package:personal_trainer/data/provider/firebase_provider.dart';
-import 'package:personal_trainer/data/provider/login_provider.dart';
+import 'package:personal_trainer/app/util/auto_route_navigator.dart';
+import 'package:personal_trainer/app/util/dependency_injector.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
 
-import '../../app_router.dart';
 import '../../app_router.gr.dart';
-import '../account_choose/account_choose_screen.dart';
-import '../client/client_screen.dart';
 
 class FirebaseLoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // AutoRouteNavigator(context).init();
     return MultiBlocProvider(providers: [
-      BlocProvider(
-          create: (context) =>
-              LoginCubit(LoginLoading())),
+      BlocProvider(create: (context) => LoginCubit(LoginLoading())),
     ], child: FirebaseHandler());
   }
 }
@@ -48,7 +44,6 @@ class FirebaseHandler extends StatelessWidget {
       var id = (state.appUser as Trainer).id;
       SchedulerBinding.instance?.addPostFrameCallback((_) {
         context.replaceRoute(AccountChooseRoute(trainerId: id));
-
       });
     } else if (state.appUser is Client) {
       var id = (state.appUser as Client).id;

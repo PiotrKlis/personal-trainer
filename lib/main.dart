@@ -4,26 +4,27 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/app/app_router.dart';
 import 'package:personal_trainer/app/app_router.gr.dart';
+import 'package:personal_trainer/app/util/auto_route_navigator.dart';
 import 'package:personal_trainer/app/util/dependency_injector.dart';
 import 'package:personal_trainer/app/util/localisation_keys.dart';
 
 void main() {
+  DependencyInjector _injector = GetItInjector();
+  _injector.init();
   runApp(PersonalTrainerApp());
 }
 
 class PersonalTrainerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    initDependencyInjection();
-    final _appRouter = AppRouter();
-
+    final _router = GetIt.I<AppRouter>();
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: MaterialApp.router(
-          routeInformationParser: _appRouter.defaultRouteParser(),
-          routerDelegate: _appRouter.delegate(),
+          routeInformationParser: _router.defaultRouteParser(),
+          routerDelegate: _router.delegate(),
         title: 'Personal Trainer',
         localizationsDelegates: [
           AppLocalizations.delegate,
@@ -38,10 +39,5 @@ class PersonalTrainerApp extends StatelessWidget {
         theme: ThemeData.dark(),
       )
     );
-  }
-
-  void initDependencyInjection() {
-    DependencyInjector _injector = GetItInjector();
-    _injector.init();
   }
 }

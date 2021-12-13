@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:personal_trainer/app/util/auto_route_navigator.dart';
 import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
 
@@ -8,7 +9,9 @@ import 'calendar_exercises_state.dart';
 
 class CalendarExercisesBloc
     extends Bloc<CalendarExerciseEvent, CalendarExercisesState> {
-  final CalendarExerciseProvider _calendarExerciseProvider = GetIt.I.get<CalendarExerciseProvider>();
+  final CalendarExerciseProvider _calendarExerciseProvider = GetIt.I.get<
+      CalendarExerciseProvider>();
+  final AutoRouteNavigator _navigator = AutoRouteNavigator();
   var _selectedDate = DateTime.now();
 
   CalendarExercisesBloc(CalendarExercisesState initialState)
@@ -17,7 +20,7 @@ class CalendarExercisesBloc
       emit(CalendarExercisesState.loading());
       await _calendarExerciseProvider
           .getExercisesFor(
-              selectedDay: event.selectedDate, clientId: event.clientId)
+          selectedDay: event.selectedDate, clientId: event.clientId)
           .then((exercises) {
         emit(CalendarExercisesState.content(exercises: exercises));
         _selectedDate = event.selectedDate;
@@ -30,7 +33,7 @@ class CalendarExercisesBloc
       emit(CalendarExercisesState.loading());
       await _calendarExerciseProvider
           .getExercisesFor(
-              selectedDay: _selectedDate, clientId: event.clientId)
+          selectedDay: _selectedDate, clientId: event.clientId)
           .then((exercises) {
         emit(CalendarExercisesState.content(exercises: exercises));
       }).catchError((error) {
@@ -41,10 +44,10 @@ class CalendarExercisesBloc
     on<CalendarExercisesSetsSubmit>((event, emit) async {
       await _calendarExerciseProvider
           .updateSetsNumberForExercise(
-              clientId: event.clientId,
-              setsNumber: event.setsNumber,
-              exerciseId: event.exerciseId,
-              selectedDate: _selectedDate)
+          clientId: event.clientId,
+          setsNumber: event.setsNumber,
+          exerciseId: event.exerciseId,
+          selectedDate: _selectedDate)
           .then((value) {
         Log.d("Sets number updated to ${event.setsNumber}");
       });
@@ -53,12 +56,28 @@ class CalendarExercisesBloc
     on<CalendarExercisesRepsSubmit>((event, emit) async {
       await _calendarExerciseProvider
           .updateRepsNumberForExercise(
-              clientId: event.clientId,
-              repsNumber: event.repsNumber,
-              exerciseId: event.exerciseId,
-              selectedDate: _selectedDate)
+          clientId: event.clientId,
+          repsNumber: event.repsNumber,
+          exerciseId: event.exerciseId,
+          selectedDate: _selectedDate)
           .then((value) {
         Log.d("Reps number updated ${event.repsNumber}");
+      });
+    });
+
+    on<CalendarExerciseToSearchNavigation>((event, emit) async {
+      await _navigator.navigateToExerciseSearch(
+          selectedDate: _selectedDate, clientId: event.clientId)
+          .then((value) async {
+        emit(CalendarExercisesState.loading());
+        await _calendarExerciseProvider
+            .getExercisesFor(
+            selectedDay: _selectedDate, clientId: event.clientId)
+            .then((exercises) {
+          emit(CalendarExercisesState.content(exercises: exercises));
+        }).catchError((error) {
+          emit(CalendarExercisesState.error(error: error.toString()));
+        });
       });
     });
   }

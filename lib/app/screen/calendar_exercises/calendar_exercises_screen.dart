@@ -51,12 +51,9 @@ class SearchExercisesButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        //TODO: Navigation on bloc side
-        //   context
-        //       .pushRoute(ExerciseSearchRoute(
-        //           selectedDate: _selectedDate, clientId: clientId))
-        //       .then((value) => context.read<CalendarExercisesBloc>().add(
-        //           CalendarExercisesCameBackFromExercisesSearchScreen(clientId: clientId)));
+        context
+            .read<CalendarExercisesBloc>()
+            .add(CalendarExerciseToSearchNavigation(clientId));
       },
       child: const Icon(Icons.add),
     );
