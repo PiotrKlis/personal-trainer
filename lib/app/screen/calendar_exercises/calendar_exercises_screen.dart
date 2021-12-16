@@ -30,7 +30,7 @@ class CalendarExercisesScreen extends StatelessWidget {
           children: [
             CalendarWidget(clientId: clientId),
             Divider(),
-            ExerciseExpansionPanels(clientId: clientId)
+            ExerciseExpansionPanels(clientId: clientId, key: UniqueKey())
           ],
         ),
         floatingActionButton: SearchExercisesButton(clientId: clientId),
@@ -63,7 +63,8 @@ class SearchExercisesButton extends StatelessWidget {
 class ExerciseExpansionPanels extends StatelessWidget {
   final String clientId;
 
-  ExerciseExpansionPanels({required this.clientId});
+  const ExerciseExpansionPanels({required this.clientId, required Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
