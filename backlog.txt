@@ -3,7 +3,7 @@ MVP
 // Calendar Exercise & Search
 
 - make calendar exercises
-- bigger plus/add in search screen
+- gestures
 - Chips
 - Error on search on navigation
 - Check feature
@@ -39,3 +39,7 @@ MVP
 // Firebase screen
 
 - Migration to proper architecture
+
+--------------------
+Done:
+- bigger plus/add in search screen

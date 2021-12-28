@@ -32,7 +32,8 @@ class ExerciseSearchScreen extends StatelessWidget {
           BlocProvider(
               create: (context) => ExerciseSearchBloc(_exerciseSearchState)),
           BlocProvider(
-              create: (context) => ExerciseSearchAddExerciseBloc(_addExerciseState))
+              create: (context) =>
+                  ExerciseSearchAddExerciseBloc(_addExerciseState))
         ],
         child: Scaffold(
           appBar: AppBar(
@@ -181,19 +182,17 @@ class ListOfResults extends StatelessWidget {
               exercise.title,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            trailing: GestureDetector(
-                child: Icon(
-                  Icons.add_rounded,
-                  size: Dimens.iconRoundSize,
-                ),
-                onTap: () {
-                  context.read<ExerciseSearchAddExerciseBloc>().add(
-                      ExerciseSearchExerciseAdded(
-                          exerciseId: exercise.id,
-                          selectedDate: selectedDate,
-                          clientId: clientId,
-                          exerciseName: exercise.title));
-                }));
+            trailing: IconButton(
+              icon: Icon(Icons.add_rounded),
+              onPressed: () {
+                context.read<ExerciseSearchAddExerciseBloc>().add(
+                    ExerciseSearchExerciseAdded(
+                        exerciseId: exercise.id,
+                        selectedDate: selectedDate,
+                        clientId: clientId,
+                        exerciseName: exercise.title));
+              },
+            ));
       },
       body: Column(
         children: [
