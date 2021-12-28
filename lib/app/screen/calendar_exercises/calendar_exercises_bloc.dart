@@ -35,7 +35,7 @@ class CalendarExercisesBloc
     });
 
     on<CalendarExercisesSetsSubmit>((event, emit) async {
-      var formattedNumber = int.parse(event.setsNumber);
+      var formattedNumber = int.tryParse(event.setsNumber) ?? 0;
       await _calendarExerciseProvider
           .updateSetsNumberForExercise(
               clientId: event.clientId,
@@ -58,7 +58,7 @@ class CalendarExercisesBloc
             debounce(Duration(milliseconds: DurationConst.debounceTime)));
 
     on<CalendarExercisesRepsSubmit>((event, emit) async {
-      var formattedNumber = int.parse(event.repsNumber);
+      var formattedNumber = int.tryParse(event.repsNumber) ?? 0;
       await _calendarExerciseProvider
           .updateRepsNumberForExercise(
               clientId: event.clientId,

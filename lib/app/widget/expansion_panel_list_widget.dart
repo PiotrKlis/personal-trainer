@@ -33,7 +33,7 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
         expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
         expansionCallback: (index, isExpanded) {
           setState(() {
-            String id = widget.exercises[index].id;
+            String id = widget.exercises[index].userExerciseId;
             if (listOfExpandedExercises.contains(id)) {
               listOfExpandedExercises.remove(id);
             } else {
@@ -50,7 +50,7 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
   ExpansionPanel _buildExpansionPanel(
       {required Exercise exercise, required BuildContext context}) {
     return ExpansionPanel(
-      isExpanded: listOfExpandedExercises.contains(exercise.id),
+      isExpanded: listOfExpandedExercises.contains(exercise.userExerciseId),
       canTapOnHeader: true,
       headerBuilder: (context, isExpanded) => _expansionPanelHeader(exercise),
       body: Column(

@@ -3,10 +3,10 @@ MVP
 // Calendar Exercise & Search
 
 - make calendar exercises
+- bigger plus/add in search screen
 - Chips
 - Error on search on navigation
 - Check feature
-
 
 // Choose client
 

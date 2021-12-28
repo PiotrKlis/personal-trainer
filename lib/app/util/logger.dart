@@ -18,3 +18,4 @@ class Log {
     _logger?.e(message);
   }
 }
+
