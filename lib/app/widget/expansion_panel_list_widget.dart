@@ -120,7 +120,7 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
                     CalendarExercisesSetsSubmit(
                         clientId: widget.clientId,
                         setsNumber: value,
-                        exerciseId: exercise.id));
+                        userExerciseId: exercise.userExerciseId));
               },
               controller: _setsController,
             ),
@@ -143,7 +143,7 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
                     CalendarExercisesRepsSubmit(
                         clientId: widget.clientId,
                         repsNumber: value,
-                        exerciseId: exercise.id));
+                        userExerciseId: exercise.userExerciseId));
               },
               controller: _repsController,
             ),

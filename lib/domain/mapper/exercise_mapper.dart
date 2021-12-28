@@ -8,6 +8,8 @@ class ExerciseMapper {
         videoPath: data['videoPath'],
         tags: List.from(data['tags']),
         reps: data['reps'],
-        sets: data['sets']);
+        sets: data['sets'],
+        userExerciseId: data['userExerciseId']
+        );
   }
 }

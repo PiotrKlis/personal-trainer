@@ -6,10 +6,6 @@ import '../app_router.gr.dart';
 
 class AutoRouteNavigator {
 
-  // void init() {
-  //   router = AutoRouter.of(context);
-  // }
-
   Future navigateToExerciseSearch(
       {required DateTime selectedDate, required String clientId}) {
     // return router.push(

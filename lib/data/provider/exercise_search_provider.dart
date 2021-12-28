@@ -62,16 +62,19 @@ class ExerciseSearchProvider {
           .collection(FirebaseConstants.exercisesCollection)
           .doc(exerciseId)
           .get()
-          .then((exercise) {
+          .then((exercise) async {
         if (exercise.data() != null) {
-          FirebaseFirestore.instance
+          var dateCollection = FirebaseFirestore.instance
               .collection(FirebaseConstants.usersCollection)
               .doc(clientId)
               .collection(FirebaseConstants.clientCollection)
               .doc(FirebaseConstants.exercisesCollection)
-              .collection(formattedDate)
-              .doc(exerciseId)
-              .set(exercise.data()!);
+              .collection(formattedDate);
+          var userExerciseId = dateCollection.doc().id;
+          await dateCollection.doc(userExerciseId).set(exercise.data()!);
+          await dateCollection
+              .doc(userExerciseId)
+              .update({"userExerciseId": userExerciseId});
           return Future.value();
         } else {
           return Future.error('exercise does not exist!');

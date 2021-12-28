@@ -1,14 +1,41 @@
-TODO
+MVP
 
-Add exercise screen
-- wejscie w account choose screen za pierwszym razem bad state
-- rejestracja client za pierwszym razem tez nie dziala
-- dodaj wylogowanie
+// Calendar Exercise & Search
 
-Done
-- Navigate client to calendar exercises
-- stworz baze exercisow na firestore
-- dodaj exercisy do firestore dla clienta od trenera
-- Check if choose client work properly with both screens
-- make videos shorter (number of rows on screen)
-- dodaj liczbę serii do exercisow
+- make calendar exercises
+- Chips
+- Error on search on navigation
+- Check feature
+
+
+// Choose client
+
+- Add lots of clients and check navigation between them
+- Remove client
+- Add new client(!)
+- Check feature
+
+// Client screen
+
+- Show proper shortened calendar exercise screen
+- Check feature
+
+// MUX
+
+- Implement MUX and render videos properly
+
+// Choose account
+
+- Migration to proper architecture
+
+// Login Screen
+
+- Migration to proper architecture
+
+// Register Screen
+
+- Migration to proper architecture
+
+// Firebase screen
+
+- Migration to proper architecture

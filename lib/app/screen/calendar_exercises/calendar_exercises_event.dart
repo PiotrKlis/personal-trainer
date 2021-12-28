@@ -26,33 +26,26 @@ class CalendarExercisesPanelExpanded extends CalendarExerciseEvent {
       this.exerciseId, this.isExpanded, this.exercises);
 }
 
-class CalendarExercisesCameBackFromExercisesSearchScreen
-    extends CalendarExerciseEvent {
-  final String clientId;
-
-  CalendarExercisesCameBackFromExercisesSearchScreen({required this.clientId});
-}
-
 class CalendarExercisesSetsSubmit extends CalendarExerciseEvent {
   final String clientId;
   final String setsNumber;
-  final String exerciseId;
+  final String userExerciseId;
 
   CalendarExercisesSetsSubmit(
       {required this.clientId,
       required this.setsNumber,
-      required this.exerciseId});
+      required this.userExerciseId});
 }
 
 class CalendarExercisesRepsSubmit extends CalendarExerciseEvent {
   final String clientId;
   final String repsNumber;
-  final String exerciseId;
+  final String userExerciseId;
 
   CalendarExercisesRepsSubmit(
       {required this.clientId,
       required this.repsNumber,
-      required this.exerciseId});
+      required this.userExerciseId});
 }
 
 class CalendarExerciseToSearchNavigation extends CalendarExerciseEvent {

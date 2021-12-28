@@ -18,12 +18,13 @@ class _$ExerciseTearOff {
   const _$ExerciseTearOff();
 
   _Exercise call(
-      {dynamic reps,
-      dynamic sets,
-      dynamic id,
-      dynamic title,
-      dynamic videoPath,
-      dynamic tags}) {
+      {required int reps,
+      required int sets,
+      required String id,
+      required String title,
+      required String videoPath,
+      required List<String> tags,
+      required String userExerciseId}) {
     return _Exercise(
       reps: reps,
       sets: sets,
@@ -31,6 +32,7 @@ class _$ExerciseTearOff {
       title: title,
       videoPath: videoPath,
       tags: tags,
+      userExerciseId: userExerciseId,
     );
   }
 }
@@ -40,12 +42,13 @@ const $Exercise = _$ExerciseTearOff();
 
 /// @nodoc
 mixin _$Exercise {
-  dynamic get reps => throw _privateConstructorUsedError;
-  dynamic get sets => throw _privateConstructorUsedError;
-  dynamic get id => throw _privateConstructorUsedError;
-  dynamic get title => throw _privateConstructorUsedError;
-  dynamic get videoPath => throw _privateConstructorUsedError;
-  dynamic get tags => throw _privateConstructorUsedError;
+  int get reps => throw _privateConstructorUsedError;
+  int get sets => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get videoPath => throw _privateConstructorUsedError;
+  List<String> get tags => throw _privateConstructorUsedError;
+  String get userExerciseId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ExerciseCopyWith<Exercise> get copyWith =>
@@ -57,12 +60,13 @@ abstract class $ExerciseCopyWith<$Res> {
   factory $ExerciseCopyWith(Exercise value, $Res Function(Exercise) then) =
       _$ExerciseCopyWithImpl<$Res>;
   $Res call(
-      {dynamic reps,
-      dynamic sets,
-      dynamic id,
-      dynamic title,
-      dynamic videoPath,
-      dynamic tags});
+      {int reps,
+      int sets,
+      String id,
+      String title,
+      String videoPath,
+      List<String> tags,
+      String userExerciseId});
 }
 
 /// @nodoc
@@ -81,32 +85,37 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
     Object? title = freezed,
     Object? videoPath = freezed,
     Object? tags = freezed,
+    Object? userExerciseId = freezed,
   }) {
     return _then(_value.copyWith(
       reps: reps == freezed
           ? _value.reps
           : reps // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int,
       sets: sets == freezed
           ? _value.sets
           : sets // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String,
       videoPath: videoPath == freezed
           ? _value.videoPath
           : videoPath // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String,
       tags: tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as List<String>,
+      userExerciseId: userExerciseId == freezed
+          ? _value.userExerciseId
+          : userExerciseId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -117,12 +126,13 @@ abstract class _$ExerciseCopyWith<$Res> implements $ExerciseCopyWith<$Res> {
       __$ExerciseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {dynamic reps,
-      dynamic sets,
-      dynamic id,
-      dynamic title,
-      dynamic videoPath,
-      dynamic tags});
+      {int reps,
+      int sets,
+      String id,
+      String title,
+      String videoPath,
+      List<String> tags,
+      String userExerciseId});
 }
 
 /// @nodoc
@@ -142,53 +152,71 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
     Object? title = freezed,
     Object? videoPath = freezed,
     Object? tags = freezed,
+    Object? userExerciseId = freezed,
   }) {
     return _then(_Exercise(
-      reps: reps == freezed ? _value.reps : reps,
-      sets: sets == freezed ? _value.sets : sets,
-      id: id == freezed ? _value.id : id,
-      title: title == freezed ? _value.title : title,
-      videoPath: videoPath == freezed ? _value.videoPath : videoPath,
-      tags: tags == freezed ? _value.tags : tags,
+      reps: reps == freezed
+          ? _value.reps
+          : reps // ignore: cast_nullable_to_non_nullable
+              as int,
+      sets: sets == freezed
+          ? _value.sets
+          : sets // ignore: cast_nullable_to_non_nullable
+              as int,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      videoPath: videoPath == freezed
+          ? _value.videoPath
+          : videoPath // ignore: cast_nullable_to_non_nullable
+              as String,
+      tags: tags == freezed
+          ? _value.tags
+          : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      userExerciseId: userExerciseId == freezed
+          ? _value.userExerciseId
+          : userExerciseId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_Exercise with DiagnosticableTreeMixin implements _Exercise {
+class _$_Exercise implements _Exercise {
   _$_Exercise(
-      {this.reps, this.sets, this.id, this.title, this.videoPath, this.tags});
+      {required this.reps,
+      required this.sets,
+      required this.id,
+      required this.title,
+      required this.videoPath,
+      required this.tags,
+      required this.userExerciseId});
 
   @override
-  final dynamic reps;
+  final int reps;
   @override
-  final dynamic sets;
+  final int sets;
   @override
-  final dynamic id;
+  final String id;
   @override
-  final dynamic title;
+  final String title;
   @override
-  final dynamic videoPath;
+  final String videoPath;
   @override
-  final dynamic tags;
+  final List<String> tags;
+  @override
+  final String userExerciseId;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Exercise(reps: $reps, sets: $sets, id: $id, title: $title, videoPath: $videoPath, tags: $tags)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Exercise'))
-      ..add(DiagnosticsProperty('reps', reps))
-      ..add(DiagnosticsProperty('sets', sets))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('videoPath', videoPath))
-      ..add(DiagnosticsProperty('tags', tags));
+  String toString() {
+    return 'Exercise(reps: $reps, sets: $sets, id: $id, title: $title, videoPath: $videoPath, tags: $tags, userExerciseId: $userExerciseId)';
   }
 
   @override
@@ -201,7 +229,9 @@ class _$_Exercise with DiagnosticableTreeMixin implements _Exercise {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.videoPath, videoPath) &&
-            const DeepCollectionEquality().equals(other.tags, tags));
+            const DeepCollectionEquality().equals(other.tags, tags) &&
+            const DeepCollectionEquality()
+                .equals(other.userExerciseId, userExerciseId));
   }
 
   @override
@@ -212,7 +242,8 @@ class _$_Exercise with DiagnosticableTreeMixin implements _Exercise {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(videoPath),
-      const DeepCollectionEquality().hash(tags));
+      const DeepCollectionEquality().hash(tags),
+      const DeepCollectionEquality().hash(userExerciseId));
 
   @JsonKey(ignore: true)
   @override
@@ -222,25 +253,28 @@ class _$_Exercise with DiagnosticableTreeMixin implements _Exercise {
 
 abstract class _Exercise implements Exercise {
   factory _Exercise(
-      {dynamic reps,
-      dynamic sets,
-      dynamic id,
-      dynamic title,
-      dynamic videoPath,
-      dynamic tags}) = _$_Exercise;
+      {required int reps,
+      required int sets,
+      required String id,
+      required String title,
+      required String videoPath,
+      required List<String> tags,
+      required String userExerciseId}) = _$_Exercise;
 
   @override
-  dynamic get reps;
+  int get reps;
   @override
-  dynamic get sets;
+  int get sets;
   @override
-  dynamic get id;
+  String get id;
   @override
-  dynamic get title;
+  String get title;
   @override
-  dynamic get videoPath;
+  String get videoPath;
   @override
-  dynamic get tags;
+  List<String> get tags;
+  @override
+  String get userExerciseId;
   @override
   @JsonKey(ignore: true)
   _$ExerciseCopyWith<_Exercise> get copyWith =>

@@ -18,7 +18,8 @@ class ExampleExercises {
           '#STRENGTH',
           '#CARDIO',
           '#STRENGTH',
-        ]),
+        ],
+        userExerciseId: ""),
     Exercise(
         sets: 3,
         reps: 12,
@@ -26,7 +27,8 @@ class ExampleExercises {
         title: 'Back Push ups',
         videoPath:
             'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-        tags: ['#BACK', '#MOBILITY']),
+        tags: ['#BACK', '#MOBILITY'],
+        userExerciseId: ""),
     Exercise(
         sets: 3,
         reps: 12,
@@ -34,7 +36,8 @@ class ExampleExercises {
         title: 'Arm push',
         videoPath:
             'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-        tags: ['#ARMS', '#STRENGTH', '#HARDCORE']),
+        tags: ['#ARMS', '#STRENGTH', '#HARDCORE'],
+        userExerciseId: ""),
     Exercise(
         sets: 3,
         reps: 12,
@@ -42,7 +45,8 @@ class ExampleExercises {
         title: 'Legs workout',
         videoPath:
             'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-        tags: ['#MOBILITY', '#LEGS']),
+        tags: ['#MOBILITY', '#LEGS'],
+        userExerciseId: ""),
     Exercise(
         sets: 3,
         reps: 12,
@@ -50,7 +54,8 @@ class ExampleExercises {
         title: 'Nothing lazy workout',
         videoPath:
             'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-        tags: ['#NOTHING', '#LAZY']),
+        tags: ['#NOTHING', '#LAZY'],
+        userExerciseId: ""),
     Exercise(
         sets: 3,
         reps: 12,
@@ -58,7 +63,8 @@ class ExampleExercises {
         title: 'Pause',
         videoPath:
             'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-        tags: ['#PAUSE']),
+        tags: ['#PAUSE'],
+        userExerciseId: ""),
     Exercise(
         sets: 3,
         reps: 12,
@@ -66,6 +72,7 @@ class ExampleExercises {
         title: 'Cardio & Strength',
         videoPath:
             'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4m',
-        tags: ['#STRENGTH', '#CARDIO', '#STRENGTH']),
+        tags: ['#STRENGTH', '#CARDIO', '#STRENGTH'],
+        userExerciseId: ""),
   ];
 }
