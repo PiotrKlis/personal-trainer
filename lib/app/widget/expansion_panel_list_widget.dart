@@ -27,8 +27,8 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
   @override
   Widget build(BuildContext context) {
     return ExpansionPanelList(
-        animationDuration:
-            Duration(seconds: Dimens.expansionPanelAnimationDuration),
+        // animationDuration:
+        //     Duration(seconds: Dimens.expansionPanelAnimationDuration),
         elevation: Dimens.expansionPanelElevation,
         expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
         expansionCallback: (index, isExpanded) {
@@ -41,6 +41,7 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
             }
           });
         },
+        //TODO: try wrapping with listview.builder. Check infinite list scroll example.
         children: widget.exercises
             .map((exercise) =>
                 _buildExpansionPanel(exercise: exercise, context: context))
@@ -57,15 +58,15 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
         children: [
           Divider(),
           _expansionPanelInfoRow(context: context, exercise: exercise),
-          SizedBox(
-            height: Dimens.videoContainerHeight,
-            child: VideoItem(
-              videoPlayerController:
-                  VideoPlayerController.network(exercise.videoPath),
-              looping: false,
-              autoplay: false,
-            ),
-          ),
+          // SizedBox(
+          //   height: Dimens.videoContainerHeight,
+          //   child: VideoItem(
+          //     videoPlayerController:
+          //         VideoPlayerController.network(exercise.videoPath),
+          //     looping: false,
+          //     autoplay: false,
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(Dimens.smallPadding),
             child: Container(

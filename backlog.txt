@@ -1,7 +1,7 @@
 MVP
 
 // Calendar Exercise & Search
-
+- Sluggish expansion panel list on many items
 - make calendar exercises
 - gestures
 - Chips
