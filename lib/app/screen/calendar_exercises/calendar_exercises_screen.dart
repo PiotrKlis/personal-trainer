@@ -26,7 +26,7 @@ class CalendarExercisesScreen extends StatelessWidget {
           title: Text(
               AppLocalizations.of(context)!.calendar_exercise_screen_title),
         ),
-        body: ListView(
+        body: Column(
           children: [
             CalendarWidget(clientId: clientId),
             Divider(),

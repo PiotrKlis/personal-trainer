@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_bloc.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_event.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
-import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:provider/src/provider.dart';
-import 'package:video_player/video_player.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ExpansionPanelListWidget extends StatefulWidget {
   final List<Exercise> exercises;
@@ -26,26 +24,28 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionPanelList(
-        // animationDuration:
-        //     Duration(seconds: Dimens.expansionPanelAnimationDuration),
-        elevation: Dimens.expansionPanelElevation,
-        expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
-        expansionCallback: (index, isExpanded) {
-          setState(() {
-            String id = widget.exercises[index].userExerciseId;
-            if (listOfExpandedExercises.contains(id)) {
-              listOfExpandedExercises.remove(id);
-            } else {
-              listOfExpandedExercises.add(id);
-            }
-          });
-        },
-        //TODO: try wrapping with listview.builder. Check infinite list scroll example.
-        children: widget.exercises
-            .map((exercise) =>
-                _buildExpansionPanel(exercise: exercise, context: context))
-            .toList());
+    return Expanded(
+      child: SingleChildScrollView(
+          child: ExpansionPanelList(
+              animationDuration: Duration(
+                  milliseconds: Dimens.expansionPanelAnimationDuration),
+              elevation: Dimens.expansionPanelElevation,
+              expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
+              expansionCallback: (index, isExpanded) {
+                setState(() {
+                  String id = widget.exercises[index].userExerciseId;
+                  if (listOfExpandedExercises.contains(id)) {
+                    listOfExpandedExercises.remove(id);
+                  } else {
+                    listOfExpandedExercises.add(id);
+                  }
+                });
+              },
+              children: widget.exercises
+                  .map((exercise) => _buildExpansionPanel(
+                      exercise: exercise, context: context))
+                  .toList())),
+    );
   }
 
   ExpansionPanel _buildExpansionPanel(
