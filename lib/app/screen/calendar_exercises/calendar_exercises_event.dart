@@ -1,55 +1,62 @@
-import 'package:personal_trainer/domain/model/exercise.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+part 'calendar_exercises_event.freezed.dart';
 
-abstract class CalendarExerciseEvent {}
+@freezed
+class CalendarExerciseEvent with _$CalendarExerciseEvent {
+  const factory CalendarExerciseEvent.newDateSelected(
+      {required DateTime selectedDate,
+      required String clientId}) = _NewDateSelected;
 
-class CalendarExercisesNewDateSelected extends CalendarExerciseEvent {
-  final DateTime selectedDate;
-  final String clientId;
+  const factory CalendarExerciseEvent.setsSubmit(
+      {required String clientId,
+      required String setsNumber,
+      required String userExerciseId}) = _SetsSubmit;
 
-  CalendarExercisesNewDateSelected(
-      {required this.selectedDate, required this.clientId});
+  const factory CalendarExerciseEvent.repsSubmit(
+      {required String clientId,
+      required String repsNumber,
+      required String userExerciseId}) = _RepsSubmit;
+
+  const factory CalendarExerciseEvent.navigateToSearchScreen(
+      {required String clientId}) = _SearchNavigation;
+
+  const factory CalendarExerciseEvent.exerciseDeleted({required String userExerciseId}) = _ExerciseDeleted;
 }
 
-class CalendarExercisesDateFormatChanged extends CalendarExerciseEvent {
-  final CalendarFormat calendarFormat;
-
-  CalendarExercisesDateFormatChanged(this.calendarFormat);
-}
-
-class CalendarExercisesPanelExpanded extends CalendarExerciseEvent {
-  final String exerciseId;
-  final bool isExpanded;
-  final List<Exercise> exercises;
-
-  CalendarExercisesPanelExpanded(
-      this.exerciseId, this.isExpanded, this.exercises);
-}
-
-class CalendarExercisesSetsSubmit extends CalendarExerciseEvent {
-  final String clientId;
-  final String setsNumber;
-  final String userExerciseId;
-
-  CalendarExercisesSetsSubmit(
-      {required this.clientId,
-      required this.setsNumber,
-      required this.userExerciseId});
-}
-
-class CalendarExercisesRepsSubmit extends CalendarExerciseEvent {
-  final String clientId;
-  final String repsNumber;
-  final String userExerciseId;
-
-  CalendarExercisesRepsSubmit(
-      {required this.clientId,
-      required this.repsNumber,
-      required this.userExerciseId});
-}
-
-class CalendarExerciseToSearchNavigation extends CalendarExerciseEvent {
-  final String clientId;
-
-  CalendarExerciseToSearchNavigation(this.clientId);
-}
+// abstract class CalendarExerciseEvent {}
+//
+// class CalendarExercisesNewDateSelected extends CalendarExerciseEvent {
+//   final DateTime selectedDate;
+//   final String clientId;
+//
+//   CalendarExercisesNewDateSelected(
+//       {required this.selectedDate, required this.clientId});
+// }
+//
+// class CalendarExercisesSetsSubmit extends CalendarExerciseEvent {
+//   final String clientId;
+//   final String setsNumber;
+//   final String userExerciseId;
+//
+//   CalendarExercisesSetsSubmit(
+//       {required this.clientId,
+//       required this.setsNumber,
+//       required this.userExerciseId});
+// }
+//
+// class CalendarExercisesRepsSubmit extends CalendarExerciseEvent {
+//   final String clientId;
+//   final String repsNumber;
+//   final String userExerciseId;
+//
+//   CalendarExercisesRepsSubmit(
+//       {required this.clientId,
+//       required this.repsNumber,
+//       required this.userExerciseId});
+// }
+//
+// class CalendarExerciseToSearchNavigation extends CalendarExerciseEvent {
+//   final String clientId;
+//
+//   CalendarExerciseToSearchNavigation(this.clientId);
+// }

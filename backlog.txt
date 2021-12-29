@@ -1,8 +1,12 @@
 MVP
 
-// Calendar Exercise & Search
-- make calendar exercises
-- gestures
+// Calendar Exercise
+- remove exercise
+- reorder exercise
+- test cases
+
+// Search
+- Refactor!
 - Chips
 - Error on search on navigation
 - Check feature

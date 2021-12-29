@@ -190,7 +190,7 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Exercise implements _Exercise {
-  _$_Exercise(
+  const _$_Exercise(
       {required this.reps,
       required this.sets,
       required this.id,
@@ -252,7 +252,7 @@ class _$_Exercise implements _Exercise {
 }
 
 abstract class _Exercise implements Exercise {
-  factory _Exercise(
+  const factory _Exercise(
       {required int reps,
       required int sets,
       required String id,

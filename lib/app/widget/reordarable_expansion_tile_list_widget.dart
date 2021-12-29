@@ -7,19 +7,19 @@ import 'package:personal_trainer/app/util/dimens.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:provider/src/provider.dart';
 
-class ExpansionPanelListWidget extends StatefulWidget {
+class ReordarableExpansionTileListWidget extends StatefulWidget {
   final List<Exercise> exercises;
   final String clientId;
 
-  const ExpansionPanelListWidget(
+  const ReordarableExpansionTileListWidget(
       {required this.exercises, required this.clientId});
 
   @override
-  _ExpansionPanelListWidgetState createState() =>
-      _ExpansionPanelListWidgetState();
+  _ReordarableExpansionTileListWidgetState createState() =>
+      _ReordarableExpansionTileListWidgetState();
 }
 
-class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
+class _ReordarableExpansionTileListWidgetState extends State<ReordarableExpansionTileListWidget> {
   List<String> listOfExpandedExercises = [];
 
   @override
@@ -28,7 +28,7 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
       child: ReorderableListView(
           children: widget.exercises
               .map((exercise) =>
-                  _buildExpansionPanel(exercise: exercise, context: context))
+                  _buildExpansionTile(exercise: exercise, context: context))
               .toList(),
           onReorder: (old, newer) {
             //TODO: reorder stuff
@@ -36,13 +36,13 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
     );
   }
 
-  Dismissible _buildExpansionPanel(
+  Dismissible _buildExpansionTile(
       {required Exercise exercise, required BuildContext context}) {
     return Dismissible(
       background: Container(color: Colors.red),
       key: Key(exercise.userExerciseId),
       onDismissed: (direction) {
-        // TODO: remove exercise from db
+        // context.read<CalendarExercisesBloc>().add(CalendarExercisesExerciseDeleted(exercise.userExerciseId));
       },
       child: ExpansionTile(
         key: Key(exercise.userExerciseId),
@@ -149,23 +149,6 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
           ),
         ),
       ],
-    );
-  }
-
-  Dismissible _expansionPanelHeader(Exercise exercise) {
-    return Dismissible(
-      background: Container(color: Colors.red),
-      key: Key(exercise.userExerciseId),
-      child: ListTile(
-        leading: Icon(Icons.fitness_center),
-        title: Text(
-          exercise.title,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
-      onDismissed: (direction) {
-        // TODO: remove exercise from db
-      },
     );
   }
 }

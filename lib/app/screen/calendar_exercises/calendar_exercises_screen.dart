@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
 import 'package:personal_trainer/app/widget/calendar_widget.dart';
 import 'package:personal_trainer/app/widget/error_view.dart';
-import 'package:personal_trainer/app/widget/expansion_panel_list_widget.dart';
+import 'package:personal_trainer/app/widget/reordarable_expansion_tile_list_widget.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
 import 'calendar_exercises_bloc.dart';
@@ -53,7 +53,7 @@ class SearchExercisesButton extends StatelessWidget {
       onPressed: () {
         context
             .read<CalendarExercisesBloc>()
-            .add(CalendarExerciseToSearchNavigation(clientId));
+            .add(CalendarExerciseEvent.navigateToSearchScreen(clientId: clientId));
       },
       child: const Icon(Icons.add),
     );
@@ -80,7 +80,7 @@ class ExerciseExpansionPanels extends StatelessWidget {
   }
 
   Container _handleInitialState(BuildContext context) {
-    context.read<CalendarExercisesBloc>().add(CalendarExercisesNewDateSelected(
+    context.read<CalendarExercisesBloc>().add(CalendarExerciseEvent.newDateSelected(
         selectedDate: DateTime.now(), clientId: clientId));
     return Container();
   }
@@ -88,7 +88,7 @@ class ExerciseExpansionPanels extends StatelessWidget {
   Widget _handleDataLoadSuccess(
       List<Exercise> exercises, BuildContext context) {
     if (exercises.isNotEmpty) {
-      return ExpansionPanelListWidget(exercises: exercises, clientId: clientId);
+      return ReordarableExpansionTileListWidget(exercises: exercises, clientId: clientId);
     } else {
       return _handleNoExercises(context: context);
     }

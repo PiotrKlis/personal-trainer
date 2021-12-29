@@ -19,8 +19,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'exercise.freezed.dart';
 
 @freezed
-abstract class Exercise with _$Exercise {
-  factory Exercise(
+class Exercise with _$Exercise {
+  const factory Exercise(
       {required int reps,
       required int sets,
       required String id,
