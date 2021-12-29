@@ -25,48 +25,46 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: SingleChildScrollView(
-          child: ExpansionPanelList(
-              animationDuration: Duration(
-                  milliseconds: Dimens.expansionPanelAnimationDuration),
-              elevation: Dimens.expansionPanelElevation,
-              expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
-              expansionCallback: (index, isExpanded) {
-                setState(() {
-                  String id = widget.exercises[index].userExerciseId;
-                  if (listOfExpandedExercises.contains(id)) {
-                    listOfExpandedExercises.remove(id);
-                  } else {
-                    listOfExpandedExercises.add(id);
-                  }
-                });
-              },
-              children: widget.exercises
-                  .map((exercise) => _buildExpansionPanel(
-                      exercise: exercise, context: context))
-                  .toList())),
+      child: ReorderableListView(
+          children: widget.exercises
+              .map((exercise) =>
+                  _buildExpansionPanel(exercise: exercise, context: context))
+              .toList(),
+          onReorder: (old, newer) {
+            //TODO: reorder stuff
+          }),
     );
   }
 
-  ExpansionPanel _buildExpansionPanel(
+  Dismissible _buildExpansionPanel(
       {required Exercise exercise, required BuildContext context}) {
-    return ExpansionPanel(
-      isExpanded: listOfExpandedExercises.contains(exercise.userExerciseId),
-      canTapOnHeader: true,
-      headerBuilder: (context, isExpanded) => _expansionPanelHeader(exercise),
-      body: Column(
+    return Dismissible(
+      background: Container(color: Colors.red),
+      key: Key(exercise.userExerciseId),
+      onDismissed: (direction) {
+        // TODO: remove exercise from db
+      },
+      child: ExpansionTile(
+        key: Key(exercise.userExerciseId),
+        title: Text(
+          exercise.title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        initiallyExpanded:
+            listOfExpandedExercises.contains(exercise.userExerciseId),
+        leading: Icon(Icons.fitness_center),
         children: [
           Divider(),
           _expansionPanelInfoRow(context: context, exercise: exercise),
-          // SizedBox(
-          //   height: Dimens.videoContainerHeight,
-          //   child: VideoItem(
-          //     videoPlayerController:
-          //         VideoPlayerController.network(exercise.videoPath),
-          //     looping: false,
-          //     autoplay: false,
-          //   ),
-          // ),
+          SizedBox(
+            height: Dimens.videoContainerHeight,
+            // child: VideoItem(
+            //   videoPlayerController:
+            //       VideoPlayerController.network(exercise.videoPath),
+            //   looping: false,
+            //   autoplay: false,
+            // ),
+          ),
           Padding(
             padding: const EdgeInsets.all(Dimens.smallPadding),
             child: Container(
@@ -154,13 +152,20 @@ class _ExpansionPanelListWidgetState extends State<ExpansionPanelListWidget> {
     );
   }
 
-  ListTile _expansionPanelHeader(Exercise exercise) {
-    return ListTile(
-      leading: Icon(Icons.fitness_center),
-      title: Text(
-        exercise.title,
-        style: TextStyle(fontWeight: FontWeight.bold),
+  Dismissible _expansionPanelHeader(Exercise exercise) {
+    return Dismissible(
+      background: Container(color: Colors.red),
+      key: Key(exercise.userExerciseId),
+      child: ListTile(
+        leading: Icon(Icons.fitness_center),
+        title: Text(
+          exercise.title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
+      onDismissed: (direction) {
+        // TODO: remove exercise from db
+      },
     );
   }
 }

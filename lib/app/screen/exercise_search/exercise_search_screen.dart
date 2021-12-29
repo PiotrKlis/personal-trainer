@@ -76,8 +76,10 @@ BlocListener _addExerciseBlocListener() {
       switch (state.runtimeType) {
         case ExerciseSearchAddExerciseSuccess:
           state as ExerciseSearchAddExerciseSuccess;
-          ToastMessage.show(
-              "${state.exerciseName} ${AppLocalizations.of(context)!.exercise_added_message}");
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(milliseconds: 500),
+              content: Text(
+                  "${state.exerciseName} ${AppLocalizations.of(context)!.exercise_added_message}")));
           break;
         case ExerciseSearchAddExerciseFailure:
           state as ExerciseSearchAddExerciseFailure;
