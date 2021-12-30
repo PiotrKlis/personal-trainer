@@ -19,7 +19,8 @@ class ReordarableExpansionTileListWidget extends StatefulWidget {
       _ReordarableExpansionTileListWidgetState();
 }
 
-class _ReordarableExpansionTileListWidgetState extends State<ReordarableExpansionTileListWidget> {
+class _ReordarableExpansionTileListWidgetState
+    extends State<ReordarableExpansionTileListWidget> {
   List<String> listOfExpandedExercises = [];
 
   @override
@@ -42,7 +43,10 @@ class _ReordarableExpansionTileListWidgetState extends State<ReordarableExpansio
       background: Container(color: Colors.red),
       key: Key(exercise.userExerciseId),
       onDismissed: (direction) {
-        // context.read<CalendarExercisesBloc>().add(CalendarExercisesExerciseDeleted(exercise.userExerciseId));
+        context.read<CalendarExercisesBloc>().add(
+            CalendarExerciseEvent.exerciseDeleted(
+                userExerciseId: exercise.userExerciseId,
+                clientId: widget.clientId));
       },
       child: ExpansionTile(
         key: Key(exercise.userExerciseId),
@@ -116,7 +120,7 @@ class _ReordarableExpansionTileListWidgetState extends State<ReordarableExpansio
               textAlign: TextAlign.center,
               onChanged: (value) {
                 context.read<CalendarExercisesBloc>().add(
-                    CalendarExercisesSetsSubmit(
+                    CalendarExerciseEvent.setsSubmit(
                         clientId: widget.clientId,
                         setsNumber: value,
                         userExerciseId: exercise.userExerciseId));
@@ -139,7 +143,7 @@ class _ReordarableExpansionTileListWidgetState extends State<ReordarableExpansio
               textAlign: TextAlign.center,
               onChanged: (value) {
                 context.read<CalendarExercisesBloc>().add(
-                    CalendarExercisesRepsSubmit(
+                    CalendarExerciseEvent.repsSubmit(
                         clientId: widget.clientId,
                         repsNumber: value,
                         userExerciseId: exercise.userExerciseId));

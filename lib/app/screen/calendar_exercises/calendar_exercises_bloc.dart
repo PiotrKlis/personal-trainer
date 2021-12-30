@@ -9,105 +9,137 @@ import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
 import 'calendar_exercises_event.dart';
-import 'calendar_exercises_event.dart';
 import 'calendar_exercises_state.dart';
 
 class CalendarExercisesBloc
     extends Bloc<CalendarExerciseEvent, CalendarExercisesState> {
   final CalendarExerciseProvider _calendarExerciseProvider =
-  GetIt.I.get<CalendarExerciseProvider>();
+      GetIt.I.get<CalendarExerciseProvider>();
   final AutoRouteNavigator _navigator = AutoRouteNavigator();
   var _selectedDate = DateTime.now();
   List<Exercise> _exercises = [];
 
-  //TODO: there's gonna be probably need to have on on<> and then do when
   CalendarExercisesBloc(CalendarExercisesState initialState)
       : super(initialState) {
-    on<CalendarExerciseEvent>((event, emit) async {
-      event.when(
-          newDateSelected: newDateSelected,
-          setsSubmit: setsSubmit,
-          repsSubmit: repsSubmit,
-          navigateToSearchScreen: navigateToSearchScreen,
-          exerciseDeleted: exerciseDeleted)
+    on<CalendarExerciseEvent>((event, emitter) async {
+      await event.whenOrNull(
+          newDateSelected: (selectedDate, clientId) => _newDateSelected(
+              emit: emitter, selectedDate: selectedDate, clientId: clientId),
+          navigateToSearchScreen: (clientId) =>
+              _navigateToSearch(emitter: emitter, clientId: clientId),
+          exerciseDeleted: (userExerciseId, clientId) => _deleteExercise(
+              emitter: emitter,
+              userExerciseId: userExerciseId,
+              clientId: clientId),
+          setsSubmit: (clientId, setsNumber, userExerciseId) => _setsSubmit(
+              emitter: emitter,
+              clientId: clientId,
+              setsNumber: setsNumber,
+              userExerciseId: userExerciseId),
+          repsSubmit: (clientId, repsNumber, userExerciseId) => _repsSubmit(
+              emitter: emitter,
+              clientId: clientId,
+              repsNumber: repsNumber,
+              userExerciseId: userExerciseId));
     });
+  }
 
-    on<CalendarExerciseEvent.newDateSelected>((event, emit) async {
-      emit(CalendarExercisesState.loading());
+  _newDateSelected(
+      {required Emitter<CalendarExercisesState> emit,
+      required DateTime selectedDate,
+      required String clientId}) async {
+    emit(CalendarExercisesState.loading());
+    await _calendarExerciseProvider
+        .getExercisesFor(selectedDay: selectedDate, clientId: clientId)
+        .then((exercises) {
+      emit(CalendarExercisesState.content(exercises: exercises));
+      _selectedDate = selectedDate;
+      _exercises = exercises;
+    }).catchError((error) {
+      emit(CalendarExercisesState.error(error: error.toString()));
+    });
+  }
+
+  _setsSubmit(
+      {required Emitter<CalendarExercisesState> emitter,
+      required String clientId,
+      required String setsNumber,
+      required String userExerciseId}) async {
+    var formattedNumber = int.tryParse(setsNumber) ?? 0;
+    await _calendarExerciseProvider
+        .updateSetsNumberForExercise(
+            clientId: clientId,
+            setsNumber: int.parse(setsNumber),
+            userExerciseId: userExerciseId,
+            selectedDate: _selectedDate)
+        .then((value) {
+      var updatedExercise = _exercises
+          .firstWhere((element) => element.userExerciseId == userExerciseId)
+          .copyWith(sets: formattedNumber);
+      _exercises[_exercises.indexWhere(
+              (element) => element.userExerciseId == userExerciseId)] =
+          updatedExercise;
+      Log.d("Sets number updated to $setsNumber");
+      emitter(CalendarExercisesState.content(exercises: _exercises));
+    });
+  }
+
+  _repsSubmit(
+      {required Emitter<CalendarExercisesState> emitter,
+      required String clientId,
+      required String repsNumber,
+      required String userExerciseId}) async {
+    var formattedNumber = int.tryParse(repsNumber) ?? 0;
+    await _calendarExerciseProvider
+        .updateRepsNumberForExercise(
+            clientId: clientId,
+            repsNumber: formattedNumber,
+            userExerciseId: userExerciseId,
+            selectedDate: _selectedDate)
+        .then((value) {
+      var updatedExercise = _exercises
+          .firstWhere((element) => element.userExerciseId == userExerciseId)
+          .copyWith(reps: formattedNumber);
+      _exercises[_exercises.indexWhere(
+              (element) => element.userExerciseId == userExerciseId)] =
+          updatedExercise;
+      Log.d("Reps number updated $repsNumber");
+      emitter(CalendarExercisesState.content(exercises: _exercises));
+    });
+  }
+
+  _navigateToSearch(
+      {required Emitter<CalendarExercisesState> emitter,
+      required String clientId}) async {
+    await _navigator
+        .navigateToExerciseSearch(
+            selectedDate: _selectedDate, clientId: clientId)
+        .then((value) async {
+      emitter(CalendarExercisesState.loading());
       await _calendarExerciseProvider
-          .getExercisesFor(
-          selectedDay: event.selectedDate, clientId: event.clientId)
+          .getExercisesFor(selectedDay: _selectedDate, clientId: clientId)
           .then((exercises) {
-        emit(CalendarExercisesState.content(exercises: exercises));
-        _selectedDate = event.selectedDate;
         _exercises = exercises;
+        emitter(CalendarExercisesState.content(exercises: exercises));
       }).catchError((error) {
-        emit(CalendarExercisesState.error(error: error.toString()));
+        emitter(CalendarExercisesState.error(error: error.toString()));
       });
     });
+  }
 
-    on<CalendarExercisesSetsSubmit>((event, emit) async {
-      var formattedNumber = int.tryParse(event.setsNumber) ?? 0;
-      await _calendarExerciseProvider
-          .updateSetsNumberForExercise(
-          clientId: event.clientId,
-          setsNumber: int.parse(event.setsNumber),
-          userExerciseId: event.userExerciseId,
-          selectedDate: _selectedDate)
-          .then((value) {
-        var updatedExercise = _exercises
-            .firstWhere(
-                (element) => element.userExerciseId == event.userExerciseId)
-            .copyWith(sets: formattedNumber);
-        _exercises[_exercises.indexWhere(
-                (element) => element.userExerciseId == event.userExerciseId)] =
-            updatedExercise;
-        Log.d("Sets number updated to ${event.setsNumber}");
-        emit(CalendarExercisesState.content(exercises: _exercises));
-      });
-    },
-        transformer:
-        debounce(Duration(milliseconds: DurationConst.debounceTime)));
-
-    on<CalendarExercisesRepsSubmit>((event, emit) async {
-      var formattedNumber = int.tryParse(event.repsNumber) ?? 0;
-      await _calendarExerciseProvider
-          .updateRepsNumberForExercise(
-          clientId: event.clientId,
-          repsNumber: formattedNumber,
-          userExerciseId: event.userExerciseId,
-          selectedDate: _selectedDate)
-          .then((value) {
-        var updatedExercise = _exercises
-            .firstWhere(
-                (element) => element.userExerciseId == event.userExerciseId)
-            .copyWith(reps: formattedNumber);
-        _exercises[_exercises.indexWhere(
-                (element) => element.userExerciseId == event.userExerciseId)] =
-            updatedExercise;
-        Log.d("Reps number updated ${event.repsNumber}");
-        emit(CalendarExercisesState.content(exercises: _exercises));
-      });
-    },
-        transformer:
-        debounce(Duration(milliseconds: DurationConst.debounceTime)));
-
-    on<CalendarExerciseToSearchNavigation>((event, emit) async {
-      await _navigator
-          .navigateToExerciseSearch(
-          selectedDate: _selectedDate, clientId: event.clientId)
-          .then((value) async {
-        emit(CalendarExercisesState.loading());
-        await _calendarExerciseProvider
-            .getExercisesFor(
-            selectedDay: _selectedDate, clientId: event.clientId)
-            .then((exercises) {
-          _exercises = exercises;
-          emit(CalendarExercisesState.content(exercises: exercises));
-        }).catchError((error) {
-          emit(CalendarExercisesState.error(error: error.toString()));
-        });
-      });
+  _deleteExercise(
+      {required Emitter<CalendarExercisesState> emitter,
+      required String userExerciseId,
+      required String clientId}) async {
+    await _calendarExerciseProvider
+        .deleteExercise(
+            userExerciseId: userExerciseId,
+            clientId: clientId,
+            selectedDate: _selectedDate)
+        .then((value) {
+      _exercises
+          .removeWhere((element) => element.userExerciseId == userExerciseId);
+      emitter(CalendarExercisesState.content(exercises: _exercises));
     });
   }
 }

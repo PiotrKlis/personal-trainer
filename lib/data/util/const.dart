@@ -4,9 +4,11 @@ class FirebaseConstants {
   static String trainerCollection = 'trainer';
   static String dataCollection = 'data';
   static String clientCollection = 'client';
+  static String repsCollection = 'reps';
+  static String setsCollection = 'sets';
 }
 
 class DurationConst {
-  static int debounceTime = 300;
+  static int debounceTime = 100;
   static int longerDebounceTime = 400;
 }

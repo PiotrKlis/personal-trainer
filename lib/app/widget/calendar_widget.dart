@@ -36,7 +36,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
           onDaySelected: (selectedDate, focusedDay) {
             _selectedDate = selectedDate;
             context.read<CalendarExercisesBloc>().add(
-                CalendarExercisesNewDateSelected(
+                CalendarExerciseEvent.newDateSelected(
                     selectedDate: selectedDate, clientId: widget.clientId));
           },
           onFormatChanged: (calendarFormat) {

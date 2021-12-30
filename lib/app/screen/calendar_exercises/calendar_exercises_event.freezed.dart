@@ -25,6 +25,20 @@ class _$CalendarExerciseEventTearOff {
     );
   }
 
+  _SearchNavigation navigateToSearchScreen({required String clientId}) {
+    return _SearchNavigation(
+      clientId: clientId,
+    );
+  }
+
+  _ExerciseDeleted exerciseDeleted(
+      {required String userExerciseId, required String clientId}) {
+    return _ExerciseDeleted(
+      userExerciseId: userExerciseId,
+      clientId: clientId,
+    );
+  }
+
   _SetsSubmit setsSubmit(
       {required String clientId,
       required String setsNumber,
@@ -46,18 +60,6 @@ class _$CalendarExerciseEventTearOff {
       userExerciseId: userExerciseId,
     );
   }
-
-  _SearchNavigation navigateToSearchScreen({required String clientId}) {
-    return _SearchNavigation(
-      clientId: clientId,
-    );
-  }
-
-  _ExerciseDeleted exerciseDeleted({required String userExerciseId}) {
-    return _ExerciseDeleted(
-      userExerciseId: userExerciseId,
-    );
-  }
 }
 
 /// @nodoc
@@ -65,70 +67,77 @@ const $CalendarExerciseEvent = _$CalendarExerciseEventTearOff();
 
 /// @nodoc
 mixin _$CalendarExerciseEvent {
+  String get clientId => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime selectedDate, String clientId)
         newDateSelected,
+    required TResult Function(String clientId) navigateToSearchScreen,
+    required TResult Function(String userExerciseId, String clientId)
+        exerciseDeleted,
     required TResult Function(
             String clientId, String setsNumber, String userExerciseId)
         setsSubmit,
     required TResult Function(
             String clientId, String repsNumber, String userExerciseId)
         repsSubmit,
-    required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId) exerciseDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_NewDateSelected value) newDateSelected,
-    required TResult Function(_SetsSubmit value) setsSubmit,
-    required TResult Function(_RepsSubmit value) repsSubmit,
     required TResult Function(_SearchNavigation value) navigateToSearchScreen,
     required TResult Function(_ExerciseDeleted value) exerciseDeleted,
+    required TResult Function(_SetsSubmit value) setsSubmit,
+    required TResult Function(_RepsSubmit value) repsSubmit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
     TResult Function(_SearchNavigation value)? navigateToSearchScreen,
     TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
     TResult Function(_SearchNavigation value)? navigateToSearchScreen,
     TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $CalendarExerciseEventCopyWith<CalendarExerciseEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -137,6 +146,7 @@ abstract class $CalendarExerciseEventCopyWith<$Res> {
   factory $CalendarExerciseEventCopyWith(CalendarExerciseEvent value,
           $Res Function(CalendarExerciseEvent) then) =
       _$CalendarExerciseEventCopyWithImpl<$Res>;
+  $Res call({String clientId});
 }
 
 /// @nodoc
@@ -147,13 +157,27 @@ class _$CalendarExerciseEventCopyWithImpl<$Res>
   final CalendarExerciseEvent _value;
   // ignore: unused_field
   final $Res Function(CalendarExerciseEvent) _then;
+
+  @override
+  $Res call({
+    Object? clientId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      clientId: clientId == freezed
+          ? _value.clientId
+          : clientId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$NewDateSelectedCopyWith<$Res> {
+abstract class _$NewDateSelectedCopyWith<$Res>
+    implements $CalendarExerciseEventCopyWith<$Res> {
   factory _$NewDateSelectedCopyWith(
           _NewDateSelected value, $Res Function(_NewDateSelected) then) =
       __$NewDateSelectedCopyWithImpl<$Res>;
+  @override
   $Res call({DateTime selectedDate, String clientId});
 }
 
@@ -228,14 +252,15 @@ class _$_NewDateSelected implements _NewDateSelected {
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime selectedDate, String clientId)
         newDateSelected,
+    required TResult Function(String clientId) navigateToSearchScreen,
+    required TResult Function(String userExerciseId, String clientId)
+        exerciseDeleted,
     required TResult Function(
             String clientId, String setsNumber, String userExerciseId)
         setsSubmit,
     required TResult Function(
             String clientId, String repsNumber, String userExerciseId)
         repsSubmit,
-    required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId) exerciseDeleted,
   }) {
     return newDateSelected(selectedDate, clientId);
   }
@@ -244,12 +269,12 @@ class _$_NewDateSelected implements _NewDateSelected {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
   }) {
     return newDateSelected?.call(selectedDate, clientId);
   }
@@ -258,12 +283,12 @@ class _$_NewDateSelected implements _NewDateSelected {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
     required TResult orElse(),
   }) {
     if (newDateSelected != null) {
@@ -276,10 +301,10 @@ class _$_NewDateSelected implements _NewDateSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_NewDateSelected value) newDateSelected,
-    required TResult Function(_SetsSubmit value) setsSubmit,
-    required TResult Function(_RepsSubmit value) repsSubmit,
     required TResult Function(_SearchNavigation value) navigateToSearchScreen,
     required TResult Function(_ExerciseDeleted value) exerciseDeleted,
+    required TResult Function(_SetsSubmit value) setsSubmit,
+    required TResult Function(_RepsSubmit value) repsSubmit,
   }) {
     return newDateSelected(this);
   }
@@ -288,10 +313,10 @@ class _$_NewDateSelected implements _NewDateSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
     TResult Function(_SearchNavigation value)? navigateToSearchScreen,
     TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
   }) {
     return newDateSelected?.call(this);
   }
@@ -300,10 +325,10 @@ class _$_NewDateSelected implements _NewDateSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
     TResult Function(_SearchNavigation value)? navigateToSearchScreen,
     TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
     required TResult orElse(),
   }) {
     if (newDateSelected != null) {
@@ -319,17 +344,369 @@ abstract class _NewDateSelected implements CalendarExerciseEvent {
       required String clientId}) = _$_NewDateSelected;
 
   DateTime get selectedDate;
+  @override
   String get clientId;
+  @override
   @JsonKey(ignore: true)
   _$NewDateSelectedCopyWith<_NewDateSelected> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$SetsSubmitCopyWith<$Res> {
+abstract class _$SearchNavigationCopyWith<$Res>
+    implements $CalendarExerciseEventCopyWith<$Res> {
+  factory _$SearchNavigationCopyWith(
+          _SearchNavigation value, $Res Function(_SearchNavigation) then) =
+      __$SearchNavigationCopyWithImpl<$Res>;
+  @override
+  $Res call({String clientId});
+}
+
+/// @nodoc
+class __$SearchNavigationCopyWithImpl<$Res>
+    extends _$CalendarExerciseEventCopyWithImpl<$Res>
+    implements _$SearchNavigationCopyWith<$Res> {
+  __$SearchNavigationCopyWithImpl(
+      _SearchNavigation _value, $Res Function(_SearchNavigation) _then)
+      : super(_value, (v) => _then(v as _SearchNavigation));
+
+  @override
+  _SearchNavigation get _value => super._value as _SearchNavigation;
+
+  @override
+  $Res call({
+    Object? clientId = freezed,
+  }) {
+    return _then(_SearchNavigation(
+      clientId: clientId == freezed
+          ? _value.clientId
+          : clientId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SearchNavigation implements _SearchNavigation {
+  const _$_SearchNavigation({required this.clientId});
+
+  @override
+  final String clientId;
+
+  @override
+  String toString() {
+    return 'CalendarExerciseEvent.navigateToSearchScreen(clientId: $clientId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SearchNavigation &&
+            const DeepCollectionEquality().equals(other.clientId, clientId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(clientId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$SearchNavigationCopyWith<_SearchNavigation> get copyWith =>
+      __$SearchNavigationCopyWithImpl<_SearchNavigation>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(DateTime selectedDate, String clientId)
+        newDateSelected,
+    required TResult Function(String clientId) navigateToSearchScreen,
+    required TResult Function(String userExerciseId, String clientId)
+        exerciseDeleted,
+    required TResult Function(
+            String clientId, String setsNumber, String userExerciseId)
+        setsSubmit,
+    required TResult Function(
+            String clientId, String repsNumber, String userExerciseId)
+        repsSubmit,
+  }) {
+    return navigateToSearchScreen(clientId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+        setsSubmit,
+    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+        repsSubmit,
+  }) {
+    return navigateToSearchScreen?.call(clientId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+        setsSubmit,
+    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+        repsSubmit,
+    required TResult orElse(),
+  }) {
+    if (navigateToSearchScreen != null) {
+      return navigateToSearchScreen(clientId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_NewDateSelected value) newDateSelected,
+    required TResult Function(_SearchNavigation value) navigateToSearchScreen,
+    required TResult Function(_ExerciseDeleted value) exerciseDeleted,
+    required TResult Function(_SetsSubmit value) setsSubmit,
+    required TResult Function(_RepsSubmit value) repsSubmit,
+  }) {
+    return navigateToSearchScreen(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_NewDateSelected value)? newDateSelected,
+    TResult Function(_SearchNavigation value)? navigateToSearchScreen,
+    TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
+  }) {
+    return navigateToSearchScreen?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_NewDateSelected value)? newDateSelected,
+    TResult Function(_SearchNavigation value)? navigateToSearchScreen,
+    TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
+    required TResult orElse(),
+  }) {
+    if (navigateToSearchScreen != null) {
+      return navigateToSearchScreen(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchNavigation implements CalendarExerciseEvent {
+  const factory _SearchNavigation({required String clientId}) =
+      _$_SearchNavigation;
+
+  @override
+  String get clientId;
+  @override
+  @JsonKey(ignore: true)
+  _$SearchNavigationCopyWith<_SearchNavigation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$ExerciseDeletedCopyWith<$Res>
+    implements $CalendarExerciseEventCopyWith<$Res> {
+  factory _$ExerciseDeletedCopyWith(
+          _ExerciseDeleted value, $Res Function(_ExerciseDeleted) then) =
+      __$ExerciseDeletedCopyWithImpl<$Res>;
+  @override
+  $Res call({String userExerciseId, String clientId});
+}
+
+/// @nodoc
+class __$ExerciseDeletedCopyWithImpl<$Res>
+    extends _$CalendarExerciseEventCopyWithImpl<$Res>
+    implements _$ExerciseDeletedCopyWith<$Res> {
+  __$ExerciseDeletedCopyWithImpl(
+      _ExerciseDeleted _value, $Res Function(_ExerciseDeleted) _then)
+      : super(_value, (v) => _then(v as _ExerciseDeleted));
+
+  @override
+  _ExerciseDeleted get _value => super._value as _ExerciseDeleted;
+
+  @override
+  $Res call({
+    Object? userExerciseId = freezed,
+    Object? clientId = freezed,
+  }) {
+    return _then(_ExerciseDeleted(
+      userExerciseId: userExerciseId == freezed
+          ? _value.userExerciseId
+          : userExerciseId // ignore: cast_nullable_to_non_nullable
+              as String,
+      clientId: clientId == freezed
+          ? _value.clientId
+          : clientId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ExerciseDeleted implements _ExerciseDeleted {
+  const _$_ExerciseDeleted(
+      {required this.userExerciseId, required this.clientId});
+
+  @override
+  final String userExerciseId;
+  @override
+  final String clientId;
+
+  @override
+  String toString() {
+    return 'CalendarExerciseEvent.exerciseDeleted(userExerciseId: $userExerciseId, clientId: $clientId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ExerciseDeleted &&
+            const DeepCollectionEquality()
+                .equals(other.userExerciseId, userExerciseId) &&
+            const DeepCollectionEquality().equals(other.clientId, clientId));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(userExerciseId),
+      const DeepCollectionEquality().hash(clientId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$ExerciseDeletedCopyWith<_ExerciseDeleted> get copyWith =>
+      __$ExerciseDeletedCopyWithImpl<_ExerciseDeleted>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(DateTime selectedDate, String clientId)
+        newDateSelected,
+    required TResult Function(String clientId) navigateToSearchScreen,
+    required TResult Function(String userExerciseId, String clientId)
+        exerciseDeleted,
+    required TResult Function(
+            String clientId, String setsNumber, String userExerciseId)
+        setsSubmit,
+    required TResult Function(
+            String clientId, String repsNumber, String userExerciseId)
+        repsSubmit,
+  }) {
+    return exerciseDeleted(userExerciseId, clientId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+        setsSubmit,
+    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+        repsSubmit,
+  }) {
+    return exerciseDeleted?.call(userExerciseId, clientId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+        setsSubmit,
+    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+        repsSubmit,
+    required TResult orElse(),
+  }) {
+    if (exerciseDeleted != null) {
+      return exerciseDeleted(userExerciseId, clientId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_NewDateSelected value) newDateSelected,
+    required TResult Function(_SearchNavigation value) navigateToSearchScreen,
+    required TResult Function(_ExerciseDeleted value) exerciseDeleted,
+    required TResult Function(_SetsSubmit value) setsSubmit,
+    required TResult Function(_RepsSubmit value) repsSubmit,
+  }) {
+    return exerciseDeleted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_NewDateSelected value)? newDateSelected,
+    TResult Function(_SearchNavigation value)? navigateToSearchScreen,
+    TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
+  }) {
+    return exerciseDeleted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_NewDateSelected value)? newDateSelected,
+    TResult Function(_SearchNavigation value)? navigateToSearchScreen,
+    TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
+    required TResult orElse(),
+  }) {
+    if (exerciseDeleted != null) {
+      return exerciseDeleted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ExerciseDeleted implements CalendarExerciseEvent {
+  const factory _ExerciseDeleted(
+      {required String userExerciseId,
+      required String clientId}) = _$_ExerciseDeleted;
+
+  String get userExerciseId;
+  @override
+  String get clientId;
+  @override
+  @JsonKey(ignore: true)
+  _$ExerciseDeletedCopyWith<_ExerciseDeleted> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$SetsSubmitCopyWith<$Res>
+    implements $CalendarExerciseEventCopyWith<$Res> {
   factory _$SetsSubmitCopyWith(
           _SetsSubmit value, $Res Function(_SetsSubmit) then) =
       __$SetsSubmitCopyWithImpl<$Res>;
+  @override
   $Res call({String clientId, String setsNumber, String userExerciseId});
 }
 
@@ -416,14 +793,15 @@ class _$_SetsSubmit implements _SetsSubmit {
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime selectedDate, String clientId)
         newDateSelected,
+    required TResult Function(String clientId) navigateToSearchScreen,
+    required TResult Function(String userExerciseId, String clientId)
+        exerciseDeleted,
     required TResult Function(
             String clientId, String setsNumber, String userExerciseId)
         setsSubmit,
     required TResult Function(
             String clientId, String repsNumber, String userExerciseId)
         repsSubmit,
-    required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId) exerciseDeleted,
   }) {
     return setsSubmit(clientId, setsNumber, userExerciseId);
   }
@@ -432,12 +810,12 @@ class _$_SetsSubmit implements _SetsSubmit {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
   }) {
     return setsSubmit?.call(clientId, setsNumber, userExerciseId);
   }
@@ -446,12 +824,12 @@ class _$_SetsSubmit implements _SetsSubmit {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
     required TResult orElse(),
   }) {
     if (setsSubmit != null) {
@@ -464,10 +842,10 @@ class _$_SetsSubmit implements _SetsSubmit {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_NewDateSelected value) newDateSelected,
-    required TResult Function(_SetsSubmit value) setsSubmit,
-    required TResult Function(_RepsSubmit value) repsSubmit,
     required TResult Function(_SearchNavigation value) navigateToSearchScreen,
     required TResult Function(_ExerciseDeleted value) exerciseDeleted,
+    required TResult Function(_SetsSubmit value) setsSubmit,
+    required TResult Function(_RepsSubmit value) repsSubmit,
   }) {
     return setsSubmit(this);
   }
@@ -476,10 +854,10 @@ class _$_SetsSubmit implements _SetsSubmit {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
     TResult Function(_SearchNavigation value)? navigateToSearchScreen,
     TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
   }) {
     return setsSubmit?.call(this);
   }
@@ -488,10 +866,10 @@ class _$_SetsSubmit implements _SetsSubmit {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
     TResult Function(_SearchNavigation value)? navigateToSearchScreen,
     TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
     required TResult orElse(),
   }) {
     if (setsSubmit != null) {
@@ -507,19 +885,23 @@ abstract class _SetsSubmit implements CalendarExerciseEvent {
       required String setsNumber,
       required String userExerciseId}) = _$_SetsSubmit;
 
+  @override
   String get clientId;
   String get setsNumber;
   String get userExerciseId;
+  @override
   @JsonKey(ignore: true)
   _$SetsSubmitCopyWith<_SetsSubmit> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$RepsSubmitCopyWith<$Res> {
+abstract class _$RepsSubmitCopyWith<$Res>
+    implements $CalendarExerciseEventCopyWith<$Res> {
   factory _$RepsSubmitCopyWith(
           _RepsSubmit value, $Res Function(_RepsSubmit) then) =
       __$RepsSubmitCopyWithImpl<$Res>;
+  @override
   $Res call({String clientId, String repsNumber, String userExerciseId});
 }
 
@@ -606,14 +988,15 @@ class _$_RepsSubmit implements _RepsSubmit {
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime selectedDate, String clientId)
         newDateSelected,
+    required TResult Function(String clientId) navigateToSearchScreen,
+    required TResult Function(String userExerciseId, String clientId)
+        exerciseDeleted,
     required TResult Function(
             String clientId, String setsNumber, String userExerciseId)
         setsSubmit,
     required TResult Function(
             String clientId, String repsNumber, String userExerciseId)
         repsSubmit,
-    required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId) exerciseDeleted,
   }) {
     return repsSubmit(clientId, repsNumber, userExerciseId);
   }
@@ -622,12 +1005,12 @@ class _$_RepsSubmit implements _RepsSubmit {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
   }) {
     return repsSubmit?.call(clientId, repsNumber, userExerciseId);
   }
@@ -636,12 +1019,12 @@ class _$_RepsSubmit implements _RepsSubmit {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
     required TResult orElse(),
   }) {
     if (repsSubmit != null) {
@@ -654,10 +1037,10 @@ class _$_RepsSubmit implements _RepsSubmit {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_NewDateSelected value) newDateSelected,
-    required TResult Function(_SetsSubmit value) setsSubmit,
-    required TResult Function(_RepsSubmit value) repsSubmit,
     required TResult Function(_SearchNavigation value) navigateToSearchScreen,
     required TResult Function(_ExerciseDeleted value) exerciseDeleted,
+    required TResult Function(_SetsSubmit value) setsSubmit,
+    required TResult Function(_RepsSubmit value) repsSubmit,
   }) {
     return repsSubmit(this);
   }
@@ -666,10 +1049,10 @@ class _$_RepsSubmit implements _RepsSubmit {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
     TResult Function(_SearchNavigation value)? navigateToSearchScreen,
     TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
   }) {
     return repsSubmit?.call(this);
   }
@@ -678,10 +1061,10 @@ class _$_RepsSubmit implements _RepsSubmit {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
     TResult Function(_SearchNavigation value)? navigateToSearchScreen,
     TResult Function(_ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(_SetsSubmit value)? setsSubmit,
+    TResult Function(_RepsSubmit value)? repsSubmit,
     required TResult orElse(),
   }) {
     if (repsSubmit != null) {
@@ -697,335 +1080,12 @@ abstract class _RepsSubmit implements CalendarExerciseEvent {
       required String repsNumber,
       required String userExerciseId}) = _$_RepsSubmit;
 
+  @override
   String get clientId;
   String get repsNumber;
   String get userExerciseId;
+  @override
   @JsonKey(ignore: true)
   _$RepsSubmitCopyWith<_RepsSubmit> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$SearchNavigationCopyWith<$Res> {
-  factory _$SearchNavigationCopyWith(
-          _SearchNavigation value, $Res Function(_SearchNavigation) then) =
-      __$SearchNavigationCopyWithImpl<$Res>;
-  $Res call({String clientId});
-}
-
-/// @nodoc
-class __$SearchNavigationCopyWithImpl<$Res>
-    extends _$CalendarExerciseEventCopyWithImpl<$Res>
-    implements _$SearchNavigationCopyWith<$Res> {
-  __$SearchNavigationCopyWithImpl(
-      _SearchNavigation _value, $Res Function(_SearchNavigation) _then)
-      : super(_value, (v) => _then(v as _SearchNavigation));
-
-  @override
-  _SearchNavigation get _value => super._value as _SearchNavigation;
-
-  @override
-  $Res call({
-    Object? clientId = freezed,
-  }) {
-    return _then(_SearchNavigation(
-      clientId: clientId == freezed
-          ? _value.clientId
-          : clientId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_SearchNavigation implements _SearchNavigation {
-  const _$_SearchNavigation({required this.clientId});
-
-  @override
-  final String clientId;
-
-  @override
-  String toString() {
-    return 'CalendarExerciseEvent.navigateToSearchScreen(clientId: $clientId)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _SearchNavigation &&
-            const DeepCollectionEquality().equals(other.clientId, clientId));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(clientId));
-
-  @JsonKey(ignore: true)
-  @override
-  _$SearchNavigationCopyWith<_SearchNavigation> get copyWith =>
-      __$SearchNavigationCopyWithImpl<_SearchNavigation>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(DateTime selectedDate, String clientId)
-        newDateSelected,
-    required TResult Function(
-            String clientId, String setsNumber, String userExerciseId)
-        setsSubmit,
-    required TResult Function(
-            String clientId, String repsNumber, String userExerciseId)
-        repsSubmit,
-    required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId) exerciseDeleted,
-  }) {
-    return navigateToSearchScreen(clientId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
-        setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
-        repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
-  }) {
-    return navigateToSearchScreen?.call(clientId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
-        setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
-        repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
-    required TResult orElse(),
-  }) {
-    if (navigateToSearchScreen != null) {
-      return navigateToSearchScreen(clientId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_NewDateSelected value) newDateSelected,
-    required TResult Function(_SetsSubmit value) setsSubmit,
-    required TResult Function(_RepsSubmit value) repsSubmit,
-    required TResult Function(_SearchNavigation value) navigateToSearchScreen,
-    required TResult Function(_ExerciseDeleted value) exerciseDeleted,
-  }) {
-    return navigateToSearchScreen(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
-    TResult Function(_SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(_ExerciseDeleted value)? exerciseDeleted,
-  }) {
-    return navigateToSearchScreen?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
-    TResult Function(_SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(_ExerciseDeleted value)? exerciseDeleted,
-    required TResult orElse(),
-  }) {
-    if (navigateToSearchScreen != null) {
-      return navigateToSearchScreen(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SearchNavigation implements CalendarExerciseEvent {
-  const factory _SearchNavigation({required String clientId}) =
-      _$_SearchNavigation;
-
-  String get clientId;
-  @JsonKey(ignore: true)
-  _$SearchNavigationCopyWith<_SearchNavigation> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$ExerciseDeletedCopyWith<$Res> {
-  factory _$ExerciseDeletedCopyWith(
-          _ExerciseDeleted value, $Res Function(_ExerciseDeleted) then) =
-      __$ExerciseDeletedCopyWithImpl<$Res>;
-  $Res call({String userExerciseId});
-}
-
-/// @nodoc
-class __$ExerciseDeletedCopyWithImpl<$Res>
-    extends _$CalendarExerciseEventCopyWithImpl<$Res>
-    implements _$ExerciseDeletedCopyWith<$Res> {
-  __$ExerciseDeletedCopyWithImpl(
-      _ExerciseDeleted _value, $Res Function(_ExerciseDeleted) _then)
-      : super(_value, (v) => _then(v as _ExerciseDeleted));
-
-  @override
-  _ExerciseDeleted get _value => super._value as _ExerciseDeleted;
-
-  @override
-  $Res call({
-    Object? userExerciseId = freezed,
-  }) {
-    return _then(_ExerciseDeleted(
-      userExerciseId: userExerciseId == freezed
-          ? _value.userExerciseId
-          : userExerciseId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_ExerciseDeleted implements _ExerciseDeleted {
-  const _$_ExerciseDeleted({required this.userExerciseId});
-
-  @override
-  final String userExerciseId;
-
-  @override
-  String toString() {
-    return 'CalendarExerciseEvent.exerciseDeleted(userExerciseId: $userExerciseId)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _ExerciseDeleted &&
-            const DeepCollectionEquality()
-                .equals(other.userExerciseId, userExerciseId));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(userExerciseId));
-
-  @JsonKey(ignore: true)
-  @override
-  _$ExerciseDeletedCopyWith<_ExerciseDeleted> get copyWith =>
-      __$ExerciseDeletedCopyWithImpl<_ExerciseDeleted>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(DateTime selectedDate, String clientId)
-        newDateSelected,
-    required TResult Function(
-            String clientId, String setsNumber, String userExerciseId)
-        setsSubmit,
-    required TResult Function(
-            String clientId, String repsNumber, String userExerciseId)
-        repsSubmit,
-    required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId) exerciseDeleted,
-  }) {
-    return exerciseDeleted(userExerciseId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
-        setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
-        repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
-  }) {
-    return exerciseDeleted?.call(userExerciseId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
-        setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
-        repsSubmit,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId)? exerciseDeleted,
-    required TResult orElse(),
-  }) {
-    if (exerciseDeleted != null) {
-      return exerciseDeleted(userExerciseId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_NewDateSelected value) newDateSelected,
-    required TResult Function(_SetsSubmit value) setsSubmit,
-    required TResult Function(_RepsSubmit value) repsSubmit,
-    required TResult Function(_SearchNavigation value) navigateToSearchScreen,
-    required TResult Function(_ExerciseDeleted value) exerciseDeleted,
-  }) {
-    return exerciseDeleted(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
-    TResult Function(_SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(_ExerciseDeleted value)? exerciseDeleted,
-  }) {
-    return exerciseDeleted?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NewDateSelected value)? newDateSelected,
-    TResult Function(_SetsSubmit value)? setsSubmit,
-    TResult Function(_RepsSubmit value)? repsSubmit,
-    TResult Function(_SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(_ExerciseDeleted value)? exerciseDeleted,
-    required TResult orElse(),
-  }) {
-    if (exerciseDeleted != null) {
-      return exerciseDeleted(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ExerciseDeleted implements CalendarExerciseEvent {
-  const factory _ExerciseDeleted({required String userExerciseId}) =
-      _$_ExerciseDeleted;
-
-  String get userExerciseId;
-  @JsonKey(ignore: true)
-  _$ExerciseDeletedCopyWith<_ExerciseDeleted> get copyWith =>
       throw _privateConstructorUsedError;
 }

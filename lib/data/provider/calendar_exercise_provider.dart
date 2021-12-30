@@ -43,7 +43,7 @@ class CalendarExerciseProvider {
           .doc(FirebaseConstants.exercisesCollection)
           .collection(formattedDate)
           .doc(userExerciseId)
-          .update({"sets": setsNumber});
+          .update({FirebaseConstants.setsCollection: setsNumber});
       return Future.value();
     } catch (error) {
       return Future.error(error, StackTrace.current);
@@ -64,7 +64,27 @@ class CalendarExerciseProvider {
           .doc(FirebaseConstants.exercisesCollection)
           .collection(formattedDate)
           .doc(userExerciseId)
-          .update({"reps": repsNumber});
+          .update({FirebaseConstants.repsCollection: repsNumber});
+      return Future.value();
+    } catch (error) {
+      return Future.error(error, StackTrace.current);
+    }
+  }
+
+  Future deleteExercise(
+      {required String userExerciseId,
+      required String clientId,
+      required DateTime selectedDate}) async {
+    try {
+      String formattedDate = DateUtils.dateOnly(selectedDate).toString();
+      FirebaseFirestore.instance
+          .collection(FirebaseConstants.usersCollection)
+          .doc(clientId)
+          .collection(FirebaseConstants.clientCollection)
+          .doc(FirebaseConstants.exercisesCollection)
+          .collection(formattedDate)
+          .doc(userExerciseId)
+          .delete();
       return Future.value();
     } catch (error) {
       return Future.error(error, StackTrace.current);
