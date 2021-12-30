@@ -73,7 +73,7 @@ class ExerciseSearchProvider {
               .collection(formattedDate);
           var userExerciseId = dateCollection.doc().id;
           var userExerciseData =
-              createUserExerciseData(id: dateCollection.doc().id, index: index);
+              createUserExerciseData(id: userExerciseId, index: index);
 
           await dateCollection.doc(userExerciseId).set(userExerciseData);
 
@@ -81,10 +81,6 @@ class ExerciseSearchProvider {
               .doc(userExerciseId)
               .collection(FirebaseConstants.exerciseCollection)
               .add(exercise.data()!);
-
-          await dateCollection
-              .doc(userExerciseId)
-              .update({"userExerciseId": userExerciseId});
           return Future.value();
         } else {
           return Future.error('exercise does not exist!');

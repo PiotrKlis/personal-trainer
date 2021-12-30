@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/data/util/const.dart';
-import 'package:personal_trainer/domain/mapper/exercise_mapper.dart';
 import 'package:personal_trainer/domain/mapper/user_exercise_mapper.dart';
-import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:personal_trainer/domain/model/user_exercise.dart';
 
 class CalendarExerciseProvider {
@@ -14,7 +12,7 @@ class CalendarExerciseProvider {
       {required DateTime selectedDay, required String clientId}) async {
     try {
       var formattedDate = DateUtils.dateOnly(selectedDay).toString();
-      var exercisesResult = await FirebaseFirestore.instance
+      var userExercisesResult = await FirebaseFirestore.instance
           .collection(FirebaseConstants.usersCollection)
           .doc(clientId)
           .collection(FirebaseConstants.clientCollection)
@@ -22,9 +20,22 @@ class CalendarExerciseProvider {
           .collection(formattedDate)
           .get();
 
-      var userExercises = exercisesResult.docs
-          .map((exercise) => _userExerciseMapper.map(exercise.data()))
-          .toList();
+      var userExercises =
+          Future.wait(userExercisesResult.docs.map((userExercise) async {
+        var exercise = await FirebaseFirestore.instance
+            .collection(FirebaseConstants.usersCollection)
+            .doc(clientId)
+            .collection(FirebaseConstants.clientCollection)
+            .doc(FirebaseConstants.exercisesCollection)
+            .collection(formattedDate)
+            .doc(userExercise.id)
+            .collection(FirebaseConstants.exerciseCollection)
+            .get();
+
+        return _userExerciseMapper.map(
+            userData: userExercise.data(),
+            exerciseData: exercise.docs.first.data());
+      }).toList());
 
       return userExercises;
     } catch (error) {
@@ -94,7 +105,5 @@ class CalendarExerciseProvider {
     }
   }
 
-  Future reorderExercises() async {
-
-  }
+  Future reorderExercises() async {}
 }

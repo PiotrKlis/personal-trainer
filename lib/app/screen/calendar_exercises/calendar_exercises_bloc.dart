@@ -103,10 +103,11 @@ class CalendarExercisesBloc
           .firstWhere((exercise) => exercise.id == userExerciseId)
           .copyWith(reps: formattedNumber);
       _userExercises[_userExercises.indexWhere(
-              (exercise) => exercise.id == userExerciseId)] =
-          updatedExercise;
+          (exercise) => exercise.id == userExerciseId)] = updatedExercise;
       Log.d("Reps number updated $repsNumber");
       emitter(CalendarExercisesState.content(userExercises: _userExercises));
+    }).catchError((error) {
+      emitter(CalendarExercisesState.error(error: error.toString()));
     });
   }
 
@@ -139,9 +140,10 @@ class CalendarExercisesBloc
             clientId: clientId,
             selectedDate: _selectedDate)
         .then((value) {
-      _userExercises
-          .removeWhere((exercise) => exercise.id == userExerciseId);
+      _userExercises.removeWhere((exercise) => exercise.id == userExerciseId);
       emitter(CalendarExercisesState.content(userExercises: _userExercises));
+    }).catchError((error) {
+      emitter(CalendarExercisesState.error(error: error.toString()));
     });
   }
 

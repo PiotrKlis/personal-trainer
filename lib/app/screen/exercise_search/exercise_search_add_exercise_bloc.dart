@@ -19,6 +19,7 @@ class ExerciseSearchAddExerciseBloc extends Bloc<ExerciseSearchAddExerciseEvent,
               selectedDate: event.selectedDate,
               exerciseId: event.exerciseId)
           .then((value) {
+        _indexCounter += 1;
         emit(
             ExerciseSearchAddExerciseSuccess(exerciseName: event.exerciseName));
       }).catchError((error) {

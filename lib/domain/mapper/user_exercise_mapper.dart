@@ -6,12 +6,13 @@ import 'exercise_mapper.dart';
 class UserExerciseMapper {
   final _exerciseMapper = GetIt.I.get<ExerciseMapper>();
 
-  UserExercise map(Map<String, dynamic> data) {
+  UserExercise map(
+  {required Map<String, dynamic> userData, required Map<String, dynamic> exerciseData}) {
     return UserExercise(
-        id: data['id'],
-        index: data['index'],
-        reps: data['reps'],
-        sets: data['sets'],
-        exercise: _exerciseMapper.mapToExercise(data['exercise']));
+        id: userData['id'],
+        index: userData['index'],
+        reps: userData['reps'],
+        sets: userData['sets'],
+        exercise: _exerciseMapper.mapToExercise(exerciseData));
   }
 }
