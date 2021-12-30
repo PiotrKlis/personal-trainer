@@ -5,61 +5,66 @@ import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercise
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_event.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
+import 'package:personal_trainer/domain/model/user_exercise.dart';
 import 'package:provider/src/provider.dart';
 
-class ReordarableExpansionTileListWidget extends StatefulWidget {
-  final List<Exercise> exercises;
+class ReorderableExpansionTileListWidget extends StatefulWidget {
+  final List<UserExercise> userExercises;
   final String clientId;
 
-  const ReordarableExpansionTileListWidget(
-      {required this.exercises, required this.clientId});
+  const ReorderableExpansionTileListWidget(
+      {required this.userExercises, required this.clientId});
 
   @override
-  _ReordarableExpansionTileListWidgetState createState() =>
-      _ReordarableExpansionTileListWidgetState();
+  _ReorderableExpansionTileListWidgetState createState() =>
+      _ReorderableExpansionTileListWidgetState();
 }
 
-class _ReordarableExpansionTileListWidgetState
-    extends State<ReordarableExpansionTileListWidget> {
+class _ReorderableExpansionTileListWidgetState
+    extends State<ReorderableExpansionTileListWidget> {
   List<String> listOfExpandedExercises = [];
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ReorderableListView(
-          children: widget.exercises
-              .map((exercise) =>
-                  _buildExpansionTile(exercise: exercise, context: context))
+          children: widget.userExercises
+              .map((userExercise) =>
+                  _buildExpansionTile(userExercise: userExercise, context: context))
               .toList(),
-          onReorder: (old, newer) {
-            //TODO: reorder stuff
+          onReorder: (oldIndex, newIndex) {
+            context.read<CalendarExercisesBloc>().add(
+                CalendarExerciseEvent.reorderExercises(
+                    oldIndex: oldIndex,
+                    newIndex: newIndex,
+                    clientId: widget.clientId));
           }),
     );
   }
 
   Dismissible _buildExpansionTile(
-      {required Exercise exercise, required BuildContext context}) {
+      {required UserExercise userExercise, required BuildContext context}) {
     return Dismissible(
-      background: Container(color: Colors.red),
-      key: Key(exercise.userExerciseId),
+      background: Container(color: Colors.black),
+      key: Key(userExercise.id),
       onDismissed: (direction) {
         context.read<CalendarExercisesBloc>().add(
             CalendarExerciseEvent.exerciseDeleted(
-                userExerciseId: exercise.userExerciseId,
+                userExerciseId: userExercise.id,
                 clientId: widget.clientId));
       },
       child: ExpansionTile(
-        key: Key(exercise.userExerciseId),
+        key: Key(userExercise.id),
         title: Text(
-          exercise.title,
+          userExercise.exercise.title,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         initiallyExpanded:
-            listOfExpandedExercises.contains(exercise.userExerciseId),
+            listOfExpandedExercises.contains(userExercise.id),
         leading: Icon(Icons.fitness_center),
         children: [
           Divider(),
-          _expansionPanelInfoRow(context: context, exercise: exercise),
+          _expansionPanelInfoRow(context: context, userExercise: userExercise),
           SizedBox(
             height: Dimens.videoContainerHeight,
             // child: VideoItem(
@@ -77,11 +82,11 @@ class _ReordarableExpansionTileListWidgetState
                 Expanded(
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: exercise.tags.length,
+                    itemCount: userExercise.exercise.tags.length,
                     itemBuilder: (BuildContext context, int tagIndex) {
                       return Row(children: [
                         Text(
-                          exercise.tags[tagIndex],
+                          userExercise.exercise.tags[tagIndex],
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(width: Dimens.tagsRowDividerWidth)
@@ -98,9 +103,9 @@ class _ReordarableExpansionTileListWidgetState
   }
 
   Row _expansionPanelInfoRow(
-      {required BuildContext context, required Exercise exercise}) {
-    String _initialSetsValue = exercise.sets.toString();
-    String _initialRepsValue = exercise.reps.toString();
+      {required BuildContext context, required UserExercise userExercise}) {
+    String _initialSetsValue = userExercise.sets.toString();
+    String _initialRepsValue = userExercise.reps.toString();
     var _setsController = TextEditingController(text: _initialSetsValue);
     var _repsController = TextEditingController(text: _initialRepsValue);
     return Row(
@@ -123,7 +128,7 @@ class _ReordarableExpansionTileListWidgetState
                     CalendarExerciseEvent.setsSubmit(
                         clientId: widget.clientId,
                         setsNumber: value,
-                        userExerciseId: exercise.userExerciseId));
+                        userExerciseId: userExercise.id));
               },
               controller: _setsController,
             ),
@@ -146,7 +151,7 @@ class _ReordarableExpansionTileListWidgetState
                     CalendarExerciseEvent.repsSubmit(
                         clientId: widget.clientId,
                         repsNumber: value,
-                        userExerciseId: exercise.userExerciseId));
+                        userExerciseId: userExercise.id));
               },
               controller: _repsController,
             ),

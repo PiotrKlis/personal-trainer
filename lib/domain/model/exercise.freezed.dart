@@ -18,21 +18,15 @@ class _$ExerciseTearOff {
   const _$ExerciseTearOff();
 
   _Exercise call(
-      {required int reps,
-      required int sets,
-      required String id,
+      {required String id,
       required String title,
       required String videoPath,
-      required List<String> tags,
-      required String userExerciseId}) {
+      required List<String> tags}) {
     return _Exercise(
-      reps: reps,
-      sets: sets,
       id: id,
       title: title,
       videoPath: videoPath,
       tags: tags,
-      userExerciseId: userExerciseId,
     );
   }
 }
@@ -42,13 +36,10 @@ const $Exercise = _$ExerciseTearOff();
 
 /// @nodoc
 mixin _$Exercise {
-  int get reps => throw _privateConstructorUsedError;
-  int get sets => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get videoPath => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
-  String get userExerciseId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ExerciseCopyWith<Exercise> get copyWith =>
@@ -59,14 +50,7 @@ mixin _$Exercise {
 abstract class $ExerciseCopyWith<$Res> {
   factory $ExerciseCopyWith(Exercise value, $Res Function(Exercise) then) =
       _$ExerciseCopyWithImpl<$Res>;
-  $Res call(
-      {int reps,
-      int sets,
-      String id,
-      String title,
-      String videoPath,
-      List<String> tags,
-      String userExerciseId});
+  $Res call({String id, String title, String videoPath, List<String> tags});
 }
 
 /// @nodoc
@@ -79,23 +63,12 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? reps = freezed,
-    Object? sets = freezed,
     Object? id = freezed,
     Object? title = freezed,
     Object? videoPath = freezed,
     Object? tags = freezed,
-    Object? userExerciseId = freezed,
   }) {
     return _then(_value.copyWith(
-      reps: reps == freezed
-          ? _value.reps
-          : reps // ignore: cast_nullable_to_non_nullable
-              as int,
-      sets: sets == freezed
-          ? _value.sets
-          : sets // ignore: cast_nullable_to_non_nullable
-              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -112,10 +85,6 @@ class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      userExerciseId: userExerciseId == freezed
-          ? _value.userExerciseId
-          : userExerciseId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -125,14 +94,7 @@ abstract class _$ExerciseCopyWith<$Res> implements $ExerciseCopyWith<$Res> {
   factory _$ExerciseCopyWith(_Exercise value, $Res Function(_Exercise) then) =
       __$ExerciseCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int reps,
-      int sets,
-      String id,
-      String title,
-      String videoPath,
-      List<String> tags,
-      String userExerciseId});
+  $Res call({String id, String title, String videoPath, List<String> tags});
 }
 
 /// @nodoc
@@ -146,23 +108,12 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? reps = freezed,
-    Object? sets = freezed,
     Object? id = freezed,
     Object? title = freezed,
     Object? videoPath = freezed,
     Object? tags = freezed,
-    Object? userExerciseId = freezed,
   }) {
     return _then(_Exercise(
-      reps: reps == freezed
-          ? _value.reps
-          : reps // ignore: cast_nullable_to_non_nullable
-              as int,
-      sets: sets == freezed
-          ? _value.sets
-          : sets // ignore: cast_nullable_to_non_nullable
-              as int,
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -179,10 +130,6 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      userExerciseId: userExerciseId == freezed
-          ? _value.userExerciseId
-          : userExerciseId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -191,18 +138,11 @@ class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
 
 class _$_Exercise implements _Exercise {
   const _$_Exercise(
-      {required this.reps,
-      required this.sets,
-      required this.id,
+      {required this.id,
       required this.title,
       required this.videoPath,
-      required this.tags,
-      required this.userExerciseId});
+      required this.tags});
 
-  @override
-  final int reps;
-  @override
-  final int sets;
   @override
   final String id;
   @override
@@ -211,12 +151,10 @@ class _$_Exercise implements _Exercise {
   final String videoPath;
   @override
   final List<String> tags;
-  @override
-  final String userExerciseId;
 
   @override
   String toString() {
-    return 'Exercise(reps: $reps, sets: $sets, id: $id, title: $title, videoPath: $videoPath, tags: $tags, userExerciseId: $userExerciseId)';
+    return 'Exercise(id: $id, title: $title, videoPath: $videoPath, tags: $tags)';
   }
 
   @override
@@ -224,26 +162,19 @@ class _$_Exercise implements _Exercise {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Exercise &&
-            const DeepCollectionEquality().equals(other.reps, reps) &&
-            const DeepCollectionEquality().equals(other.sets, sets) &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.videoPath, videoPath) &&
-            const DeepCollectionEquality().equals(other.tags, tags) &&
-            const DeepCollectionEquality()
-                .equals(other.userExerciseId, userExerciseId));
+            const DeepCollectionEquality().equals(other.tags, tags));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(reps),
-      const DeepCollectionEquality().hash(sets),
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(videoPath),
-      const DeepCollectionEquality().hash(tags),
-      const DeepCollectionEquality().hash(userExerciseId));
+      const DeepCollectionEquality().hash(tags));
 
   @JsonKey(ignore: true)
   @override
@@ -253,18 +184,11 @@ class _$_Exercise implements _Exercise {
 
 abstract class _Exercise implements Exercise {
   const factory _Exercise(
-      {required int reps,
-      required int sets,
-      required String id,
+      {required String id,
       required String title,
       required String videoPath,
-      required List<String> tags,
-      required String userExerciseId}) = _$_Exercise;
+      required List<String> tags}) = _$_Exercise;
 
-  @override
-  int get reps;
-  @override
-  int get sets;
   @override
   String get id;
   @override
@@ -273,8 +197,6 @@ abstract class _Exercise implements Exercise {
   String get videoPath;
   @override
   List<String> get tags;
-  @override
-  String get userExerciseId;
   @override
   @JsonKey(ignore: true)
   _$ExerciseCopyWith<_Exercise> get copyWith =>

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:personal_trainer/app/util/example_exercises.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
+import 'package:personal_trainer/domain/model/user_exercise.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:video_player/video_player.dart';
 
 class ClientScreen extends StatelessWidget {
-  final List<Exercise> listOfExercises = ExampleExercises.list;
+  final List<UserExercise> listOfUserExercises = [];
   final id;
 
   ClientScreen({this.id}) : super();
@@ -27,7 +28,7 @@ class ClientScreen extends StatelessWidget {
   Widget listOfCards() => Expanded(
         child: ListView.builder(
           scrollDirection: Axis.vertical,
-          itemCount: listOfExercises.length,
+          itemCount: listOfUserExercises.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
               child: Column(
@@ -35,7 +36,7 @@ class ClientScreen extends StatelessWidget {
                   ListTile(
                     leading: Icon(Icons.fitness_center),
                     title: Text(
-                      listOfExercises[index].title,
+                      listOfUserExercises[index].exercise.title,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -43,7 +44,7 @@ class ClientScreen extends StatelessWidget {
                     height: 240,
                     child: VideoItem(
                       videoPlayerController: VideoPlayerController.network(
-                          listOfExercises[index].videoPath),
+                          listOfUserExercises[index].exercise.videoPath),
                       looping: false,
                       autoplay: false,
                     ),
@@ -55,11 +56,11 @@ class ClientScreen extends StatelessWidget {
                       child: Expanded(
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: listOfExercises[index].tags.length,
+                          itemCount: listOfUserExercises[index].exercise.tags.length,
                           itemBuilder: (BuildContext context, int tagIndex) {
                             return Row(children: [
                               Text(
-                                listOfExercises[index].tags[tagIndex],
+                                listOfUserExercises[index].exercise.tags[tagIndex],
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               SizedBox(width: 4)

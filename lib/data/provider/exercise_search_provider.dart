@@ -55,7 +55,8 @@ class ExerciseSearchProvider {
   Future addExercise(
       {required String exerciseId,
       required DateTime selectedDate,
-      required String clientId}) async {
+      required String clientId,
+      required int index}) async {
     try {
       var formattedDate = DateUtils.dateOnly(selectedDate).toString();
       await FirebaseFirestore.instance
@@ -71,7 +72,16 @@ class ExerciseSearchProvider {
               .doc(FirebaseConstants.exercisesCollection)
               .collection(formattedDate);
           var userExerciseId = dateCollection.doc().id;
-          await dateCollection.doc(userExerciseId).set(exercise.data()!);
+          var userExerciseData =
+              createUserExerciseData(id: dateCollection.doc().id, index: index);
+
+          await dateCollection.doc(userExerciseId).set(userExerciseData);
+
+          await dateCollection
+              .doc(userExerciseId)
+              .collection(FirebaseConstants.exerciseCollection)
+              .add(exercise.data()!);
+
           await dateCollection
               .doc(userExerciseId)
               .update({"userExerciseId": userExerciseId});
@@ -83,5 +93,9 @@ class ExerciseSearchProvider {
     } catch (error) {
       Future.error(error);
     }
+  }
+
+  Map<String, dynamic> createUserExerciseData({required id, required index}) {
+    return {"id": id, "index": index, "reps": 12, "sets": 3};
   }
 }

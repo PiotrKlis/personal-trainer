@@ -24,4 +24,9 @@ class CalendarExerciseEvent with _$CalendarExerciseEvent {
       {required String clientId,
       required String repsNumber,
       required String userExerciseId}) = _RepsSubmit;
+
+  const factory CalendarExerciseEvent.reorderExercises(
+      {required int oldIndex,
+        required int newIndex,
+        required String clientId}) = _ReorderExercises;
 }

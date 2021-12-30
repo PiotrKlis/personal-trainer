@@ -7,6 +7,7 @@ class ExerciseSearchAddExerciseBloc extends Bloc<ExerciseSearchAddExerciseEvent,
     ExerciseSearchAddExerciseState> {
   final ExerciseSearchProvider searchProvider =
       GetIt.I.get<ExerciseSearchProvider>();
+  int _indexCounter = 0;
 
   ExerciseSearchAddExerciseBloc(ExerciseSearchAddExerciseState initialState)
       : super(initialState) {
@@ -14,6 +15,7 @@ class ExerciseSearchAddExerciseBloc extends Bloc<ExerciseSearchAddExerciseEvent,
       await searchProvider
           .addExercise(
               clientId: event.clientId,
+              index: _indexCounter,
               selectedDate: event.selectedDate,
               exerciseId: event.exerciseId)
           .then((value) {

@@ -2,11 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_event.dart';
 import 'package:personal_trainer/app/util/auto_route_navigator.dart';
-import 'package:personal_trainer/app/util/event_transformer.dart';
 import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
-import 'package:personal_trainer/data/util/const.dart';
-import 'package:personal_trainer/domain/model/exercise.dart';
+import 'package:personal_trainer/domain/model/user_exercise.dart';
 
 import 'calendar_exercises_event.dart';
 import 'calendar_exercises_state.dart';
@@ -17,14 +15,14 @@ class CalendarExercisesBloc
       GetIt.I.get<CalendarExerciseProvider>();
   final AutoRouteNavigator _navigator = AutoRouteNavigator();
   var _selectedDate = DateTime.now();
-  List<Exercise> _exercises = [];
+  List<UserExercise> _userExercises = [];
 
   CalendarExercisesBloc(CalendarExercisesState initialState)
       : super(initialState) {
     on<CalendarExerciseEvent>((event, emitter) async {
       await event.whenOrNull(
           newDateSelected: (selectedDate, clientId) => _newDateSelected(
-              emit: emitter, selectedDate: selectedDate, clientId: clientId),
+              emitter: emitter, selectedDate: selectedDate, clientId: clientId),
           navigateToSearchScreen: (clientId) =>
               _navigateToSearch(emitter: emitter, clientId: clientId),
           exerciseDeleted: (userExerciseId, clientId) => _deleteExercise(
@@ -40,23 +38,28 @@ class CalendarExercisesBloc
               emitter: emitter,
               clientId: clientId,
               repsNumber: repsNumber,
-              userExerciseId: userExerciseId));
+              userExerciseId: userExerciseId),
+          reorderExercises: (oldIndex, newIndex, clientId) => _reorderExercises(
+              oldIndex: oldIndex, newIndex: newIndex, clientId: clientId));
+      //TODO: Add debounce to reps&sets submit before release
+      // transformer:
+      // debounce(Duration(milliseconds: DurationConst.debounceTime))
     });
   }
 
   _newDateSelected(
-      {required Emitter<CalendarExercisesState> emit,
+      {required Emitter<CalendarExercisesState> emitter,
       required DateTime selectedDate,
       required String clientId}) async {
-    emit(CalendarExercisesState.loading());
+    emitter(CalendarExercisesState.loading());
     await _calendarExerciseProvider
         .getExercisesFor(selectedDay: selectedDate, clientId: clientId)
         .then((exercises) {
-      emit(CalendarExercisesState.content(exercises: exercises));
+      emitter(CalendarExercisesState.content(userExercises: exercises));
       _selectedDate = selectedDate;
-      _exercises = exercises;
+      _userExercises = exercises;
     }).catchError((error) {
-      emit(CalendarExercisesState.error(error: error.toString()));
+      emitter(CalendarExercisesState.error(error: error.toString()));
     });
   }
 
@@ -73,14 +76,13 @@ class CalendarExercisesBloc
             userExerciseId: userExerciseId,
             selectedDate: _selectedDate)
         .then((value) {
-      var updatedExercise = _exercises
-          .firstWhere((element) => element.userExerciseId == userExerciseId)
+      var updatedExercise = _userExercises
+          .firstWhere((exercise) => exercise.id == userExerciseId)
           .copyWith(sets: formattedNumber);
-      _exercises[_exercises.indexWhere(
-              (element) => element.userExerciseId == userExerciseId)] =
-          updatedExercise;
+      _userExercises[_userExercises.indexWhere(
+          (exercise) => exercise.id == userExerciseId)] = updatedExercise;
       Log.d("Sets number updated to $setsNumber");
-      emitter(CalendarExercisesState.content(exercises: _exercises));
+      emitter(CalendarExercisesState.content(userExercises: _userExercises));
     });
   }
 
@@ -97,14 +99,14 @@ class CalendarExercisesBloc
             userExerciseId: userExerciseId,
             selectedDate: _selectedDate)
         .then((value) {
-      var updatedExercise = _exercises
-          .firstWhere((element) => element.userExerciseId == userExerciseId)
+      var updatedExercise = _userExercises
+          .firstWhere((exercise) => exercise.id == userExerciseId)
           .copyWith(reps: formattedNumber);
-      _exercises[_exercises.indexWhere(
-              (element) => element.userExerciseId == userExerciseId)] =
+      _userExercises[_userExercises.indexWhere(
+              (exercise) => exercise.id == userExerciseId)] =
           updatedExercise;
       Log.d("Reps number updated $repsNumber");
-      emitter(CalendarExercisesState.content(exercises: _exercises));
+      emitter(CalendarExercisesState.content(userExercises: _userExercises));
     });
   }
 
@@ -119,8 +121,8 @@ class CalendarExercisesBloc
       await _calendarExerciseProvider
           .getExercisesFor(selectedDay: _selectedDate, clientId: clientId)
           .then((exercises) {
-        _exercises = exercises;
-        emitter(CalendarExercisesState.content(exercises: exercises));
+        _userExercises = exercises;
+        emitter(CalendarExercisesState.content(userExercises: exercises));
       }).catchError((error) {
         emitter(CalendarExercisesState.error(error: error.toString()));
       });
@@ -137,9 +139,19 @@ class CalendarExercisesBloc
             clientId: clientId,
             selectedDate: _selectedDate)
         .then((value) {
-      _exercises
-          .removeWhere((element) => element.userExerciseId == userExerciseId);
-      emitter(CalendarExercisesState.content(exercises: _exercises));
+      _userExercises
+          .removeWhere((exercise) => exercise.id == userExerciseId);
+      emitter(CalendarExercisesState.content(userExercises: _userExercises));
     });
+  }
+
+  _reorderExercises(
+      {required int oldIndex,
+      required int newIndex,
+      required String clientId}) async {
+    // await _calendarExerciseProvider
+    //     .reorderExercises(
+    //
+    // )
   }
 }

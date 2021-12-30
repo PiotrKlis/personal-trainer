@@ -21,11 +21,8 @@ part 'exercise.freezed.dart';
 @freezed
 class Exercise with _$Exercise {
   const factory Exercise(
-      {required int reps,
-      required int sets,
-      required String id,
+      {required String id,
       required String title,
       required String videoPath,
-      required List<String> tags,
-      required String userExerciseId}) = _Exercise;
+      required List<String> tags}) = _Exercise;
 }

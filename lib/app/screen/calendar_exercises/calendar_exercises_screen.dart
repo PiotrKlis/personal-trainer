@@ -6,6 +6,7 @@ import 'package:personal_trainer/app/widget/calendar_widget.dart';
 import 'package:personal_trainer/app/widget/error_view.dart';
 import 'package:personal_trainer/app/widget/reordarable_expansion_tile_list_widget.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
+import 'package:personal_trainer/domain/model/user_exercise.dart';
 
 import 'calendar_exercises_bloc.dart';
 import 'calendar_exercises_event.dart';
@@ -73,7 +74,7 @@ class ExerciseExpansionPanels extends StatelessWidget {
       return state.when(
           started: () => _handleInitialState(context),
           loading: () => Center(child: CircularProgressIndicator()),
-          content: (exercises) => _handleDataLoadSuccess(exercises, context),
+          content: (userExercises) => _handleDataLoadSuccess(userExercises, context),
           error: (error) =>
               ErrorView.error(AppLocalizations.of(context)!.error));
     });
@@ -86,9 +87,9 @@ class ExerciseExpansionPanels extends StatelessWidget {
   }
 
   Widget _handleDataLoadSuccess(
-      List<Exercise> exercises, BuildContext context) {
-    if (exercises.isNotEmpty) {
-      return ReordarableExpansionTileListWidget(exercises: exercises, clientId: clientId);
+      List<UserExercise> userExercises, BuildContext context) {
+    if (userExercises.isNotEmpty) {
+      return ReorderableExpansionTileListWidget(userExercises: userExercises, clientId: clientId);
     } else {
       return _handleNoExercises(context: context);
     }

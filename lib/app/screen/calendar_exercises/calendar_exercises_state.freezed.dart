@@ -31,9 +31,9 @@ class _$CalendarExercisesStateTearOff {
     );
   }
 
-  _Content content({required List<Exercise> exercises}) {
+  _Content content({required List<UserExercise> userExercises}) {
     return _Content(
-      exercises: exercises,
+      userExercises: userExercises,
     );
   }
 }
@@ -48,7 +48,7 @@ mixin _$CalendarExercisesState {
     required TResult Function() started,
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Exercise> exercises) content,
+    required TResult Function(List<UserExercise> userExercises) content,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,7 +56,7 @@ mixin _$CalendarExercisesState {
     TResult Function()? started,
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(List<UserExercise> userExercises)? content,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,7 +64,7 @@ mixin _$CalendarExercisesState {
     TResult Function()? started,
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(List<UserExercise> userExercises)? content,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -161,7 +161,7 @@ class _$_Started with DiagnosticableTreeMixin implements _Started {
     required TResult Function() started,
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Exercise> exercises) content,
+    required TResult Function(List<UserExercise> userExercises) content,
   }) {
     return started();
   }
@@ -172,7 +172,7 @@ class _$_Started with DiagnosticableTreeMixin implements _Started {
     TResult Function()? started,
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(List<UserExercise> userExercises)? content,
   }) {
     return started?.call();
   }
@@ -183,7 +183,7 @@ class _$_Started with DiagnosticableTreeMixin implements _Started {
     TResult Function()? started,
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(List<UserExercise> userExercises)? content,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -283,7 +283,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     required TResult Function() started,
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Exercise> exercises) content,
+    required TResult Function(List<UserExercise> userExercises) content,
   }) {
     return loading();
   }
@@ -294,7 +294,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     TResult Function()? started,
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(List<UserExercise> userExercises)? content,
   }) {
     return loading?.call();
   }
@@ -305,7 +305,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
     TResult Function()? started,
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(List<UserExercise> userExercises)? content,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -430,7 +430,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     required TResult Function() started,
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Exercise> exercises) content,
+    required TResult Function(List<UserExercise> userExercises) content,
   }) {
     return error(this.error);
   }
@@ -441,7 +441,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     TResult Function()? started,
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(List<UserExercise> userExercises)? content,
   }) {
     return error?.call(this.error);
   }
@@ -452,7 +452,7 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
     TResult Function()? started,
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(List<UserExercise> userExercises)? content,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -511,7 +511,7 @@ abstract class _Error implements CalendarExercisesState {
 abstract class _$ContentCopyWith<$Res> {
   factory _$ContentCopyWith(_Content value, $Res Function(_Content) then) =
       __$ContentCopyWithImpl<$Res>;
-  $Res call({List<Exercise> exercises});
+  $Res call({List<UserExercise> userExercises});
 }
 
 /// @nodoc
@@ -526,13 +526,13 @@ class __$ContentCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? exercises = freezed,
+    Object? userExercises = freezed,
   }) {
     return _then(_Content(
-      exercises: exercises == freezed
-          ? _value.exercises
-          : exercises // ignore: cast_nullable_to_non_nullable
-              as List<Exercise>,
+      userExercises: userExercises == freezed
+          ? _value.userExercises
+          : userExercises // ignore: cast_nullable_to_non_nullable
+              as List<UserExercise>,
     ));
   }
 }
@@ -540,14 +540,14 @@ class __$ContentCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Content with DiagnosticableTreeMixin implements _Content {
-  const _$_Content({required this.exercises});
+  const _$_Content({required this.userExercises});
 
   @override
-  final List<Exercise> exercises;
+  final List<UserExercise> userExercises;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CalendarExercisesState.content(exercises: $exercises)';
+    return 'CalendarExercisesState.content(userExercises: $userExercises)';
   }
 
   @override
@@ -555,7 +555,7 @@ class _$_Content with DiagnosticableTreeMixin implements _Content {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'CalendarExercisesState.content'))
-      ..add(DiagnosticsProperty('exercises', exercises));
+      ..add(DiagnosticsProperty('userExercises', userExercises));
   }
 
   @override
@@ -563,12 +563,13 @@ class _$_Content with DiagnosticableTreeMixin implements _Content {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Content &&
-            const DeepCollectionEquality().equals(other.exercises, exercises));
+            const DeepCollectionEquality()
+                .equals(other.userExercises, userExercises));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(exercises));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(userExercises));
 
   @JsonKey(ignore: true)
   @override
@@ -581,9 +582,9 @@ class _$_Content with DiagnosticableTreeMixin implements _Content {
     required TResult Function() started,
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Exercise> exercises) content,
+    required TResult Function(List<UserExercise> userExercises) content,
   }) {
-    return content(exercises);
+    return content(userExercises);
   }
 
   @override
@@ -592,9 +593,9 @@ class _$_Content with DiagnosticableTreeMixin implements _Content {
     TResult Function()? started,
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(List<UserExercise> userExercises)? content,
   }) {
-    return content?.call(exercises);
+    return content?.call(userExercises);
   }
 
   @override
@@ -603,11 +604,11 @@ class _$_Content with DiagnosticableTreeMixin implements _Content {
     TResult Function()? started,
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(List<UserExercise> userExercises)? content,
     required TResult orElse(),
   }) {
     if (content != null) {
-      return content(exercises);
+      return content(userExercises);
     }
     return orElse();
   }
@@ -651,9 +652,10 @@ class _$_Content with DiagnosticableTreeMixin implements _Content {
 }
 
 abstract class _Content implements CalendarExercisesState {
-  const factory _Content({required List<Exercise> exercises}) = _$_Content;
+  const factory _Content({required List<UserExercise> userExercises}) =
+      _$_Content;
 
-  List<Exercise> get exercises;
+  List<UserExercise> get userExercises;
   @JsonKey(ignore: true)
   _$ContentCopyWith<_Content> get copyWith =>
       throw _privateConstructorUsedError;

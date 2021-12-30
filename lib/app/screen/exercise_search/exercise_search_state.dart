@@ -1,11 +1,12 @@
 import 'package:personal_trainer/domain/model/exercise.dart';
+import 'package:personal_trainer/domain/model/user_exercise.dart';
 
 abstract class ExerciseSearchState {}
 
 class ExerciseSearchSuccess extends ExerciseSearchState {
-  final List<Exercise> exercises;
+  final List<Exercise> userExercises;
 
-  ExerciseSearchSuccess(this.exercises);
+  ExerciseSearchSuccess(this.userExercises);
 }
 
 class ExerciseSearchFailure extends ExerciseSearchState {

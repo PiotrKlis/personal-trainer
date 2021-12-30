@@ -1,13 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/mapper/exercise_mapper.dart';
+import 'package:personal_trainer/domain/mapper/user_exercise_mapper.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
+import 'package:personal_trainer/domain/model/user_exercise.dart';
 
 class CalendarExerciseProvider {
-  late final ExerciseMapper _exerciseMapper = ExerciseMapper();
+  final _userExerciseMapper = GetIt.I.get<UserExerciseMapper>();
 
-  Future<List<Exercise>> getExercisesFor(
+  Future<List<UserExercise>> getExercisesFor(
       {required DateTime selectedDay, required String clientId}) async {
     try {
       var formattedDate = DateUtils.dateOnly(selectedDay).toString();
@@ -19,11 +22,11 @@ class CalendarExerciseProvider {
           .collection(formattedDate)
           .get();
 
-      var exercises = exercisesResult.docs
-          .map((exercise) => _exerciseMapper.mapToExercise(exercise.data()))
+      var userExercises = exercisesResult.docs
+          .map((exercise) => _userExerciseMapper.map(exercise.data()))
           .toList();
 
-      return exercises;
+      return userExercises;
     } catch (error) {
       return Future.error(error, StackTrace.current);
     }
@@ -89,5 +92,9 @@ class CalendarExerciseProvider {
     } catch (error) {
       return Future.error(error, StackTrace.current);
     }
+  }
+
+  Future reorderExercises() async {
+
   }
 }

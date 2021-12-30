@@ -10,6 +10,7 @@ import 'package:personal_trainer/app/widget/error_view.dart';
 import 'package:personal_trainer/app/widget/toast_message.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
+import 'package:personal_trainer/domain/model/user_exercise.dart';
 import 'package:video_player/video_player.dart';
 
 import 'exercise_search_state.dart';
@@ -135,7 +136,7 @@ class ListOfResults extends StatelessWidget {
           return _handleSearchAllExercises(context);
         case ExerciseSearchSuccess:
           state as ExerciseSearchSuccess;
-          return _handleDataLoadSuccess(state.exercises, context);
+          return _handleDataLoadSuccess(state.userExercises, context);
         case ExerciseSearchExpansionPanelClickSuccess:
           state as ExerciseSearchExpansionPanelClickSuccess;
           return _handleDataLoadSuccess(state.exercises, context);
