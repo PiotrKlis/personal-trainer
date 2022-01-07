@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/mapper/user_exercise_mapper.dart';
 import 'package:personal_trainer/domain/model/user_exercise.dart';
@@ -37,7 +38,10 @@ class CalendarExerciseProvider {
             exerciseData: exercise.docs.first.data());
       }).toList());
 
-      return userExercises;
+      var test = await userExercises;
+      test.sort((a,b) => a.index.compareTo(b.index));
+      Log.d("getExercises $test");
+      return Future.value(test);
     } catch (error) {
       return Future.error(error, StackTrace.current);
     }

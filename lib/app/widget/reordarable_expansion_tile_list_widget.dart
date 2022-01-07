@@ -29,8 +29,8 @@ class _ReorderableExpansionTileListWidgetState
     return Expanded(
       child: ReorderableListView(
           children: widget.userExercises
-              .map((userExercise) =>
-                  _buildExpansionTile(userExercise: userExercise, context: context))
+              .map((userExercise) => _buildExpansionTile(
+                  userExercise: userExercise, context: context))
               .toList(),
           onReorder: (oldIndex, newIndex) {
             context.read<CalendarExercisesBloc>().add(
@@ -51,53 +51,57 @@ class _ReorderableExpansionTileListWidgetState
         context.read<CalendarExercisesBloc>().add(
             CalendarExerciseEvent.exerciseDeleted(
                 userExerciseId: userExercise.id,
-                clientId: widget.clientId));
+                clientId: widget.clientId,
+                index: userExercise.index));
       },
-      child: ExpansionTile(
-        key: Key(userExercise.id),
-        title: Text(
-          userExercise.exercise.title,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        initiallyExpanded:
-            listOfExpandedExercises.contains(userExercise.id),
-        leading: Icon(Icons.fitness_center),
-        children: [
-          Divider(),
-          _expansionPanelInfoRow(context: context, userExercise: userExercise),
-          SizedBox(
-            height: Dimens.videoContainerHeight,
-            // child: VideoItem(
-            //   videoPlayerController:
-            //       VideoPlayerController.network(exercise.videoPath),
-            //   looping: false,
-            //   autoplay: false,
-            // ),
+      child: Card(
+        elevation: 1,
+        child: ExpansionTile(
+          key: Key(userExercise.id),
+          title: Text(
+            userExercise.exercise.title,
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          Padding(
-            padding: const EdgeInsets.all(Dimens.smallPadding),
-            child: Container(
-              height: Dimens.tagsRowHeight,
-              child: Flex(direction: Axis.vertical, children: [
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: userExercise.exercise.tags.length,
-                    itemBuilder: (BuildContext context, int tagIndex) {
-                      return Row(children: [
-                        Text(
-                          userExercise.exercise.tags[tagIndex],
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(width: Dimens.tagsRowDividerWidth)
-                      ]);
-                    },
-                  ),
-                ),
-              ]),
+          initiallyExpanded: listOfExpandedExercises.contains(userExercise.id),
+          leading: Icon(Icons.fitness_center),
+          children: [
+            Divider(),
+            _expansionPanelInfoRow(
+                context: context, userExercise: userExercise),
+            SizedBox(
+              height: Dimens.videoContainerHeight,
+              // child: VideoItem(
+              //   videoPlayerController:
+              //       VideoPlayerController.network(exercise.videoPath),
+              //   looping: false,
+              //   autoplay: false,
+              // ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(Dimens.smallPadding),
+              child: Container(
+                height: Dimens.tagsRowHeight,
+                child: Flex(direction: Axis.vertical, children: [
+                  Expanded(
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: userExercise.exercise.tags.length,
+                      itemBuilder: (BuildContext context, int tagIndex) {
+                        return Row(children: [
+                          Text(
+                            userExercise.exercise.tags[tagIndex],
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(width: Dimens.tagsRowDividerWidth)
+                        ]);
+                      },
+                    ),
+                  ),
+                ]),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -9,8 +9,8 @@ import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/error_view.dart';
 import 'package:personal_trainer/app/widget/toast_message.dart';
 import 'package:personal_trainer/app/widget/video_item.dart';
+import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
-import 'package:personal_trainer/domain/model/user_exercise.dart';
 import 'package:video_player/video_player.dart';
 
 import 'exercise_search_state.dart';
@@ -18,12 +18,16 @@ import 'exercise_search_state.dart';
 class ExerciseSearchScreen extends StatelessWidget {
   final DateTime selectedDate;
   final String clientId;
+  final int listLength;
   final ExerciseSearchState _exerciseSearchState = ExerciseSearchAllExercises();
   final ExerciseSearchAddExerciseState _addExerciseState =
       ExerciseSearchAddStarted();
 
   ExerciseSearchScreen(
-      {Key? key, required this.selectedDate, required this.clientId})
+      {Key? key,
+      required this.selectedDate,
+      required this.clientId,
+      required this.listLength})
       : super(key: key);
 
   @override
@@ -34,7 +38,7 @@ class ExerciseSearchScreen extends StatelessWidget {
               create: (context) => ExerciseSearchBloc(_exerciseSearchState)),
           BlocProvider(
               create: (context) =>
-                  ExerciseSearchAddExerciseBloc(_addExerciseState))
+                  ExerciseSearchAddExerciseBloc(_addExerciseState, listLength))
         ],
         child: Scaffold(
           appBar: AppBar(
@@ -44,6 +48,7 @@ class ExerciseSearchScreen extends StatelessWidget {
           body: SearchScreenContent(
             selectedDate: selectedDate,
             clientId: clientId,
+            listLength: listLength,
           ),
         ));
   }
@@ -52,8 +57,9 @@ class ExerciseSearchScreen extends StatelessWidget {
 class SearchScreenContent extends StatelessWidget {
   final selectedDate;
   final clientId;
+  final listLength;
 
-  const SearchScreenContent({this.selectedDate, this.clientId}) : super();
+  const SearchScreenContent({this.selectedDate, this.clientId, this.listLength}) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +84,7 @@ BlocListener _addExerciseBlocListener() {
         case ExerciseSearchAddExerciseSuccess:
           state as ExerciseSearchAddExerciseSuccess;
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            duration: Duration(milliseconds: 500),
+              duration: Duration(milliseconds: DurationConst.snackbarVisibilityDuration),
               content: Text(
                   "${state.exerciseName} ${AppLocalizations.of(context)!.exercise_added_message}")));
           break;
@@ -98,7 +104,6 @@ class SearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var _searchController = TextEditingController();
     _searchController.addListener(() {
-      Log.d("search controller text: ${_searchController.text}");
       if (_searchController.text.isEmpty) {
         context.read<ExerciseSearchBloc>().add(ExerciseSearchEmpty());
       } else {

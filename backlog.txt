@@ -1,8 +1,10 @@
 MVP
 
 // Calendar Exercise
-- remove exercise
 - reorder exercise
+    - Reorder
+    - delete
+    - add
 - test cases
 
 // Search

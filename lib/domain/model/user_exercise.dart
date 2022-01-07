@@ -11,6 +11,6 @@ class UserExercise with _$UserExercise {
     required int index,
     required int reps,
     required int sets,
-    required Exercise exercise
+    required Exercise exercise,
 }) = _UserExercise;
 }

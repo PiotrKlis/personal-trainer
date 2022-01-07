@@ -12,4 +12,5 @@ class FirebaseConstants {
 class DurationConst {
   static int debounceTime = 100;
   static int longerDebounceTime = 400;
+  static int snackbarVisibilityDuration = 500;
 }

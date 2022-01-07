@@ -20,15 +20,16 @@ class CalendarExercisesBloc
   CalendarExercisesBloc(CalendarExercisesState initialState)
       : super(initialState) {
     on<CalendarExerciseEvent>((event, emitter) async {
-      await event.whenOrNull(
+      await event.when(
           newDateSelected: (selectedDate, clientId) => _newDateSelected(
               emitter: emitter, selectedDate: selectedDate, clientId: clientId),
           navigateToSearchScreen: (clientId) =>
               _navigateToSearch(emitter: emitter, clientId: clientId),
-          exerciseDeleted: (userExerciseId, clientId) => _deleteExercise(
+          exerciseDeleted: (userExerciseId, clientId, index) => _deleteExercise(
               emitter: emitter,
               userExerciseId: userExerciseId,
-              clientId: clientId),
+              clientId: clientId,
+              index: index),
           setsSubmit: (clientId, setsNumber, userExerciseId) => _setsSubmit(
               emitter: emitter,
               clientId: clientId,
@@ -116,12 +117,15 @@ class CalendarExercisesBloc
       required String clientId}) async {
     await _navigator
         .navigateToExerciseSearch(
-            selectedDate: _selectedDate, clientId: clientId)
+            selectedDate: _selectedDate,
+            clientId: clientId,
+            listLength: _userExercises.length)
         .then((value) async {
       emitter(CalendarExercisesState.loading());
       await _calendarExerciseProvider
           .getExercisesFor(selectedDay: _selectedDate, clientId: clientId)
           .then((exercises) {
+        exercises.sort((a, b) => a.index.compareTo(b.index));
         _userExercises = exercises;
         emitter(CalendarExercisesState.content(userExercises: exercises));
       }).catchError((error) {
@@ -133,14 +137,21 @@ class CalendarExercisesBloc
   _deleteExercise(
       {required Emitter<CalendarExercisesState> emitter,
       required String userExerciseId,
-      required String clientId}) async {
+      required String clientId,
+      required int index}) async {
     await _calendarExerciseProvider
         .deleteExercise(
             userExerciseId: userExerciseId,
             clientId: clientId,
             selectedDate: _selectedDate)
         .then((value) {
-      _userExercises.removeWhere((exercise) => exercise.id == userExerciseId);
+      Log.d("before $_userExercises");
+      _userExercises.removeAt(index);
+      Log.d("after removal $_userExercises");
+      for (var i = index; index == _userExercises.length - 1; index++) {
+        _userExercises[i].copyWith(index: i);
+      }
+      Log.d("after everything $_userExercises");
       emitter(CalendarExercisesState.content(userExercises: _userExercises));
     }).catchError((error) {
       emitter(CalendarExercisesState.error(error: error.toString()));
@@ -151,6 +162,11 @@ class CalendarExercisesBloc
       {required int oldIndex,
       required int newIndex,
       required String clientId}) async {
+    Log.d("before $_userExercises");
+    var userExercise = _userExercises[oldIndex];
+    _userExercises.removeAt(oldIndex);
+    _userExercises.insert(newIndex, userExercise);
+    Log.d("after $_userExercises");
     // await _calendarExerciseProvider
     //     .reorderExercises(
     //

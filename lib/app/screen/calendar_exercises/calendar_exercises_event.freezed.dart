@@ -32,10 +32,13 @@ class _$CalendarExerciseEventTearOff {
   }
 
   _ExerciseDeleted exerciseDeleted(
-      {required String userExerciseId, required String clientId}) {
+      {required String userExerciseId,
+      required String clientId,
+      required int index}) {
     return _ExerciseDeleted(
       userExerciseId: userExerciseId,
       clientId: clientId,
+      index: index,
     );
   }
 
@@ -85,7 +88,7 @@ mixin _$CalendarExerciseEvent {
     required TResult Function(DateTime selectedDate, String clientId)
         newDateSelected,
     required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId, String clientId)
+    required TResult Function(String userExerciseId, String clientId, int index)
         exerciseDeleted,
     required TResult Function(
             String clientId, String setsNumber, String userExerciseId)
@@ -101,7 +104,8 @@ mixin _$CalendarExerciseEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -114,7 +118,8 @@ mixin _$CalendarExerciseEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -273,7 +278,7 @@ class _$_NewDateSelected implements _NewDateSelected {
     required TResult Function(DateTime selectedDate, String clientId)
         newDateSelected,
     required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId, String clientId)
+    required TResult Function(String userExerciseId, String clientId, int index)
         exerciseDeleted,
     required TResult Function(
             String clientId, String setsNumber, String userExerciseId)
@@ -292,7 +297,8 @@ class _$_NewDateSelected implements _NewDateSelected {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -308,7 +314,8 @@ class _$_NewDateSelected implements _NewDateSelected {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -451,7 +458,7 @@ class _$_SearchNavigation implements _SearchNavigation {
     required TResult Function(DateTime selectedDate, String clientId)
         newDateSelected,
     required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId, String clientId)
+    required TResult Function(String userExerciseId, String clientId, int index)
         exerciseDeleted,
     required TResult Function(
             String clientId, String setsNumber, String userExerciseId)
@@ -470,7 +477,8 @@ class _$_SearchNavigation implements _SearchNavigation {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -486,7 +494,8 @@ class _$_SearchNavigation implements _SearchNavigation {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -564,7 +573,7 @@ abstract class _$ExerciseDeletedCopyWith<$Res>
           _ExerciseDeleted value, $Res Function(_ExerciseDeleted) then) =
       __$ExerciseDeletedCopyWithImpl<$Res>;
   @override
-  $Res call({String userExerciseId, String clientId});
+  $Res call({String userExerciseId, String clientId, int index});
 }
 
 /// @nodoc
@@ -582,6 +591,7 @@ class __$ExerciseDeletedCopyWithImpl<$Res>
   $Res call({
     Object? userExerciseId = freezed,
     Object? clientId = freezed,
+    Object? index = freezed,
   }) {
     return _then(_ExerciseDeleted(
       userExerciseId: userExerciseId == freezed
@@ -592,6 +602,10 @@ class __$ExerciseDeletedCopyWithImpl<$Res>
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
+      index: index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -600,16 +614,20 @@ class __$ExerciseDeletedCopyWithImpl<$Res>
 
 class _$_ExerciseDeleted implements _ExerciseDeleted {
   const _$_ExerciseDeleted(
-      {required this.userExerciseId, required this.clientId});
+      {required this.userExerciseId,
+      required this.clientId,
+      required this.index});
 
   @override
   final String userExerciseId;
   @override
   final String clientId;
+  @override
+  final int index;
 
   @override
   String toString() {
-    return 'CalendarExerciseEvent.exerciseDeleted(userExerciseId: $userExerciseId, clientId: $clientId)';
+    return 'CalendarExerciseEvent.exerciseDeleted(userExerciseId: $userExerciseId, clientId: $clientId, index: $index)';
   }
 
   @override
@@ -619,14 +637,16 @@ class _$_ExerciseDeleted implements _ExerciseDeleted {
             other is _ExerciseDeleted &&
             const DeepCollectionEquality()
                 .equals(other.userExerciseId, userExerciseId) &&
-            const DeepCollectionEquality().equals(other.clientId, clientId));
+            const DeepCollectionEquality().equals(other.clientId, clientId) &&
+            const DeepCollectionEquality().equals(other.index, index));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(userExerciseId),
-      const DeepCollectionEquality().hash(clientId));
+      const DeepCollectionEquality().hash(clientId),
+      const DeepCollectionEquality().hash(index));
 
   @JsonKey(ignore: true)
   @override
@@ -639,7 +659,7 @@ class _$_ExerciseDeleted implements _ExerciseDeleted {
     required TResult Function(DateTime selectedDate, String clientId)
         newDateSelected,
     required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId, String clientId)
+    required TResult Function(String userExerciseId, String clientId, int index)
         exerciseDeleted,
     required TResult Function(
             String clientId, String setsNumber, String userExerciseId)
@@ -650,7 +670,7 @@ class _$_ExerciseDeleted implements _ExerciseDeleted {
     required TResult Function(int oldIndex, int newIndex, String clientId)
         reorderExercises,
   }) {
-    return exerciseDeleted(userExerciseId, clientId);
+    return exerciseDeleted(userExerciseId, clientId, index);
   }
 
   @override
@@ -658,7 +678,8 @@ class _$_ExerciseDeleted implements _ExerciseDeleted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -666,7 +687,7 @@ class _$_ExerciseDeleted implements _ExerciseDeleted {
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
   }) {
-    return exerciseDeleted?.call(userExerciseId, clientId);
+    return exerciseDeleted?.call(userExerciseId, clientId, index);
   }
 
   @override
@@ -674,7 +695,8 @@ class _$_ExerciseDeleted implements _ExerciseDeleted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -684,7 +706,7 @@ class _$_ExerciseDeleted implements _ExerciseDeleted {
     required TResult orElse(),
   }) {
     if (exerciseDeleted != null) {
-      return exerciseDeleted(userExerciseId, clientId);
+      return exerciseDeleted(userExerciseId, clientId, index);
     }
     return orElse();
   }
@@ -736,11 +758,13 @@ class _$_ExerciseDeleted implements _ExerciseDeleted {
 abstract class _ExerciseDeleted implements CalendarExerciseEvent {
   const factory _ExerciseDeleted(
       {required String userExerciseId,
-      required String clientId}) = _$_ExerciseDeleted;
+      required String clientId,
+      required int index}) = _$_ExerciseDeleted;
 
   String get userExerciseId;
   @override
   String get clientId;
+  int get index;
   @override
   @JsonKey(ignore: true)
   _$ExerciseDeletedCopyWith<_ExerciseDeleted> get copyWith =>
@@ -841,7 +865,7 @@ class _$_SetsSubmit implements _SetsSubmit {
     required TResult Function(DateTime selectedDate, String clientId)
         newDateSelected,
     required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId, String clientId)
+    required TResult Function(String userExerciseId, String clientId, int index)
         exerciseDeleted,
     required TResult Function(
             String clientId, String setsNumber, String userExerciseId)
@@ -860,7 +884,8 @@ class _$_SetsSubmit implements _SetsSubmit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -876,7 +901,8 @@ class _$_SetsSubmit implements _SetsSubmit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -1045,7 +1071,7 @@ class _$_RepsSubmit implements _RepsSubmit {
     required TResult Function(DateTime selectedDate, String clientId)
         newDateSelected,
     required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId, String clientId)
+    required TResult Function(String userExerciseId, String clientId, int index)
         exerciseDeleted,
     required TResult Function(
             String clientId, String setsNumber, String userExerciseId)
@@ -1064,7 +1090,8 @@ class _$_RepsSubmit implements _RepsSubmit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -1080,7 +1107,8 @@ class _$_RepsSubmit implements _RepsSubmit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -1245,7 +1273,7 @@ class _$_ReorderExercises implements _ReorderExercises {
     required TResult Function(DateTime selectedDate, String clientId)
         newDateSelected,
     required TResult Function(String clientId) navigateToSearchScreen,
-    required TResult Function(String userExerciseId, String clientId)
+    required TResult Function(String userExerciseId, String clientId, int index)
         exerciseDeleted,
     required TResult Function(
             String clientId, String setsNumber, String userExerciseId)
@@ -1264,7 +1292,8 @@ class _$_ReorderExercises implements _ReorderExercises {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?
@@ -1280,7 +1309,8 @@ class _$_ReorderExercises implements _ReorderExercises {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
     TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId)? exerciseDeleted,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
     TResult Function(String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
     TResult Function(String clientId, String repsNumber, String userExerciseId)?

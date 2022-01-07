@@ -13,7 +13,8 @@ class CalendarExerciseEvent with _$CalendarExerciseEvent {
 
   const factory CalendarExerciseEvent.exerciseDeleted(
       {required String userExerciseId,
-      required String clientId}) = _ExerciseDeleted;
+      required String clientId,
+      required int index}) = _ExerciseDeleted;
 
   const factory CalendarExerciseEvent.setsSubmit(
       {required String clientId,

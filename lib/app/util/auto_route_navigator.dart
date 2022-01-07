@@ -7,10 +7,10 @@ import '../app_router.gr.dart';
 class AutoRouteNavigator {
 
   Future navigateToExerciseSearch(
-      {required DateTime selectedDate, required String clientId}) {
+      {required DateTime selectedDate, required String clientId, required int listLength}) {
     // return router.push(
     //     ExerciseSearchRoute(selectedDate: selectedDate, clientId: clientId));
     return GetIt.I<AppRouter>().push(
-        ExerciseSearchRoute(selectedDate: selectedDate, clientId: clientId));
+        ExerciseSearchRoute(selectedDate: selectedDate, clientId: clientId, listLength: listLength));
   }
 }

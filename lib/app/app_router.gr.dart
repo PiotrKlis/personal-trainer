@@ -73,7 +73,8 @@ class AppRouter extends _i9.RootStackRouter {
           child: _i8.ExerciseSearchScreen(
               key: args.key,
               selectedDate: args.selectedDate,
-              clientId: args.clientId));
+              clientId: args.clientId,
+              listLength: args.listLength));
     }
   };
 
@@ -204,18 +205,27 @@ class CalendarExercisesRouteArgs {
 /// generated route for [_i8.ExerciseSearchScreen]
 class ExerciseSearchRoute extends _i9.PageRouteInfo<ExerciseSearchRouteArgs> {
   ExerciseSearchRoute(
-      {_i10.Key? key, required DateTime selectedDate, required String clientId})
+      {_i10.Key? key,
+      required DateTime selectedDate,
+      required String clientId,
+      required int listLength})
       : super(name,
             path: '/exercise-search-screen',
             args: ExerciseSearchRouteArgs(
-                key: key, selectedDate: selectedDate, clientId: clientId));
+                key: key,
+                selectedDate: selectedDate,
+                clientId: clientId,
+                listLength: listLength));
 
   static const String name = 'ExerciseSearchRoute';
 }
 
 class ExerciseSearchRouteArgs {
   const ExerciseSearchRouteArgs(
-      {this.key, required this.selectedDate, required this.clientId});
+      {this.key,
+      required this.selectedDate,
+      required this.clientId,
+      required this.listLength});
 
   final _i10.Key? key;
 
@@ -223,8 +233,10 @@ class ExerciseSearchRouteArgs {
 
   final String clientId;
 
+  final int listLength;
+
   @override
   String toString() {
-    return 'ExerciseSearchRouteArgs{key: $key, selectedDate: $selectedDate, clientId: $clientId}';
+    return 'ExerciseSearchRouteArgs{key: $key, selectedDate: $selectedDate, clientId: $clientId, listLength: $listLength}';
   }
 }
