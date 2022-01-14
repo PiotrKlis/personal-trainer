@@ -69,11 +69,11 @@ class ExerciseSearchProvider {
               .collection(FirebaseConstants.usersCollection)
               .doc(clientId)
               .collection(FirebaseConstants.clientCollection)
-              .doc(FirebaseConstants.exercisesCollection)
+              .doc(FirebaseConstants.userExercisesCollection)
               .collection(formattedDate);
           var userExerciseId = dateCollection.doc().id;
           var userExerciseData =
-              createUserExerciseData(id: userExerciseId, index: index);
+              _createUserExerciseData(id: userExerciseId, index: index);
 
           await dateCollection.doc(userExerciseId).set(userExerciseData);
 
@@ -91,7 +91,7 @@ class ExerciseSearchProvider {
     }
   }
 
-  Map<String, dynamic> createUserExerciseData({required id, required index}) {
+  Map<String, dynamic> _createUserExerciseData({required id, required index}) {
     return {"id": id, "index": index, "reps": 12, "sets": 3};
   }
 }

@@ -6,28 +6,28 @@ part 'calendar_exercises_event.freezed.dart';
 class CalendarExerciseEvent with _$CalendarExerciseEvent {
   const factory CalendarExerciseEvent.newDateSelected(
       {required DateTime selectedDate,
-      required String clientId}) = _NewDateSelected;
+      required String clientId}) = NewDateSelected;
 
   const factory CalendarExerciseEvent.navigateToSearchScreen(
-      {required String clientId}) = _SearchNavigation;
+      {required String clientId}) = SearchNavigation;
 
   const factory CalendarExerciseEvent.exerciseDeleted(
       {required String userExerciseId,
       required String clientId,
-      required int index}) = _ExerciseDeleted;
+      required int index}) = ExerciseDeleted;
 
   const factory CalendarExerciseEvent.setsSubmit(
       {required String clientId,
       required String setsNumber,
-      required String userExerciseId}) = _SetsSubmit;
+      required String userExerciseId}) = SetsSubmit;
 
   const factory CalendarExerciseEvent.repsSubmit(
       {required String clientId,
       required String repsNumber,
-      required String userExerciseId}) = _RepsSubmit;
+      required String userExerciseId}) = RepsSubmit;
 
   const factory CalendarExerciseEvent.reorderExercises(
       {required int oldIndex,
         required int newIndex,
-        required String clientId}) = _ReorderExercises;
+        required String clientId}) = ReorderExercises;
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
@@ -53,21 +54,26 @@ class SearchExercisesButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        context
-            .read<CalendarExercisesBloc>()
-            .add(CalendarExerciseEvent.navigateToSearchScreen(clientId: clientId));
+        context.read<CalendarExercisesBloc>().add(
+            CalendarExerciseEvent.navigateToSearchScreen(clientId: clientId));
       },
       child: const Icon(Icons.add),
     );
   }
 }
 
-class ExerciseExpansionPanels extends StatelessWidget {
+class ExerciseExpansionPanels extends StatefulWidget {
   final String clientId;
 
   const ExerciseExpansionPanels({required this.clientId, required Key? key})
       : super(key: key);
 
+  @override
+  State<ExerciseExpansionPanels> createState() =>
+      _ExerciseExpansionPanelsState();
+}
+
+class _ExerciseExpansionPanelsState extends State<ExerciseExpansionPanels> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CalendarExercisesBloc, CalendarExercisesState>(
@@ -75,24 +81,28 @@ class ExerciseExpansionPanels extends StatelessWidget {
       return state.when(
           started: () => _handleInitialState(context),
           loading: () => Center(child: CircularProgressIndicator()),
-          content: (userExercises) => _handleDataLoadSuccess(userExercises, context),
+          content: (userExercises) =>
+              _handleDataLoadSuccess(userExercises, context),
           error: (error) {
-              Log.d(error);
-              return ErrorView.error(AppLocalizations.of(context)!.error);
+            Log.e(error);
+            return ErrorView.error(AppLocalizations.of(context)!.error);
           });
     });
   }
 
   Container _handleInitialState(BuildContext context) {
-    context.read<CalendarExercisesBloc>().add(CalendarExerciseEvent.newDateSelected(
-        selectedDate: DateTime.now(), clientId: clientId));
+    context.read<CalendarExercisesBloc>().add(
+        CalendarExerciseEvent.newDateSelected(
+            selectedDate: DateTime.now(), clientId: widget.clientId));
     return Container();
   }
 
   Widget _handleDataLoadSuccess(
       List<UserExercise> userExercises, BuildContext context) {
     if (userExercises.isNotEmpty) {
-      return ReorderableExpansionTileListWidget(userExercises: userExercises, clientId: clientId);
+      return ReorderableExpansionTileListWidgetState(
+          userExercises: userExercises,
+          clientId: widget.clientId);
     } else {
       return _handleNoExercises(context: context);
     }

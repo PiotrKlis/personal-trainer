@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/mapper/user_exercise_mapper.dart';
 import 'package:personal_trainer/domain/model/user_exercise.dart';
@@ -17,7 +16,7 @@ class CalendarExerciseProvider {
           .collection(FirebaseConstants.usersCollection)
           .doc(clientId)
           .collection(FirebaseConstants.clientCollection)
-          .doc(FirebaseConstants.exercisesCollection)
+          .doc(FirebaseConstants.userExercisesCollection)
           .collection(formattedDate)
           .get();
 
@@ -27,7 +26,7 @@ class CalendarExerciseProvider {
             .collection(FirebaseConstants.usersCollection)
             .doc(clientId)
             .collection(FirebaseConstants.clientCollection)
-            .doc(FirebaseConstants.exercisesCollection)
+            .doc(FirebaseConstants.userExercisesCollection)
             .collection(formattedDate)
             .doc(userExercise.id)
             .collection(FirebaseConstants.exerciseCollection)
@@ -37,10 +36,8 @@ class CalendarExerciseProvider {
             userData: userExercise.data(),
             exerciseData: exercise.docs.first.data());
       }).toList());
-
       var test = await userExercises;
-      test.sort((a,b) => a.index.compareTo(b.index));
-      Log.d("getExercises $test");
+      test.sort((a, b) => a.index.compareTo(b.index));
       return Future.value(test);
     } catch (error) {
       return Future.error(error, StackTrace.current);
@@ -58,10 +55,10 @@ class CalendarExerciseProvider {
           .collection(FirebaseConstants.usersCollection)
           .doc(clientId)
           .collection(FirebaseConstants.clientCollection)
-          .doc(FirebaseConstants.exercisesCollection)
+          .doc(FirebaseConstants.userExercisesCollection)
           .collection(formattedDate)
           .doc(userExerciseId)
-          .update({FirebaseConstants.setsCollection: setsNumber});
+          .update({FirebaseConstants.setsField: setsNumber});
       return Future.value();
     } catch (error) {
       return Future.error(error, StackTrace.current);
@@ -79,10 +76,10 @@ class CalendarExerciseProvider {
           .collection(FirebaseConstants.usersCollection)
           .doc(clientId)
           .collection(FirebaseConstants.clientCollection)
-          .doc(FirebaseConstants.exercisesCollection)
+          .doc(FirebaseConstants.userExercisesCollection)
           .collection(formattedDate)
           .doc(userExerciseId)
-          .update({FirebaseConstants.repsCollection: repsNumber});
+          .update({FirebaseConstants.repsField: repsNumber});
       return Future.value();
     } catch (error) {
       return Future.error(error, StackTrace.current);
@@ -99,7 +96,7 @@ class CalendarExerciseProvider {
           .collection(FirebaseConstants.usersCollection)
           .doc(clientId)
           .collection(FirebaseConstants.clientCollection)
-          .doc(FirebaseConstants.exercisesCollection)
+          .doc(FirebaseConstants.userExercisesCollection)
           .collection(formattedDate)
           .doc(userExerciseId)
           .delete();
@@ -110,4 +107,20 @@ class CalendarExerciseProvider {
   }
 
   Future reorderExercises() async {}
+
+  Future updateIndex(
+      {required DateTime selectedDate,
+      required String clientId,
+      required String userExerciseId,
+      required int index}) async {
+    String formattedDate = DateUtils.dateOnly(selectedDate).toString();
+    FirebaseFirestore.instance
+        .collection(FirebaseConstants.usersCollection)
+        .doc(clientId)
+        .collection(FirebaseConstants.clientCollection)
+        .doc(FirebaseConstants.userExercisesCollection)
+        .collection(formattedDate)
+        .doc(userExerciseId)
+        .update({FirebaseConstants.indexField: index});
+  }
 }

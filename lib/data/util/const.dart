@@ -2,11 +2,13 @@ class FirebaseConstants {
   static String usersCollection = 'users';
   static String exercisesCollection = 'exercises';
   static String exerciseCollection = 'exercise';
+  static String userExercisesCollection = 'userExercises';
   static String trainerCollection = 'trainer';
   static String dataCollection = 'data';
   static String clientCollection = 'client';
-  static String repsCollection = 'reps';
-  static String setsCollection = 'sets';
+  static String repsField = 'reps';
+  static String setsField = 'sets';
+  static String indexField = 'index';
 }
 
 class DurationConst {
