@@ -1,10 +1,8 @@
+Backlog
+
 MVP
 
 // Calendar Exercise
-- reorder exercise
-    - Reorder
-    - delete
-    - add
 - test cases
 
 // Search
@@ -49,3 +47,8 @@ MVP
 Done:
 - bigger plus/add in search screen
 - Sluggish expansion panel list on many items
+
+- reorder exercise
+    - Reorder
+    - delete
+    - add

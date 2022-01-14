@@ -55,6 +55,7 @@ class ClientChooseScreen extends StatelessWidget {
                 .then((value) => value);
           },
           child: const Icon(Icons.add),
+          backgroundColor: Colors.blue,
         ),
       ),
     );

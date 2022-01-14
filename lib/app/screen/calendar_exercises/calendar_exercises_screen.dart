@@ -58,6 +58,7 @@ class SearchExercisesButton extends StatelessWidget {
             CalendarExerciseEvent.navigateToSearchScreen(clientId: clientId));
       },
       child: const Icon(Icons.add),
+      backgroundColor: Colors.blue,
     );
   }
 }

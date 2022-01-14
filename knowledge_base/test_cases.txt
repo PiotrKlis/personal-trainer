@@ -1,0 +1,26 @@
+Test cases
+
+// Calendar Exercise
+
+/ Calendar
+- initial state; todays day selected
+- change days with different colors for selected and todays day
+- change calendar format
+- go through calendar by arrow navigation
+- loading on list when navigating between days
+
+/ Exercise list
+- initial state; empty list with empty list text
+- reorder works and persist
+- delete works and persist
+- add works and persist
+- reps update works and persist
+- sets update works and persist
+- on delete of all exercises, show empty list text
+- expansion/collapse works as expected
+
+- video works (add more video scenarios!)
+
+/ Add exercise
+- navigation to add exercise screen works
+- screen reloads itself with new exercises when came back from add exercise screen
