@@ -19,26 +19,49 @@ class CalendarExercisesBloc
   DateTime _selectedDate = DateTime.now();
   List<UserExercise> _userExercises = [];
 
+  int getIndex(int oldIndex, int newIndex) {
+    int index = 0;
+    if (oldIndex < newIndex) {
+      index = oldIndex;
+    } else {
+      index = newIndex;
+    }
+    return index;
+  }
+
+  // https://github.com/flutter/flutter/issues/24786
+  int fixNewIndexOnReorder(int newIndex, int oldIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    return newIndex;
+  }
+
+  Future<void> updateExercisesIndexesOnRemote(
+      {required String clientId, required int index}) async {
+    for (var i = index; i < _userExercises.length; i++) {
+      _userExercises[i] = _userExercises[i].copyWith(index: i);
+      await _calendarExerciseProvider.updateIndex(
+          clientId: clientId,
+          userExerciseId: _userExercises[i].id,
+          index: i,
+          selectedDate: _selectedDate);
+    }
+  }
+
   CalendarExercisesBloc(CalendarExercisesState initialState)
       : super(initialState) {
-    on<SearchNavigation>((event, emitter) async {
-      await _navigator
-          .navigateToExerciseSearch(
-              selectedDate: _selectedDate,
-              clientId: event.clientId,
-              listLength: _userExercises.length)
-          .then((value) async {
-        emitter(CalendarExercisesState.loading());
-        await _calendarExerciseProvider
-            .getExercisesFor(
-                selectedDay: _selectedDate, clientId: event.clientId)
-            .then((exercises) {
-          exercises.sort((a, b) => a.index.compareTo(b.index));
-          _userExercises = exercises;
-          emitter(CalendarExercisesState.content(userExercises: exercises));
-        }).catchError((error) {
-          emitter(CalendarExercisesState.error(error: error.toString()));
-        });
+    on<NewDateSelected>((event, emitter) async {
+      emitter(CalendarExercisesState.loading());
+      await _calendarExerciseProvider
+          .getExercisesFor(
+              selectedDay: event.selectedDate, clientId: event.clientId)
+          .then((exercises) {
+        emitter(CalendarExercisesState.content(userExercises: exercises));
+        _selectedDate = event.selectedDate;
+        _userExercises = exercises;
+      }).catchError((error) {
+        emitter(CalendarExercisesState.error(error: error.toString()));
       });
     });
 
@@ -50,19 +73,30 @@ class CalendarExercisesBloc
               selectedDate: _selectedDate)
           .then((value) async {
         _userExercises.removeAt(event.index);
-        for (var i = event.index; i < _userExercises.length; i++) {
-          _userExercises[i] = _userExercises[i].copyWith(index: i);
-          await _calendarExerciseProvider.updateIndex(
-              clientId: event.clientId,
-              userExerciseId: _userExercises[i].id,
-              index: i,
-              selectedDate: _selectedDate);
-        }
+        await updateExercisesIndexesOnRemote(
+            clientId: event.clientId, index: event.index);
         emitter(CalendarExercisesState.loading());
         emitter(CalendarExercisesState.content(userExercises: _userExercises));
       }).catchError((error) {
         emitter(CalendarExercisesState.error(error: error.toString()));
       });
+    });
+
+    on<ReorderExercises>((event, emitter) async {
+      try {
+        int newIndex = fixNewIndexOnReorder(event.newIndex, event.oldIndex);
+        Log.d("new $newIndex old ${event.oldIndex}");
+        var userExercise = _userExercises[event.oldIndex];
+        _userExercises.removeAt(event.oldIndex);
+        _userExercises.insert(newIndex, userExercise);
+        int index = getIndex(event.oldIndex, newIndex);
+        await updateExercisesIndexesOnRemote(
+            clientId: event.clientId, index: index);
+        emitter(CalendarExercisesState.loading());
+        emitter(CalendarExercisesState.content(userExercises: _userExercises));
+      } catch (error) {
+        emitter(CalendarExercisesState.error(error: error.toString()));
+      }
     });
 
     on<SetsSubmit>((event, emitter) async {
@@ -112,29 +146,24 @@ class CalendarExercisesBloc
         transformer:
             debounce(Duration(milliseconds: DurationConst.debounceTime)));
 
-    on<ReorderExercises>((event, emitter) async {
-      Log.d("before $_userExercises");
-      var userExercise = _userExercises[event.oldIndex];
-      _userExercises.removeAt(event.oldIndex);
-      _userExercises.insert(event.newIndex, userExercise);
-      Log.d("after $_userExercises");
-      // await _calendarExerciseProvider
-      //     .reorderExercises(
-      //
-      // )
-    });
-
-    on<NewDateSelected>((event, emitter) async {
-      emitter(CalendarExercisesState.loading());
-      await _calendarExerciseProvider
-          .getExercisesFor(
-              selectedDay: event.selectedDate, clientId: event.clientId)
-          .then((exercises) {
-        emitter(CalendarExercisesState.content(userExercises: exercises));
-        _selectedDate = event.selectedDate;
-        _userExercises = exercises;
-      }).catchError((error) {
-        emitter(CalendarExercisesState.error(error: error.toString()));
+    on<SearchNavigation>((event, emitter) async {
+      await _navigator
+          .navigateToExerciseSearch(
+              selectedDate: _selectedDate,
+              clientId: event.clientId,
+              listLength: _userExercises.length)
+          .then((value) async {
+        emitter(CalendarExercisesState.loading());
+        await _calendarExerciseProvider
+            .getExercisesFor(
+                selectedDay: _selectedDate, clientId: event.clientId)
+            .then((exercises) {
+          exercises.sort((a, b) => a.index.compareTo(b.index));
+          _userExercises = exercises;
+          emitter(CalendarExercisesState.content(userExercises: exercises));
+        }).catchError((error) {
+          emitter(CalendarExercisesState.error(error: error.toString()));
+        });
       });
     });
   }
