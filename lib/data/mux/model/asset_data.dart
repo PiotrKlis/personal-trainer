@@ -1,15 +1,17 @@
-import 'dart:convert';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'common/data.dart';
-
+part 'asset_data.freezed.dart';
+part 'asset_data.g.dart';
 
 @freezed
 class AssetData with _$AssetData {
   const factory AssetData({
     required List<Data> data,
   }) = _AssetData;
+
+  factory AssetData.fromJson(Map<String, dynamic> json) => _$AssetDataFromJson(json);
+
 }
 
 //

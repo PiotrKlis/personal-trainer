@@ -22,38 +22,37 @@ class MUXClient {
   Future<VideoData?> storeVideo({required String videoUrl}) async {
     Response response;
 
-    // try {
-    //   response = await _dio.post(
-    //     "/assets",
-    //     data: {
-    //       "videoUrl": videoUrl,
-    //     },
-    //   );
-    // } catch (e) {
-    //   print('Error starting build: $e');
-    //   throw Exception('Failed to store video on MUX');
-    // }
-    //
-    // if (response.statusCode == 200) {
-    //   VideoData videoData = VideoData.fromJson(response.data);
-    //
-    //   String status = videoData.data.status;
-    //
-    //   while (status == 'preparing') {
-    //     print('processing...');
-    //     await Future.delayed(Duration(seconds: 1));
-    //     videoData = await checkPostStatus(videoId: videoData.data.id);
-    //     status = videoData.data.status;
-    //   }
-    //
-    //   return videoData;
-    // }
+    try {
+      response = await _dio.post(
+        "/assets",
+        data: {
+          "videoUrl": videoUrl,
+        },
+      );
+    } catch (e) {
+      print('Error starting build: $e');
+      throw Exception('Failed to store video on MUX');
+    }
+
+    if (response.statusCode == 200) {
+      VideoData? videoData = VideoData.fromJson(response.data);
+
+      String? status = videoData.data.status;
+
+      while (status == 'preparing') {
+        print('processing...');
+        await Future.delayed(Duration(seconds: 1));
+        videoData = await checkPostStatus(videoId: videoData?.data.id);
+        status = videoData?.data.status;
+      }
+
+      return videoData;
+    }
 
     return null;
   }
 
-
-  Future<VideoData?> checkPostStatus({required String videoId}) async {
+  Future<VideoData?> checkPostStatus({required String? videoId}) async {
     try {
       Response response = await _dio.get(
         "/asset",
@@ -63,9 +62,9 @@ class MUXClient {
       );
 
       if (response.statusCode == 200) {
-        // VideoData videoData = VideoData.fromJson(response.data);
+        VideoData videoData = VideoData.fromJson(response.data);
 
-        // return videoData;
+        return videoData;
       }
     } catch (e) {
       print('Error starting build: $e');
@@ -82,9 +81,9 @@ class MUXClient {
       );
 
       if (response.statusCode == 200) {
-        // AssetData assetData = AssetData.fromJson(response.data);
+        AssetData assetData = AssetData.fromJson(response.data);
 
-        // return assetData;
+        return assetData;
       }
     } catch (e) {
       print('Error starting build: $e');

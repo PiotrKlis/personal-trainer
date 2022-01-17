@@ -1,7 +1,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'playback_id.dart';
+part 'playback_id.freezed.dart';
+part 'playback_id.g.dart';
 
 @freezed
 class PlaybackId with _$PlaybackId {
@@ -9,6 +10,9 @@ class PlaybackId with _$PlaybackId {
     String? policy,
     String? id,
   }) = _PlaybackId;
+
+  factory PlaybackId.fromJson(Map<String, dynamic> json) => _$PlaybackIdFromJson(json);
+
 }
 //
 //   String policy;

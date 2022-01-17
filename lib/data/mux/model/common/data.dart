@@ -2,8 +2,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:personal_trainer/data/mux/model/common/playback_id.dart';
 import 'package:personal_trainer/data/mux/model/common/track.dart';
-
-part 'playback_id.dart';
+part 'data.freezed.dart';
+part 'data.g.dart';
 
 @freezed
 class Data with _$Data {
@@ -21,6 +21,8 @@ class Data with _$Data {
     String? mp4Support,
     String? aspectRatio,
   }) = _Data;
+
+  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
 }
   //
   // bool? test;

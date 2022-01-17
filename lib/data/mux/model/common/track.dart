@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+part 'track.freezed.dart';
+part 'track.g.dart';
 
 @freezed
 class Track with _$Track {
@@ -14,6 +16,9 @@ class Track with _$Track {
     String? maxChannelLayout,
     int? maxChannels,
   }) = _Track;
+
+  factory Track.fromJson(Map<String, dynamic> json) => _$TrackFromJson(json);
+
 }
 //
 //   int maxWidth;
