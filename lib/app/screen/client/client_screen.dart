@@ -40,15 +40,15 @@ class ClientScreen extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
-                    height: 240,
-                    child: VideoItem(
-                      videoPlayerController: VideoPlayerController.network(
-                          listOfUserExercises[index].exercise.videoPath),
-                      looping: false,
-                      autoplay: false,
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: 240,
+                  //   child: VideoItem(
+                  //     videoPlayerController: VideoPlayerController.network(
+                  //         listOfUserExercises[index].exercise.videoPath),
+                  //     looping: false,
+                  //     autoplay: false,
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(

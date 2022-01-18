@@ -23,6 +23,6 @@ class Exercise with _$Exercise {
   const factory Exercise(
       {required String id,
       required String title,
-      required String videoPath,
+      required String playbackId,
       required List<String> tags}) = _Exercise;
 }

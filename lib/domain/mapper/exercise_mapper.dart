@@ -5,7 +5,7 @@ class ExerciseMapper {
     return Exercise(
         id: data['id'],
         title: data['title'],
-        videoPath: data['videoPath'],
+        playbackId: data['playbackId'],
         tags: List.from(data['tags']));
   }
 }

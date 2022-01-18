@@ -205,15 +205,15 @@ class ListOfResults extends StatelessWidget {
       body: Column(
         children: [
           Divider(),
-          SizedBox(
-            height: Dimens.videoContainerHeight,
-            child: VideoItem(
-              videoPlayerController:
-                  VideoPlayerController.network(exercise.videoPath),
-              looping: false,
-              autoplay: false,
-            ),
-          ),
+          // SizedBox(
+          //   height: Dimens.videoContainerHeight,
+          //   child: VideoItem(
+          //     videoPlayerController:
+          //         VideoPlayerController.network(exercise.videoPath),
+          //     looping: false,
+          //     autoplay: false,
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(Dimens.smallPadding),
             child: Container(

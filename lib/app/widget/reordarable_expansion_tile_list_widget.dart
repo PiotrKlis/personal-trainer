@@ -5,10 +5,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_bloc.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_event.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
+import 'package:personal_trainer/app/util/logger.dart';
+import 'package:personal_trainer/data/mux/mux_strings.dart';
 import 'package:personal_trainer/domain/model/user_exercise.dart';
 import 'package:provider/src/provider.dart';
+import 'package:video_player/video_player.dart';
 
-class ReorderableExpansionTileListWidgetState extends StatelessWidget {
+class ReorderableExpansionTileListWidgetState extends StatefulWidget {
   final String clientId;
   final List<UserExercise> userExercises;
 
@@ -17,32 +20,44 @@ class ReorderableExpansionTileListWidgetState extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<ReorderableExpansionTileListWidgetState> createState() =>
+      _ReorderableExpansionTileListWidgetStateState();
+}
+
+class _ReorderableExpansionTileListWidgetStateState
+    extends State<ReorderableExpansionTileListWidgetState> {
+  List<String> listOfExpandedExercises = [];
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ReorderableListView(
-          children: userExercises
-              .map((userExercise) =>
-              _buildExpansionTile(
+          children: widget.userExercises
+              .map((userExercise) => _buildExpansionTile(
                   userExercise: userExercise,
                   context: context,
-                  clientId: clientId))
+                  clientId: widget.clientId))
               .toList(),
           onReorder: (oldIndex, newIndex) {
             context.read<CalendarExercisesBloc>().add(
                 CalendarExerciseEvent.reorderExercises(
                     oldIndex: oldIndex,
                     newIndex: newIndex,
-                    clientId: clientId));
+                    clientId: widget.clientId));
           }),
     );
   }
 
-  Dismissible _buildExpansionTile({required UserExercise userExercise,
-    required BuildContext context,
-    required String clientId}) {
+  Dismissible _buildExpansionTile(
+      {required UserExercise userExercise,
+      required BuildContext context,
+      required String clientId}) {
+    VideoPlayerController _videoPlayerController =
+        initVideoPlayerController(userExercise);
+
     return Dismissible(
       background: Container(color: Colors.black),
-      key: UniqueKey(),
+      key: PageStorageKey(userExercise.id),
       onDismissed: (direction) {
         context.read<CalendarExercisesBloc>().add(
             CalendarExerciseEvent.exerciseDeleted(
@@ -53,7 +68,11 @@ class ReorderableExpansionTileListWidgetState extends StatelessWidget {
       child: Card(
         elevation: 1,
         child: ExpansionTile(
-          key: Key(userExercise.id),
+          onExpansionChanged: (value) {
+            value
+                ? listOfExpandedExercises.add(userExercise.id)
+                : listOfExpandedExercises.remove(userExercise.id);
+          },
           leading: Icon(Icons.fitness_center),
           title: Text(
             userExercise.exercise.title,
@@ -66,13 +85,17 @@ class ReorderableExpansionTileListWidgetState extends StatelessWidget {
                 userExercise: userExercise,
                 clientId: clientId),
             SizedBox(
-              height: Dimens.videoContainerHeight,
-              // child: VideoItem(
-              //   videoPlayerController:
-              //       VideoPlayerController.network(exercise.videoPath),
-              //   looping: false,
-              //   autoplay: false,
-              // ),
+                height: Dimens.videoContainerHeight,
+                child: VideoPlayer(_videoPlayerController)),
+            Row(
+              children: [
+                MaterialButton(color: Colors.blue ,onPressed: () {
+                  Log.d("button pressed!");
+                  _videoPlayerController.value.isPlaying
+                      ? _videoPlayerController.pause()
+                      : _videoPlayerController.play();
+                })
+              ],
             ),
             Padding(
               padding: const EdgeInsets.all(Dimens.smallPadding),
@@ -81,6 +104,7 @@ class ReorderableExpansionTileListWidgetState extends StatelessWidget {
                 child: Flex(direction: Axis.vertical, children: [
                   Expanded(
                     child: ListView.builder(
+                      key: PageStorageKey(userExercise.id),
                       scrollDirection: Axis.horizontal,
                       itemCount: userExercise.exercise.tags.length,
                       itemBuilder: (BuildContext context, int tagIndex) {
@@ -103,14 +127,25 @@ class ReorderableExpansionTileListWidgetState extends StatelessWidget {
     );
   }
 
-  Row _expansionPanelInfoRow({required BuildContext context,
-    required UserExercise userExercise,
-    required String clientId}) {
+  VideoPlayerController initVideoPlayerController(UserExercise userExercise) {
+    String playbackId = userExercise.exercise.playbackId;
+    String path = '$muxStreamBaseUrl/$playbackId.$videoExtension';
+    VideoPlayerController _videoPlayerController =
+        VideoPlayerController.network(path)..initialize();
+    _videoPlayerController.setLooping(true);
+    return _videoPlayerController;
+  }
+
+  Row _expansionPanelInfoRow(
+      {required BuildContext context,
+      required UserExercise userExercise,
+      required String clientId}) {
     String _initialSetsValue = userExercise.sets.toString();
     String _initialRepsValue = userExercise.reps.toString();
     var _setsController = TextEditingController(text: _initialSetsValue);
     var _repsController = TextEditingController(text: _initialRepsValue);
     return Row(
+      key: PageStorageKey(userExercise.id),
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
