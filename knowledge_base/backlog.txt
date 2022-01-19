@@ -4,7 +4,6 @@ MVP
 
 // Calendar Exercise
 - mux
-    - loading bar on loading
     - pause video on tile collapse
     - dispose all controllers on date change
 - test cases
@@ -56,3 +55,4 @@ Done:
     - Reorder
     - delete
     - add
+        - loading bar on loading

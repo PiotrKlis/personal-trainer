@@ -99,7 +99,7 @@ class _ExerciseExpansionPanelsState extends State<ExerciseExpansionPanels> {
   Widget _handleDataLoadSuccess(
       List<UserExercise> userExercises, BuildContext context) {
     if (userExercises.isNotEmpty) {
-      return ReorderableExpansionTileListWidgetState(
+      return ReorderableExpansionTileListWidget(
           userExercises: userExercises,
           clientId: widget.clientId);
     } else {

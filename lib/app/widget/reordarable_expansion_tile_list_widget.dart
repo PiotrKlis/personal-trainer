@@ -5,28 +5,25 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_bloc.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_event.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
-import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/video_player_state.dart';
-import 'package:personal_trainer/data/mux/mux_strings.dart';
 import 'package:personal_trainer/domain/model/user_exercise.dart';
 import 'package:provider/src/provider.dart';
-import 'package:video_player/video_player.dart';
 
-class ReorderableExpansionTileListWidgetState extends StatefulWidget {
+class ReorderableExpansionTileListWidget extends StatefulWidget {
   final String clientId;
   final List<UserExercise> userExercises;
 
-  const ReorderableExpansionTileListWidgetState(
+  const ReorderableExpansionTileListWidget(
       {Key? key, required this.clientId, required this.userExercises})
       : super(key: key);
 
   @override
-  State<ReorderableExpansionTileListWidgetState> createState() =>
-      _ReorderableExpansionTileListWidgetStateState();
+  State<ReorderableExpansionTileListWidget> createState() =>
+      _ReorderableExpansionTileListWidgetState();
 }
 
-class _ReorderableExpansionTileListWidgetStateState
-    extends State<ReorderableExpansionTileListWidgetState> {
+class _ReorderableExpansionTileListWidgetState
+    extends State<ReorderableExpansionTileListWidget> {
   List<String> listOfExpandedExercises = [];
 
   @override
@@ -53,9 +50,6 @@ class _ReorderableExpansionTileListWidgetStateState
       {required UserExercise userExercise,
       required BuildContext context,
       required String clientId}) {
-    // VideoPlayerController _videoPlayerController =
-    //     initVideoPlayerController(userExercise);
-
     return Dismissible(
       background: Container(color: Colors.black),
       key: PageStorageKey(UniqueKey()),
