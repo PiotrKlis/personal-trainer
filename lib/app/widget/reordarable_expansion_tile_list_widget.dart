@@ -89,12 +89,14 @@ class _ReorderableExpansionTileListWidgetStateState
                 child: VideoPlayer(_videoPlayerController)),
             Row(
               children: [
-                MaterialButton(color: Colors.blue ,onPressed: () {
-                  Log.d("button pressed!");
-                  _videoPlayerController.value.isPlaying
-                      ? _videoPlayerController.pause()
-                      : _videoPlayerController.play();
-                })
+                MaterialButton(
+                    color: Colors.blue,
+                    onPressed: () {
+                      Log.d("button pressed!");
+                      _videoPlayerController.value.isPlaying
+                          ? _videoPlayerController.pause()
+                          : _videoPlayerController.play();
+                    })
               ],
             ),
             Padding(
@@ -131,7 +133,9 @@ class _ReorderableExpansionTileListWidgetStateState
     String playbackId = userExercise.exercise.playbackId;
     String path = '$muxStreamBaseUrl/$playbackId.$videoExtension';
     VideoPlayerController _videoPlayerController =
-        VideoPlayerController.network(path)..initialize();
+        VideoPlayerController.network(path,
+            videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true))
+          ..initialize();
     _videoPlayerController.setLooping(true);
     return _videoPlayerController;
   }
