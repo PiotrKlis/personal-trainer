@@ -560,6 +560,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.4"
+  pedantic:
+    dependency: transitive
+    description:
+      name: pedantic
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.11.1"
   platform:
     dependency: transitive
     description:
@@ -750,24 +757,30 @@ packages:
   video_player:
     dependency: "direct main"
     description:
-      name: video_player
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.11"
+      path: "packages/video_player/video_player"
+      ref: caching
+      resolved-ref: "677d928d1a745e9bdf4257163daa2c52a5374fef"
+      url: "git://github.com/mavericksunny/plugins.git"
+    source: git
+    version: "2.2.10"
   video_player_platform_interface:
     dependency: transitive
     description:
-      name: video_player_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.2.0"
+      path: "packages/video_player/video_player_platform_interface"
+      ref: caching
+      resolved-ref: "677d928d1a745e9bdf4257163daa2c52a5374fef"
+      url: "git@github.com:mavericksunny/plugins.git"
+    source: git
+    version: "5.0.0"
   video_player_web:
     dependency: transitive
     description:
-      name: video_player_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.4"
+      path: "packages/video_player/video_player_web"
+      ref: caching
+      resolved-ref: "677d928d1a745e9bdf4257163daa2c52a5374fef"
+      url: "git@github.com:mavericksunny/plugins.git"
+    source: git
+    version: "2.0.5"
   watcher:
     dependency: transitive
     description:

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
@@ -7,7 +6,6 @@ import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/calendar_widget.dart';
 import 'package:personal_trainer/app/widget/error_view.dart';
 import 'package:personal_trainer/app/widget/reordarable_expansion_tile_list_widget.dart';
-import 'package:personal_trainer/domain/model/exercise.dart';
 import 'package:personal_trainer/domain/model/user_exercise.dart';
 
 import 'calendar_exercises_bloc.dart';

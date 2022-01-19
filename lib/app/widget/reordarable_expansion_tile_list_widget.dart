@@ -6,6 +6,7 @@ import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercise
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_event.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
 import 'package:personal_trainer/app/util/logger.dart';
+import 'package:personal_trainer/app/widget/video_player_state.dart';
 import 'package:personal_trainer/data/mux/mux_strings.dart';
 import 'package:personal_trainer/domain/model/user_exercise.dart';
 import 'package:provider/src/provider.dart';
@@ -52,12 +53,12 @@ class _ReorderableExpansionTileListWidgetStateState
       {required UserExercise userExercise,
       required BuildContext context,
       required String clientId}) {
-    VideoPlayerController _videoPlayerController =
-        initVideoPlayerController(userExercise);
+    // VideoPlayerController _videoPlayerController =
+    //     initVideoPlayerController(userExercise);
 
     return Dismissible(
       background: Container(color: Colors.black),
-      key: PageStorageKey(userExercise.id),
+      key: PageStorageKey(UniqueKey()),
       onDismissed: (direction) {
         context.read<CalendarExercisesBloc>().add(
             CalendarExerciseEvent.exerciseDeleted(
@@ -68,6 +69,7 @@ class _ReorderableExpansionTileListWidgetStateState
       child: Card(
         elevation: 1,
         child: ExpansionTile(
+          initiallyExpanded: listOfExpandedExercises.contains(userExercise.id),
           onExpansionChanged: (value) {
             value
                 ? listOfExpandedExercises.add(userExercise.id)
@@ -84,21 +86,7 @@ class _ReorderableExpansionTileListWidgetStateState
                 context: context,
                 userExercise: userExercise,
                 clientId: clientId),
-            SizedBox(
-                height: Dimens.videoContainerHeight,
-                child: VideoPlayer(_videoPlayerController)),
-            Row(
-              children: [
-                MaterialButton(
-                    color: Colors.blue,
-                    onPressed: () {
-                      Log.d("button pressed!");
-                      _videoPlayerController.value.isPlaying
-                          ? _videoPlayerController.pause()
-                          : _videoPlayerController.play();
-                    })
-              ],
-            ),
+            VideoPlayerWidget(playbackId: userExercise.exercise.playbackId),
             Padding(
               padding: const EdgeInsets.all(Dimens.smallPadding),
               child: Container(
@@ -127,17 +115,6 @@ class _ReorderableExpansionTileListWidgetStateState
         ),
       ),
     );
-  }
-
-  VideoPlayerController initVideoPlayerController(UserExercise userExercise) {
-    String playbackId = userExercise.exercise.playbackId;
-    String path = '$muxStreamBaseUrl/$playbackId.$videoExtension';
-    VideoPlayerController _videoPlayerController =
-        VideoPlayerController.network(path,
-            videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true))
-          ..initialize();
-    _videoPlayerController.setLooping(true);
-    return _videoPlayerController;
   }
 
   Row _expansionPanelInfoRow(

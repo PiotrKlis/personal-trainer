@@ -29,7 +29,11 @@ dependencies:
   flutter_email_sender: ^5.0.1
   fluttertoast: ^8.0.8
   table_calendar: ^3.0.3
-  video_player: ^2.2.11
+  video_player:
+    git:
+      url: git://github.com/mavericksunny/plugins.git
+      ref: caching
+      path: packages/video_player/video_player
   cloud_firestore: ^3.1.0
   firebase_auth: ^3.2.0
   provider: ^6.0.1

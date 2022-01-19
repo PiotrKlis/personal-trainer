@@ -9,7 +9,7 @@ class Dimens {
   static const int expansionPanelAnimationDuration = 500;
   static const double digitTextFieldWidth = 24.0;
   static const double iconRoundSize = 20.0;
-  static const double videoContainerHeight = 240.0;
+  static const double videoContainerHeight = 230.0;
   static const double tagsRowHeight = 24.0;
   static const double tagsRowDividerWidth = 4.0;
 }

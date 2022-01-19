@@ -3,6 +3,10 @@ Backlog
 MVP
 
 // Calendar Exercise
+- mux
+    - loading bar on loading
+    - pause video on tile collapse
+    - dispose all controllers on date change
 - test cases
 
 // Search
