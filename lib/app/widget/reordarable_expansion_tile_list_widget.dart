@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_bloc.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_event.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
-import 'package:personal_trainer/app/widget/video_player_state.dart';
+import 'package:personal_trainer/app/widget/video_player_widget.dart';
 import 'package:personal_trainer/domain/model/user_exercise.dart';
 import 'package:provider/src/provider.dart';
 
