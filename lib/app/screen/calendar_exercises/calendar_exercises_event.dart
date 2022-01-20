@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 part 'calendar_exercises_event.freezed.dart';
 
@@ -28,6 +29,10 @@ class CalendarExerciseEvent with _$CalendarExerciseEvent {
 
   const factory CalendarExerciseEvent.reorderExercises(
       {required int oldIndex,
-        required int newIndex,
-        required String clientId}) = ReorderExercises;
+      required int newIndex,
+      required String clientId}) = ReorderExercises;
+
+  const factory CalendarExerciseEvent.newDateFormatSelected(
+      {required CalendarFormat calendarFormat,
+      required String clientId}) = NewDateFormatSelected;
 }

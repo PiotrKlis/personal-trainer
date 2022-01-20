@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:personal_trainer/app/widget/calendar/calendar_provider.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
 import 'package:personal_trainer/data/provider/client_choose_provider.dart';
 import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
@@ -33,7 +34,8 @@ class GetItInjector implements DependencyInjector {
     _getIt.registerLazySingleton<RegisterProvider>(() => RegisterProvider());
     _getIt.registerLazySingleton<ClientChooseProvider>(
         () => ClientChooseProvider());
-    _getIt.registerSingleton<AppRouter>(AppRouter());
+    _getIt.registerLazySingleton<CalendarProvider>(() => CalendarProvider());
+    _getIt.registerLazySingleton<AppRouter>(() => AppRouter());
 
     // _getIt.registerLazySingleton<AutoRouteNavigator>(
     //     () => AutoRouteNavigator(context));

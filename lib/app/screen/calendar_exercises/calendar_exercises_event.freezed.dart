@@ -74,6 +74,14 @@ class _$CalendarExerciseEventTearOff {
       clientId: clientId,
     );
   }
+
+  NewDateFormatSelected newDateFormatSelected(
+      {required CalendarFormat calendarFormat, required String clientId}) {
+    return NewDateFormatSelected(
+      calendarFormat: calendarFormat,
+      clientId: clientId,
+    );
+  }
 }
 
 /// @nodoc
@@ -98,6 +106,8 @@ mixin _$CalendarExerciseEvent {
         repsSubmit,
     required TResult Function(int oldIndex, int newIndex, String clientId)
         reorderExercises,
+    required TResult Function(CalendarFormat calendarFormat, String clientId)
+        newDateFormatSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -112,6 +122,8 @@ mixin _$CalendarExerciseEvent {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -126,6 +138,8 @@ mixin _$CalendarExerciseEvent {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -137,6 +151,8 @@ mixin _$CalendarExerciseEvent {
     required TResult Function(SetsSubmit value) setsSubmit,
     required TResult Function(RepsSubmit value) repsSubmit,
     required TResult Function(ReorderExercises value) reorderExercises,
+    required TResult Function(NewDateFormatSelected value)
+        newDateFormatSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -147,6 +163,7 @@ mixin _$CalendarExerciseEvent {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -157,6 +174,7 @@ mixin _$CalendarExerciseEvent {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -287,6 +305,8 @@ class _$NewDateSelected implements NewDateSelected {
         repsSubmit,
     required TResult Function(int oldIndex, int newIndex, String clientId)
         reorderExercises,
+    required TResult Function(CalendarFormat calendarFormat, String clientId)
+        newDateFormatSelected,
   }) {
     return newDateSelected(selectedDate, clientId);
   }
@@ -304,6 +324,8 @@ class _$NewDateSelected implements NewDateSelected {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
   }) {
     return newDateSelected?.call(selectedDate, clientId);
   }
@@ -321,6 +343,8 @@ class _$NewDateSelected implements NewDateSelected {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (newDateSelected != null) {
@@ -338,6 +362,8 @@ class _$NewDateSelected implements NewDateSelected {
     required TResult Function(SetsSubmit value) setsSubmit,
     required TResult Function(RepsSubmit value) repsSubmit,
     required TResult Function(ReorderExercises value) reorderExercises,
+    required TResult Function(NewDateFormatSelected value)
+        newDateFormatSelected,
   }) {
     return newDateSelected(this);
   }
@@ -351,6 +377,7 @@ class _$NewDateSelected implements NewDateSelected {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return newDateSelected?.call(this);
   }
@@ -364,6 +391,7 @@ class _$NewDateSelected implements NewDateSelected {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (newDateSelected != null) {
@@ -467,6 +495,8 @@ class _$SearchNavigation implements SearchNavigation {
         repsSubmit,
     required TResult Function(int oldIndex, int newIndex, String clientId)
         reorderExercises,
+    required TResult Function(CalendarFormat calendarFormat, String clientId)
+        newDateFormatSelected,
   }) {
     return navigateToSearchScreen(clientId);
   }
@@ -484,6 +514,8 @@ class _$SearchNavigation implements SearchNavigation {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
   }) {
     return navigateToSearchScreen?.call(clientId);
   }
@@ -501,6 +533,8 @@ class _$SearchNavigation implements SearchNavigation {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (navigateToSearchScreen != null) {
@@ -518,6 +552,8 @@ class _$SearchNavigation implements SearchNavigation {
     required TResult Function(SetsSubmit value) setsSubmit,
     required TResult Function(RepsSubmit value) repsSubmit,
     required TResult Function(ReorderExercises value) reorderExercises,
+    required TResult Function(NewDateFormatSelected value)
+        newDateFormatSelected,
   }) {
     return navigateToSearchScreen(this);
   }
@@ -531,6 +567,7 @@ class _$SearchNavigation implements SearchNavigation {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return navigateToSearchScreen?.call(this);
   }
@@ -544,6 +581,7 @@ class _$SearchNavigation implements SearchNavigation {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (navigateToSearchScreen != null) {
@@ -668,6 +706,8 @@ class _$ExerciseDeleted implements ExerciseDeleted {
         repsSubmit,
     required TResult Function(int oldIndex, int newIndex, String clientId)
         reorderExercises,
+    required TResult Function(CalendarFormat calendarFormat, String clientId)
+        newDateFormatSelected,
   }) {
     return exerciseDeleted(userExerciseId, clientId, index);
   }
@@ -685,6 +725,8 @@ class _$ExerciseDeleted implements ExerciseDeleted {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
   }) {
     return exerciseDeleted?.call(userExerciseId, clientId, index);
   }
@@ -702,6 +744,8 @@ class _$ExerciseDeleted implements ExerciseDeleted {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (exerciseDeleted != null) {
@@ -719,6 +763,8 @@ class _$ExerciseDeleted implements ExerciseDeleted {
     required TResult Function(SetsSubmit value) setsSubmit,
     required TResult Function(RepsSubmit value) repsSubmit,
     required TResult Function(ReorderExercises value) reorderExercises,
+    required TResult Function(NewDateFormatSelected value)
+        newDateFormatSelected,
   }) {
     return exerciseDeleted(this);
   }
@@ -732,6 +778,7 @@ class _$ExerciseDeleted implements ExerciseDeleted {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return exerciseDeleted?.call(this);
   }
@@ -745,6 +792,7 @@ class _$ExerciseDeleted implements ExerciseDeleted {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (exerciseDeleted != null) {
@@ -873,6 +921,8 @@ class _$SetsSubmit implements SetsSubmit {
         repsSubmit,
     required TResult Function(int oldIndex, int newIndex, String clientId)
         reorderExercises,
+    required TResult Function(CalendarFormat calendarFormat, String clientId)
+        newDateFormatSelected,
   }) {
     return setsSubmit(clientId, setsNumber, userExerciseId);
   }
@@ -890,6 +940,8 @@ class _$SetsSubmit implements SetsSubmit {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
   }) {
     return setsSubmit?.call(clientId, setsNumber, userExerciseId);
   }
@@ -907,6 +959,8 @@ class _$SetsSubmit implements SetsSubmit {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (setsSubmit != null) {
@@ -924,6 +978,8 @@ class _$SetsSubmit implements SetsSubmit {
     required TResult Function(SetsSubmit value) setsSubmit,
     required TResult Function(RepsSubmit value) repsSubmit,
     required TResult Function(ReorderExercises value) reorderExercises,
+    required TResult Function(NewDateFormatSelected value)
+        newDateFormatSelected,
   }) {
     return setsSubmit(this);
   }
@@ -937,6 +993,7 @@ class _$SetsSubmit implements SetsSubmit {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return setsSubmit?.call(this);
   }
@@ -950,6 +1007,7 @@ class _$SetsSubmit implements SetsSubmit {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (setsSubmit != null) {
@@ -1078,6 +1136,8 @@ class _$RepsSubmit implements RepsSubmit {
         repsSubmit,
     required TResult Function(int oldIndex, int newIndex, String clientId)
         reorderExercises,
+    required TResult Function(CalendarFormat calendarFormat, String clientId)
+        newDateFormatSelected,
   }) {
     return repsSubmit(clientId, repsNumber, userExerciseId);
   }
@@ -1095,6 +1155,8 @@ class _$RepsSubmit implements RepsSubmit {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
   }) {
     return repsSubmit?.call(clientId, repsNumber, userExerciseId);
   }
@@ -1112,6 +1174,8 @@ class _$RepsSubmit implements RepsSubmit {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (repsSubmit != null) {
@@ -1129,6 +1193,8 @@ class _$RepsSubmit implements RepsSubmit {
     required TResult Function(SetsSubmit value) setsSubmit,
     required TResult Function(RepsSubmit value) repsSubmit,
     required TResult Function(ReorderExercises value) reorderExercises,
+    required TResult Function(NewDateFormatSelected value)
+        newDateFormatSelected,
   }) {
     return repsSubmit(this);
   }
@@ -1142,6 +1208,7 @@ class _$RepsSubmit implements RepsSubmit {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return repsSubmit?.call(this);
   }
@@ -1155,6 +1222,7 @@ class _$RepsSubmit implements RepsSubmit {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (repsSubmit != null) {
@@ -1280,6 +1348,8 @@ class _$ReorderExercises implements ReorderExercises {
         repsSubmit,
     required TResult Function(int oldIndex, int newIndex, String clientId)
         reorderExercises,
+    required TResult Function(CalendarFormat calendarFormat, String clientId)
+        newDateFormatSelected,
   }) {
     return reorderExercises(oldIndex, newIndex, clientId);
   }
@@ -1297,6 +1367,8 @@ class _$ReorderExercises implements ReorderExercises {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
   }) {
     return reorderExercises?.call(oldIndex, newIndex, clientId);
   }
@@ -1314,6 +1386,8 @@ class _$ReorderExercises implements ReorderExercises {
         repsSubmit,
     TResult Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (reorderExercises != null) {
@@ -1331,6 +1405,8 @@ class _$ReorderExercises implements ReorderExercises {
     required TResult Function(SetsSubmit value) setsSubmit,
     required TResult Function(RepsSubmit value) repsSubmit,
     required TResult Function(ReorderExercises value) reorderExercises,
+    required TResult Function(NewDateFormatSelected value)
+        newDateFormatSelected,
   }) {
     return reorderExercises(this);
   }
@@ -1344,6 +1420,7 @@ class _$ReorderExercises implements ReorderExercises {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return reorderExercises?.call(this);
   }
@@ -1357,6 +1434,7 @@ class _$ReorderExercises implements ReorderExercises {
     TResult Function(SetsSubmit value)? setsSubmit,
     TResult Function(RepsSubmit value)? repsSubmit,
     TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
     required TResult orElse(),
   }) {
     if (reorderExercises != null) {
@@ -1379,5 +1457,208 @@ abstract class ReorderExercises implements CalendarExerciseEvent {
   @override
   @JsonKey(ignore: true)
   $ReorderExercisesCopyWith<ReorderExercises> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NewDateFormatSelectedCopyWith<$Res>
+    implements $CalendarExerciseEventCopyWith<$Res> {
+  factory $NewDateFormatSelectedCopyWith(NewDateFormatSelected value,
+          $Res Function(NewDateFormatSelected) then) =
+      _$NewDateFormatSelectedCopyWithImpl<$Res>;
+  @override
+  $Res call({CalendarFormat calendarFormat, String clientId});
+}
+
+/// @nodoc
+class _$NewDateFormatSelectedCopyWithImpl<$Res>
+    extends _$CalendarExerciseEventCopyWithImpl<$Res>
+    implements $NewDateFormatSelectedCopyWith<$Res> {
+  _$NewDateFormatSelectedCopyWithImpl(
+      NewDateFormatSelected _value, $Res Function(NewDateFormatSelected) _then)
+      : super(_value, (v) => _then(v as NewDateFormatSelected));
+
+  @override
+  NewDateFormatSelected get _value => super._value as NewDateFormatSelected;
+
+  @override
+  $Res call({
+    Object? calendarFormat = freezed,
+    Object? clientId = freezed,
+  }) {
+    return _then(NewDateFormatSelected(
+      calendarFormat: calendarFormat == freezed
+          ? _value.calendarFormat
+          : calendarFormat // ignore: cast_nullable_to_non_nullable
+              as CalendarFormat,
+      clientId: clientId == freezed
+          ? _value.clientId
+          : clientId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$NewDateFormatSelected implements NewDateFormatSelected {
+  const _$NewDateFormatSelected(
+      {required this.calendarFormat, required this.clientId});
+
+  @override
+  final CalendarFormat calendarFormat;
+  @override
+  final String clientId;
+
+  @override
+  String toString() {
+    return 'CalendarExerciseEvent.newDateFormatSelected(calendarFormat: $calendarFormat, clientId: $clientId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NewDateFormatSelected &&
+            const DeepCollectionEquality()
+                .equals(other.calendarFormat, calendarFormat) &&
+            const DeepCollectionEquality().equals(other.clientId, clientId));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(calendarFormat),
+      const DeepCollectionEquality().hash(clientId));
+
+  @JsonKey(ignore: true)
+  @override
+  $NewDateFormatSelectedCopyWith<NewDateFormatSelected> get copyWith =>
+      _$NewDateFormatSelectedCopyWithImpl<NewDateFormatSelected>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(DateTime selectedDate, String clientId)
+        newDateSelected,
+    required TResult Function(String clientId) navigateToSearchScreen,
+    required TResult Function(String userExerciseId, String clientId, int index)
+        exerciseDeleted,
+    required TResult Function(
+            String clientId, String setsNumber, String userExerciseId)
+        setsSubmit,
+    required TResult Function(
+            String clientId, String repsNumber, String userExerciseId)
+        repsSubmit,
+    required TResult Function(int oldIndex, int newIndex, String clientId)
+        reorderExercises,
+    required TResult Function(CalendarFormat calendarFormat, String clientId)
+        newDateFormatSelected,
+  }) {
+    return newDateFormatSelected(calendarFormat, clientId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
+    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+        setsSubmit,
+    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+        repsSubmit,
+    TResult Function(int oldIndex, int newIndex, String clientId)?
+        reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
+  }) {
+    return newDateFormatSelected?.call(calendarFormat, clientId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult Function(String clientId)? navigateToSearchScreen,
+    TResult Function(String userExerciseId, String clientId, int index)?
+        exerciseDeleted,
+    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+        setsSubmit,
+    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+        repsSubmit,
+    TResult Function(int oldIndex, int newIndex, String clientId)?
+        reorderExercises,
+    TResult Function(CalendarFormat calendarFormat, String clientId)?
+        newDateFormatSelected,
+    required TResult orElse(),
+  }) {
+    if (newDateFormatSelected != null) {
+      return newDateFormatSelected(calendarFormat, clientId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NewDateSelected value) newDateSelected,
+    required TResult Function(SearchNavigation value) navigateToSearchScreen,
+    required TResult Function(ExerciseDeleted value) exerciseDeleted,
+    required TResult Function(SetsSubmit value) setsSubmit,
+    required TResult Function(RepsSubmit value) repsSubmit,
+    required TResult Function(ReorderExercises value) reorderExercises,
+    required TResult Function(NewDateFormatSelected value)
+        newDateFormatSelected,
+  }) {
+    return newDateFormatSelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(NewDateSelected value)? newDateSelected,
+    TResult Function(SearchNavigation value)? navigateToSearchScreen,
+    TResult Function(ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(SetsSubmit value)? setsSubmit,
+    TResult Function(RepsSubmit value)? repsSubmit,
+    TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
+  }) {
+    return newDateFormatSelected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NewDateSelected value)? newDateSelected,
+    TResult Function(SearchNavigation value)? navigateToSearchScreen,
+    TResult Function(ExerciseDeleted value)? exerciseDeleted,
+    TResult Function(SetsSubmit value)? setsSubmit,
+    TResult Function(RepsSubmit value)? repsSubmit,
+    TResult Function(ReorderExercises value)? reorderExercises,
+    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
+    required TResult orElse(),
+  }) {
+    if (newDateFormatSelected != null) {
+      return newDateFormatSelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NewDateFormatSelected implements CalendarExerciseEvent {
+  const factory NewDateFormatSelected(
+      {required CalendarFormat calendarFormat,
+      required String clientId}) = _$NewDateFormatSelected;
+
+  CalendarFormat get calendarFormat;
+  @override
+  String get clientId;
+  @override
+  @JsonKey(ignore: true)
+  $NewDateFormatSelectedCopyWith<NewDateFormatSelected> get copyWith =>
       throw _privateConstructorUsedError;
 }

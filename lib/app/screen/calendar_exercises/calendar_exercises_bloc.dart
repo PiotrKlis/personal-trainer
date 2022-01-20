@@ -97,8 +97,7 @@ class CalendarExercisesBloc
             userExerciseId: event.userExerciseId,
             selectedDate: _selectedDate);
         updateRepsNumberLocally(event, formattedNumber);
-        emitter.call(
-            CalendarExercisesState.content(userExercises: _userExercises));
+        emitter(CalendarExercisesState.content(userExercises: _userExercises));
       } catch (error) {
         emitter(CalendarExercisesState.error(error: error.toString()));
       }
@@ -122,7 +121,7 @@ class CalendarExercisesBloc
   }
 
   Future<void> updateExercisesOnBackFromSearch(SearchNavigation event) async {
-     var exercises = await _calendarExerciseProvider.getExercisesFor(
+    var exercises = await _calendarExerciseProvider.getExercisesFor(
         selectedDay: _selectedDate, clientId: event.clientId);
     exercises.sort((a, b) => a.index.compareTo(b.index));
     _userExercises = exercises;
