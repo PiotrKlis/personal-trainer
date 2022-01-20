@@ -2,11 +2,8 @@ Backlog
 
 MVP
 
-// Calendar Exercise
-- mux
-    - pause video on tile collapse
-    - dispose all controllers on date change
-- test cases
+//Calendar
+- list of dates with exercises
 
 // Search
 - Refactor!
@@ -25,10 +22,6 @@ MVP
 
 - Show proper shortened calendar exercise screen
 - Check feature
-
-// MUX
-
-- Implement MUX and render videos properly
 
 // Choose account
 
@@ -55,4 +48,15 @@ Done:
     - Reorder
     - delete
     - add
+- mux
         - loading bar on loading
+    - pause video on tile collapse
+    - dispose all controllers on date change
+
+    // Calendar Exercise
+
+    - test cases
+
+    // MUX
+
+    - Implement MUX and render videos properly

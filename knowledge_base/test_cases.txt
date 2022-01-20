@@ -1,15 +1,15 @@
 Test cases
 
-// Calendar Exercise
+/// Calendar Exercise
 
-/ Calendar
+// Calendar
 - initial state; todays day selected
 - change days with different colors for selected and todays day
 - change calendar format
 - go through calendar by arrow navigation
 - loading on list when navigating between days
 
-/ Exercise list
+// Exercise list
 - initial state; empty list with empty list text
 - reorder works and persist
 - delete works and persist
@@ -19,7 +19,13 @@ Test cases
 - on delete of all exercises, show empty list text
 - expansion/collapse works as expected
 
-- video works (add more video scenarios!)
+// Videos
+- video opens and shows loading screen on expansion, then plays video immediately
+- video is looped
+- video is disposed on collapse
+- video is cached
+- any difference to sets/reps doesnt change video play
+- click on video stops/plays it
 
 / Add exercise
 - navigation to add exercise screen works
