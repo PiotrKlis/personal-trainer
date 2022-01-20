@@ -10,14 +10,14 @@ import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends StatelessWidget {
   final String clientId;
-  final CalendarState _initialState = CalendarState.started();
+  final CalendarState _initialState = CalendarState.loadEvents();
 
   CalendarWidget({required this.clientId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => CalendarBloc(_initialState),
+      create: (BuildContext context) => CalendarBloc(_initialState, context.read<CalendarExercisesBloc>()),
       child: TableCalendarWidget(clientId: clientId),
     );
   }
@@ -63,6 +63,7 @@ class _TableCalendarState extends State<TableCalendarWidget> {
           if (_selectedDate != selectedDate) {
             setState(() {
               _selectedDate = selectedDate;
+              context.read<CalendarBloc>().clearExercisesCache();
               context.read<CalendarExercisesBloc>().add(
                   CalendarExerciseEvent.newDateSelected(
                       selectedDate: selectedDate, clientId: widget.clientId));
@@ -70,17 +71,17 @@ class _TableCalendarState extends State<TableCalendarWidget> {
           }
         },
         eventLoader: (date) {
-          return getEventForDay(date, state);
+          return getEventForDate(date, state);
         },
       );
     });
   }
 
-  List<bool> getEventForDay(DateTime day, CalendarState state) {
+  List<bool> getEventForDate(DateTime day, CalendarState state) {
     return state.when(eventForDate: (events) {
       var isEvent = events[day] ?? false;
       return isEvent ? [isEvent] : [];
-    }, started: () {
+    }, loadEvents: () {
       context.read<CalendarBloc>().add(CalendarEvent.getCalendarEventMarker(
           dateTime: day, clientId: widget.clientId));
       return [];

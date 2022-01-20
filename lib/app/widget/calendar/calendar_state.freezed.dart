@@ -23,8 +23,8 @@ class _$CalendarStateTearOff {
     );
   }
 
-  _Started started() {
-    return const _Started();
+  _LoadEvents loadEvents() {
+    return const _LoadEvents();
   }
 
   _Error error({required String error}) {
@@ -42,21 +42,21 @@ mixin _$CalendarState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Map<DateTime, bool> events) eventForDate,
-    required TResult Function() started,
+    required TResult Function() loadEvents,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function()? started,
+    TResult Function()? loadEvents,
     TResult Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function()? started,
+    TResult Function()? loadEvents,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -64,21 +64,21 @@ mixin _$CalendarState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EventForDate value) eventForDate,
-    required TResult Function(_Started value) started,
+    required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_EventForDate value)? eventForDate,
-    TResult Function(_Started value)? started,
+    TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EventForDate value)? eventForDate,
-    TResult Function(_Started value)? started,
+    TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -168,7 +168,7 @@ class _$_EventForDate implements _EventForDate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Map<DateTime, bool> events) eventForDate,
-    required TResult Function() started,
+    required TResult Function() loadEvents,
     required TResult Function(String error) error,
   }) {
     return eventForDate(events);
@@ -178,7 +178,7 @@ class _$_EventForDate implements _EventForDate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function()? started,
+    TResult Function()? loadEvents,
     TResult Function(String error)? error,
   }) {
     return eventForDate?.call(events);
@@ -188,7 +188,7 @@ class _$_EventForDate implements _EventForDate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function()? started,
+    TResult Function()? loadEvents,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -202,7 +202,7 @@ class _$_EventForDate implements _EventForDate {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EventForDate value) eventForDate,
-    required TResult Function(_Started value) started,
+    required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_Error value) error,
   }) {
     return eventForDate(this);
@@ -212,7 +212,7 @@ class _$_EventForDate implements _EventForDate {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_EventForDate value)? eventForDate,
-    TResult Function(_Started value)? started,
+    TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
   }) {
     return eventForDate?.call(this);
@@ -222,7 +222,7 @@ class _$_EventForDate implements _EventForDate {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EventForDate value)? eventForDate,
-    TResult Function(_Started value)? started,
+    TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -244,35 +244,37 @@ abstract class _EventForDate implements CalendarState {
 }
 
 /// @nodoc
-abstract class _$StartedCopyWith<$Res> {
-  factory _$StartedCopyWith(_Started value, $Res Function(_Started) then) =
-      __$StartedCopyWithImpl<$Res>;
+abstract class _$LoadEventsCopyWith<$Res> {
+  factory _$LoadEventsCopyWith(
+          _LoadEvents value, $Res Function(_LoadEvents) then) =
+      __$LoadEventsCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$StartedCopyWithImpl<$Res> extends _$CalendarStateCopyWithImpl<$Res>
-    implements _$StartedCopyWith<$Res> {
-  __$StartedCopyWithImpl(_Started _value, $Res Function(_Started) _then)
-      : super(_value, (v) => _then(v as _Started));
+class __$LoadEventsCopyWithImpl<$Res> extends _$CalendarStateCopyWithImpl<$Res>
+    implements _$LoadEventsCopyWith<$Res> {
+  __$LoadEventsCopyWithImpl(
+      _LoadEvents _value, $Res Function(_LoadEvents) _then)
+      : super(_value, (v) => _then(v as _LoadEvents));
 
   @override
-  _Started get _value => super._value as _Started;
+  _LoadEvents get _value => super._value as _LoadEvents;
 }
 
 /// @nodoc
 
-class _$_Started implements _Started {
-  const _$_Started();
+class _$_LoadEvents implements _LoadEvents {
+  const _$_LoadEvents();
 
   @override
   String toString() {
-    return 'CalendarState.started()';
+    return 'CalendarState.loadEvents()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Started);
+        (other.runtimeType == runtimeType && other is _LoadEvents);
   }
 
   @override
@@ -282,32 +284,32 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Map<DateTime, bool> events) eventForDate,
-    required TResult Function() started,
+    required TResult Function() loadEvents,
     required TResult Function(String error) error,
   }) {
-    return started();
+    return loadEvents();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function()? started,
+    TResult Function()? loadEvents,
     TResult Function(String error)? error,
   }) {
-    return started?.call();
+    return loadEvents?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function()? started,
+    TResult Function()? loadEvents,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started();
+    if (loadEvents != null) {
+      return loadEvents();
     }
     return orElse();
   }
@@ -316,39 +318,39 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EventForDate value) eventForDate,
-    required TResult Function(_Started value) started,
+    required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_Error value) error,
   }) {
-    return started(this);
+    return loadEvents(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_EventForDate value)? eventForDate,
-    TResult Function(_Started value)? started,
+    TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
   }) {
-    return started?.call(this);
+    return loadEvents?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EventForDate value)? eventForDate,
-    TResult Function(_Started value)? started,
+    TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started(this);
+    if (loadEvents != null) {
+      return loadEvents(this);
     }
     return orElse();
   }
 }
 
-abstract class _Started implements CalendarState {
-  const factory _Started() = _$_Started;
+abstract class _LoadEvents implements CalendarState {
+  const factory _LoadEvents() = _$_LoadEvents;
 }
 
 /// @nodoc
@@ -414,7 +416,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Map<DateTime, bool> events) eventForDate,
-    required TResult Function() started,
+    required TResult Function() loadEvents,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -424,7 +426,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function()? started,
+    TResult Function()? loadEvents,
     TResult Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -434,7 +436,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function()? started,
+    TResult Function()? loadEvents,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -448,7 +450,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EventForDate value) eventForDate,
-    required TResult Function(_Started value) started,
+    required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -458,7 +460,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_EventForDate value)? eventForDate,
-    TResult Function(_Started value)? started,
+    TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -468,7 +470,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EventForDate value)? eventForDate,
-    TResult Function(_Started value)? started,
+    TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
