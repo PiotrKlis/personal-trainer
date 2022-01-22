@@ -12,4 +12,7 @@ class Dimens {
   static const double videoContainerHeight = 230.0;
   static const double tagsRowHeight = 24.0;
   static const double tagsRowDividerWidth = 4.0;
+
+  static const double eventMarkerWidth = 8.0;
+  static const double eventMarkerHeight = 8.0;
 }

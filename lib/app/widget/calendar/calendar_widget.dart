@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_bloc.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_event.dart';
 import 'package:personal_trainer/app/util/date_util.dart';
+import 'package:personal_trainer/app/util/dimens.dart';
 import 'package:personal_trainer/app/widget/calendar/calendar_bloc.dart';
 import 'package:personal_trainer/app/widget/calendar/calendar_event.dart';
 import 'package:personal_trainer/app/widget/calendar/calendar_state.dart';
@@ -10,14 +11,15 @@ import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends StatelessWidget {
   final String clientId;
-  final CalendarState _initialState = CalendarState.loadEvents();
+  final CalendarState _initialState = CalendarState.loadEvents(events: {});
 
   CalendarWidget({required this.clientId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => CalendarBloc(_initialState, context.read<CalendarExercisesBloc>()),
+      create: (BuildContext context) =>
+          CalendarBloc(_initialState, context.read<CalendarExercisesBloc>()),
       child: TableCalendarWidget(clientId: clientId),
     );
   }
@@ -49,9 +51,8 @@ class _TableCalendarState extends State<TableCalendarWidget> {
           return Container(
               decoration:
                   BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
-              width: 8.0,
-              height: 8.0,
-              margin: const EdgeInsets.symmetric(horizontal: 1.6));
+              width: Dimens.eventMarkerWidth,
+              height: Dimens.eventMarkerHeight);
         }),
         firstDay: DateUtil.calendarStartDate,
         lastDay: DateUtil.calendarEndDate,
@@ -79,14 +80,18 @@ class _TableCalendarState extends State<TableCalendarWidget> {
 
   List<bool> getEventForDate(DateTime day, CalendarState state) {
     return state.when(eventForDate: (events) {
-      var isEvent = events[day] ?? false;
-      return isEvent ? [isEvent] : [];
-    }, loadEvents: () {
+      return shouldShowMarker(events, day);
+    }, loadEvents: (events) {
       context.read<CalendarBloc>().add(CalendarEvent.getCalendarEventMarker(
           dateTime: day, clientId: widget.clientId));
-      return [];
+      return shouldShowMarker(events, day);
     }, error: (String error) {
       return [];
     });
+  }
+
+  List<bool> shouldShowMarker(Map<DateTime, bool> events, DateTime day) {
+    var isEvent = events[day] ?? false;
+    return isEvent ? [isEvent] : [];
   }
 }

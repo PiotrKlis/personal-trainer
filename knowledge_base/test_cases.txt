@@ -9,6 +9,12 @@ Test cases
 - go through calendar by arrow navigation
 - loading on list when navigating between days
 
+// Event Markers
+- No markers if no exercises
+- Marker showed for given date when came back from exercise add screen
+- All of exercises removal makes marker disappear
+- Markers persist throughout weeks navigation
+
 // Exercise list
 - initial state; empty list with empty list text
 - reorder works and persist
@@ -27,6 +33,6 @@ Test cases
 - any difference to sets/reps doesnt change video play
 - click on video stops/plays it
 
-/ Add exercise
+// Add exercise
 - navigation to add exercise screen works
 - screen reloads itself with new exercises when came back from add exercise screen

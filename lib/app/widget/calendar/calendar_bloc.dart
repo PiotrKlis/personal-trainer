@@ -12,31 +12,26 @@ import 'calendar_state.dart';
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   final CalendarProvider _calendarExerciseProvider =
       GetIt.I.get<CalendarProvider>();
+  Map<DateTime, bool> _tempEvents = {};
   Map<DateTime, bool> _events = {};
   late final StreamSubscription _otherBlocSubscription;
-  List<UserExercise> _exercisesCache = [];
+  List<UserExercise> _previousExercises = [];
+  static const CALENDAR_FORMAT_IN_DAYS = 7;
 
   CalendarBloc(
       CalendarState initialState, CalendarExercisesBloc calendarExercisesBloc)
       : super(initialState) {
-    _otherBlocSubscription = calendarExercisesBloc.stream.listen((state) {
-      state.whenOrNull(content: (exercises) {
-        if (_exercisesCache.isEmpty && exercises.isNotEmpty ||
-            _exercisesCache.isNotEmpty && exercises.isEmpty) {
-          _exercisesCache = List.of(exercises);
-          emit(CalendarState.loadEvents());
-        }
-      });
-    });
+    observeExercisesDataForEventMarkerReload(calendarExercisesBloc);
 
     on<GetCalendarEventMarker>((event, emitter) async {
       try {
         var result = await _calendarExerciseProvider.getExerciseMarkerFor(
             dateTime: event.dateTime, clientId: event.clientId);
-        _events.addAll({event.dateTime: result});
-        if (_events.length == 7) {
-          emitter(CalendarState.eventForDate(events: _events));
-          _events = {};
+        _tempEvents.addAll({event.dateTime: result});
+        if (_tempEvents.length == CALENDAR_FORMAT_IN_DAYS) {
+          emitter(CalendarState.eventForDate(events: _tempEvents));
+          _events = _tempEvents;
+          _tempEvents = {};
         }
       } catch (error) {
         emitter(CalendarState.error(error: error.toString()));
@@ -44,8 +39,23 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     });
   }
 
+  void observeExercisesDataForEventMarkerReload(
+      CalendarExercisesBloc calendarExercisesBloc) {
+    _otherBlocSubscription = calendarExercisesBloc.stream.listen((state) {
+      state.whenOrNull(content: (exercises) {
+        bool shouldReloadEventMarkers =
+            _previousExercises.isEmpty && exercises.isNotEmpty ||
+                _previousExercises.isNotEmpty && exercises.isEmpty;
+        if (shouldReloadEventMarkers) {
+          _previousExercises = List.of(exercises);
+          emit(CalendarState.loadEvents(events: _events));
+        }
+      });
+    });
+  }
+
   clearExercisesCache() {
-    _exercisesCache = [];
+    _previousExercises = [];
   }
 
   @override
