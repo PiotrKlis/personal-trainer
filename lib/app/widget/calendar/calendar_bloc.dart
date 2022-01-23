@@ -13,13 +13,12 @@ import 'calendar_state.dart';
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   final CalendarProvider _calendarExerciseProvider =
       GetIt.I.get<CalendarProvider>();
-  Map<DateTime, bool> _tempEvents = {};
-  Map<DateTime, bool> _eventsCache = {};
   late final StreamSubscription _otherBlocSubscription;
+  Map<DateTime, bool> _eventsCache = {};
   List<UserExercise> _previousExercises = [];
   static const CALENDAR_FORMAT_IN_DAYS = 7;
 
-  var _events = [];
+  var _eventMarkers = [];
 
   CalendarBloc(
       CalendarState initialState, CalendarExercisesBloc calendarExercisesBloc)
@@ -30,21 +29,21 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       try {
         switch (event.pageNavigation) {
           case PAGE_NAVIGATION.PAST:
-            _events.add(event);
-            if (_events.length == 7) {
+            _eventMarkers.add(event);
+            if (_eventMarkers.length == 7) {
               await emitMarkers(emitter);
             }
             break;
           case PAGE_NAVIGATION.FUTURE:
-            _events.add(event);
-            if (_events.length == 14) {
-              _events.removeRange(0, 7);
+            _eventMarkers.add(event);
+            if (_eventMarkers.length == 14) {
+              _eventMarkers.removeRange(0, 7);
               await emitMarkers(emitter);
             }
             break;
           case PAGE_NAVIGATION.NO_NAVIGATION:
-            _events.add(event);
-            if (_events.length == 7) {
+            _eventMarkers.add(event);
+            if (_eventMarkers.length == 7) {
               await emitMarkers(emitter);
             }
             break;
@@ -61,7 +60,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   }
 
   Future<void> emitMarkers(Emitter<CalendarState> emitter) async {
-    var listOfEventMaps = await Future.wait(_events.map((event) async {
+    var listOfEventMaps = await Future.wait(_eventMarkers.map((event) async {
       var eventMap = await _calendarExerciseProvider.getExerciseMarkerFor(
           dateTime: event.dateTime, clientId: event.clientId);
       return eventMap;
@@ -83,7 +82,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
                 !_isPageNavigation;
         if (shouldReloadEventMarkers) {
           _previousExercises = List.of(exercises);
-          clearBlocEvents();
+          clearEventMarkers();
           emit(CalendarState.loadEventMarkers(events: _eventsCache));
         }
         if (_isPageNavigation) {
@@ -93,12 +92,12 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     });
   }
 
-  void clearBlocEvents() {
-    _events = [];
+  void clearEventMarkers() {
+    _eventMarkers = [];
   }
 
   void prepareForPageChange() {
-    clearBlocEvents();
+    clearEventMarkers();
     _isPageNavigation = true;
   }
 
