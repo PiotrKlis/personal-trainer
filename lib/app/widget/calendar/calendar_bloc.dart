@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_bloc.dart';
+import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/calendar/calendar_widget.dart';
 import 'package:personal_trainer/domain/model/user_exercise.dart';
 
@@ -24,7 +25,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       CalendarState initialState, CalendarExercisesBloc calendarExercisesBloc)
       : super(initialState) {
     observeExercisesDataForEventMarkerReload(calendarExercisesBloc);
-
+    // pass new date, divide provided data into groups of seven and check of focused day is in given list
     on<GetEventMarker>((event, emitter) async {
       try {
         switch (event.pageNavigation) {
@@ -60,6 +61,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   }
 
   Future<void> emitMarkers(Emitter<CalendarState> emitter) async {
+    // Log.d("Fetching markers data $_eventMarkers");
     var listOfEventMaps = await Future.wait(_eventMarkers.map((event) async {
       var eventMap = await _calendarExerciseProvider.getExerciseMarkerFor(
           dateTime: event.dateTime, clientId: event.clientId);
@@ -70,7 +72,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     emitter(CalendarState.eventMarkersData(eventMarkers: flattenedMap));
   }
 
-  bool _isPageNavigation = false;
+  bool _isMarkersReloadEnabled = true;
 
   void observeExercisesDataForEventMarkerReload(
       CalendarExercisesBloc calendarExercisesBloc) {
@@ -79,26 +81,21 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         bool shouldReloadEventMarkers =
             (_previousExercises.isEmpty && exercises.isNotEmpty ||
                     _previousExercises.isNotEmpty && exercises.isEmpty) &&
-                !_isPageNavigation;
+                _isMarkersReloadEnabled;
         if (shouldReloadEventMarkers) {
           _previousExercises = List.of(exercises);
-          clearEventMarkers();
+          _eventMarkers = [];
           emit(CalendarState.loadEventMarkers(events: _eventsCache));
         }
-        if (_isPageNavigation) {
-          _isPageNavigation = false;
+        if (!_isMarkersReloadEnabled) {
+          _isMarkersReloadEnabled = true;
         }
       });
     });
   }
 
-  void clearEventMarkers() {
-    _eventMarkers = [];
-  }
-
-  void prepareForPageChange() {
-    clearEventMarkers();
-    _isPageNavigation = true;
+  void disableMarkersReloadForNextEvent() {
+    _isMarkersReloadEnabled = false;
   }
 
   @override

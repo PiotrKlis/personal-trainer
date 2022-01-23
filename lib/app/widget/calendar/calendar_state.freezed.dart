@@ -17,13 +17,13 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CalendarStateTearOff {
   const _$CalendarStateTearOff();
 
-  _EventForDate eventMarkers({required Map<DateTime, bool> eventMarkers}) {
+  _EventForDate eventMarkersData({required Map<DateTime, bool> eventMarkers}) {
     return _EventForDate(
       eventMarkers: eventMarkers,
     );
   }
 
-  _LoadEvents loadEvents(
+  _LoadEvents loadEventMarkers(
       {PAGE_NAVIGATION pageNavigation = PAGE_NAVIGATION.NO_NAVIGATION,
       required Map<DateTime, bool> events}) {
     return _LoadEvents(
@@ -46,50 +46,51 @@ const $CalendarState = _$CalendarStateTearOff();
 mixin _$CalendarState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<DateTime, bool> eventMarkers) eventMarkers,
+    required TResult Function(Map<DateTime, bool> eventMarkers)
+        eventMarkersData,
     required TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)
-        loadEvents,
+        loadEventMarkers,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
     TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
-        loadEvents,
+        loadEventMarkers,
     TResult Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
     TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
-        loadEvents,
+        loadEventMarkers,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_EventForDate value) eventMarkers,
-    required TResult Function(_LoadEvents value) loadEvents,
+    required TResult Function(_EventForDate value) eventMarkersData,
+    required TResult Function(_LoadEvents value) loadEventMarkers,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkers,
-    TResult Function(_LoadEvents value)? loadEvents,
+    TResult Function(_EventForDate value)? eventMarkersData,
+    TResult Function(_LoadEvents value)? loadEventMarkers,
     TResult Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkers,
-    TResult Function(_LoadEvents value)? loadEvents,
+    TResult Function(_EventForDate value)? eventMarkersData,
+    TResult Function(_LoadEvents value)? loadEventMarkers,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -155,7 +156,7 @@ class _$_EventForDate implements _EventForDate {
 
   @override
   String toString() {
-    return 'CalendarState.eventMarkers(eventMarkers: $eventMarkers)';
+    return 'CalendarState.eventMarkersData(eventMarkers: $eventMarkers)';
   }
 
   @override
@@ -179,39 +180,40 @@ class _$_EventForDate implements _EventForDate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<DateTime, bool> eventMarkers) eventMarkers,
+    required TResult Function(Map<DateTime, bool> eventMarkers)
+        eventMarkersData,
     required TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)
-        loadEvents,
+        loadEventMarkers,
     required TResult Function(String error) error,
   }) {
-    return eventMarkers(this.eventMarkers);
+    return eventMarkersData(eventMarkers);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
     TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
-        loadEvents,
+        loadEventMarkers,
     TResult Function(String error)? error,
   }) {
-    return eventMarkers?.call(this.eventMarkers);
+    return eventMarkersData?.call(eventMarkers);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
     TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
-        loadEvents,
+        loadEventMarkers,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
-    if (eventMarkers != null) {
-      return eventMarkers(this.eventMarkers);
+    if (eventMarkersData != null) {
+      return eventMarkersData(eventMarkers);
     }
     return orElse();
   }
@@ -219,33 +221,33 @@ class _$_EventForDate implements _EventForDate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_EventForDate value) eventMarkers,
-    required TResult Function(_LoadEvents value) loadEvents,
+    required TResult Function(_EventForDate value) eventMarkersData,
+    required TResult Function(_LoadEvents value) loadEventMarkers,
     required TResult Function(_Error value) error,
   }) {
-    return eventMarkers(this);
+    return eventMarkersData(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkers,
-    TResult Function(_LoadEvents value)? loadEvents,
+    TResult Function(_EventForDate value)? eventMarkersData,
+    TResult Function(_LoadEvents value)? loadEventMarkers,
     TResult Function(_Error value)? error,
   }) {
-    return eventMarkers?.call(this);
+    return eventMarkersData?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkers,
-    TResult Function(_LoadEvents value)? loadEvents,
+    TResult Function(_EventForDate value)? eventMarkersData,
+    TResult Function(_LoadEvents value)? loadEventMarkers,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
-    if (eventMarkers != null) {
-      return eventMarkers(this);
+    if (eventMarkersData != null) {
+      return eventMarkersData(this);
     }
     return orElse();
   }
@@ -312,7 +314,7 @@ class _$_LoadEvents implements _LoadEvents {
 
   @override
   String toString() {
-    return 'CalendarState.loadEvents(pageNavigation: $pageNavigation, events: $events)';
+    return 'CalendarState.loadEventMarkers(pageNavigation: $pageNavigation, events: $events)';
   }
 
   @override
@@ -339,39 +341,40 @@ class _$_LoadEvents implements _LoadEvents {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<DateTime, bool> eventMarkers) eventMarkers,
+    required TResult Function(Map<DateTime, bool> eventMarkers)
+        eventMarkersData,
     required TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)
-        loadEvents,
+        loadEventMarkers,
     required TResult Function(String error) error,
   }) {
-    return loadEvents(pageNavigation, events);
+    return loadEventMarkers(pageNavigation, events);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
     TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
-        loadEvents,
+        loadEventMarkers,
     TResult Function(String error)? error,
   }) {
-    return loadEvents?.call(pageNavigation, events);
+    return loadEventMarkers?.call(pageNavigation, events);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
     TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
-        loadEvents,
+        loadEventMarkers,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
-    if (loadEvents != null) {
-      return loadEvents(pageNavigation, events);
+    if (loadEventMarkers != null) {
+      return loadEventMarkers(pageNavigation, events);
     }
     return orElse();
   }
@@ -379,33 +382,33 @@ class _$_LoadEvents implements _LoadEvents {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_EventForDate value) eventMarkers,
-    required TResult Function(_LoadEvents value) loadEvents,
+    required TResult Function(_EventForDate value) eventMarkersData,
+    required TResult Function(_LoadEvents value) loadEventMarkers,
     required TResult Function(_Error value) error,
   }) {
-    return loadEvents(this);
+    return loadEventMarkers(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkers,
-    TResult Function(_LoadEvents value)? loadEvents,
+    TResult Function(_EventForDate value)? eventMarkersData,
+    TResult Function(_LoadEvents value)? loadEventMarkers,
     TResult Function(_Error value)? error,
   }) {
-    return loadEvents?.call(this);
+    return loadEventMarkers?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkers,
-    TResult Function(_LoadEvents value)? loadEvents,
+    TResult Function(_EventForDate value)? eventMarkersData,
+    TResult Function(_LoadEvents value)? loadEventMarkers,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
-    if (loadEvents != null) {
-      return loadEvents(this);
+    if (loadEventMarkers != null) {
+      return loadEventMarkers(this);
     }
     return orElse();
   }
@@ -485,10 +488,11 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<DateTime, bool> eventMarkers) eventMarkers,
+    required TResult Function(Map<DateTime, bool> eventMarkers)
+        eventMarkersData,
     required TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)
-        loadEvents,
+        loadEventMarkers,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -497,10 +501,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
     TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
-        loadEvents,
+        loadEventMarkers,
     TResult Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -509,10 +513,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
     TResult Function(
             PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
-        loadEvents,
+        loadEventMarkers,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -525,8 +529,8 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_EventForDate value) eventMarkers,
-    required TResult Function(_LoadEvents value) loadEvents,
+    required TResult Function(_EventForDate value) eventMarkersData,
+    required TResult Function(_LoadEvents value) loadEventMarkers,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -535,8 +539,8 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkers,
-    TResult Function(_LoadEvents value)? loadEvents,
+    TResult Function(_EventForDate value)? eventMarkersData,
+    TResult Function(_LoadEvents value)? loadEventMarkers,
     TResult Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -545,8 +549,8 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkers,
-    TResult Function(_LoadEvents value)? loadEvents,
+    TResult Function(_EventForDate value)? eventMarkersData,
+    TResult Function(_LoadEvents value)? loadEventMarkers,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

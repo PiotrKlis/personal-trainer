@@ -4,6 +4,7 @@ import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercise
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_event.dart';
 import 'package:personal_trainer/app/util/date_util.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
+import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/calendar/calendar_bloc.dart';
 import 'package:personal_trainer/app/widget/calendar/calendar_event.dart';
 import 'package:personal_trainer/app/widget/calendar/calendar_state.dart';
@@ -55,16 +56,16 @@ class _TableCalendarState extends State<TableCalendarWidget> {
         }),
         onPageChanged: (focusedDay) {
           setState(() {
-            PAGE_NAVIGATION pageNavigation =
-                getPageNavigationType(_selectedDate, focusedDay);
+          //   PAGE_NAVIGATION pageNavigation =
+          //       getPageNavigationType(_selectedDate, focusedDay);
             _selectedDate = focusedDay;
-            context.read<CalendarBloc>().prepareForPageChange();
-            context.read<CalendarExercisesBloc>().add(
-                CalendarExerciseEvent.newDateSelected(
-                    selectedDate: _selectedDate, clientId: widget.clientId));
-            context.read<CalendarBloc>().add(
-                CalendarEvent.reloadEventMarkersOnPageChanged(
-                    pageNavigation: pageNavigation));
+          //   context.read<CalendarBloc>().disableMarkersReloadForNextEvent();
+          //   context.read<CalendarExercisesBloc>().add(
+          //       CalendarExerciseEvent.newDateSelected(
+          //           selectedDate: _selectedDate, clientId: widget.clientId));
+          //   context.read<CalendarBloc>().add(
+          //       CalendarEvent.reloadEventMarkersOnPageChanged(
+          //           pageNavigation: pageNavigation));
           });
         },
         firstDay: DateUtil.calendarStartDate,
@@ -77,6 +78,7 @@ class _TableCalendarState extends State<TableCalendarWidget> {
           if (_selectedDate != selectedDate) {
             setState(() {
               _selectedDate = selectedDate;
+              context.read<CalendarBloc>().disableMarkersReloadForNextEvent();
               context.read<CalendarExercisesBloc>().add(
                   CalendarExerciseEvent.newDateSelected(
                       selectedDate: selectedDate, clientId: widget.clientId));
@@ -91,9 +93,10 @@ class _TableCalendarState extends State<TableCalendarWidget> {
   }
 
   List<bool> getEventMarkerForDate(DateTime date, CalendarState state) {
-    return state.when(eventMarkers: (events) {
+    Log.d("Loading date for markers $date");
+    return state.when(eventMarkersData: (events) {
       return shouldShowMarker(events, date);
-    }, loadEvents: (pageNavigation, events) {
+    }, loadEventMarkers: (pageNavigation, events) {
       context.read<CalendarBloc>().add(CalendarEvent.getEventMarker(
           pageNavigation: pageNavigation,
           clientId: widget.clientId,
