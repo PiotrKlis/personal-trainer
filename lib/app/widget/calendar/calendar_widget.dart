@@ -11,7 +11,8 @@ import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends StatelessWidget {
   final String clientId;
-  final CalendarState _initialState = CalendarState.loadEvents(events: {});
+  final CalendarState _initialState =
+      CalendarState.loadEventMarkers(events: {});
 
   CalendarWidget({required this.clientId});
 
@@ -37,8 +38,6 @@ class TableCalendarWidget extends StatefulWidget {
 
 class _TableCalendarState extends State<TableCalendarWidget> {
   CalendarFormat _calendarFormat = CalendarFormat.week;
-
-  //TODO: list of dates with exercises
   DateTime _selectedDate = DateTime.now();
 
   @override
@@ -54,6 +53,20 @@ class _TableCalendarState extends State<TableCalendarWidget> {
               width: Dimens.eventMarkerWidth,
               height: Dimens.eventMarkerHeight);
         }),
+        onPageChanged: (focusedDay) {
+          setState(() {
+            PAGE_NAVIGATION pageNavigation =
+                getPageNavigationType(_selectedDate, focusedDay);
+            _selectedDate = focusedDay;
+            context.read<CalendarBloc>().prepareForPageChange();
+            context.read<CalendarExercisesBloc>().add(
+                CalendarExerciseEvent.newDateSelected(
+                    selectedDate: _selectedDate, clientId: widget.clientId));
+            context.read<CalendarBloc>().add(
+                CalendarEvent.reloadEventMarkersOnPageChanged(
+                    pageNavigation: pageNavigation));
+          });
+        },
         firstDay: DateUtil.calendarStartDate,
         lastDay: DateUtil.calendarEndDate,
         focusedDay: _selectedDate,
@@ -64,7 +77,6 @@ class _TableCalendarState extends State<TableCalendarWidget> {
           if (_selectedDate != selectedDate) {
             setState(() {
               _selectedDate = selectedDate;
-              context.read<CalendarBloc>().clearExercisesCache();
               context.read<CalendarExercisesBloc>().add(
                   CalendarExerciseEvent.newDateSelected(
                       selectedDate: selectedDate, clientId: widget.clientId));
@@ -72,19 +84,21 @@ class _TableCalendarState extends State<TableCalendarWidget> {
           }
         },
         eventLoader: (date) {
-          return getEventForDate(date, state);
+          return getEventMarkerForDate(date, state);
         },
       );
     });
   }
 
-  List<bool> getEventForDate(DateTime day, CalendarState state) {
-    return state.when(eventForDate: (events) {
-      return shouldShowMarker(events, day);
-    }, loadEvents: (events) {
-      context.read<CalendarBloc>().add(CalendarEvent.getCalendarEventMarker(
-          dateTime: day, clientId: widget.clientId));
-      return shouldShowMarker(events, day);
+  List<bool> getEventMarkerForDate(DateTime date, CalendarState state) {
+    return state.when(eventMarkers: (events) {
+      return shouldShowMarker(events, date);
+    }, loadEvents: (pageNavigation, events) {
+      context.read<CalendarBloc>().add(CalendarEvent.getEventMarker(
+          pageNavigation: pageNavigation,
+          clientId: widget.clientId,
+          dateTime: date));
+      return shouldShowMarker(events, date);
     }, error: (String error) {
       return [];
     });
@@ -94,4 +108,13 @@ class _TableCalendarState extends State<TableCalendarWidget> {
     var isEvent = events[day] ?? false;
     return isEvent ? [isEvent] : [];
   }
+
+  PAGE_NAVIGATION getPageNavigationType(
+      DateTime currentDay, DateTime newSelectedDay) {
+    return newSelectedDay.isAfter(currentDay)
+        ? PAGE_NAVIGATION.FUTURE
+        : PAGE_NAVIGATION.PAST;
+  }
 }
+
+enum PAGE_NAVIGATION { PAST, FUTURE, NO_NAVIGATION }

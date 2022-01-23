@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_trainer/data/util/const.dart';
 
 class CalendarProvider {
-  Future<bool> getExerciseMarkerFor(
+  Future<Map<DateTime, bool>> getExerciseMarkerFor(
       {required DateTime dateTime, required String clientId}) async {
     try {
       var formattedDate = DateUtils.dateOnly(dateTime).toString();
@@ -14,7 +14,7 @@ class CalendarProvider {
           .doc(FirebaseConstants.userExercisesCollection)
           .collection(formattedDate)
           .get();
-      return result.docs.isNotEmpty;
+      return {dateTime: result.docs.isNotEmpty};
     } catch (error) {
       return Future.error(error);
     }

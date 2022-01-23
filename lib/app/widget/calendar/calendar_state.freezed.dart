@@ -17,14 +17,17 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CalendarStateTearOff {
   const _$CalendarStateTearOff();
 
-  _EventForDate eventForDate({required Map<DateTime, bool> events}) {
+  _EventForDate eventMarkers({required Map<DateTime, bool> eventMarkers}) {
     return _EventForDate(
-      events: events,
+      eventMarkers: eventMarkers,
     );
   }
 
-  _LoadEvents loadEvents({required Map<DateTime, bool> events}) {
+  _LoadEvents loadEvents(
+      {PAGE_NAVIGATION pageNavigation = PAGE_NAVIGATION.NO_NAVIGATION,
+      required Map<DateTime, bool> events}) {
     return _LoadEvents(
+      pageNavigation: pageNavigation,
       events: events,
     );
   }
@@ -43,43 +46,49 @@ const $CalendarState = _$CalendarStateTearOff();
 mixin _$CalendarState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<DateTime, bool> events) eventForDate,
-    required TResult Function(Map<DateTime, bool> events) loadEvents,
+    required TResult Function(Map<DateTime, bool> eventMarkers) eventMarkers,
+    required TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)
+        loadEvents,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function(Map<DateTime, bool> events)? loadEvents,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
+        loadEvents,
     TResult Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function(Map<DateTime, bool> events)? loadEvents,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
+        loadEvents,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_EventForDate value) eventForDate,
+    required TResult Function(_EventForDate value) eventMarkers,
     required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventForDate,
+    TResult Function(_EventForDate value)? eventMarkers,
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventForDate,
+    TResult Function(_EventForDate value)? eventMarkers,
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -109,7 +118,7 @@ abstract class _$EventForDateCopyWith<$Res> {
   factory _$EventForDateCopyWith(
           _EventForDate value, $Res Function(_EventForDate) then) =
       __$EventForDateCopyWithImpl<$Res>;
-  $Res call({Map<DateTime, bool> events});
+  $Res call({Map<DateTime, bool> eventMarkers});
 }
 
 /// @nodoc
@@ -125,12 +134,12 @@ class __$EventForDateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? events = freezed,
+    Object? eventMarkers = freezed,
   }) {
     return _then(_EventForDate(
-      events: events == freezed
-          ? _value.events
-          : events // ignore: cast_nullable_to_non_nullable
+      eventMarkers: eventMarkers == freezed
+          ? _value.eventMarkers
+          : eventMarkers // ignore: cast_nullable_to_non_nullable
               as Map<DateTime, bool>,
     ));
   }
@@ -139,14 +148,14 @@ class __$EventForDateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_EventForDate implements _EventForDate {
-  const _$_EventForDate({required this.events});
+  const _$_EventForDate({required this.eventMarkers});
 
   @override
-  final Map<DateTime, bool> events;
+  final Map<DateTime, bool> eventMarkers;
 
   @override
   String toString() {
-    return 'CalendarState.eventForDate(events: $events)';
+    return 'CalendarState.eventMarkers(eventMarkers: $eventMarkers)';
   }
 
   @override
@@ -154,12 +163,13 @@ class _$_EventForDate implements _EventForDate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _EventForDate &&
-            const DeepCollectionEquality().equals(other.events, events));
+            const DeepCollectionEquality()
+                .equals(other.eventMarkers, eventMarkers));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(events));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(eventMarkers));
 
   @JsonKey(ignore: true)
   @override
@@ -169,33 +179,39 @@ class _$_EventForDate implements _EventForDate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<DateTime, bool> events) eventForDate,
-    required TResult Function(Map<DateTime, bool> events) loadEvents,
+    required TResult Function(Map<DateTime, bool> eventMarkers) eventMarkers,
+    required TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)
+        loadEvents,
     required TResult Function(String error) error,
   }) {
-    return eventForDate(events);
+    return eventMarkers(this.eventMarkers);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function(Map<DateTime, bool> events)? loadEvents,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
+        loadEvents,
     TResult Function(String error)? error,
   }) {
-    return eventForDate?.call(events);
+    return eventMarkers?.call(this.eventMarkers);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function(Map<DateTime, bool> events)? loadEvents,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
+        loadEvents,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
-    if (eventForDate != null) {
-      return eventForDate(events);
+    if (eventMarkers != null) {
+      return eventMarkers(this.eventMarkers);
     }
     return orElse();
   }
@@ -203,43 +219,43 @@ class _$_EventForDate implements _EventForDate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_EventForDate value) eventForDate,
+    required TResult Function(_EventForDate value) eventMarkers,
     required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_Error value) error,
   }) {
-    return eventForDate(this);
+    return eventMarkers(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventForDate,
+    TResult Function(_EventForDate value)? eventMarkers,
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
   }) {
-    return eventForDate?.call(this);
+    return eventMarkers?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventForDate,
+    TResult Function(_EventForDate value)? eventMarkers,
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
-    if (eventForDate != null) {
-      return eventForDate(this);
+    if (eventMarkers != null) {
+      return eventMarkers(this);
     }
     return orElse();
   }
 }
 
 abstract class _EventForDate implements CalendarState {
-  const factory _EventForDate({required Map<DateTime, bool> events}) =
+  const factory _EventForDate({required Map<DateTime, bool> eventMarkers}) =
       _$_EventForDate;
 
-  Map<DateTime, bool> get events;
+  Map<DateTime, bool> get eventMarkers;
   @JsonKey(ignore: true)
   _$EventForDateCopyWith<_EventForDate> get copyWith =>
       throw _privateConstructorUsedError;
@@ -250,7 +266,7 @@ abstract class _$LoadEventsCopyWith<$Res> {
   factory _$LoadEventsCopyWith(
           _LoadEvents value, $Res Function(_LoadEvents) then) =
       __$LoadEventsCopyWithImpl<$Res>;
-  $Res call({Map<DateTime, bool> events});
+  $Res call({PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events});
 }
 
 /// @nodoc
@@ -265,9 +281,14 @@ class __$LoadEventsCopyWithImpl<$Res> extends _$CalendarStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? pageNavigation = freezed,
     Object? events = freezed,
   }) {
     return _then(_LoadEvents(
+      pageNavigation: pageNavigation == freezed
+          ? _value.pageNavigation
+          : pageNavigation // ignore: cast_nullable_to_non_nullable
+              as PAGE_NAVIGATION,
       events: events == freezed
           ? _value.events
           : events // ignore: cast_nullable_to_non_nullable
@@ -279,14 +300,19 @@ class __$LoadEventsCopyWithImpl<$Res> extends _$CalendarStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadEvents implements _LoadEvents {
-  const _$_LoadEvents({required this.events});
+  const _$_LoadEvents(
+      {this.pageNavigation = PAGE_NAVIGATION.NO_NAVIGATION,
+      required this.events});
 
+  @JsonKey(defaultValue: PAGE_NAVIGATION.NO_NAVIGATION)
+  @override
+  final PAGE_NAVIGATION pageNavigation;
   @override
   final Map<DateTime, bool> events;
 
   @override
   String toString() {
-    return 'CalendarState.loadEvents(events: $events)';
+    return 'CalendarState.loadEvents(pageNavigation: $pageNavigation, events: $events)';
   }
 
   @override
@@ -294,12 +320,16 @@ class _$_LoadEvents implements _LoadEvents {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _LoadEvents &&
+            const DeepCollectionEquality()
+                .equals(other.pageNavigation, pageNavigation) &&
             const DeepCollectionEquality().equals(other.events, events));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(events));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(pageNavigation),
+      const DeepCollectionEquality().hash(events));
 
   @JsonKey(ignore: true)
   @override
@@ -309,33 +339,39 @@ class _$_LoadEvents implements _LoadEvents {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<DateTime, bool> events) eventForDate,
-    required TResult Function(Map<DateTime, bool> events) loadEvents,
+    required TResult Function(Map<DateTime, bool> eventMarkers) eventMarkers,
+    required TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)
+        loadEvents,
     required TResult Function(String error) error,
   }) {
-    return loadEvents(events);
+    return loadEvents(pageNavigation, events);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function(Map<DateTime, bool> events)? loadEvents,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
+        loadEvents,
     TResult Function(String error)? error,
   }) {
-    return loadEvents?.call(events);
+    return loadEvents?.call(pageNavigation, events);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function(Map<DateTime, bool> events)? loadEvents,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
+        loadEvents,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (loadEvents != null) {
-      return loadEvents(events);
+      return loadEvents(pageNavigation, events);
     }
     return orElse();
   }
@@ -343,7 +379,7 @@ class _$_LoadEvents implements _LoadEvents {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_EventForDate value) eventForDate,
+    required TResult Function(_EventForDate value) eventMarkers,
     required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_Error value) error,
   }) {
@@ -353,7 +389,7 @@ class _$_LoadEvents implements _LoadEvents {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventForDate,
+    TResult Function(_EventForDate value)? eventMarkers,
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
   }) {
@@ -363,7 +399,7 @@ class _$_LoadEvents implements _LoadEvents {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventForDate,
+    TResult Function(_EventForDate value)? eventMarkers,
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -376,9 +412,11 @@ class _$_LoadEvents implements _LoadEvents {
 }
 
 abstract class _LoadEvents implements CalendarState {
-  const factory _LoadEvents({required Map<DateTime, bool> events}) =
-      _$_LoadEvents;
+  const factory _LoadEvents(
+      {PAGE_NAVIGATION pageNavigation,
+      required Map<DateTime, bool> events}) = _$_LoadEvents;
 
+  PAGE_NAVIGATION get pageNavigation;
   Map<DateTime, bool> get events;
   @JsonKey(ignore: true)
   _$LoadEventsCopyWith<_LoadEvents> get copyWith =>
@@ -447,8 +485,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Map<DateTime, bool> events) eventForDate,
-    required TResult Function(Map<DateTime, bool> events) loadEvents,
+    required TResult Function(Map<DateTime, bool> eventMarkers) eventMarkers,
+    required TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)
+        loadEvents,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -457,8 +497,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function(Map<DateTime, bool> events)? loadEvents,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
+        loadEvents,
     TResult Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -467,8 +509,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> events)? eventForDate,
-    TResult Function(Map<DateTime, bool> events)? loadEvents,
+    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkers,
+    TResult Function(
+            PAGE_NAVIGATION pageNavigation, Map<DateTime, bool> events)?
+        loadEvents,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -481,7 +525,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_EventForDate value) eventForDate,
+    required TResult Function(_EventForDate value) eventMarkers,
     required TResult Function(_LoadEvents value) loadEvents,
     required TResult Function(_Error value) error,
   }) {
@@ -491,7 +535,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventForDate,
+    TResult Function(_EventForDate value)? eventMarkers,
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
   }) {
@@ -501,7 +545,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventForDate,
+    TResult Function(_EventForDate value)? eventMarkers,
     TResult Function(_LoadEvents value)? loadEvents,
     TResult Function(_Error value)? error,
     required TResult orElse(),
