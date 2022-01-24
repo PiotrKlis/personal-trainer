@@ -18,21 +18,18 @@ class _$CalendarEventTearOff {
   const _$CalendarEventTearOff();
 
   GetEventMarker getEventMarker(
-      {PAGE_NAVIGATION pageNavigation = PAGE_NAVIGATION.NO_NAVIGATION,
+      {required DateTime selectedDate,
       required String clientId,
       required DateTime dateTime}) {
     return GetEventMarker(
-      pageNavigation: pageNavigation,
+      selectedDate: selectedDate,
       clientId: clientId,
       dateTime: dateTime,
     );
   }
 
-  ReloadEventMarkersOnPageChange reloadEventMarkersOnPageChanged(
-      {required PAGE_NAVIGATION pageNavigation}) {
-    return ReloadEventMarkersOnPageChange(
-      pageNavigation: pageNavigation,
-    );
+  ReloadEventMarkersOnPageChange reloadEventMarkersOnPageChanged() {
+    return const ReloadEventMarkersOnPageChange();
   }
 }
 
@@ -41,33 +38,26 @@ const $CalendarEvent = _$CalendarEventTearOff();
 
 /// @nodoc
 mixin _$CalendarEvent {
-  PAGE_NAVIGATION get pageNavigation => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            PAGE_NAVIGATION pageNavigation, String clientId, DateTime dateTime)
+            DateTime selectedDate, String clientId, DateTime dateTime)
         getEventMarker,
-    required TResult Function(PAGE_NAVIGATION pageNavigation)
-        reloadEventMarkersOnPageChanged,
+    required TResult Function() reloadEventMarkersOnPageChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            PAGE_NAVIGATION pageNavigation, String clientId, DateTime dateTime)?
+    TResult Function(DateTime selectedDate, String clientId, DateTime dateTime)?
         getEventMarker,
-    TResult Function(PAGE_NAVIGATION pageNavigation)?
-        reloadEventMarkersOnPageChanged,
+    TResult Function()? reloadEventMarkersOnPageChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            PAGE_NAVIGATION pageNavigation, String clientId, DateTime dateTime)?
+    TResult Function(DateTime selectedDate, String clientId, DateTime dateTime)?
         getEventMarker,
-    TResult Function(PAGE_NAVIGATION pageNavigation)?
-        reloadEventMarkersOnPageChanged,
+    TResult Function()? reloadEventMarkersOnPageChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -93,10 +83,6 @@ mixin _$CalendarEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $CalendarEventCopyWith<CalendarEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -104,7 +90,6 @@ abstract class $CalendarEventCopyWith<$Res> {
   factory $CalendarEventCopyWith(
           CalendarEvent value, $Res Function(CalendarEvent) then) =
       _$CalendarEventCopyWithImpl<$Res>;
-  $Res call({PAGE_NAVIGATION pageNavigation});
 }
 
 /// @nodoc
@@ -115,29 +100,14 @@ class _$CalendarEventCopyWithImpl<$Res>
   final CalendarEvent _value;
   // ignore: unused_field
   final $Res Function(CalendarEvent) _then;
-
-  @override
-  $Res call({
-    Object? pageNavigation = freezed,
-  }) {
-    return _then(_value.copyWith(
-      pageNavigation: pageNavigation == freezed
-          ? _value.pageNavigation
-          : pageNavigation // ignore: cast_nullable_to_non_nullable
-              as PAGE_NAVIGATION,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class $GetEventMarkerCopyWith<$Res>
-    implements $CalendarEventCopyWith<$Res> {
+abstract class $GetEventMarkerCopyWith<$Res> {
   factory $GetEventMarkerCopyWith(
           GetEventMarker value, $Res Function(GetEventMarker) then) =
       _$GetEventMarkerCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {PAGE_NAVIGATION pageNavigation, String clientId, DateTime dateTime});
+  $Res call({DateTime selectedDate, String clientId, DateTime dateTime});
 }
 
 /// @nodoc
@@ -153,15 +123,15 @@ class _$GetEventMarkerCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? pageNavigation = freezed,
+    Object? selectedDate = freezed,
     Object? clientId = freezed,
     Object? dateTime = freezed,
   }) {
     return _then(GetEventMarker(
-      pageNavigation: pageNavigation == freezed
-          ? _value.pageNavigation
-          : pageNavigation // ignore: cast_nullable_to_non_nullable
-              as PAGE_NAVIGATION,
+      selectedDate: selectedDate == freezed
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       clientId: clientId == freezed
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
@@ -178,13 +148,12 @@ class _$GetEventMarkerCopyWithImpl<$Res>
 
 class _$GetEventMarker implements GetEventMarker {
   const _$GetEventMarker(
-      {this.pageNavigation = PAGE_NAVIGATION.NO_NAVIGATION,
+      {required this.selectedDate,
       required this.clientId,
       required this.dateTime});
 
-  @JsonKey(defaultValue: PAGE_NAVIGATION.NO_NAVIGATION)
   @override
-  final PAGE_NAVIGATION pageNavigation;
+  final DateTime selectedDate;
   @override
   final String clientId;
   @override
@@ -192,7 +161,7 @@ class _$GetEventMarker implements GetEventMarker {
 
   @override
   String toString() {
-    return 'CalendarEvent.getEventMarker(pageNavigation: $pageNavigation, clientId: $clientId, dateTime: $dateTime)';
+    return 'CalendarEvent.getEventMarker(selectedDate: $selectedDate, clientId: $clientId, dateTime: $dateTime)';
   }
 
   @override
@@ -201,7 +170,7 @@ class _$GetEventMarker implements GetEventMarker {
         (other.runtimeType == runtimeType &&
             other is GetEventMarker &&
             const DeepCollectionEquality()
-                .equals(other.pageNavigation, pageNavigation) &&
+                .equals(other.selectedDate, selectedDate) &&
             const DeepCollectionEquality().equals(other.clientId, clientId) &&
             const DeepCollectionEquality().equals(other.dateTime, dateTime));
   }
@@ -209,7 +178,7 @@ class _$GetEventMarker implements GetEventMarker {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(pageNavigation),
+      const DeepCollectionEquality().hash(selectedDate),
       const DeepCollectionEquality().hash(clientId),
       const DeepCollectionEquality().hash(dateTime));
 
@@ -222,38 +191,33 @@ class _$GetEventMarker implements GetEventMarker {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            PAGE_NAVIGATION pageNavigation, String clientId, DateTime dateTime)
+            DateTime selectedDate, String clientId, DateTime dateTime)
         getEventMarker,
-    required TResult Function(PAGE_NAVIGATION pageNavigation)
-        reloadEventMarkersOnPageChanged,
+    required TResult Function() reloadEventMarkersOnPageChanged,
   }) {
-    return getEventMarker(pageNavigation, clientId, dateTime);
+    return getEventMarker(selectedDate, clientId, dateTime);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            PAGE_NAVIGATION pageNavigation, String clientId, DateTime dateTime)?
+    TResult Function(DateTime selectedDate, String clientId, DateTime dateTime)?
         getEventMarker,
-    TResult Function(PAGE_NAVIGATION pageNavigation)?
-        reloadEventMarkersOnPageChanged,
+    TResult Function()? reloadEventMarkersOnPageChanged,
   }) {
-    return getEventMarker?.call(pageNavigation, clientId, dateTime);
+    return getEventMarker?.call(selectedDate, clientId, dateTime);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            PAGE_NAVIGATION pageNavigation, String clientId, DateTime dateTime)?
+    TResult Function(DateTime selectedDate, String clientId, DateTime dateTime)?
         getEventMarker,
-    TResult Function(PAGE_NAVIGATION pageNavigation)?
-        reloadEventMarkersOnPageChanged,
+    TResult Function()? reloadEventMarkersOnPageChanged,
     required TResult orElse(),
   }) {
     if (getEventMarker != null) {
-      return getEventMarker(pageNavigation, clientId, dateTime);
+      return getEventMarker(selectedDate, clientId, dateTime);
     }
     return orElse();
   }
@@ -295,29 +259,24 @@ class _$GetEventMarker implements GetEventMarker {
 
 abstract class GetEventMarker implements CalendarEvent {
   const factory GetEventMarker(
-      {PAGE_NAVIGATION pageNavigation,
+      {required DateTime selectedDate,
       required String clientId,
       required DateTime dateTime}) = _$GetEventMarker;
 
-  @override
-  PAGE_NAVIGATION get pageNavigation;
+  DateTime get selectedDate;
   String get clientId;
   DateTime get dateTime;
-  @override
   @JsonKey(ignore: true)
   $GetEventMarkerCopyWith<GetEventMarker> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ReloadEventMarkersOnPageChangeCopyWith<$Res>
-    implements $CalendarEventCopyWith<$Res> {
+abstract class $ReloadEventMarkersOnPageChangeCopyWith<$Res> {
   factory $ReloadEventMarkersOnPageChangeCopyWith(
           ReloadEventMarkersOnPageChange value,
           $Res Function(ReloadEventMarkersOnPageChange) then) =
       _$ReloadEventMarkersOnPageChangeCopyWithImpl<$Res>;
-  @override
-  $Res call({PAGE_NAVIGATION pageNavigation});
 }
 
 /// @nodoc
@@ -332,89 +291,60 @@ class _$ReloadEventMarkersOnPageChangeCopyWithImpl<$Res>
   @override
   ReloadEventMarkersOnPageChange get _value =>
       super._value as ReloadEventMarkersOnPageChange;
-
-  @override
-  $Res call({
-    Object? pageNavigation = freezed,
-  }) {
-    return _then(ReloadEventMarkersOnPageChange(
-      pageNavigation: pageNavigation == freezed
-          ? _value.pageNavigation
-          : pageNavigation // ignore: cast_nullable_to_non_nullable
-              as PAGE_NAVIGATION,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$ReloadEventMarkersOnPageChange
     implements ReloadEventMarkersOnPageChange {
-  const _$ReloadEventMarkersOnPageChange({required this.pageNavigation});
-
-  @override
-  final PAGE_NAVIGATION pageNavigation;
+  const _$ReloadEventMarkersOnPageChange();
 
   @override
   String toString() {
-    return 'CalendarEvent.reloadEventMarkersOnPageChanged(pageNavigation: $pageNavigation)';
+    return 'CalendarEvent.reloadEventMarkersOnPageChanged()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ReloadEventMarkersOnPageChange &&
-            const DeepCollectionEquality()
-                .equals(other.pageNavigation, pageNavigation));
+            other is ReloadEventMarkersOnPageChange);
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(pageNavigation));
-
-  @JsonKey(ignore: true)
-  @override
-  $ReloadEventMarkersOnPageChangeCopyWith<ReloadEventMarkersOnPageChange>
-      get copyWith => _$ReloadEventMarkersOnPageChangeCopyWithImpl<
-          ReloadEventMarkersOnPageChange>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            PAGE_NAVIGATION pageNavigation, String clientId, DateTime dateTime)
+            DateTime selectedDate, String clientId, DateTime dateTime)
         getEventMarker,
-    required TResult Function(PAGE_NAVIGATION pageNavigation)
-        reloadEventMarkersOnPageChanged,
+    required TResult Function() reloadEventMarkersOnPageChanged,
   }) {
-    return reloadEventMarkersOnPageChanged(pageNavigation);
+    return reloadEventMarkersOnPageChanged();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            PAGE_NAVIGATION pageNavigation, String clientId, DateTime dateTime)?
+    TResult Function(DateTime selectedDate, String clientId, DateTime dateTime)?
         getEventMarker,
-    TResult Function(PAGE_NAVIGATION pageNavigation)?
-        reloadEventMarkersOnPageChanged,
+    TResult Function()? reloadEventMarkersOnPageChanged,
   }) {
-    return reloadEventMarkersOnPageChanged?.call(pageNavigation);
+    return reloadEventMarkersOnPageChanged?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            PAGE_NAVIGATION pageNavigation, String clientId, DateTime dateTime)?
+    TResult Function(DateTime selectedDate, String clientId, DateTime dateTime)?
         getEventMarker,
-    TResult Function(PAGE_NAVIGATION pageNavigation)?
-        reloadEventMarkersOnPageChanged,
+    TResult Function()? reloadEventMarkersOnPageChanged,
     required TResult orElse(),
   }) {
     if (reloadEventMarkersOnPageChanged != null) {
-      return reloadEventMarkersOnPageChanged(pageNavigation);
+      return reloadEventMarkersOnPageChanged();
     }
     return orElse();
   }
@@ -455,14 +385,6 @@ class _$ReloadEventMarkersOnPageChange
 }
 
 abstract class ReloadEventMarkersOnPageChange implements CalendarEvent {
-  const factory ReloadEventMarkersOnPageChange(
-          {required PAGE_NAVIGATION pageNavigation}) =
+  const factory ReloadEventMarkersOnPageChange() =
       _$ReloadEventMarkersOnPageChange;
-
-  @override
-  PAGE_NAVIGATION get pageNavigation;
-  @override
-  @JsonKey(ignore: true)
-  $ReloadEventMarkersOnPageChangeCopyWith<ReloadEventMarkersOnPageChange>
-      get copyWith => throw _privateConstructorUsedError;
 }

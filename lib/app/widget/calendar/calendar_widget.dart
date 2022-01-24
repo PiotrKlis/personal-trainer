@@ -56,16 +56,13 @@ class _TableCalendarState extends State<TableCalendarWidget> {
         }),
         onPageChanged: (focusedDay) {
           setState(() {
-          //   PAGE_NAVIGATION pageNavigation =
-          //       getPageNavigationType(_selectedDate, focusedDay);
             _selectedDate = focusedDay;
-          //   context.read<CalendarBloc>().disableMarkersReloadForNextEvent();
-          //   context.read<CalendarExercisesBloc>().add(
-          //       CalendarExerciseEvent.newDateSelected(
-          //           selectedDate: _selectedDate, clientId: widget.clientId));
-          //   context.read<CalendarBloc>().add(
-          //       CalendarEvent.reloadEventMarkersOnPageChanged(
-          //           pageNavigation: pageNavigation));
+            context.read<CalendarBloc>().disableMarkersReloadForNextEvent();
+            context.read<CalendarExercisesBloc>().add(
+                CalendarExerciseEvent.newDateSelected(
+                    selectedDate: _selectedDate, clientId: widget.clientId));
+            context.read<CalendarBloc>().add(
+                CalendarEvent.reloadEventMarkersOnPageChanged());
           });
         },
         firstDay: DateUtil.calendarStartDate,
@@ -93,12 +90,11 @@ class _TableCalendarState extends State<TableCalendarWidget> {
   }
 
   List<bool> getEventMarkerForDate(DateTime date, CalendarState state) {
-    Log.d("Loading date for markers $date");
     return state.when(eventMarkersData: (events) {
       return shouldShowMarker(events, date);
-    }, loadEventMarkers: (pageNavigation, events) {
+    }, loadEventMarkers: (events) {
       context.read<CalendarBloc>().add(CalendarEvent.getEventMarker(
-          pageNavigation: pageNavigation,
+          selectedDate: _selectedDate,
           clientId: widget.clientId,
           dateTime: date));
       return shouldShowMarker(events, date);
@@ -111,13 +107,4 @@ class _TableCalendarState extends State<TableCalendarWidget> {
     var isEvent = events[day] ?? false;
     return isEvent ? [isEvent] : [];
   }
-
-  PAGE_NAVIGATION getPageNavigationType(
-      DateTime currentDay, DateTime newSelectedDay) {
-    return newSelectedDay.isAfter(currentDay)
-        ? PAGE_NAVIGATION.FUTURE
-        : PAGE_NAVIGATION.PAST;
-  }
 }
-
-enum PAGE_NAVIGATION { PAST, FUTURE, NO_NAVIGATION }

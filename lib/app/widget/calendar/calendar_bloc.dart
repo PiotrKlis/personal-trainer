@@ -1,10 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_bloc.dart';
-import 'package:personal_trainer/app/util/logger.dart';
-import 'package:personal_trainer/app/widget/calendar/calendar_widget.dart';
 import 'package:personal_trainer/domain/model/user_exercise.dart';
 
 import 'calendar_event.dart';
@@ -19,35 +18,23 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   List<UserExercise> _previousExercises = [];
   static const CALENDAR_FORMAT_IN_DAYS = 7;
 
-  var _eventMarkers = [];
+  List<GetEventMarker> _eventMarkers = [];
 
   CalendarBloc(
       CalendarState initialState, CalendarExercisesBloc calendarExercisesBloc)
       : super(initialState) {
     observeExercisesDataForEventMarkerReload(calendarExercisesBloc);
-    // pass new date, divide provided data into groups of seven and check of focused day is in given list
     on<GetEventMarker>((event, emitter) async {
       try {
-        switch (event.pageNavigation) {
-          case PAGE_NAVIGATION.PAST:
-            _eventMarkers.add(event);
-            if (_eventMarkers.length == 7) {
-              await emitMarkers(emitter);
-            }
-            break;
-          case PAGE_NAVIGATION.FUTURE:
-            _eventMarkers.add(event);
-            if (_eventMarkers.length == 14) {
-              _eventMarkers.removeRange(0, 7);
-              await emitMarkers(emitter);
-            }
-            break;
-          case PAGE_NAVIGATION.NO_NAVIGATION:
-            _eventMarkers.add(event);
-            if (_eventMarkers.length == 7) {
-              await emitMarkers(emitter);
-            }
-            break;
+        _eventMarkers.add(event);
+        if (_eventMarkers.length == CALENDAR_FORMAT_IN_DAYS) {
+          if (_eventMarkers.any((element) =>
+              DateUtils.dateOnly(element.dateTime) ==
+              DateUtils.dateOnly(event.selectedDate))) {
+            await emitMarkers(emitter);
+          } else {
+            _eventMarkers = [];
+          }
         }
       } catch (error) {
         emitter(CalendarState.error(error: error.toString()));
@@ -55,17 +42,15 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     });
 
     on<ReloadEventMarkersOnPageChange>((event, emitter) async {
-      emitter(CalendarState.loadEventMarkers(
-          pageNavigation: event.pageNavigation, events: {}));
+      emitter(CalendarState.loadEventMarkers(events: {}));
     });
   }
 
   Future<void> emitMarkers(Emitter<CalendarState> emitter) async {
     // Log.d("Fetching markers data $_eventMarkers");
     var listOfEventMaps = await Future.wait(_eventMarkers.map((event) async {
-      var eventMap = await _calendarExerciseProvider.getExerciseMarkerFor(
+      return await _calendarExerciseProvider.getExerciseMarkerFor(
           dateTime: event.dateTime, clientId: event.clientId);
-      return eventMap;
     }));
     var flattenedMap = {for (var map in listOfEventMaps) ...map};
     _eventsCache = flattenedMap;
@@ -93,9 +78,10 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       });
     });
   }
-
+  // divide in two
   void disableMarkersReloadForNextEvent() {
     _isMarkersReloadEnabled = false;
+    _eventMarkers = [];
   }
 
   @override
