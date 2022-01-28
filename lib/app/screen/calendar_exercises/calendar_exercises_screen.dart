@@ -83,7 +83,6 @@ class _ExerciseExpansionPanelsState extends State<ExerciseExpansionPanels> {
           content: (userExercises) =>
               _handleDataLoadSuccess(userExercises, context),
           error: (error) {
-            Log.e(error);
             return ErrorView.error(AppLocalizations.of(context)!.error);
           });
     });

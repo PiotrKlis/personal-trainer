@@ -1,17 +1,11 @@
-abstract class ExerciseSearchEvent {}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class ExerciseSearchExpansionPanelClicked extends ExerciseSearchEvent {
-  final exerciseId;
-  final exercises;
+part 'exercise_search_event.freezed.dart';
 
-  ExerciseSearchExpansionPanelClicked(
-      {required this.exerciseId, required this.exercises});
-}
+@freezed
+class ExerciseSearchEvent with _$ExerciseSearchEvent {
+  const factory ExerciseSearchEvent.emptySearch() = EmptySearch;
 
-class ExerciseSearchEmpty extends ExerciseSearchEvent {}
-
-class ExerciseSearchForInput extends ExerciseSearchEvent {
-  final String input;
-
-  ExerciseSearchForInput({required this.input});
+  const factory ExerciseSearchEvent.searchForInput({required String input}) =
+      SearchForInput;
 }

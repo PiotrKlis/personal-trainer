@@ -2,9 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/app/screen/exercise_search/exercise_search_state.dart';
 import 'package:personal_trainer/app/util/event_transformer.dart';
-import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
 import 'package:personal_trainer/data/util/const.dart';
+import 'package:personal_trainer/domain/model/exercise.dart';
 
 import 'exercise_search_event.dart';
 
@@ -15,37 +15,29 @@ class ExerciseSearchBloc
   List<String> listOfExpandedExercises = [];
 
   ExerciseSearchBloc(ExerciseSearchState initialState) : super(initialState) {
-    on<ExerciseSearchEmpty>((event, emit) async {
-      await searchProvider.getAllExercises().then((exercises) {
-        emit(ExerciseSearchSuccess(exercises));
-      }).catchError((error) {
-        emit(ExerciseSearchFailure(error.toString()));
-        Log.e(error.toString());
-      });
+    on<EmptySearch>((event, emit) async {
+      try {
+        emit(ExerciseSearchState.loading());
+        List<Exercise> exercises = await searchProvider.getAllExercises();
+        emit(ExerciseSearchState.content(exercises: exercises));
+      } catch (error) {
+        emit(ExerciseSearchState.error(error: error.toString()));
+      }
     },
         transformer:
             debounce(Duration(milliseconds: DurationConst.longerDebounceTime)));
 
-    on<ExerciseSearchForInput>((event, emit) async {
-      await searchProvider.searchForExercises(event.input).then((exercises) {
-        emit(ExerciseSearchSuccess(exercises));
-      }).catchError((error) {
-        emit(ExerciseSearchFailure(error));
-        Log.e(error.toString());
-      });
+    on<SearchForInput>((event, emit) async {
+      try {
+        emit(ExerciseSearchState.loading());
+        List<Exercise> exercises =
+            await searchProvider.searchForExercises(event.input);
+        emit(ExerciseSearchState.content(exercises: exercises));
+      } catch (error) {
+        emit(ExerciseSearchState.error(error: error.toString()));
+      }
     },
         transformer:
             debounce(Duration(milliseconds: DurationConst.debounceTime)));
-
-    on<ExerciseSearchExpansionPanelClicked>((event, emit) {
-      String id = event.exerciseId;
-      if (listOfExpandedExercises.contains(id)) {
-        listOfExpandedExercises.remove(id);
-      } else {
-        listOfExpandedExercises.add(id);
-      }
-      emit(
-          ExerciseSearchExpansionPanelClickSuccess(exercises: event.exercises));
-    });
   }
 }

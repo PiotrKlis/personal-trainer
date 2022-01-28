@@ -5,13 +5,11 @@ import 'package:personal_trainer/app/screen/exercise_search/exercise_search_add_
 import 'package:personal_trainer/app/screen/exercise_search/exercise_search_bloc.dart';
 import 'package:personal_trainer/app/screen/exercise_search/exercise_search_event.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
-import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/error_view.dart';
 import 'package:personal_trainer/app/widget/toast_message.dart';
-import 'package:personal_trainer/app/widget/video_item.dart';
+import 'package:personal_trainer/app/widget/video_player_widget.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
-import 'package:video_player/video_player.dart';
 
 import 'exercise_search_state.dart';
 
@@ -19,9 +17,8 @@ class ExerciseSearchScreen extends StatelessWidget {
   final DateTime selectedDate;
   final String clientId;
   final int listLength;
-  final ExerciseSearchState _exerciseSearchState = ExerciseSearchAllExercises();
-  final ExerciseSearchAddExerciseState _addExerciseState =
-      ExerciseSearchAddStarted();
+  final ExerciseSearchState _exerciseSearchState =
+      ExerciseSearchState.initial();
 
   ExerciseSearchScreen(
       {Key? key,
@@ -32,14 +29,8 @@ class ExerciseSearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-              create: (context) => ExerciseSearchBloc(_exerciseSearchState)),
-          BlocProvider(
-              create: (context) =>
-                  ExerciseSearchAddExerciseBloc(_addExerciseState, listLength))
-        ],
+    return BlocProvider(
+        create: (context) => ExerciseSearchBloc(_exerciseSearchState),
         child: Scaffold(
           appBar: AppBar(
               title: Text(
@@ -59,7 +50,8 @@ class SearchScreenContent extends StatelessWidget {
   final clientId;
   final listLength;
 
-  const SearchScreenContent({this.selectedDate, this.clientId, this.listLength}) : super();
+  const SearchScreenContent({this.selectedDate, this.clientId, this.listLength})
+      : super();
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +76,8 @@ BlocListener _addExerciseBlocListener() {
         case ExerciseSearchAddExerciseSuccess:
           state as ExerciseSearchAddExerciseSuccess;
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              duration: Duration(milliseconds: DurationConst.snackbarVisibilityDuration),
+              duration: Duration(
+                  milliseconds: DurationConst.snackbarVisibilityDuration),
               content: Text(
                   "${state.exerciseName} ${AppLocalizations.of(context)!.exercise_added_message}")));
           break;
@@ -105,11 +98,12 @@ class SearchWidget extends StatelessWidget {
     var _searchController = TextEditingController();
     _searchController.addListener(() {
       if (_searchController.text.isEmpty) {
-        context.read<ExerciseSearchBloc>().add(ExerciseSearchEmpty());
-      } else {
         context
             .read<ExerciseSearchBloc>()
-            .add(ExerciseSearchForInput(input: _searchController.text));
+            .add(ExerciseSearchEvent.emptySearch());
+      } else {
+        context.read<ExerciseSearchBloc>().add(
+            ExerciseSearchEvent.searchForInput(input: _searchController.text));
       }
     });
     return Row(children: [
@@ -136,18 +130,18 @@ class ListOfResults extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ExerciseSearchBloc, ExerciseSearchState>(
         builder: (context, state) {
-      switch (state.runtimeType) {
-        case ExerciseSearchAllExercises:
-          return _handleSearchAllExercises(context);
-        case ExerciseSearchSuccess:
-          state as ExerciseSearchSuccess;
-          return _handleDataLoadSuccess(state.userExercises, context);
-        case ExerciseSearchExpansionPanelClickSuccess:
-          state as ExerciseSearchExpansionPanelClickSuccess;
-          return _handleDataLoadSuccess(state.exercises, context);
-        default:
-          return _handleNoExercises(context);
-      }
+      return state.when(loading: () {
+        return CircularProgressIndicator();
+      }, initial: () {
+        context
+            .read<ExerciseSearchBloc>()
+            .add(ExerciseSearchEvent.emptySearch());
+        return CircularProgressIndicator();
+      }, content: (exercises) {
+        return _buildExpansionTiles(exercises, context);
+      }, error: (error) {
+        return ErrorView.error(AppLocalizations.of(context)!.error);
+      });
     });
   }
 
@@ -159,32 +153,20 @@ class ListOfResults extends StatelessWidget {
                 AppLocalizations.of(context)!.search_exercises_no_exercises)));
   }
 
-  ExpansionPanelList _handleDataLoadSuccess(
-      List<Exercise> exercises, BuildContext context) {
-    return ExpansionPanelList(
-        animationDuration:
-            Duration(seconds: Dimens.expansionPanelAnimationDuration),
-        elevation: Dimens.expansionPanelElevation,
-        expandedHeaderPadding: EdgeInsets.all(Dimens.noPadding),
-        expansionCallback: (index, isExpanded) {
-          context.read<ExerciseSearchBloc>().add(
-              ExerciseSearchExpansionPanelClicked(
-                  exerciseId: exercises[index].id, exercises: exercises));
-        },
+  Widget _buildExpansionTiles(List<Exercise> exercises, BuildContext context) {
+    if (exercises.isEmpty) {
+      return _handleNoExercises(context);
+    }
+    return ListView(
         children: exercises
             .map((exercise) => _buildExpansionPanel(exercise, context))
             .toList());
   }
 
-  ExpansionPanel _buildExpansionPanel(Exercise exercise, BuildContext context) {
-    return ExpansionPanel(
-      isExpanded: context
-          .read<ExerciseSearchBloc>()
-          .listOfExpandedExercises
-          .contains(exercise.id),
-      canTapOnHeader: true,
-      headerBuilder: (context, isExpanded) {
-        return ListTile(
+  Card _buildExpansionPanel(Exercise exercise, BuildContext context) {
+    return Card(
+        elevation: 1,
+        child: ExpansionTile(
             leading: Icon(Icons.fitness_center),
             title: Text(
               exercise.title,
@@ -200,61 +182,35 @@ class ListOfResults extends StatelessWidget {
                         clientId: clientId,
                         exerciseName: exercise.title));
               },
-            ));
-      },
-      body: Column(
-        children: [
-          Divider(),
-          // SizedBox(
-          //   height: Dimens.videoContainerHeight,
-          //   child: VideoItem(
-          //     videoPlayerController:
-          //         VideoPlayerController.network(exercise.videoPath),
-          //     looping: false,
-          //     autoplay: false,
-          //   ),
-          // ),
-          Padding(
-            padding: const EdgeInsets.all(Dimens.smallPadding),
-            child: Container(
-              height: Dimens.tagsRowHeight,
-              child: Flex(direction: Axis.vertical, children: [
-                Expanded(
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: exercise.tags.length,
-                    itemBuilder: (BuildContext context, int tagIndex) {
-                      return Row(children: [
-                        Text(
-                          exercise.tags[tagIndex],
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(width: Dimens.tagsRowDividerWidth)
-                      ]);
-                    },
-                  ),
-                ),
-              ]),
             ),
-          ),
-        ],
-      ),
-    );
+            children: [
+              Divider(),
+              VideoPlayerWidget(playbackId: exercise.playbackId),
+              Padding(
+                  padding: const EdgeInsets.all(Dimens.smallPadding),
+                  child: Container(
+                      height: Dimens.tagsRowHeight,
+                      child: Flex(direction: Axis.vertical, children: [
+                        Expanded(
+                            child: ListView.builder(
+                          key: PageStorageKey(exercise.id),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: exercise.tags.length,
+                          itemBuilder: (BuildContext context, int tagIndex) {
+                            return Row(children: [
+                              Text(
+                                exercise.tags[tagIndex],
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(width: Dimens.tagsRowDividerWidth)
+                            ]);
+                          },
+                        ))
+                      ])))
+            ]));
   }
 
   bool isExpanded(Exercise exercise, List<String> listOfExpandedExercises) {
     return listOfExpandedExercises.contains(exercise.id);
   }
-
-  Center _handleSearchAllExercises(BuildContext context) {
-    context.read<ExerciseSearchBloc>().add(ExerciseSearchEmpty());
-    return Center(child: CircularProgressIndicator());
-  }
-}
-
-class ExerciseSearchArguments {
-  final DateTime selectedDay;
-  final String clientId;
-
-  ExerciseSearchArguments(this.selectedDay, this.clientId);
 }

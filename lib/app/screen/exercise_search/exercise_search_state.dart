@@ -1,25 +1,14 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
-import 'package:personal_trainer/domain/model/user_exercise.dart';
+part 'exercise_search_state.freezed.dart';
 
-abstract class ExerciseSearchState {}
+@freezed
+class ExerciseSearchState with _$ExerciseSearchState {
+  const factory ExerciseSearchState.loading() = _Loading;
+  const factory ExerciseSearchState.initial() = _Initial;
 
-class ExerciseSearchSuccess extends ExerciseSearchState {
-  final List<Exercise> userExercises;
+  const factory ExerciseSearchState.content(
+      {required List<Exercise> exercises}) = _Content;
 
-  ExerciseSearchSuccess(this.userExercises);
-}
-
-class ExerciseSearchFailure extends ExerciseSearchState {
-  final String error;
-
-  ExerciseSearchFailure(this.error);
-}
-
-class ExerciseSearchAllExercises extends ExerciseSearchState {}
-
-class ExerciseSearchExpansionPanelClickSuccess
-    extends ExerciseSearchState {
-  final List<Exercise> exercises;
-
-  ExerciseSearchExpansionPanelClickSuccess({required this.exercises});
+  const factory ExerciseSearchState.error({required String error}) = _Error;
 }
