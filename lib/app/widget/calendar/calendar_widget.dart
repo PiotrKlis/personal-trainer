@@ -76,6 +76,7 @@ class _TableCalendarState extends State<TableCalendarWidget> {
             setState(() {
               _selectedDate = selectedDate;
               context.read<CalendarBloc>().disableMarkersReloadForNextEvent();
+              context.read<CalendarBloc>().clearExercisesCache();
               context.read<CalendarExercisesBloc>().add(
                   CalendarExerciseEvent.newDateSelected(
                       selectedDate: selectedDate, clientId: widget.clientId));

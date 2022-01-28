@@ -15,7 +15,6 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       GetIt.I.get<CalendarProvider>();
   late final StreamSubscription _otherBlocSubscription;
   Map<DateTime, bool> _eventsCache = {};
-  List<UserExercise> _previousExercises = [];
   static const CALENDAR_FORMAT_IN_DAYS = 7;
 
   List<GetEventMarker> _eventMarkers = [];
@@ -58,17 +57,21 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   }
 
   bool _isMarkersReloadEnabled = true;
+  List<UserExercise> _exercisesCache = [];
 
   void observeExercisesDataForEventMarkerReload(
       CalendarExercisesBloc calendarExercisesBloc) {
     _otherBlocSubscription = calendarExercisesBloc.stream.listen((state) {
       state.whenOrNull(content: (exercises) {
+        var shouldCacheExercises =
+            _exercisesCache.isEmpty && exercises.isNotEmpty ||
+                _exercisesCache.isNotEmpty && exercises.isEmpty;
         bool shouldReloadEventMarkers =
-            (_previousExercises.isEmpty && exercises.isNotEmpty ||
-                    _previousExercises.isNotEmpty && exercises.isEmpty) &&
-                _isMarkersReloadEnabled;
+            shouldCacheExercises && _isMarkersReloadEnabled;
+        if (shouldCacheExercises) {
+          _exercisesCache = List.of(exercises);
+        }
         if (shouldReloadEventMarkers) {
-          _previousExercises = List.of(exercises);
           _eventMarkers = [];
           emit(CalendarState.loadEventMarkers(events: _eventsCache));
         }
@@ -78,10 +81,15 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       });
     });
   }
+
   // divide in two
   void disableMarkersReloadForNextEvent() {
     _isMarkersReloadEnabled = false;
     _eventMarkers = [];
+  }
+
+  void clearExercisesCache() {
+    _exercisesCache = [];
   }
 
   @override
