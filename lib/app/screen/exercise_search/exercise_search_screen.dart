@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -55,9 +56,9 @@ class SearchScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
-        _addExerciseBlocListener(),
+        // _addExerciseBlocListener(),
         SearchWidget(),
         ListOfResults(
           selectedDate: selectedDate,
@@ -92,18 +93,24 @@ BlocListener _addExerciseBlocListener() {
   );
 }
 
+var previousSearch;
+
 class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _searchController = TextEditingController();
     _searchController.addListener(() {
-      if (_searchController.text.isEmpty) {
-        context
-            .read<ExerciseSearchBloc>()
-            .add(ExerciseSearchEvent.emptySearch());
-      } else {
-        context.read<ExerciseSearchBloc>().add(
-            ExerciseSearchEvent.searchForInput(input: _searchController.text));
+      if (_searchController.text != previousSearch) {
+        previousSearch = _searchController.text;
+        if (_searchController.text.isEmpty) {
+          context
+              .read<ExerciseSearchBloc>()
+              .add(ExerciseSearchEvent.emptySearch());
+        } else {
+          context.read<ExerciseSearchBloc>().add(
+              ExerciseSearchEvent.searchForInput(
+                  input: _searchController.text));
+        }
       }
     });
     return Row(children: [
@@ -157,13 +164,15 @@ class ListOfResults extends StatelessWidget {
     if (exercises.isEmpty) {
       return _handleNoExercises(context);
     }
-    return ListView(
-        children: exercises
-            .map((exercise) => _buildExpansionPanel(exercise, context))
-            .toList());
+    return Expanded(
+      child: ListView.builder(
+          itemCount: exercises.length,
+          itemBuilder: (context, index) =>
+              _buildExpansionTile(exercises[index], context)),
+    );
   }
 
-  Card _buildExpansionPanel(Exercise exercise, BuildContext context) {
+  Widget _buildExpansionTile(Exercise exercise, BuildContext context) {
     return Card(
         elevation: 1,
         child: ExpansionTile(
