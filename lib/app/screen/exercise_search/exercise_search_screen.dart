@@ -93,15 +93,15 @@ BlocListener _addExerciseBlocListener() {
   );
 }
 
-var previousSearch;
+String? previousSearchInput;
 
 class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _searchController = TextEditingController();
     _searchController.addListener(() {
-      if (_searchController.text != previousSearch) {
-        previousSearch = _searchController.text;
+      if (_searchController.text != previousSearchInput) {
+        previousSearchInput = _searchController.text;
         if (_searchController.text.isEmpty) {
           context
               .read<ExerciseSearchBloc>()
