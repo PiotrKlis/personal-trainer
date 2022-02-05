@@ -1,18 +1,18 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:personal_trainer/app/screen/exercise_search/exercise_search_add_exercise_bloc.dart';
-import 'package:personal_trainer/app/screen/exercise_search/exercise_search_bloc.dart';
-import 'package:personal_trainer/app/screen/exercise_search/exercise_search_event.dart';
+import 'package:personal_trainer/app/screen/exercise_search/bloc/exercise_search_add_exercise_bloc.dart';
+import 'package:personal_trainer/app/screen/exercise_search/event/exercise_search_add_exercise_event.dart';
+import 'package:personal_trainer/app/screen/exercise_search/event/exercise_search_event.dart';
+import 'package:personal_trainer/app/screen/exercise_search/state/exercise_search_add_exercise_state.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
 import 'package:personal_trainer/app/widget/error_view.dart';
-import 'package:personal_trainer/app/widget/toast_message.dart';
 import 'package:personal_trainer/app/widget/video_player_widget.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
-import 'exercise_search_state.dart';
+import 'bloc/exercise_search_bloc.dart';
+import 'state/exercise_search_state.dart';
 
 class ExerciseSearchScreen extends StatelessWidget {
   final DateTime selectedDate;
@@ -30,8 +30,14 @@ class ExerciseSearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => ExerciseSearchBloc(_exerciseSearchState),
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+              create: (context) => ExerciseSearchBloc(_exerciseSearchState)),
+          BlocProvider(
+              create: (context) => ExerciseSearchAddExerciseBloc(
+                  ExerciseSearchAddExerciseState.initial(), listLength))
+        ],
         child: Scaffold(
           appBar: AppBar(
               title: Text(
@@ -58,7 +64,7 @@ class SearchScreenContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // _addExerciseBlocListener(),
+        _addExerciseBlocListener(),
         SearchWidget(),
         ListOfResults(
           selectedDate: selectedDate,
@@ -73,21 +79,21 @@ BlocListener _addExerciseBlocListener() {
   return BlocListener<ExerciseSearchAddExerciseBloc,
       ExerciseSearchAddExerciseState>(
     listener: (context, state) {
-      switch (state.runtimeType) {
-        case ExerciseSearchAddExerciseSuccess:
-          state as ExerciseSearchAddExerciseSuccess;
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              duration: Duration(
-                  milliseconds: DurationConst.snackbarVisibilityDuration),
-              content: Text(
-                  "${state.exerciseName} ${AppLocalizations.of(context)!.exercise_added_message}")));
-          break;
-        case ExerciseSearchAddExerciseFailure:
-          state as ExerciseSearchAddExerciseFailure;
-          ToastMessage.show(
-              AppLocalizations.of(context)!.exercise_add_failure_message);
-          break;
-      }
+      state.when(exerciseAddedSuccess: () {
+        return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(
+                milliseconds: DurationConst.snackbarVisibilityDuration),
+            content: Text(
+                "${AppLocalizations.of(context)!.exercise_added_message}")));
+      }, exerciseAddedFailure: () {
+        return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(
+                milliseconds: DurationConst.snackbarVisibilityDuration),
+            content: Text(
+                "${AppLocalizations.of(context)!.exercise_add_failure_message}")));
+      }, initial: () {
+        return Container();
+      });
     },
     child: Container(),
   );
@@ -185,11 +191,10 @@ class ListOfResults extends StatelessWidget {
               icon: Icon(Icons.add_rounded),
               onPressed: () {
                 context.read<ExerciseSearchAddExerciseBloc>().add(
-                    ExerciseSearchExerciseAdded(
+                    ExerciseSearchAddExerciseEvent.addExercise(
                         exerciseId: exercise.id,
                         selectedDate: selectedDate,
-                        clientId: clientId,
-                        exerciseName: exercise.title));
+                        clientId: clientId));
               },
             ),
             children: [
