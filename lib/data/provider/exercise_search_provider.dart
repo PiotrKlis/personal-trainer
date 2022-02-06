@@ -52,11 +52,10 @@ class ExerciseSearchProvider {
     }
   }
 
-  Future addExercise(
-      {required String exerciseId,
-      required DateTime selectedDate,
-      required String clientId,
-      required int index}) async {
+  Future addExercise({required String exerciseId,
+    required DateTime selectedDate,
+    required String clientId,
+    required int index}) async {
     try {
       var formattedDate = DateUtils.dateOnly(selectedDate).toString();
       await FirebaseFirestore.instance
@@ -71,11 +70,20 @@ class ExerciseSearchProvider {
               .collection(FirebaseConstants.clientCollection)
               .doc(FirebaseConstants.userExercisesCollection)
               .collection(formattedDate);
-          var userExerciseId = dateCollection.doc().id;
+          var userExerciseId = dateCollection
+              .doc()
+              .id;
           var userExerciseData =
-              _createUserExerciseData(id: userExerciseId, index: index);
+          _createUserExerciseData(id: userExerciseId, index: index);
 
-          await dateCollection.doc(userExerciseId).set(userExerciseData);
+          try {
+            await dateCollection.doc(userExerciseId)
+                .set(userExerciseData)
+                .onError((error, stackTrace) => print("PKPK $error"));
+          } catch (error) {
+            print("PKPK $error");
+          }
+          //TODO this doesnt catch if theres not internet connection - find a way to shpw fsailed snackbar
 
           await dateCollection
               .doc(userExerciseId)

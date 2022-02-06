@@ -7,5 +7,7 @@ class ExerciseSearchAddExerciseEvent extends _$ExerciseSearchAddExerciseEvent {
   const factory ExerciseSearchAddExerciseEvent.addExercise(
       {required String exerciseId,
         required DateTime selectedDate,
-        required String clientId}) = AddExercise;
+        required String clientId,
+      required String exerciseName}
+      ) = AddExercise;
 }

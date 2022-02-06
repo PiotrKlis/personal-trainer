@@ -21,12 +21,16 @@ class _$ExerciseSearchAddExerciseStateTearOff {
     return const _Initial();
   }
 
-  _ExerciseAddedSuccess exerciseAddedSuccess() {
-    return const _ExerciseAddedSuccess();
+  _ExerciseAddedSuccess exerciseAddedSuccess({required String exerciseName}) {
+    return _ExerciseAddedSuccess(
+      exerciseName: exerciseName,
+    );
   }
 
-  _ExerciseAddedFailure exerciseAddedFailure() {
-    return const _ExerciseAddedFailure();
+  _ExerciseAddedFailure exerciseAddedFailure({required String exerciseName}) {
+    return _ExerciseAddedFailure(
+      exerciseName: exerciseName,
+    );
   }
 }
 
@@ -39,22 +43,22 @@ mixin _$ExerciseSearchAddExerciseState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() exerciseAddedSuccess,
-    required TResult Function() exerciseAddedFailure,
+    required TResult Function(String exerciseName) exerciseAddedSuccess,
+    required TResult Function(String exerciseName) exerciseAddedFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? exerciseAddedSuccess,
-    TResult Function()? exerciseAddedFailure,
+    TResult Function(String exerciseName)? exerciseAddedSuccess,
+    TResult Function(String exerciseName)? exerciseAddedFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? exerciseAddedSuccess,
-    TResult Function()? exerciseAddedFailure,
+    TResult Function(String exerciseName)? exerciseAddedSuccess,
+    TResult Function(String exerciseName)? exerciseAddedFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,8 +144,8 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() exerciseAddedSuccess,
-    required TResult Function() exerciseAddedFailure,
+    required TResult Function(String exerciseName) exerciseAddedSuccess,
+    required TResult Function(String exerciseName) exerciseAddedFailure,
   }) {
     return initial();
   }
@@ -150,8 +154,8 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? exerciseAddedSuccess,
-    TResult Function()? exerciseAddedFailure,
+    TResult Function(String exerciseName)? exerciseAddedSuccess,
+    TResult Function(String exerciseName)? exerciseAddedFailure,
   }) {
     return initial?.call();
   }
@@ -160,8 +164,8 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? exerciseAddedSuccess,
-    TResult Function()? exerciseAddedFailure,
+    TResult Function(String exerciseName)? exerciseAddedSuccess,
+    TResult Function(String exerciseName)? exerciseAddedFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -214,6 +218,7 @@ abstract class _$ExerciseAddedSuccessCopyWith<$Res> {
   factory _$ExerciseAddedSuccessCopyWith(_ExerciseAddedSuccess value,
           $Res Function(_ExerciseAddedSuccess) then) =
       __$ExerciseAddedSuccessCopyWithImpl<$Res>;
+  $Res call({String exerciseName});
 }
 
 /// @nodoc
@@ -226,57 +231,82 @@ class __$ExerciseAddedSuccessCopyWithImpl<$Res>
 
   @override
   _ExerciseAddedSuccess get _value => super._value as _ExerciseAddedSuccess;
+
+  @override
+  $Res call({
+    Object? exerciseName = freezed,
+  }) {
+    return _then(_ExerciseAddedSuccess(
+      exerciseName: exerciseName == freezed
+          ? _value.exerciseName
+          : exerciseName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_ExerciseAddedSuccess implements _ExerciseAddedSuccess {
-  const _$_ExerciseAddedSuccess();
+  const _$_ExerciseAddedSuccess({required this.exerciseName});
+
+  @override
+  final String exerciseName;
 
   @override
   String toString() {
-    return 'ExerciseSearchAddExerciseState.exerciseAddedSuccess()';
+    return 'ExerciseSearchAddExerciseState.exerciseAddedSuccess(exerciseName: $exerciseName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _ExerciseAddedSuccess);
+        (other.runtimeType == runtimeType &&
+            other is _ExerciseAddedSuccess &&
+            const DeepCollectionEquality()
+                .equals(other.exerciseName, exerciseName));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(exerciseName));
+
+  @JsonKey(ignore: true)
+  @override
+  _$ExerciseAddedSuccessCopyWith<_ExerciseAddedSuccess> get copyWith =>
+      __$ExerciseAddedSuccessCopyWithImpl<_ExerciseAddedSuccess>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() exerciseAddedSuccess,
-    required TResult Function() exerciseAddedFailure,
+    required TResult Function(String exerciseName) exerciseAddedSuccess,
+    required TResult Function(String exerciseName) exerciseAddedFailure,
   }) {
-    return exerciseAddedSuccess();
+    return exerciseAddedSuccess(exerciseName);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? exerciseAddedSuccess,
-    TResult Function()? exerciseAddedFailure,
+    TResult Function(String exerciseName)? exerciseAddedSuccess,
+    TResult Function(String exerciseName)? exerciseAddedFailure,
   }) {
-    return exerciseAddedSuccess?.call();
+    return exerciseAddedSuccess?.call(exerciseName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? exerciseAddedSuccess,
-    TResult Function()? exerciseAddedFailure,
+    TResult Function(String exerciseName)? exerciseAddedSuccess,
+    TResult Function(String exerciseName)? exerciseAddedFailure,
     required TResult orElse(),
   }) {
     if (exerciseAddedSuccess != null) {
-      return exerciseAddedSuccess();
+      return exerciseAddedSuccess(exerciseName);
     }
     return orElse();
   }
@@ -317,7 +347,13 @@ class _$_ExerciseAddedSuccess implements _ExerciseAddedSuccess {
 }
 
 abstract class _ExerciseAddedSuccess implements ExerciseSearchAddExerciseState {
-  const factory _ExerciseAddedSuccess() = _$_ExerciseAddedSuccess;
+  const factory _ExerciseAddedSuccess({required String exerciseName}) =
+      _$_ExerciseAddedSuccess;
+
+  String get exerciseName;
+  @JsonKey(ignore: true)
+  _$ExerciseAddedSuccessCopyWith<_ExerciseAddedSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -325,6 +361,7 @@ abstract class _$ExerciseAddedFailureCopyWith<$Res> {
   factory _$ExerciseAddedFailureCopyWith(_ExerciseAddedFailure value,
           $Res Function(_ExerciseAddedFailure) then) =
       __$ExerciseAddedFailureCopyWithImpl<$Res>;
+  $Res call({String exerciseName});
 }
 
 /// @nodoc
@@ -337,57 +374,82 @@ class __$ExerciseAddedFailureCopyWithImpl<$Res>
 
   @override
   _ExerciseAddedFailure get _value => super._value as _ExerciseAddedFailure;
+
+  @override
+  $Res call({
+    Object? exerciseName = freezed,
+  }) {
+    return _then(_ExerciseAddedFailure(
+      exerciseName: exerciseName == freezed
+          ? _value.exerciseName
+          : exerciseName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_ExerciseAddedFailure implements _ExerciseAddedFailure {
-  const _$_ExerciseAddedFailure();
+  const _$_ExerciseAddedFailure({required this.exerciseName});
+
+  @override
+  final String exerciseName;
 
   @override
   String toString() {
-    return 'ExerciseSearchAddExerciseState.exerciseAddedFailure()';
+    return 'ExerciseSearchAddExerciseState.exerciseAddedFailure(exerciseName: $exerciseName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _ExerciseAddedFailure);
+        (other.runtimeType == runtimeType &&
+            other is _ExerciseAddedFailure &&
+            const DeepCollectionEquality()
+                .equals(other.exerciseName, exerciseName));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(exerciseName));
+
+  @JsonKey(ignore: true)
+  @override
+  _$ExerciseAddedFailureCopyWith<_ExerciseAddedFailure> get copyWith =>
+      __$ExerciseAddedFailureCopyWithImpl<_ExerciseAddedFailure>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() exerciseAddedSuccess,
-    required TResult Function() exerciseAddedFailure,
+    required TResult Function(String exerciseName) exerciseAddedSuccess,
+    required TResult Function(String exerciseName) exerciseAddedFailure,
   }) {
-    return exerciseAddedFailure();
+    return exerciseAddedFailure(exerciseName);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? exerciseAddedSuccess,
-    TResult Function()? exerciseAddedFailure,
+    TResult Function(String exerciseName)? exerciseAddedSuccess,
+    TResult Function(String exerciseName)? exerciseAddedFailure,
   }) {
-    return exerciseAddedFailure?.call();
+    return exerciseAddedFailure?.call(exerciseName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? exerciseAddedSuccess,
-    TResult Function()? exerciseAddedFailure,
+    TResult Function(String exerciseName)? exerciseAddedSuccess,
+    TResult Function(String exerciseName)? exerciseAddedFailure,
     required TResult orElse(),
   }) {
     if (exerciseAddedFailure != null) {
-      return exerciseAddedFailure();
+      return exerciseAddedFailure(exerciseName);
     }
     return orElse();
   }
@@ -428,5 +490,11 @@ class _$_ExerciseAddedFailure implements _ExerciseAddedFailure {
 }
 
 abstract class _ExerciseAddedFailure implements ExerciseSearchAddExerciseState {
-  const factory _ExerciseAddedFailure() = _$_ExerciseAddedFailure;
+  const factory _ExerciseAddedFailure({required String exerciseName}) =
+      _$_ExerciseAddedFailure;
+
+  String get exerciseName;
+  @JsonKey(ignore: true)
+  _$ExerciseAddedFailureCopyWith<_ExerciseAddedFailure> get copyWith =>
+      throw _privateConstructorUsedError;
 }

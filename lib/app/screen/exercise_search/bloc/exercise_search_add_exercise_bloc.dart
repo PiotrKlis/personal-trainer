@@ -21,9 +21,10 @@ class ExerciseSearchAddExerciseBloc extends Bloc<ExerciseSearchAddExerciseEvent,
               exerciseId: event.exerciseId)
           .then((value) {
         listLength += 1;
-        emit(ExerciseSearchAddExerciseState.exerciseAddedSuccess());
+        emit(ExerciseSearchAddExerciseState.exerciseAddedSuccess(exerciseName: event.exerciseName));
+        emit(ExerciseSearchAddExerciseState.initial());
       }).catchError((error) {
-        emit(ExerciseSearchAddExerciseState.exerciseAddedFailure());
+        emit(ExerciseSearchAddExerciseState.exerciseAddedFailure(exerciseName: event.exerciseName));
       });
     });
   }

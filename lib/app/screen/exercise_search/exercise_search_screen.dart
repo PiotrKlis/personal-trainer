@@ -79,18 +79,18 @@ BlocListener _addExerciseBlocListener() {
   return BlocListener<ExerciseSearchAddExerciseBloc,
       ExerciseSearchAddExerciseState>(
     listener: (context, state) {
-      state.when(exerciseAddedSuccess: () {
+      state.when(exerciseAddedSuccess: (exerciseName) {
         return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             duration: Duration(
                 milliseconds: DurationConst.snackbarVisibilityDuration),
             content: Text(
-                "${AppLocalizations.of(context)!.exercise_added_message}")));
-      }, exerciseAddedFailure: () {
+                "$exerciseName ${AppLocalizations.of(context)!.exercise_added_message}")));
+      }, exerciseAddedFailure: (exerciseName) {
         return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             duration: Duration(
                 milliseconds: DurationConst.snackbarVisibilityDuration),
             content: Text(
-                "${AppLocalizations.of(context)!.exercise_add_failure_message}")));
+                "$exerciseName ${AppLocalizations.of(context)!.exercise_add_failure_message}")));
       }, initial: () {
         return Container();
       });
@@ -194,7 +194,8 @@ class ListOfResults extends StatelessWidget {
                     ExerciseSearchAddExerciseEvent.addExercise(
                         exerciseId: exercise.id,
                         selectedDate: selectedDate,
-                        clientId: clientId));
+                        clientId: clientId,
+                        exerciseName: exercise.title));
               },
             ),
             children: [

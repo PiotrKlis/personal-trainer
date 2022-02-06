@@ -9,7 +9,6 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:flutter/cupertino.dart' as _i11;
 import 'package:flutter/material.dart' as _i10;
 
 import 'screen/account_choose/account_choose_screen.dart' as _i4;
@@ -139,7 +138,7 @@ class AccountChooseRouteArgs {
 
 /// generated route for [_i5.ClientChooseScreen]
 class ClientChooseRoute extends _i9.PageRouteInfo<ClientChooseRouteArgs> {
-  ClientChooseRoute({_i11.Key? key, dynamic trainerId})
+  ClientChooseRoute({_i10.Key? key, dynamic trainerId})
       : super(name,
             path: '/client-choose-screen',
             args: ClientChooseRouteArgs(key: key, trainerId: trainerId));
@@ -150,7 +149,7 @@ class ClientChooseRoute extends _i9.PageRouteInfo<ClientChooseRouteArgs> {
 class ClientChooseRouteArgs {
   const ClientChooseRouteArgs({this.key, this.trainerId});
 
-  final _i11.Key? key;
+  final _i10.Key? key;
 
   final dynamic trainerId;
 
@@ -182,7 +181,7 @@ class ClientRouteArgs {
 /// generated route for [_i7.CalendarExercisesScreen]
 class CalendarExercisesRoute
     extends _i9.PageRouteInfo<CalendarExercisesRouteArgs> {
-  CalendarExercisesRoute({_i11.Key? key, required String clientId})
+  CalendarExercisesRoute({_i10.Key? key, required String clientId})
       : super(name,
             path: '/calendar-exercises-screen',
             args: CalendarExercisesRouteArgs(key: key, clientId: clientId));
@@ -193,7 +192,7 @@ class CalendarExercisesRoute
 class CalendarExercisesRouteArgs {
   const CalendarExercisesRouteArgs({this.key, required this.clientId});
 
-  final _i11.Key? key;
+  final _i10.Key? key;
 
   final String clientId;
 
@@ -206,7 +205,7 @@ class CalendarExercisesRouteArgs {
 /// generated route for [_i8.ExerciseSearchScreen]
 class ExerciseSearchRoute extends _i9.PageRouteInfo<ExerciseSearchRouteArgs> {
   ExerciseSearchRoute(
-      {_i11.Key? key,
+      {_i10.Key? key,
       required DateTime selectedDate,
       required String clientId,
       required int listLength})
@@ -228,7 +227,7 @@ class ExerciseSearchRouteArgs {
       required this.clientId,
       required this.listLength});
 
-  final _i11.Key? key;
+  final _i10.Key? key;
 
   final DateTime selectedDate;
 

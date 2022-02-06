@@ -20,11 +20,13 @@ class _$ExerciseSearchAddExerciseEventTearOff {
   AddExercise addExercise(
       {required String exerciseId,
       required DateTime selectedDate,
-      required String clientId}) {
+      required String clientId,
+      required String exerciseName}) {
     return AddExercise(
       exerciseId: exerciseId,
       selectedDate: selectedDate,
       clientId: clientId,
+      exerciseName: exerciseName,
     );
   }
 }
@@ -38,23 +40,26 @@ mixin _$ExerciseSearchAddExerciseEvent {
   String get exerciseId => throw _privateConstructorUsedError;
   DateTime get selectedDate => throw _privateConstructorUsedError;
   String get clientId => throw _privateConstructorUsedError;
+  String get exerciseName => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String exerciseId, DateTime selectedDate, String clientId)
+    required TResult Function(String exerciseId, DateTime selectedDate,
+            String clientId, String exerciseName)
         addExercise,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String exerciseId, DateTime selectedDate, String clientId)?
+    TResult Function(String exerciseId, DateTime selectedDate, String clientId,
+            String exerciseName)?
         addExercise,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String exerciseId, DateTime selectedDate, String clientId)?
+    TResult Function(String exerciseId, DateTime selectedDate, String clientId,
+            String exerciseName)?
         addExercise,
     required TResult orElse(),
   }) =>
@@ -87,7 +92,11 @@ abstract class $ExerciseSearchAddExerciseEventCopyWith<$Res> {
           ExerciseSearchAddExerciseEvent value,
           $Res Function(ExerciseSearchAddExerciseEvent) then) =
       _$ExerciseSearchAddExerciseEventCopyWithImpl<$Res>;
-  $Res call({String exerciseId, DateTime selectedDate, String clientId});
+  $Res call(
+      {String exerciseId,
+      DateTime selectedDate,
+      String clientId,
+      String exerciseName});
 }
 
 /// @nodoc
@@ -104,6 +113,7 @@ class _$ExerciseSearchAddExerciseEventCopyWithImpl<$Res>
     Object? exerciseId = freezed,
     Object? selectedDate = freezed,
     Object? clientId = freezed,
+    Object? exerciseName = freezed,
   }) {
     return _then(_value.copyWith(
       exerciseId: exerciseId == freezed
@@ -118,6 +128,10 @@ class _$ExerciseSearchAddExerciseEventCopyWithImpl<$Res>
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
+      exerciseName: exerciseName == freezed
+          ? _value.exerciseName
+          : exerciseName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -129,7 +143,11 @@ abstract class $AddExerciseCopyWith<$Res>
           AddExercise value, $Res Function(AddExercise) then) =
       _$AddExerciseCopyWithImpl<$Res>;
   @override
-  $Res call({String exerciseId, DateTime selectedDate, String clientId});
+  $Res call(
+      {String exerciseId,
+      DateTime selectedDate,
+      String clientId,
+      String exerciseName});
 }
 
 /// @nodoc
@@ -148,6 +166,7 @@ class _$AddExerciseCopyWithImpl<$Res>
     Object? exerciseId = freezed,
     Object? selectedDate = freezed,
     Object? clientId = freezed,
+    Object? exerciseName = freezed,
   }) {
     return _then(AddExercise(
       exerciseId: exerciseId == freezed
@@ -162,6 +181,10 @@ class _$AddExerciseCopyWithImpl<$Res>
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
+      exerciseName: exerciseName == freezed
+          ? _value.exerciseName
+          : exerciseName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -172,7 +195,8 @@ class _$AddExercise implements AddExercise {
   const _$AddExercise(
       {required this.exerciseId,
       required this.selectedDate,
-      required this.clientId});
+      required this.clientId,
+      required this.exerciseName});
 
   @override
   final String exerciseId;
@@ -180,10 +204,12 @@ class _$AddExercise implements AddExercise {
   final DateTime selectedDate;
   @override
   final String clientId;
+  @override
+  final String exerciseName;
 
   @override
   String toString() {
-    return 'ExerciseSearchAddExerciseEvent.addExercise(exerciseId: $exerciseId, selectedDate: $selectedDate, clientId: $clientId)';
+    return 'ExerciseSearchAddExerciseEvent.addExercise(exerciseId: $exerciseId, selectedDate: $selectedDate, clientId: $clientId, exerciseName: $exerciseName)';
   }
 
   @override
@@ -195,7 +221,9 @@ class _$AddExercise implements AddExercise {
                 .equals(other.exerciseId, exerciseId) &&
             const DeepCollectionEquality()
                 .equals(other.selectedDate, selectedDate) &&
-            const DeepCollectionEquality().equals(other.clientId, clientId));
+            const DeepCollectionEquality().equals(other.clientId, clientId) &&
+            const DeepCollectionEquality()
+                .equals(other.exerciseName, exerciseName));
   }
 
   @override
@@ -203,7 +231,8 @@ class _$AddExercise implements AddExercise {
       runtimeType,
       const DeepCollectionEquality().hash(exerciseId),
       const DeepCollectionEquality().hash(selectedDate),
-      const DeepCollectionEquality().hash(clientId));
+      const DeepCollectionEquality().hash(clientId),
+      const DeepCollectionEquality().hash(exerciseName));
 
   @JsonKey(ignore: true)
   @override
@@ -213,31 +242,33 @@ class _$AddExercise implements AddExercise {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String exerciseId, DateTime selectedDate, String clientId)
+    required TResult Function(String exerciseId, DateTime selectedDate,
+            String clientId, String exerciseName)
         addExercise,
   }) {
-    return addExercise(exerciseId, selectedDate, clientId);
+    return addExercise(exerciseId, selectedDate, clientId, exerciseName);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String exerciseId, DateTime selectedDate, String clientId)?
+    TResult Function(String exerciseId, DateTime selectedDate, String clientId,
+            String exerciseName)?
         addExercise,
   }) {
-    return addExercise?.call(exerciseId, selectedDate, clientId);
+    return addExercise?.call(exerciseId, selectedDate, clientId, exerciseName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String exerciseId, DateTime selectedDate, String clientId)?
+    TResult Function(String exerciseId, DateTime selectedDate, String clientId,
+            String exerciseName)?
         addExercise,
     required TResult orElse(),
   }) {
     if (addExercise != null) {
-      return addExercise(exerciseId, selectedDate, clientId);
+      return addExercise(exerciseId, selectedDate, clientId, exerciseName);
     }
     return orElse();
   }
@@ -275,7 +306,8 @@ abstract class AddExercise implements ExerciseSearchAddExerciseEvent {
   const factory AddExercise(
       {required String exerciseId,
       required DateTime selectedDate,
-      required String clientId}) = _$AddExercise;
+      required String clientId,
+      required String exerciseName}) = _$AddExercise;
 
   @override
   String get exerciseId;
@@ -283,6 +315,8 @@ abstract class AddExercise implements ExerciseSearchAddExerciseEvent {
   DateTime get selectedDate;
   @override
   String get clientId;
+  @override
+  String get exerciseName;
   @override
   @JsonKey(ignore: true)
   $AddExerciseCopyWith<AddExercise> get copyWith =>
