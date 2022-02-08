@@ -12,4 +12,5 @@ class ExerciseSearchState with _$ExerciseSearchState {
       {required List<Exercise> exercises}) = _Content;
 
   const factory ExerciseSearchState.error({required String error}) = _Error;
+  const factory ExerciseSearchState.filterReload() = _FilterReload;
 }

@@ -36,6 +36,10 @@ class _$ExerciseSearchStateTearOff {
       error: error,
     );
   }
+
+  _FilterReload filterReload() {
+    return const _FilterReload();
+  }
 }
 
 /// @nodoc
@@ -49,6 +53,7 @@ mixin _$ExerciseSearchState {
     required TResult Function() initial,
     required TResult Function(List<Exercise> exercises) content,
     required TResult Function(String error) error,
+    required TResult Function() filterReload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$ExerciseSearchState {
     TResult Function()? initial,
     TResult Function(List<Exercise> exercises)? content,
     TResult Function(String error)? error,
+    TResult Function()? filterReload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +71,7 @@ mixin _$ExerciseSearchState {
     TResult Function()? initial,
     TResult Function(List<Exercise> exercises)? content,
     TResult Function(String error)? error,
+    TResult Function()? filterReload,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -74,6 +81,7 @@ mixin _$ExerciseSearchState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Content value) content,
     required TResult Function(_Error value) error,
+    required TResult Function(_FilterReload value) filterReload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -82,6 +90,7 @@ mixin _$ExerciseSearchState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Content value)? content,
     TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -90,6 +99,7 @@ mixin _$ExerciseSearchState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Content value)? content,
     TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -155,6 +165,7 @@ class _$_Loading implements _Loading {
     required TResult Function() initial,
     required TResult Function(List<Exercise> exercises) content,
     required TResult Function(String error) error,
+    required TResult Function() filterReload,
   }) {
     return loading();
   }
@@ -166,6 +177,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function(List<Exercise> exercises)? content,
     TResult Function(String error)? error,
+    TResult Function()? filterReload,
   }) {
     return loading?.call();
   }
@@ -177,6 +189,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function(List<Exercise> exercises)? content,
     TResult Function(String error)? error,
+    TResult Function()? filterReload,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -192,6 +205,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Content value) content,
     required TResult Function(_Error value) error,
+    required TResult Function(_FilterReload value) filterReload,
   }) {
     return loading(this);
   }
@@ -203,6 +217,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Content value)? content,
     TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
   }) {
     return loading?.call(this);
   }
@@ -214,6 +229,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Content value)? content,
     TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -270,6 +286,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function(List<Exercise> exercises) content,
     required TResult Function(String error) error,
+    required TResult Function() filterReload,
   }) {
     return initial();
   }
@@ -281,6 +298,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(List<Exercise> exercises)? content,
     TResult Function(String error)? error,
+    TResult Function()? filterReload,
   }) {
     return initial?.call();
   }
@@ -292,6 +310,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(List<Exercise> exercises)? content,
     TResult Function(String error)? error,
+    TResult Function()? filterReload,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -307,6 +326,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Content value) content,
     required TResult Function(_Error value) error,
+    required TResult Function(_FilterReload value) filterReload,
   }) {
     return initial(this);
   }
@@ -318,6 +338,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Content value)? content,
     TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
   }) {
     return initial?.call(this);
   }
@@ -329,6 +350,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Content value)? content,
     TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -409,6 +431,7 @@ class _$_Content implements _Content {
     required TResult Function() initial,
     required TResult Function(List<Exercise> exercises) content,
     required TResult Function(String error) error,
+    required TResult Function() filterReload,
   }) {
     return content(exercises);
   }
@@ -420,6 +443,7 @@ class _$_Content implements _Content {
     TResult Function()? initial,
     TResult Function(List<Exercise> exercises)? content,
     TResult Function(String error)? error,
+    TResult Function()? filterReload,
   }) {
     return content?.call(exercises);
   }
@@ -431,6 +455,7 @@ class _$_Content implements _Content {
     TResult Function()? initial,
     TResult Function(List<Exercise> exercises)? content,
     TResult Function(String error)? error,
+    TResult Function()? filterReload,
     required TResult orElse(),
   }) {
     if (content != null) {
@@ -446,6 +471,7 @@ class _$_Content implements _Content {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Content value) content,
     required TResult Function(_Error value) error,
+    required TResult Function(_FilterReload value) filterReload,
   }) {
     return content(this);
   }
@@ -457,6 +483,7 @@ class _$_Content implements _Content {
     TResult Function(_Initial value)? initial,
     TResult Function(_Content value)? content,
     TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
   }) {
     return content?.call(this);
   }
@@ -468,6 +495,7 @@ class _$_Content implements _Content {
     TResult Function(_Initial value)? initial,
     TResult Function(_Content value)? content,
     TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
     required TResult orElse(),
   }) {
     if (content != null) {
@@ -552,6 +580,7 @@ class _$_Error implements _Error {
     required TResult Function() initial,
     required TResult Function(List<Exercise> exercises) content,
     required TResult Function(String error) error,
+    required TResult Function() filterReload,
   }) {
     return error(this.error);
   }
@@ -563,6 +592,7 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function(List<Exercise> exercises)? content,
     TResult Function(String error)? error,
+    TResult Function()? filterReload,
   }) {
     return error?.call(this.error);
   }
@@ -574,6 +604,7 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function(List<Exercise> exercises)? content,
     TResult Function(String error)? error,
+    TResult Function()? filterReload,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -589,6 +620,7 @@ class _$_Error implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Content value) content,
     required TResult Function(_Error value) error,
+    required TResult Function(_FilterReload value) filterReload,
   }) {
     return error(this);
   }
@@ -600,6 +632,7 @@ class _$_Error implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Content value)? content,
     TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
   }) {
     return error?.call(this);
   }
@@ -611,6 +644,7 @@ class _$_Error implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Content value)? content,
     TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -626,4 +660,127 @@ abstract class _Error implements ExerciseSearchState {
   String get error;
   @JsonKey(ignore: true)
   _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$FilterReloadCopyWith<$Res> {
+  factory _$FilterReloadCopyWith(
+          _FilterReload value, $Res Function(_FilterReload) then) =
+      __$FilterReloadCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$FilterReloadCopyWithImpl<$Res>
+    extends _$ExerciseSearchStateCopyWithImpl<$Res>
+    implements _$FilterReloadCopyWith<$Res> {
+  __$FilterReloadCopyWithImpl(
+      _FilterReload _value, $Res Function(_FilterReload) _then)
+      : super(_value, (v) => _then(v as _FilterReload));
+
+  @override
+  _FilterReload get _value => super._value as _FilterReload;
+}
+
+/// @nodoc
+
+class _$_FilterReload implements _FilterReload {
+  const _$_FilterReload();
+
+  @override
+  String toString() {
+    return 'ExerciseSearchState.filterReload()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _FilterReload);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function() initial,
+    required TResult Function(List<Exercise> exercises) content,
+    required TResult Function(String error) error,
+    required TResult Function() filterReload,
+  }) {
+    return filterReload();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? initial,
+    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(String error)? error,
+    TResult Function()? filterReload,
+  }) {
+    return filterReload?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function()? initial,
+    TResult Function(List<Exercise> exercises)? content,
+    TResult Function(String error)? error,
+    TResult Function()? filterReload,
+    required TResult orElse(),
+  }) {
+    if (filterReload != null) {
+      return filterReload();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Content value) content,
+    required TResult Function(_Error value) error,
+    required TResult Function(_FilterReload value) filterReload,
+  }) {
+    return filterReload(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Content value)? content,
+    TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
+  }) {
+    return filterReload?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Content value)? content,
+    TResult Function(_Error value)? error,
+    TResult Function(_FilterReload value)? filterReload,
+    required TResult orElse(),
+  }) {
+    if (filterReload != null) {
+      return filterReload(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FilterReload implements ExerciseSearchState {
+  const factory _FilterReload() = _$_FilterReload;
 }

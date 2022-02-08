@@ -26,6 +26,16 @@ class _$ExerciseSearchEventTearOff {
       input: input,
     );
   }
+
+  FilterClick filterClick({required String filterName}) {
+    return FilterClick(
+      filterName: filterName,
+    );
+  }
+
+  ReloadLastSearch reloadLastSearch() {
+    return const ReloadLastSearch();
+  }
 }
 
 /// @nodoc
@@ -37,18 +47,24 @@ mixin _$ExerciseSearchEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() emptySearch,
     required TResult Function(String input) searchForInput,
+    required TResult Function(String filterName) filterClick,
+    required TResult Function() reloadLastSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? emptySearch,
     TResult Function(String input)? searchForInput,
+    TResult Function(String filterName)? filterClick,
+    TResult Function()? reloadLastSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? emptySearch,
     TResult Function(String input)? searchForInput,
+    TResult Function(String filterName)? filterClick,
+    TResult Function()? reloadLastSearch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -56,18 +72,24 @@ mixin _$ExerciseSearchEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(EmptySearch value) emptySearch,
     required TResult Function(SearchForInput value) searchForInput,
+    required TResult Function(FilterClick value) filterClick,
+    required TResult Function(ReloadLastSearch value) reloadLastSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(EmptySearch value)? emptySearch,
     TResult Function(SearchForInput value)? searchForInput,
+    TResult Function(FilterClick value)? filterClick,
+    TResult Function(ReloadLastSearch value)? reloadLastSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(EmptySearch value)? emptySearch,
     TResult Function(SearchForInput value)? searchForInput,
+    TResult Function(FilterClick value)? filterClick,
+    TResult Function(ReloadLastSearch value)? reloadLastSearch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -133,6 +155,8 @@ class _$EmptySearch implements EmptySearch {
   TResult when<TResult extends Object?>({
     required TResult Function() emptySearch,
     required TResult Function(String input) searchForInput,
+    required TResult Function(String filterName) filterClick,
+    required TResult Function() reloadLastSearch,
   }) {
     return emptySearch();
   }
@@ -142,6 +166,8 @@ class _$EmptySearch implements EmptySearch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? emptySearch,
     TResult Function(String input)? searchForInput,
+    TResult Function(String filterName)? filterClick,
+    TResult Function()? reloadLastSearch,
   }) {
     return emptySearch?.call();
   }
@@ -151,6 +177,8 @@ class _$EmptySearch implements EmptySearch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? emptySearch,
     TResult Function(String input)? searchForInput,
+    TResult Function(String filterName)? filterClick,
+    TResult Function()? reloadLastSearch,
     required TResult orElse(),
   }) {
     if (emptySearch != null) {
@@ -164,6 +192,8 @@ class _$EmptySearch implements EmptySearch {
   TResult map<TResult extends Object?>({
     required TResult Function(EmptySearch value) emptySearch,
     required TResult Function(SearchForInput value) searchForInput,
+    required TResult Function(FilterClick value) filterClick,
+    required TResult Function(ReloadLastSearch value) reloadLastSearch,
   }) {
     return emptySearch(this);
   }
@@ -173,6 +203,8 @@ class _$EmptySearch implements EmptySearch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(EmptySearch value)? emptySearch,
     TResult Function(SearchForInput value)? searchForInput,
+    TResult Function(FilterClick value)? filterClick,
+    TResult Function(ReloadLastSearch value)? reloadLastSearch,
   }) {
     return emptySearch?.call(this);
   }
@@ -182,6 +214,8 @@ class _$EmptySearch implements EmptySearch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(EmptySearch value)? emptySearch,
     TResult Function(SearchForInput value)? searchForInput,
+    TResult Function(FilterClick value)? filterClick,
+    TResult Function(ReloadLastSearch value)? reloadLastSearch,
     required TResult orElse(),
   }) {
     if (emptySearch != null) {
@@ -262,6 +296,8 @@ class _$SearchForInput implements SearchForInput {
   TResult when<TResult extends Object?>({
     required TResult Function() emptySearch,
     required TResult Function(String input) searchForInput,
+    required TResult Function(String filterName) filterClick,
+    required TResult Function() reloadLastSearch,
   }) {
     return searchForInput(input);
   }
@@ -271,6 +307,8 @@ class _$SearchForInput implements SearchForInput {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? emptySearch,
     TResult Function(String input)? searchForInput,
+    TResult Function(String filterName)? filterClick,
+    TResult Function()? reloadLastSearch,
   }) {
     return searchForInput?.call(input);
   }
@@ -280,6 +318,8 @@ class _$SearchForInput implements SearchForInput {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? emptySearch,
     TResult Function(String input)? searchForInput,
+    TResult Function(String filterName)? filterClick,
+    TResult Function()? reloadLastSearch,
     required TResult orElse(),
   }) {
     if (searchForInput != null) {
@@ -293,6 +333,8 @@ class _$SearchForInput implements SearchForInput {
   TResult map<TResult extends Object?>({
     required TResult Function(EmptySearch value) emptySearch,
     required TResult Function(SearchForInput value) searchForInput,
+    required TResult Function(FilterClick value) filterClick,
+    required TResult Function(ReloadLastSearch value) reloadLastSearch,
   }) {
     return searchForInput(this);
   }
@@ -302,6 +344,8 @@ class _$SearchForInput implements SearchForInput {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(EmptySearch value)? emptySearch,
     TResult Function(SearchForInput value)? searchForInput,
+    TResult Function(FilterClick value)? filterClick,
+    TResult Function(ReloadLastSearch value)? reloadLastSearch,
   }) {
     return searchForInput?.call(this);
   }
@@ -311,6 +355,8 @@ class _$SearchForInput implements SearchForInput {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(EmptySearch value)? emptySearch,
     TResult Function(SearchForInput value)? searchForInput,
+    TResult Function(FilterClick value)? filterClick,
+    TResult Function(ReloadLastSearch value)? reloadLastSearch,
     required TResult orElse(),
   }) {
     if (searchForInput != null) {
@@ -327,4 +373,268 @@ abstract class SearchForInput implements ExerciseSearchEvent {
   @JsonKey(ignore: true)
   $SearchForInputCopyWith<SearchForInput> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FilterClickCopyWith<$Res> {
+  factory $FilterClickCopyWith(
+          FilterClick value, $Res Function(FilterClick) then) =
+      _$FilterClickCopyWithImpl<$Res>;
+  $Res call({String filterName});
+}
+
+/// @nodoc
+class _$FilterClickCopyWithImpl<$Res>
+    extends _$ExerciseSearchEventCopyWithImpl<$Res>
+    implements $FilterClickCopyWith<$Res> {
+  _$FilterClickCopyWithImpl(
+      FilterClick _value, $Res Function(FilterClick) _then)
+      : super(_value, (v) => _then(v as FilterClick));
+
+  @override
+  FilterClick get _value => super._value as FilterClick;
+
+  @override
+  $Res call({
+    Object? filterName = freezed,
+  }) {
+    return _then(FilterClick(
+      filterName: filterName == freezed
+          ? _value.filterName
+          : filterName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FilterClick implements FilterClick {
+  const _$FilterClick({required this.filterName});
+
+  @override
+  final String filterName;
+
+  @override
+  String toString() {
+    return 'ExerciseSearchEvent.filterClick(filterName: $filterName)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is FilterClick &&
+            const DeepCollectionEquality()
+                .equals(other.filterName, filterName));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(filterName));
+
+  @JsonKey(ignore: true)
+  @override
+  $FilterClickCopyWith<FilterClick> get copyWith =>
+      _$FilterClickCopyWithImpl<FilterClick>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() emptySearch,
+    required TResult Function(String input) searchForInput,
+    required TResult Function(String filterName) filterClick,
+    required TResult Function() reloadLastSearch,
+  }) {
+    return filterClick(filterName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? emptySearch,
+    TResult Function(String input)? searchForInput,
+    TResult Function(String filterName)? filterClick,
+    TResult Function()? reloadLastSearch,
+  }) {
+    return filterClick?.call(filterName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptySearch,
+    TResult Function(String input)? searchForInput,
+    TResult Function(String filterName)? filterClick,
+    TResult Function()? reloadLastSearch,
+    required TResult orElse(),
+  }) {
+    if (filterClick != null) {
+      return filterClick(filterName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EmptySearch value) emptySearch,
+    required TResult Function(SearchForInput value) searchForInput,
+    required TResult Function(FilterClick value) filterClick,
+    required TResult Function(ReloadLastSearch value) reloadLastSearch,
+  }) {
+    return filterClick(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmptySearch value)? emptySearch,
+    TResult Function(SearchForInput value)? searchForInput,
+    TResult Function(FilterClick value)? filterClick,
+    TResult Function(ReloadLastSearch value)? reloadLastSearch,
+  }) {
+    return filterClick?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptySearch value)? emptySearch,
+    TResult Function(SearchForInput value)? searchForInput,
+    TResult Function(FilterClick value)? filterClick,
+    TResult Function(ReloadLastSearch value)? reloadLastSearch,
+    required TResult orElse(),
+  }) {
+    if (filterClick != null) {
+      return filterClick(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FilterClick implements ExerciseSearchEvent {
+  const factory FilterClick({required String filterName}) = _$FilterClick;
+
+  String get filterName;
+  @JsonKey(ignore: true)
+  $FilterClickCopyWith<FilterClick> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ReloadLastSearchCopyWith<$Res> {
+  factory $ReloadLastSearchCopyWith(
+          ReloadLastSearch value, $Res Function(ReloadLastSearch) then) =
+      _$ReloadLastSearchCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$ReloadLastSearchCopyWithImpl<$Res>
+    extends _$ExerciseSearchEventCopyWithImpl<$Res>
+    implements $ReloadLastSearchCopyWith<$Res> {
+  _$ReloadLastSearchCopyWithImpl(
+      ReloadLastSearch _value, $Res Function(ReloadLastSearch) _then)
+      : super(_value, (v) => _then(v as ReloadLastSearch));
+
+  @override
+  ReloadLastSearch get _value => super._value as ReloadLastSearch;
+}
+
+/// @nodoc
+
+class _$ReloadLastSearch implements ReloadLastSearch {
+  const _$ReloadLastSearch();
+
+  @override
+  String toString() {
+    return 'ExerciseSearchEvent.reloadLastSearch()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is ReloadLastSearch);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() emptySearch,
+    required TResult Function(String input) searchForInput,
+    required TResult Function(String filterName) filterClick,
+    required TResult Function() reloadLastSearch,
+  }) {
+    return reloadLastSearch();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? emptySearch,
+    TResult Function(String input)? searchForInput,
+    TResult Function(String filterName)? filterClick,
+    TResult Function()? reloadLastSearch,
+  }) {
+    return reloadLastSearch?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptySearch,
+    TResult Function(String input)? searchForInput,
+    TResult Function(String filterName)? filterClick,
+    TResult Function()? reloadLastSearch,
+    required TResult orElse(),
+  }) {
+    if (reloadLastSearch != null) {
+      return reloadLastSearch();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EmptySearch value) emptySearch,
+    required TResult Function(SearchForInput value) searchForInput,
+    required TResult Function(FilterClick value) filterClick,
+    required TResult Function(ReloadLastSearch value) reloadLastSearch,
+  }) {
+    return reloadLastSearch(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(EmptySearch value)? emptySearch,
+    TResult Function(SearchForInput value)? searchForInput,
+    TResult Function(FilterClick value)? filterClick,
+    TResult Function(ReloadLastSearch value)? reloadLastSearch,
+  }) {
+    return reloadLastSearch?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EmptySearch value)? emptySearch,
+    TResult Function(SearchForInput value)? searchForInput,
+    TResult Function(FilterClick value)? filterClick,
+    TResult Function(ReloadLastSearch value)? reloadLastSearch,
+    required TResult orElse(),
+  }) {
+    if (reloadLastSearch != null) {
+      return reloadLastSearch(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ReloadLastSearch implements ExerciseSearchEvent {
+  const factory ReloadLastSearch() = _$ReloadLastSearch;
 }

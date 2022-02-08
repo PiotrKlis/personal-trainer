@@ -7,37 +7,46 @@ import 'package:personal_trainer/data/provider/exercise_search_provider.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
-
 class ExerciseSearchBloc
     extends Bloc<ExerciseSearchEvent, ExerciseSearchState> {
   final ExerciseSearchProvider searchProvider =
-      GetIt.I.get<ExerciseSearchProvider>();
-  List<String> listOfExpandedExercises = [];
+  GetIt.I.get<ExerciseSearchProvider>();
+  List<String> _filters = [];
 
   ExerciseSearchBloc(ExerciseSearchState initialState) : super(initialState) {
     on<EmptySearch>((event, emit) async {
       try {
         emit(ExerciseSearchState.loading());
-        List<Exercise> exercises = await searchProvider.getAllExercises();
+        List<Exercise> exercises = await searchProvider.getAllExercises(filters: _filters);
         emit(ExerciseSearchState.content(exercises: exercises));
       } catch (error) {
         emit(ExerciseSearchState.error(error: error.toString()));
       }
     },
         transformer:
-            debounce(Duration(milliseconds: DurationConst.longerDebounceTime)));
+        debounce(Duration(milliseconds: DurationConst.longerDebounceTime)));
 
     on<SearchForInput>((event, emit) async {
       try {
         emit(ExerciseSearchState.loading());
         List<Exercise> exercises =
-            await searchProvider.searchForExercises(event.input);
+        await searchProvider.searchForExercises(query: event.input, filters: _filters);
         emit(ExerciseSearchState.content(exercises: exercises));
       } catch (error) {
         emit(ExerciseSearchState.error(error: error.toString()));
       }
     },
         transformer:
-            debounce(Duration(milliseconds: DurationConst.debounceTime)));
+        debounce(Duration(milliseconds: DurationConst.debounceTime)));
+
+    on<FilterClick>((event, emit) async {
+      try {
+        _filters.contains(event.filterName) ? _filters.removeWhere((
+            element) => element == event.filterName) :_filters.add(event.filterName);
+        emit(ExerciseSearchState.filterReload());
+      } catch (error) {
+        emit(ExerciseSearchState.error(error: error.toString()));
+      }
+    });
   }
 }

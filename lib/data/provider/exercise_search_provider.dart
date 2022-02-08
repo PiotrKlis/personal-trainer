@@ -8,54 +8,49 @@ import 'package:personal_trainer/domain/model/exercise.dart';
 class ExerciseSearchProvider {
   final _exerciseMapper = GetIt.I.get<ExerciseMapper>();
 
-  Future<List<Exercise>> searchForExercises(String query) async {
+  Future<List<Exercise>> searchForExercises(
+      {required String query, required List<String> filters}) async {
     try {
-      String modifiedQuery = '#${query.toUpperCase()}';
-
-      var titleResult = await FirebaseFirestore.instance
+      var exercisesSnapshot = await FirebaseFirestore.instance
           .collection(FirebaseConstants.exercisesCollection)
+          .where('tags', arrayContainsAny: filters)
           .where('title', isGreaterThanOrEqualTo: query)
           .where('title', isLessThanOrEqualTo: '$query\uf7ff')
           .get();
 
-      var tagResult = await FirebaseFirestore.instance
-          .collection(FirebaseConstants.exercisesCollection)
-          .where('tags', arrayContains: modifiedQuery)
-          .get();
-
-      var titleMappedExercises = titleResult.docs
+      var exercises = exercisesSnapshot.docs
           .map((value) => _exerciseMapper.mapToExercise(value.data()))
           .toList();
 
-      var tagsMappedExercises = tagResult.docs
-          .map((value) => _exerciseMapper.mapToExercise(value.data()))
-          .toList();
-
-      var result = titleMappedExercises + tagsMappedExercises;
-      return Future.value(result);
+      return Future.value(exercises);
     } catch (error) {
       return Future.error(error, StackTrace.current);
     }
   }
 
-  Future<List<Exercise>> getAllExercises() async {
+  Future<List<Exercise>> getAllExercises(
+      {required List<String> filters}) async {
     try {
-      var exercises = await FirebaseFirestore.instance
+      var exercisesSnapshot = await FirebaseFirestore.instance
           .collection(FirebaseConstants.exercisesCollection)
+          .where('tags', arrayContainsAny: filters)
           .get();
-      var mappedExercises = exercises.docs
+
+      var exercises = exercisesSnapshot.docs
           .map((value) => _exerciseMapper.mapToExercise(value.data()))
           .toList();
-      return Future.value(mappedExercises);
+
+      return Future.value(exercises);
     } catch (error) {
       return Future.error(error, StackTrace.current);
     }
   }
 
-  Future addExercise({required String exerciseId,
-    required DateTime selectedDate,
-    required String clientId,
-    required int index}) async {
+  Future addExercise(
+      {required String exerciseId,
+      required DateTime selectedDate,
+      required String clientId,
+      required int index}) async {
     try {
       var formattedDate = DateUtils.dateOnly(selectedDate).toString();
       await FirebaseFirestore.instance
@@ -70,20 +65,19 @@ class ExerciseSearchProvider {
               .collection(FirebaseConstants.clientCollection)
               .doc(FirebaseConstants.userExercisesCollection)
               .collection(formattedDate);
-          var userExerciseId = dateCollection
-              .doc()
-              .id;
+          var userExerciseId = dateCollection.doc().id;
           var userExerciseData =
-          _createUserExerciseData(id: userExerciseId, index: index);
+              _createUserExerciseData(id: userExerciseId, index: index);
 
           try {
-            await dateCollection.doc(userExerciseId)
+            await dateCollection
+                .doc(userExerciseId)
                 .set(userExerciseData)
                 .onError((error, stackTrace) => print("PKPK $error"));
           } catch (error) {
             print("PKPK $error");
           }
-          //TODO this doesnt catch if theres not internet connection - find a way to shpw fsailed snackbar
+          //TODO this doesnt catch if theres not internet connection - find a way to show failed snackbar
 
           await dateCollection
               .doc(userExerciseId)

@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:personal_trainer/app/screen/exercise_search/bloc/exercise_search_add_exercise_bloc.dart';
+import 'package:personal_trainer/app/screen/exercise_search/bloc/exercise_search_tags_bloc.dart';
 import 'package:personal_trainer/app/screen/exercise_search/event/exercise_search_add_exercise_event.dart';
 import 'package:personal_trainer/app/screen/exercise_search/event/exercise_search_event.dart';
 import 'package:personal_trainer/app/screen/exercise_search/state/exercise_search_add_exercise_state.dart';
+import 'package:personal_trainer/app/screen/exercise_search/state/exercise_search_tags_state.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
+import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/error_view.dart';
 import 'package:personal_trainer/app/widget/video_player_widget.dart';
 import 'package:personal_trainer/data/util/const.dart';
@@ -62,20 +65,22 @@ class SearchScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _searchController = TextEditingController();
+
     return Column(
       children: [
-        _addExerciseBlocListener(),
-        SearchWidget(),
-        ListOfResults(
-          selectedDate: selectedDate,
-          clientId: clientId,
-        )
+        _listenForAddedExercises(),
+        SearchWidget(searchController: _searchController),
+        SearchResultList(
+            selectedDate: selectedDate,
+            clientId: clientId,
+            searchController: _searchController)
       ],
     );
   }
 }
 
-BlocListener _addExerciseBlocListener() {
+BlocListener _listenForAddedExercises() {
   return BlocListener<ExerciseSearchAddExerciseBloc,
       ExerciseSearchAddExerciseState>(
     listener: (context, state) {
@@ -99,23 +104,82 @@ BlocListener _addExerciseBlocListener() {
   );
 }
 
+class TagFilterChips extends StatelessWidget {
+  const TagFilterChips({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ExerciseSearchTagsBloc, ExerciseSearchTagsState>(
+        builder: (context, state) {
+      return state.when(
+          initial: () => Container(),
+          content: (tags) => createTags(tags),
+          error: (error) {
+            Log.d(error);
+            return Container();
+          });
+    });
+  }
+
+  Row createTags(List<String> tags) {
+    return Row(
+      children: tags.map((element) => TagFilterChip(name: element)).toList(),
+    );
+  }
+}
+
+class TagFilterChip extends StatefulWidget {
+  final String name;
+
+  const TagFilterChip({required this.name}) : super();
+
+  @override
+  _TagFilterChipState createState() => _TagFilterChipState();
+}
+
+class _TagFilterChipState extends State<TagFilterChip> {
+  List<String> _selectedFilters = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return FilterChip(
+        backgroundColor: Colors.grey,
+        label: Text(widget.name),
+        selected: _selectedFilters.contains(widget.name),
+        selectedColor: Colors.purpleAccent,
+        onSelected: (bool selected) {
+          setState(() {
+            if (selected) {
+              _selectedFilters.add(widget.name);
+              //apply bloc filter
+            } else {
+              _selectedFilters.removeWhere((element) => element == widget.name);
+              //remove bloc filter
+            }
+          });
+        });
+  }
+}
+
 String? previousSearchInput;
 
 class SearchWidget extends StatelessWidget {
+  final searchController;
+
+  SearchWidget({required this.searchController});
+
   @override
   Widget build(BuildContext context) {
-    var _searchController = TextEditingController();
-    _searchController.addListener(() {
-      if (_searchController.text != previousSearchInput) {
-        previousSearchInput = _searchController.text;
-        if (_searchController.text.isEmpty) {
+    searchController.addListener(() {
+      if (searchController.text != previousSearchInput) {
+        previousSearchInput = searchController.text;
+        if (searchController.text.isEmpty) {
           context
               .read<ExerciseSearchBloc>()
               .add(ExerciseSearchEvent.emptySearch());
         } else {
           context.read<ExerciseSearchBloc>().add(
-              ExerciseSearchEvent.searchForInput(
-                  input: _searchController.text));
+              ExerciseSearchEvent.searchForInput(input: searchController.text));
         }
       }
     });
@@ -125,7 +189,7 @@ class SearchWidget extends StatelessWidget {
           child: Icon(Icons.search)),
       Expanded(
         child: TextField(
-            controller: _searchController,
+            controller: searchController,
             decoration: InputDecoration(
                 hintText: AppLocalizations.of(context)!.search)),
       ),
@@ -133,28 +197,43 @@ class SearchWidget extends StatelessWidget {
   }
 }
 
-class ListOfResults extends StatelessWidget {
+class SearchResultList extends StatelessWidget {
   final selectedDate;
   final clientId;
+  final searchController;
 
-  ListOfResults({required this.selectedDate, required this.clientId});
+  SearchResultList(
+      {required this.selectedDate,
+      required this.clientId,
+      required this.searchController});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ExerciseSearchBloc, ExerciseSearchState>(
         builder: (context, state) {
-      return state.when(loading: () {
-        return CircularProgressIndicator();
-      }, initial: () {
-        context
-            .read<ExerciseSearchBloc>()
-            .add(ExerciseSearchEvent.emptySearch());
-        return CircularProgressIndicator();
-      }, content: (exercises) {
-        return _buildExpansionTiles(exercises, context);
-      }, error: (error) {
-        return ErrorView.error(AppLocalizations.of(context)!.error);
-      });
+      return state.when(
+          loading: () => CircularProgressIndicator(),
+          initial: () {
+            context
+                .read<ExerciseSearchBloc>()
+                .add(ExerciseSearchEvent.emptySearch());
+            return CircularProgressIndicator();
+          },
+          content: (exercises) => _buildExpansionTiles(exercises, context),
+          error: (error) =>
+              ErrorView.error(AppLocalizations.of(context)!.error),
+          filterReload: () {
+            if (searchController.text.isEmpty) {
+              context
+                  .read<ExerciseSearchBloc>()
+                  .add(ExerciseSearchEvent.emptySearch());
+            } else {
+              context.read<ExerciseSearchBloc>().add(
+                  ExerciseSearchEvent.searchForInput(
+                      input: searchController.text));
+            }
+            return CircularProgressIndicator();
+          });
     });
   }
 

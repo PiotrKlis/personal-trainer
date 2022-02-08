@@ -8,4 +8,9 @@ class ExerciseSearchEvent with _$ExerciseSearchEvent {
 
   const factory ExerciseSearchEvent.searchForInput({required String input}) =
       SearchForInput;
+
+  const factory ExerciseSearchEvent.filterClick({required String filterName}) =
+      FilterClick;
+
+  const factory ExerciseSearchEvent.reloadLastSearch() = ReloadLastSearch;
 }
