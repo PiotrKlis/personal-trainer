@@ -41,8 +41,9 @@ class ExerciseSearchScreen extends StatelessWidget {
               create: (context) => ExerciseSearchAddExerciseBloc(
                   ExerciseSearchAddExerciseState.initial(), listLength)),
           BlocProvider(
-              create: (context) =>
-                  ExerciseSearchTagsBloc(ExerciseSearchTagsState.initial()))
+              create: (context) => ExerciseSearchTagsBloc(
+                  ExerciseSearchTagsState.initial(),
+                  context.read<ExerciseSearchBloc>()))
         ],
         child: Scaffold(
           appBar: AppBar(
@@ -122,7 +123,7 @@ class TagFilterChips extends StatelessWidget {
                 .add(ExerciseSearchTagsEvent.getTags());
             return Container();
           },
-          content: (tags) => createTags(tags),
+          content: (tags) => _createTags(tags),
           error: (error) {
             Log.d(error);
             return Container();
@@ -130,42 +131,49 @@ class TagFilterChips extends StatelessWidget {
     });
   }
 
-  Wrap createTags(List<String> tags) {
+  Wrap _createTags(List<String> tags) {
+    List<String> _selectedFilters = [];
+
     return Wrap(
       spacing: Dimens.smallPadding,
-      children: tags.map((element) => TagFilterChip(name: element)).toList(),
+      children: tags.map((element) {
+        _selectedFilters.add(element);
+        return TagFilterChip(name: element, selectedFilters: _selectedFilters);
+      }).toList(),
     );
   }
 }
 
 class TagFilterChip extends StatefulWidget {
   final String name;
+  final List<String> selectedFilters;
 
-  const TagFilterChip({required this.name}) : super();
+  const TagFilterChip({required this.name, required this.selectedFilters})
+      : super();
 
   @override
   _TagFilterChipState createState() => _TagFilterChipState();
 }
 
 class _TagFilterChipState extends State<TagFilterChip> {
-  List<String> _selectedFilters = [];
-
   @override
   Widget build(BuildContext context) {
     return FilterChip(
         backgroundColor: Colors.grey,
         label: Text(widget.name),
-        selected: _selectedFilters.contains(widget.name),
+        selected: widget.selectedFilters.contains(widget.name),
         selectedColor: Colors.blue,
         onSelected: (bool selected) {
           setState(() {
             if (selected) {
-              _selectedFilters.add(widget.name);
-              //apply bloc filter
+              widget.selectedFilters.add(widget.name);
+              context.read<ExerciseSearchBloc>().add(
+                  ExerciseSearchEvent.filterClick(filterName: widget.name));
             } else {
-              _selectedFilters
+              widget.selectedFilters
                   .removeWhere((element) => element == widget.name);
-              //remove bloc filter
+              context.read<ExerciseSearchBloc>().add(
+                  ExerciseSearchEvent.filterClick(filterName: widget.name));
             }
           });
         });
