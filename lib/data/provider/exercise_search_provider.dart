@@ -96,4 +96,13 @@ class ExerciseSearchProvider {
   Map<String, dynamic> _createUserExerciseData({required id, required index}) {
     return {"id": id, "index": index, "reps": 12, "sets": 3};
   }
+
+  Future<List<String>> getAllTags() async {
+    var tagsSnapshot = await FirebaseFirestore.instance
+        .collection(FirebaseConstants.tagsCollection)
+        .doc(FirebaseConstants.tagsCollection)
+        .get();
+    List<String> tags = List.from(tagsSnapshot.data()?['tags']);
+    return Future.value(tags);
+  }
 }

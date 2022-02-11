@@ -1,6 +1,7 @@
 class FirebaseConstants {
   static String usersCollection = 'users';
   static String exercisesCollection = 'exercises';
+  static String tagsCollection = 'tags';
   static String exerciseCollection = 'exercise';
   static String userExercisesCollection = 'userExercises';
   static String trainerCollection = 'trainer';

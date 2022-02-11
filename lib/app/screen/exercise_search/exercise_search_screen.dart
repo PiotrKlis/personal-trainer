@@ -5,6 +5,7 @@ import 'package:personal_trainer/app/screen/exercise_search/bloc/exercise_search
 import 'package:personal_trainer/app/screen/exercise_search/bloc/exercise_search_tags_bloc.dart';
 import 'package:personal_trainer/app/screen/exercise_search/event/exercise_search_add_exercise_event.dart';
 import 'package:personal_trainer/app/screen/exercise_search/event/exercise_search_event.dart';
+import 'package:personal_trainer/app/screen/exercise_search/event/exercise_search_tags_event.dart';
 import 'package:personal_trainer/app/screen/exercise_search/state/exercise_search_add_exercise_state.dart';
 import 'package:personal_trainer/app/screen/exercise_search/state/exercise_search_tags_state.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
@@ -21,8 +22,6 @@ class ExerciseSearchScreen extends StatelessWidget {
   final DateTime selectedDate;
   final String clientId;
   final int listLength;
-  final ExerciseSearchState _exerciseSearchState =
-      ExerciseSearchState.initial();
 
   ExerciseSearchScreen(
       {Key? key,
@@ -36,10 +35,14 @@ class ExerciseSearchScreen extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (context) => ExerciseSearchBloc(_exerciseSearchState)),
+              create: (context) =>
+                  ExerciseSearchBloc(ExerciseSearchState.initial())),
           BlocProvider(
               create: (context) => ExerciseSearchAddExerciseBloc(
-                  ExerciseSearchAddExerciseState.initial(), listLength))
+                  ExerciseSearchAddExerciseState.initial(), listLength)),
+          BlocProvider(
+              create: (context) =>
+                  ExerciseSearchTagsBloc(ExerciseSearchTagsState.initial()))
         ],
         child: Scaffold(
           appBar: AppBar(
@@ -71,6 +74,7 @@ class SearchScreenContent extends StatelessWidget {
       children: [
         _listenForAddedExercises(),
         SearchWidget(searchController: _searchController),
+        TagFilterChips(),
         SearchResultList(
             selectedDate: selectedDate,
             clientId: clientId,
@@ -112,7 +116,12 @@ class TagFilterChips extends StatelessWidget {
     return BlocBuilder<ExerciseSearchTagsBloc, ExerciseSearchTagsState>(
         builder: (context, state) {
       return state.when(
-          initial: () => Container(),
+          initial: () {
+            context
+                .read<ExerciseSearchTagsBloc>()
+                .add(ExerciseSearchTagsEvent.getTags());
+            return Container();
+          },
           content: (tags) => createTags(tags),
           error: (error) {
             Log.d(error);
@@ -121,8 +130,9 @@ class TagFilterChips extends StatelessWidget {
     });
   }
 
-  Row createTags(List<String> tags) {
-    return Row(
+  Wrap createTags(List<String> tags) {
+    return Wrap(
+      spacing: Dimens.smallPadding,
       children: tags.map((element) => TagFilterChip(name: element)).toList(),
     );
   }
@@ -146,14 +156,15 @@ class _TagFilterChipState extends State<TagFilterChip> {
         backgroundColor: Colors.grey,
         label: Text(widget.name),
         selected: _selectedFilters.contains(widget.name),
-        selectedColor: Colors.purpleAccent,
+        selectedColor: Colors.blue,
         onSelected: (bool selected) {
           setState(() {
             if (selected) {
               _selectedFilters.add(widget.name);
               //apply bloc filter
             } else {
-              _selectedFilters.removeWhere((element) => element == widget.name);
+              _selectedFilters
+                  .removeWhere((element) => element == widget.name);
               //remove bloc filter
             }
           });
