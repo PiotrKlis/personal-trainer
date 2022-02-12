@@ -10,6 +10,8 @@ class FirebaseConstants {
   static String repsField = 'reps';
   static String setsField = 'sets';
   static String indexField = 'index';
+  static String titleField = 'title';
+  static String tagsField = 'tags';
 }
 
 class DurationConst {
