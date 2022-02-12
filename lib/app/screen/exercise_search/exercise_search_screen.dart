@@ -142,7 +142,6 @@ class TagFilterChips extends StatelessWidget {
 }
 
 class TagFilterChip extends StatefulWidget {
-  //TODO: All filters deselected on default, every click apply one
   final String name;
 
   const TagFilterChip({required this.name}) : super();

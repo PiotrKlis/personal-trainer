@@ -1,5 +1,19 @@
 Test cases
 
+/// Search Exercise
+
+// Tags
+- initial state; no tags selected
+- click/unclick of tag reloads search
+- tag UI gets updated on click/unclick
+
+// Search
+- initial state; get all exercises
+- get all exercises on empty search
+- get exercise for input
+- add exercise adds exercise to remote db
+- add exercise and shows snackbar with exercise name
+
 /// Calendar Exercise
 
 // Calendar

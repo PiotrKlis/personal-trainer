@@ -1,15 +1,8 @@
 Backlog
 
 MVP
-
-//Calendar
-- list of dates with exercises
-
 // Search
-- Refactor!
-- Chips
-- Error on search on navigation
-- Check feature
+//Calendar
 
 // Choose client
 
@@ -41,6 +34,15 @@ MVP
 
 --------------------
 Done:
+//Calendar
+- list of dates with exercises
+
+// Search
+- Refactor!
+- Chips
+- Error on search on navigation
+- Check feature
+
 - bigger plus/add in search screen
 - Sluggish expansion panel list on many items
 
