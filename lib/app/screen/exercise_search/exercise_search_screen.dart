@@ -132,46 +132,42 @@ class TagFilterChips extends StatelessWidget {
   }
 
   Wrap _createTags(List<String> tags) {
-    List<String> _selectedFilters = [];
-
     return Wrap(
       spacing: Dimens.smallPadding,
       children: tags.map((element) {
-        _selectedFilters.add(element);
-        return TagFilterChip(name: element, selectedFilters: _selectedFilters);
+        return TagFilterChip(name: element);
       }).toList(),
     );
   }
 }
 
 class TagFilterChip extends StatefulWidget {
+  //TODO: All filters deselected on default, every click apply one
   final String name;
-  final List<String> selectedFilters;
 
-  const TagFilterChip({required this.name, required this.selectedFilters})
-      : super();
+  const TagFilterChip({required this.name}) : super();
 
   @override
   _TagFilterChipState createState() => _TagFilterChipState();
 }
 
 class _TagFilterChipState extends State<TagFilterChip> {
+  bool _isSelected = false;
+
   @override
   Widget build(BuildContext context) {
     return FilterChip(
         backgroundColor: Colors.grey,
         label: Text(widget.name),
-        selected: widget.selectedFilters.contains(widget.name),
+        selected: _isSelected,
         selectedColor: Colors.blue,
         onSelected: (bool selected) {
           setState(() {
+            _isSelected = selected;
             if (selected) {
-              widget.selectedFilters.add(widget.name);
               context.read<ExerciseSearchBloc>().add(
                   ExerciseSearchEvent.filterClick(filterName: widget.name));
             } else {
-              widget.selectedFilters
-                  .removeWhere((element) => element == widget.name);
               context.read<ExerciseSearchBloc>().add(
                   ExerciseSearchEvent.filterClick(filterName: widget.name));
             }

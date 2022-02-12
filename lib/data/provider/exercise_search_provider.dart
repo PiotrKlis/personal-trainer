@@ -11,12 +11,8 @@ class ExerciseSearchProvider {
   Future<List<Exercise>> searchForExercises(
       {required String query, required List<String> filters}) async {
     try {
-      var exercisesSnapshot = await FirebaseFirestore.instance
-          .collection(FirebaseConstants.exercisesCollection)
-          .where('tags', arrayContainsAny: filters)
-          .where('title', isGreaterThanOrEqualTo: query)
-          .where('title', isLessThanOrEqualTo: '$query\uf7ff')
-          .get();
+      QuerySnapshot<Map<String, dynamic>> exercisesSnapshot =
+          await _getExercisesSnapshotForInput(filters, query);
 
       var exercises = exercisesSnapshot.docs
           .map((value) => _exerciseMapper.mapToExercise(value.data()))
@@ -31,10 +27,8 @@ class ExerciseSearchProvider {
   Future<List<Exercise>> getAllExercises(
       {required List<String> filters}) async {
     try {
-      var exercisesSnapshot = await FirebaseFirestore.instance
-          .collection(FirebaseConstants.exercisesCollection)
-          .where('tags', arrayContainsAny: filters)
-          .get();
+      QuerySnapshot<Map<String, dynamic>> exercisesSnapshot =
+          await _getAllExercisesSnapshots(filters);
 
       var exercises = exercisesSnapshot.docs
           .map((value) => _exerciseMapper.mapToExercise(value.data()))
@@ -43,6 +37,22 @@ class ExerciseSearchProvider {
       return Future.value(exercises);
     } catch (error) {
       return Future.error(error, StackTrace.current);
+    }
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> _getAllExercisesSnapshots(
+      List<String> filters) async {
+    if (filters.isEmpty) {
+      var exercisesSnapshot = await FirebaseFirestore.instance
+          .collection(FirebaseConstants.exercisesCollection)
+          .get();
+      return exercisesSnapshot;
+    } else {
+      var exercisesSnapshot = await FirebaseFirestore.instance
+          .collection(FirebaseConstants.exercisesCollection)
+          .where('tags', arrayContainsAny: filters)
+          .get();
+      return exercisesSnapshot;
     }
   }
 
@@ -104,5 +114,25 @@ class ExerciseSearchProvider {
         .get();
     List<String> tags = List.from(tagsSnapshot.data()?['tags']);
     return Future.value(tags);
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> _getExercisesSnapshotForInput(
+      List<String> filters, String query) async {
+    if (filters.isEmpty) {
+      var exercisesSnapshot = await FirebaseFirestore.instance
+          .collection(FirebaseConstants.exercisesCollection)
+          .where('title', isGreaterThanOrEqualTo: query)
+          .where('title', isLessThanOrEqualTo: '$query\uf7ff')
+          .get();
+      return exercisesSnapshot;
+    } else {
+      var exercisesSnapshot = await FirebaseFirestore.instance
+          .collection(FirebaseConstants.exercisesCollection)
+          .where('tags', arrayContainsAny: filters)
+          .where('title', isGreaterThanOrEqualTo: query)
+          .where('title', isLessThanOrEqualTo: '$query\uf7ff')
+          .get();
+      return exercisesSnapshot;
+    }
   }
 }
