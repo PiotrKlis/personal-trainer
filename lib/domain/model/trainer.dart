@@ -1,14 +1,12 @@
-import 'app_user.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Trainer extends AppUser {
-  final String id;
-  final String email;
-  final String name;
-  List<String>? clientEmails;
+part 'trainer.freezed.dart';
 
-  Trainer(
-      {required this.id,
-      required this.email,
-      required this.name,
-      this.clientEmails});
+@freezed
+class Trainer with _$Trainer {
+  const factory Trainer({required String id,
+    required String email,
+    required String name,
+    required List<String> clientIds,
+    @Default("") String phoneNumber}) = _Trainer;
 }

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/app/app_router.gr.dart';
-import 'package:personal_trainer/app/screen/login/login_cubit.dart';
-import 'package:personal_trainer/app/screen/login/login_state.dart';
+import 'package:personal_trainer/app/screen/login/bloc/login_bloc.dart';
+import 'package:personal_trainer/app/screen/login/state/login_state.dart';
 import 'package:personal_trainer/app/widget/toast_message.dart';
 import 'package:personal_trainer/domain/model/client.dart';
 import 'package:personal_trainer/domain/model/trainer.dart';
@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(LoginLoading()),
+      create: (context) => LoginBloc(LoginLoading()),
       child: LoginWidget(),
     );
   }
@@ -103,14 +103,14 @@ class _LoginFormState extends State<LoginForm> {
             child: ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  var loginCubit = BlocProvider.of<LoginCubit>(context);
+                  var loginCubit = BlocProvider.of<LoginBloc>(context);
                   loginCubit.loginUser(_login ?? "", _password ?? "");
                 }
               },
               child: Text('Login'),
             ),
           ),
-          BlocListener<LoginCubit, LoginState>(
+          BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
               if (state is LoginSuccess) {
                 if (state.appUser is Trainer) {

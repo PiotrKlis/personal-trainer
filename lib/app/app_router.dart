@@ -4,14 +4,14 @@ import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercise
 import 'package:personal_trainer/app/screen/client/client_screen.dart';
 import 'package:personal_trainer/app/screen/client_choose/client_choose_screen.dart';
 import 'package:personal_trainer/app/screen/exercise_search/exercise_search_screen.dart';
-import 'package:personal_trainer/app/screen/firebase_loading/firebase_screen.dart';
+import 'package:personal_trainer/app/screen/splash/splash_screen.dart';
 import 'package:personal_trainer/app/screen/login/login_screen.dart';
 import 'package:personal_trainer/app/screen/register/register_screen.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Screen,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: FirebaseLoadingScreen, initial: true),
+    AutoRoute(page: SplashScreen, initial: true),
     AutoRoute(page: LoginScreen),
     AutoRoute(page: RegisterScreen),
     AutoRoute(page: AccountChooseScreen),

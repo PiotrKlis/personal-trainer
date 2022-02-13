@@ -16,9 +16,9 @@ import 'screen/calendar_exercises/calendar_exercises_screen.dart' as _i7;
 import 'screen/client/client_screen.dart' as _i6;
 import 'screen/client_choose/client_choose_screen.dart' as _i5;
 import 'screen/exercise_search/exercise_search_screen.dart' as _i8;
-import 'screen/firebase_loading/firebase_screen.dart' as _i1;
 import 'screen/login/login_screen.dart' as _i2;
 import 'screen/register/register_screen.dart' as _i3;
+import 'screen/splash/splash_screen.dart' as _i1;
 
 class AppRouter extends _i9.RootStackRouter {
   AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
@@ -26,9 +26,9 @@ class AppRouter extends _i9.RootStackRouter {
 
   @override
   final Map<String, _i9.PageFactory> pagesMap = {
-    FirebaseLoadingRoute.name: (routeData) {
+    SplashRoute.name: (routeData) {
       return _i9.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i1.FirebaseLoadingScreen());
+          routeData: routeData, child: _i1.SplashScreen());
     },
     LoginRoute.name: (routeData) {
       return _i9.MaterialPageX<dynamic>(
@@ -79,7 +79,7 @@ class AppRouter extends _i9.RootStackRouter {
 
   @override
   List<_i9.RouteConfig> get routes => [
-        _i9.RouteConfig(FirebaseLoadingRoute.name, path: '/'),
+        _i9.RouteConfig(SplashRoute.name, path: '/'),
         _i9.RouteConfig(LoginRoute.name, path: '/login-screen'),
         _i9.RouteConfig(RegisterRoute.name, path: '/register-screen'),
         _i9.RouteConfig(AccountChooseRoute.name,
@@ -93,11 +93,11 @@ class AppRouter extends _i9.RootStackRouter {
       ];
 }
 
-/// generated route for [_i1.FirebaseLoadingScreen]
-class FirebaseLoadingRoute extends _i9.PageRouteInfo<void> {
-  const FirebaseLoadingRoute() : super(name, path: '/');
+/// generated route for [_i1.SplashScreen]
+class SplashRoute extends _i9.PageRouteInfo<void> {
+  const SplashRoute() : super(name, path: '/');
 
-  static const String name = 'FirebaseLoadingRoute';
+  static const String name = 'SplashRoute';
 }
 
 /// generated route for [_i2.LoginScreen]
