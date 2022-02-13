@@ -46,8 +46,7 @@ class AppRouter extends _i9.RootStackRouter {
           child: _i4.AccountChooseScreen(trainerId: args.trainerId));
     },
     ClientChooseRoute.name: (routeData) {
-      final args = routeData.argsAs<ClientChooseRouteArgs>(
-          orElse: () => const ClientChooseRouteArgs());
+      final args = routeData.argsAs<ClientChooseRouteArgs>();
       return _i9.MaterialPageX<dynamic>(
           routeData: routeData,
           child:
@@ -138,7 +137,7 @@ class AccountChooseRouteArgs {
 
 /// generated route for [_i5.ClientChooseScreen]
 class ClientChooseRoute extends _i9.PageRouteInfo<ClientChooseRouteArgs> {
-  ClientChooseRoute({_i10.Key? key, dynamic trainerId})
+  ClientChooseRoute({_i10.Key? key, required String trainerId})
       : super(name,
             path: '/client-choose-screen',
             args: ClientChooseRouteArgs(key: key, trainerId: trainerId));
@@ -147,11 +146,11 @@ class ClientChooseRoute extends _i9.PageRouteInfo<ClientChooseRouteArgs> {
 }
 
 class ClientChooseRouteArgs {
-  const ClientChooseRouteArgs({this.key, this.trainerId});
+  const ClientChooseRouteArgs({this.key, required this.trainerId});
 
   final _i10.Key? key;
 
-  final dynamic trainerId;
+  final String trainerId;
 
   @override
   String toString() {

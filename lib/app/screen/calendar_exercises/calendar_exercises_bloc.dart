@@ -56,7 +56,7 @@ class CalendarExercisesBloc
     on<ReorderExercises>((event, emitter) async {
       try {
         int newIndex = _fixNewIndexOnReorder(event.newIndex, event.oldIndex);
-        reorderLocalExercisesList(event, newIndex);
+        _reorderLocalExercisesList(event, newIndex);
         await _updateExercisesIndexes(
             clientId: event.clientId,
             index: _getLowerIndex(event.oldIndex, newIndex));
@@ -79,7 +79,7 @@ class CalendarExercisesBloc
             setsNumber: formattedNumber,
             userExerciseId: event.userExerciseId,
             selectedDate: _selectedDate);
-        updateSetsNumberLocally(event, formattedNumber);
+        _updateSetsNumberLocally(event, formattedNumber);
         emitter(CalendarExercisesState.content(userExercises: _userExercises));
       } catch (error) {
         emitter(CalendarExercisesState.error(error: error.toString()));
@@ -96,7 +96,7 @@ class CalendarExercisesBloc
             repsNumber: formattedNumber,
             userExerciseId: event.userExerciseId,
             selectedDate: _selectedDate);
-        updateRepsNumberLocally(event, formattedNumber);
+        _updateRepsNumberLocally(event, formattedNumber);
         emitter(CalendarExercisesState.content(userExercises: _userExercises));
       } catch (error) {
         emitter(CalendarExercisesState.error(error: error.toString()));
@@ -112,7 +112,7 @@ class CalendarExercisesBloc
             clientId: event.clientId,
             listLength: _userExercises.length);
         emitter(CalendarExercisesState.loading());
-        await updateExercisesOnBackFromSearch(event);
+        await _updateExercisesOnBackFromSearch(event);
         emitter(CalendarExercisesState.content(userExercises: _userExercises));
       } catch (error) {
         emitter(CalendarExercisesState.error(error: error.toString()));
@@ -120,28 +120,28 @@ class CalendarExercisesBloc
     });
   }
 
-  Future<void> updateExercisesOnBackFromSearch(SearchNavigation event) async {
+  Future<void> _updateExercisesOnBackFromSearch(SearchNavigation event) async {
     var exercises = await _calendarExerciseProvider.getExercisesFor(
         selectedDay: _selectedDate, clientId: event.clientId);
     exercises.sort((a, b) => a.index.compareTo(b.index));
     _userExercises = exercises;
   }
 
-  void updateSetsNumberLocally(SetsSubmit event, int formattedNumber) {
+  void _updateSetsNumberLocally(SetsSubmit event, int formattedNumber) {
     int index = _userExercises
         .indexWhere((exercise) => exercise.id == event.userExerciseId);
     _userExercises[index] =
         _userExercises[index].copyWith(sets: formattedNumber);
   }
 
-  void updateRepsNumberLocally(RepsSubmit event, int formattedNumber) {
+  void _updateRepsNumberLocally(RepsSubmit event, int formattedNumber) {
     int index = _userExercises
         .indexWhere((exercise) => exercise.id == event.userExerciseId);
     _userExercises[index] =
         _userExercises[index].copyWith(reps: formattedNumber);
   }
 
-  void reorderLocalExercisesList(ReorderExercises event, int newIndex) {
+  void _reorderLocalExercisesList(ReorderExercises event, int newIndex) {
     var reorderedExercise = _userExercises[event.oldIndex];
     _userExercises.removeAt(event.oldIndex);
     _userExercises.insert(newIndex, reorderedExercise);
