@@ -17,11 +17,25 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$LoginEventTearOff {
   const _$LoginEventTearOff();
 
-  _LogIn logIn({required String login, required String password}) {
-    return _LogIn(
+  InitFirebase initFirebase() {
+    return const InitFirebase();
+  }
+
+  LogIn logIn({required String login, required String password}) {
+    return LogIn(
       login: login,
       password: password,
     );
+  }
+
+  NavigateLoggedIn navigateLoggedIn({required UserType userType}) {
+    return NavigateLoggedIn(
+      userType: userType,
+    );
+  }
+
+  NavigateLoggedOut navigateLoggedOut() {
+    return const NavigateLoggedOut();
   }
 }
 
@@ -30,44 +44,55 @@ const $LoginEvent = _$LoginEventTearOff();
 
 /// @nodoc
 mixin _$LoginEvent {
-  String get login => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initFirebase,
     required TResult Function(String login, String password) logIn,
+    required TResult Function(UserType userType) navigateLoggedIn,
+    required TResult Function() navigateLoggedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initFirebase,
     TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initFirebase,
     TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LogIn value) logIn,
+    required TResult Function(InitFirebase value) initFirebase,
+    required TResult Function(LogIn value) logIn,
+    required TResult Function(NavigateLoggedIn value) navigateLoggedIn,
+    required TResult Function(NavigateLoggedOut value) navigateLoggedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_LogIn value)? logIn,
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LogIn value)? logIn,
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $LoginEventCopyWith<LoginEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -76,7 +101,6 @@ abstract class $LoginEventCopyWith<$Res> {
   factory $LoginEventCopyWith(
           LoginEvent value, $Res Function(LoginEvent) then) =
       _$LoginEventCopyWithImpl<$Res>;
-  $Res call({String login, String password});
 }
 
 /// @nodoc
@@ -86,48 +110,146 @@ class _$LoginEventCopyWithImpl<$Res> implements $LoginEventCopyWith<$Res> {
   final LoginEvent _value;
   // ignore: unused_field
   final $Res Function(LoginEvent) _then;
-
-  @override
-  $Res call({
-    Object? login = freezed,
-    Object? password = freezed,
-  }) {
-    return _then(_value.copyWith(
-      login: login == freezed
-          ? _value.login
-          : login // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$LogInCopyWith<$Res> implements $LoginEventCopyWith<$Res> {
-  factory _$LogInCopyWith(_LogIn value, $Res Function(_LogIn) then) =
-      __$LogInCopyWithImpl<$Res>;
+abstract class $InitFirebaseCopyWith<$Res> {
+  factory $InitFirebaseCopyWith(
+          InitFirebase value, $Res Function(InitFirebase) then) =
+      _$InitFirebaseCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$InitFirebaseCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
+    implements $InitFirebaseCopyWith<$Res> {
+  _$InitFirebaseCopyWithImpl(
+      InitFirebase _value, $Res Function(InitFirebase) _then)
+      : super(_value, (v) => _then(v as InitFirebase));
+
   @override
+  InitFirebase get _value => super._value as InitFirebase;
+}
+
+/// @nodoc
+
+class _$InitFirebase implements InitFirebase {
+  const _$InitFirebase();
+
+  @override
+  String toString() {
+    return 'LoginEvent.initFirebase()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is InitFirebase);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initFirebase,
+    required TResult Function(String login, String password) logIn,
+    required TResult Function(UserType userType) navigateLoggedIn,
+    required TResult Function() navigateLoggedOut,
+  }) {
+    return initFirebase();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initFirebase,
+    TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
+  }) {
+    return initFirebase?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initFirebase,
+    TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
+    required TResult orElse(),
+  }) {
+    if (initFirebase != null) {
+      return initFirebase();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitFirebase value) initFirebase,
+    required TResult Function(LogIn value) logIn,
+    required TResult Function(NavigateLoggedIn value) navigateLoggedIn,
+    required TResult Function(NavigateLoggedOut value) navigateLoggedOut,
+  }) {
+    return initFirebase(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+  }) {
+    return initFirebase?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    required TResult orElse(),
+  }) {
+    if (initFirebase != null) {
+      return initFirebase(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InitFirebase implements LoginEvent {
+  const factory InitFirebase() = _$InitFirebase;
+}
+
+/// @nodoc
+abstract class $LogInCopyWith<$Res> {
+  factory $LogInCopyWith(LogIn value, $Res Function(LogIn) then) =
+      _$LogInCopyWithImpl<$Res>;
   $Res call({String login, String password});
 }
 
 /// @nodoc
-class __$LogInCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
-    implements _$LogInCopyWith<$Res> {
-  __$LogInCopyWithImpl(_LogIn _value, $Res Function(_LogIn) _then)
-      : super(_value, (v) => _then(v as _LogIn));
+class _$LogInCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
+    implements $LogInCopyWith<$Res> {
+  _$LogInCopyWithImpl(LogIn _value, $Res Function(LogIn) _then)
+      : super(_value, (v) => _then(v as LogIn));
 
   @override
-  _LogIn get _value => super._value as _LogIn;
+  LogIn get _value => super._value as LogIn;
 
   @override
   $Res call({
     Object? login = freezed,
     Object? password = freezed,
   }) {
-    return _then(_LogIn(
+    return _then(LogIn(
       login: login == freezed
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
@@ -142,8 +264,8 @@ class __$LogInCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LogIn implements _LogIn {
-  const _$_LogIn({required this.login, required this.password});
+class _$LogIn implements LogIn {
+  const _$LogIn({required this.login, required this.password});
 
   @override
   final String login;
@@ -159,7 +281,7 @@ class _$_LogIn implements _LogIn {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LogIn &&
+            other is LogIn &&
             const DeepCollectionEquality().equals(other.login, login) &&
             const DeepCollectionEquality().equals(other.password, password));
   }
@@ -172,13 +294,16 @@ class _$_LogIn implements _LogIn {
 
   @JsonKey(ignore: true)
   @override
-  _$LogInCopyWith<_LogIn> get copyWith =>
-      __$LogInCopyWithImpl<_LogIn>(this, _$identity);
+  $LogInCopyWith<LogIn> get copyWith =>
+      _$LogInCopyWithImpl<LogIn>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initFirebase,
     required TResult Function(String login, String password) logIn,
+    required TResult Function(UserType userType) navigateLoggedIn,
+    required TResult Function() navigateLoggedOut,
   }) {
     return logIn(login, password);
   }
@@ -186,7 +311,10 @@ class _$_LogIn implements _LogIn {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initFirebase,
     TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
   }) {
     return logIn?.call(login, password);
   }
@@ -194,7 +322,10 @@ class _$_LogIn implements _LogIn {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initFirebase,
     TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
     required TResult orElse(),
   }) {
     if (logIn != null) {
@@ -206,7 +337,10 @@ class _$_LogIn implements _LogIn {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LogIn value) logIn,
+    required TResult Function(InitFirebase value) initFirebase,
+    required TResult Function(LogIn value) logIn,
+    required TResult Function(NavigateLoggedIn value) navigateLoggedIn,
+    required TResult Function(NavigateLoggedOut value) navigateLoggedOut,
   }) {
     return logIn(this);
   }
@@ -214,7 +348,10 @@ class _$_LogIn implements _LogIn {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_LogIn value)? logIn,
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
   }) {
     return logIn?.call(this);
   }
@@ -222,7 +359,10 @@ class _$_LogIn implements _LogIn {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LogIn value)? logIn,
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
     required TResult orElse(),
   }) {
     if (logIn != null) {
@@ -232,15 +372,276 @@ class _$_LogIn implements _LogIn {
   }
 }
 
-abstract class _LogIn implements LoginEvent {
-  const factory _LogIn({required String login, required String password}) =
-      _$_LogIn;
+abstract class LogIn implements LoginEvent {
+  const factory LogIn({required String login, required String password}) =
+      _$LogIn;
+
+  String get login;
+  String get password;
+  @JsonKey(ignore: true)
+  $LogInCopyWith<LogIn> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NavigateLoggedInCopyWith<$Res> {
+  factory $NavigateLoggedInCopyWith(
+          NavigateLoggedIn value, $Res Function(NavigateLoggedIn) then) =
+      _$NavigateLoggedInCopyWithImpl<$Res>;
+  $Res call({UserType userType});
+}
+
+/// @nodoc
+class _$NavigateLoggedInCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res>
+    implements $NavigateLoggedInCopyWith<$Res> {
+  _$NavigateLoggedInCopyWithImpl(
+      NavigateLoggedIn _value, $Res Function(NavigateLoggedIn) _then)
+      : super(_value, (v) => _then(v as NavigateLoggedIn));
 
   @override
-  String get login;
+  NavigateLoggedIn get _value => super._value as NavigateLoggedIn;
+
   @override
-  String get password;
+  $Res call({
+    Object? userType = freezed,
+  }) {
+    return _then(NavigateLoggedIn(
+      userType: userType == freezed
+          ? _value.userType
+          : userType // ignore: cast_nullable_to_non_nullable
+              as UserType,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$NavigateLoggedIn implements NavigateLoggedIn {
+  const _$NavigateLoggedIn({required this.userType});
+
   @override
+  final UserType userType;
+
+  @override
+  String toString() {
+    return 'LoginEvent.navigateLoggedIn(userType: $userType)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is NavigateLoggedIn &&
+            const DeepCollectionEquality().equals(other.userType, userType));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(userType));
+
   @JsonKey(ignore: true)
-  _$LogInCopyWith<_LogIn> get copyWith => throw _privateConstructorUsedError;
+  @override
+  $NavigateLoggedInCopyWith<NavigateLoggedIn> get copyWith =>
+      _$NavigateLoggedInCopyWithImpl<NavigateLoggedIn>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initFirebase,
+    required TResult Function(String login, String password) logIn,
+    required TResult Function(UserType userType) navigateLoggedIn,
+    required TResult Function() navigateLoggedOut,
+  }) {
+    return navigateLoggedIn(userType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initFirebase,
+    TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
+  }) {
+    return navigateLoggedIn?.call(userType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initFirebase,
+    TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
+    required TResult orElse(),
+  }) {
+    if (navigateLoggedIn != null) {
+      return navigateLoggedIn(userType);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitFirebase value) initFirebase,
+    required TResult Function(LogIn value) logIn,
+    required TResult Function(NavigateLoggedIn value) navigateLoggedIn,
+    required TResult Function(NavigateLoggedOut value) navigateLoggedOut,
+  }) {
+    return navigateLoggedIn(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+  }) {
+    return navigateLoggedIn?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    required TResult orElse(),
+  }) {
+    if (navigateLoggedIn != null) {
+      return navigateLoggedIn(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NavigateLoggedIn implements LoginEvent {
+  const factory NavigateLoggedIn({required UserType userType}) =
+      _$NavigateLoggedIn;
+
+  UserType get userType;
+  @JsonKey(ignore: true)
+  $NavigateLoggedInCopyWith<NavigateLoggedIn> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NavigateLoggedOutCopyWith<$Res> {
+  factory $NavigateLoggedOutCopyWith(
+          NavigateLoggedOut value, $Res Function(NavigateLoggedOut) then) =
+      _$NavigateLoggedOutCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$NavigateLoggedOutCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res>
+    implements $NavigateLoggedOutCopyWith<$Res> {
+  _$NavigateLoggedOutCopyWithImpl(
+      NavigateLoggedOut _value, $Res Function(NavigateLoggedOut) _then)
+      : super(_value, (v) => _then(v as NavigateLoggedOut));
+
+  @override
+  NavigateLoggedOut get _value => super._value as NavigateLoggedOut;
+}
+
+/// @nodoc
+
+class _$NavigateLoggedOut implements NavigateLoggedOut {
+  const _$NavigateLoggedOut();
+
+  @override
+  String toString() {
+    return 'LoginEvent.navigateLoggedOut()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is NavigateLoggedOut);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initFirebase,
+    required TResult Function(String login, String password) logIn,
+    required TResult Function(UserType userType) navigateLoggedIn,
+    required TResult Function() navigateLoggedOut,
+  }) {
+    return navigateLoggedOut();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initFirebase,
+    TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
+  }) {
+    return navigateLoggedOut?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initFirebase,
+    TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
+    required TResult orElse(),
+  }) {
+    if (navigateLoggedOut != null) {
+      return navigateLoggedOut();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitFirebase value) initFirebase,
+    required TResult Function(LogIn value) logIn,
+    required TResult Function(NavigateLoggedIn value) navigateLoggedIn,
+    required TResult Function(NavigateLoggedOut value) navigateLoggedOut,
+  }) {
+    return navigateLoggedOut(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+  }) {
+    return navigateLoggedOut?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    required TResult orElse(),
+  }) {
+    if (navigateLoggedOut != null) {
+      return navigateLoggedOut(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NavigateLoggedOut implements LoginEvent {
+  const factory NavigateLoggedOut() = _$NavigateLoggedOut;
 }

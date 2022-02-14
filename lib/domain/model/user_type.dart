@@ -10,3 +10,13 @@ extension UserTypeExtension on UserType {
     }
   }
 }
+
+extension StringUserTypeExtension on String {
+  UserType get userType {
+    if (this == 'trainer') {
+      return UserType.TRAINER;
+    } else {
+      return UserType.CLIENT;
+    }
+  }
+}

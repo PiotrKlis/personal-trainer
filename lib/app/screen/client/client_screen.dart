@@ -8,9 +8,6 @@ import 'package:video_player/video_player.dart';
 
 class ClientScreen extends StatelessWidget {
   final List<UserExercise> listOfUserExercises = [];
-  final id;
-
-  ClientScreen({this.id}) : super();
 
   @override
   Widget build(BuildContext context) {

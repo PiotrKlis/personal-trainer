@@ -53,10 +53,8 @@ class AppRouter extends _i9.RootStackRouter {
               _i5.ClientChooseScreen(key: args.key, trainerId: args.trainerId));
     },
     ClientRoute.name: (routeData) {
-      final args = routeData.argsAs<ClientRouteArgs>(
-          orElse: () => const ClientRouteArgs());
       return _i9.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i6.ClientScreen(id: args.id));
+          routeData: routeData, child: _i6.ClientScreen());
     },
     CalendarExercisesRoute.name: (routeData) {
       final args = routeData.argsAs<CalendarExercisesRouteArgs>();
@@ -159,22 +157,10 @@ class ClientChooseRouteArgs {
 }
 
 /// generated route for [_i6.ClientScreen]
-class ClientRoute extends _i9.PageRouteInfo<ClientRouteArgs> {
-  ClientRoute({dynamic id})
-      : super(name, path: '/client-screen', args: ClientRouteArgs(id: id));
+class ClientRoute extends _i9.PageRouteInfo<void> {
+  const ClientRoute() : super(name, path: '/client-screen');
 
   static const String name = 'ClientRoute';
-}
-
-class ClientRouteArgs {
-  const ClientRouteArgs({this.id});
-
-  final dynamic id;
-
-  @override
-  String toString() {
-    return 'ClientRouteArgs{id: $id}';
-  }
 }
 
 /// generated route for [_i7.CalendarExercisesScreen]
