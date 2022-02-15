@@ -24,7 +24,42 @@ class LoginWidget extends StatelessWidget {
         appBar: AppBar(
           title: Text('Login'),
         ),
-        body: SignInScreen(providerConfigs: []));
+        body: SignInScreen(
+            headerBuilder: (context, constraints, _) {
+              return Padding(
+                padding: const EdgeInsets.all(20),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Image.network(
+                      'https://firebase.flutter.dev/img/flutterfire_300x.png'),
+                ),
+              );
+            },
+            subtitleBuilder: (context, action) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+                  action == AuthAction.signIn
+                      ? 'Welcome to FlutterFire UI! Please sign in to continue.'
+                      : 'Welcome to FlutterFire UI! Please create an account to continue',
+                ),
+              );
+            },
+            footerBuilder: (context, _) {
+              return const Padding(
+                padding: EdgeInsets.only(top: 16),
+                child: Text(
+                  'By signing in, you agree to our terms and conditions.',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              );
+            },
+            providerConfigs: [
+              EmailProviderConfiguration(),
+              GoogleProviderConfiguration(
+                clientId: '...',
+              )
+            ]));
   }
 }
 // body: Column(
