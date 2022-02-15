@@ -5,10 +5,10 @@ part 'client.freezed.dart';
 @freezed
 class Client with _$Client {
   const factory Client({
+    @Default("") String phoneNumber,
     required String id,
     required String email,
     required String name,
-    required trainerEmail,
-    @Default("") String phoneNumber
+    required String trainerEmail,
   }) = _Client;
 }
