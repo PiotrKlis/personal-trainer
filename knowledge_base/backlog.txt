@@ -4,6 +4,18 @@ MVP
 // Search
 //Calendar
 
+// Firebase screen
+
+- Disable back to firebase screen
+
+// Login & Register Screen
+
+- Make it work
+
+// Choose account
+
+- Migration to proper architecture
+
 // Choose client
 
 - Add lots of clients and check navigation between them
@@ -16,21 +28,7 @@ MVP
 - Show proper shortened calendar exercise screen
 - Check feature
 
-// Choose account
 
-- Migration to proper architecture
-
-// Login Screen
-
-- Migration to proper architecture
-
-// Register Screen
-
-- Migration to proper architecture
-
-// Firebase screen
-
-- Migration to proper architecture
 
 --------------------
 Done:
