@@ -13,10 +13,10 @@ class AutoRouteNavigator {
         listLength: listLength));
   }
 
-  Future navigateToClientScreen() => GetIt.I<AppRouter>().push(ClientRoute());
+  Future navigateToClientScreen() => GetIt.I<AppRouter>().replace(ClientRoute());
 
   Future navigateToChooseAccountScreen() =>
       GetIt.I<AppRouter>().push(AccountChooseRoute());
 
-  Future navigateToLoginScreen() => GetIt.I<AppRouter>().push(LoginRoute());
+  Future navigateToLoginScreen() => GetIt.I<AppRouter>().replace(LoginRoute());
 }

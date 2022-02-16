@@ -1,8 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterfire_ui/auth.dart';
+import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/app/screen/login/bloc/login_bloc.dart';
 import 'package:personal_trainer/app/screen/login/state/login_state.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:personal_trainer/app/util/dimens.dart';
+import 'package:personal_trainer/app/util/logger.dart';
+
+import '../../app_router.gr.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -24,42 +31,55 @@ class LoginWidget extends StatelessWidget {
         appBar: AppBar(
           title: Text('Login'),
         ),
-        body: SignInScreen(
-            headerBuilder: (context, constraints, _) {
-              return Padding(
-                padding: const EdgeInsets.all(20),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: Image.network(
-                      'https://firebase.flutter.dev/img/flutterfire_300x.png'),
-                ),
-              );
-            },
-            subtitleBuilder: (context, action) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Text(
-                  action == AuthAction.signIn
-                      ? 'Welcome to FlutterFire UI! Please sign in to continue.'
-                      : 'Welcome to FlutterFire UI! Please create an account to continue',
-                ),
-              );
-            },
-            footerBuilder: (context, _) {
-              return const Padding(
-                padding: EdgeInsets.only(top: 16),
-                child: Text(
-                  'By signing in, you agree to our terms and conditions.',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              );
-            },
-            providerConfigs: [
-              EmailProviderConfiguration(),
-              GoogleProviderConfiguration(
-                clientId: '...',
-              )
-            ]));
+        body: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              Log.d("I have data! ${snapshot.data}");
+            } else {
+              Log.d("What do I have? $snapshot");
+            }
+            return SignInScreen(
+                showAuthActionSwitch: false,
+                subtitleBuilder: (context, action) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      action == AuthAction.signIn
+                          ? 'Welcome to Personal Trainer! Please sign in to continue.'
+                          : 'Welcome to Personal Trainer Please create an account to continue',
+                    ),
+                  );
+                },
+                footerBuilder: (context, _) {
+                  return Column(children: [
+                    Padding(
+                        padding: EdgeInsets.only(top: Dimens.smallPadding),
+                        child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              minimumSize: const Size.fromHeight(36),
+                            ),
+                            child: Text('Register'),
+                            onPressed: () =>
+                                {GetIt.I<AppRouter>().push(RegisterRoute())})),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 16),
+                      child: Text(
+                        'By signing in, you agree to our terms and conditions.',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                  ]);
+                },
+                providerConfigs: [
+                  EmailProviderConfiguration(),
+                  // GoogleProviderConfiguration(
+                  //   clientId:
+                  //       '525753904963-c1758o26ddopl8qb1t5c6oh5c8g7hu6h.apps.googleusercontent.com',
+                  // )
+                ]);
+          },
+        ));
   }
 }
 // body: Column(
