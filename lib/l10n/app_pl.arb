@@ -11,5 +11,14 @@
     "exercise_added_message": "exercise added",
     "exercise_add_failure_message": "Cannot add exercise, check internet connection and try again",
     "search": "Search",
-    "search_exercises_no_exercises": "no exercises for input"
+    "search_exercises_no_exercises": "no exercises for input",
+    "user_email_not_verified": "user email not verified",
+    "register_encourage": "No account yet? Register by clicking button below!",
+    "register": "Register",
+    "invalid_email_error": "Enter valid email",
+    "email_required_error": "Email is required",
+    "email": "Email",
+    "password_length_error": "Password should be at least 6 characters",
+    "password": "Password",
+    "login": "Login"
 }

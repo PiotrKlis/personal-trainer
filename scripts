@@ -1,3 +1,10 @@
+//emulator
 adb -s emulator-5554 emu kill
+
+//build freezed
 flutter pub run build_runner build
+
+//localization issues
 flutter packages pub run build_runner build --delete-conflicting-outputs
+flutter gen-l10n
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'

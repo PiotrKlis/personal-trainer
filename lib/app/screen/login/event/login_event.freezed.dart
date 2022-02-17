@@ -37,6 +37,10 @@ class _$LoginEventTearOff {
   NavigateLoggedOut navigateLoggedOut() {
     return const NavigateLoggedOut();
   }
+
+  NavigateToRegister navigateToRegister() {
+    return const NavigateToRegister();
+  }
 }
 
 /// @nodoc
@@ -50,6 +54,7 @@ mixin _$LoginEvent {
     required TResult Function(String login, String password) logIn,
     required TResult Function(UserType userType) navigateLoggedIn,
     required TResult Function() navigateLoggedOut,
+    required TResult Function() navigateToRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +63,7 @@ mixin _$LoginEvent {
     TResult Function(String login, String password)? logIn,
     TResult Function(UserType userType)? navigateLoggedIn,
     TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,6 +72,7 @@ mixin _$LoginEvent {
     TResult Function(String login, String password)? logIn,
     TResult Function(UserType userType)? navigateLoggedIn,
     TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -75,6 +82,7 @@ mixin _$LoginEvent {
     required TResult Function(LogIn value) logIn,
     required TResult Function(NavigateLoggedIn value) navigateLoggedIn,
     required TResult Function(NavigateLoggedOut value) navigateLoggedOut,
+    required TResult Function(NavigateToRegister value) navigateToRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -83,6 +91,7 @@ mixin _$LoginEvent {
     TResult Function(LogIn value)? logIn,
     TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
     TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -91,6 +100,7 @@ mixin _$LoginEvent {
     TResult Function(LogIn value)? logIn,
     TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
     TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -156,6 +166,7 @@ class _$InitFirebase implements InitFirebase {
     required TResult Function(String login, String password) logIn,
     required TResult Function(UserType userType) navigateLoggedIn,
     required TResult Function() navigateLoggedOut,
+    required TResult Function() navigateToRegister,
   }) {
     return initFirebase();
   }
@@ -167,6 +178,7 @@ class _$InitFirebase implements InitFirebase {
     TResult Function(String login, String password)? logIn,
     TResult Function(UserType userType)? navigateLoggedIn,
     TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
   }) {
     return initFirebase?.call();
   }
@@ -178,6 +190,7 @@ class _$InitFirebase implements InitFirebase {
     TResult Function(String login, String password)? logIn,
     TResult Function(UserType userType)? navigateLoggedIn,
     TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
     required TResult orElse(),
   }) {
     if (initFirebase != null) {
@@ -193,6 +206,7 @@ class _$InitFirebase implements InitFirebase {
     required TResult Function(LogIn value) logIn,
     required TResult Function(NavigateLoggedIn value) navigateLoggedIn,
     required TResult Function(NavigateLoggedOut value) navigateLoggedOut,
+    required TResult Function(NavigateToRegister value) navigateToRegister,
   }) {
     return initFirebase(this);
   }
@@ -204,6 +218,7 @@ class _$InitFirebase implements InitFirebase {
     TResult Function(LogIn value)? logIn,
     TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
     TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
   }) {
     return initFirebase?.call(this);
   }
@@ -215,6 +230,7 @@ class _$InitFirebase implements InitFirebase {
     TResult Function(LogIn value)? logIn,
     TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
     TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
     required TResult orElse(),
   }) {
     if (initFirebase != null) {
@@ -304,6 +320,7 @@ class _$LogIn implements LogIn {
     required TResult Function(String login, String password) logIn,
     required TResult Function(UserType userType) navigateLoggedIn,
     required TResult Function() navigateLoggedOut,
+    required TResult Function() navigateToRegister,
   }) {
     return logIn(login, password);
   }
@@ -315,6 +332,7 @@ class _$LogIn implements LogIn {
     TResult Function(String login, String password)? logIn,
     TResult Function(UserType userType)? navigateLoggedIn,
     TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
   }) {
     return logIn?.call(login, password);
   }
@@ -326,6 +344,7 @@ class _$LogIn implements LogIn {
     TResult Function(String login, String password)? logIn,
     TResult Function(UserType userType)? navigateLoggedIn,
     TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
     required TResult orElse(),
   }) {
     if (logIn != null) {
@@ -341,6 +360,7 @@ class _$LogIn implements LogIn {
     required TResult Function(LogIn value) logIn,
     required TResult Function(NavigateLoggedIn value) navigateLoggedIn,
     required TResult Function(NavigateLoggedOut value) navigateLoggedOut,
+    required TResult Function(NavigateToRegister value) navigateToRegister,
   }) {
     return logIn(this);
   }
@@ -352,6 +372,7 @@ class _$LogIn implements LogIn {
     TResult Function(LogIn value)? logIn,
     TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
     TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
   }) {
     return logIn?.call(this);
   }
@@ -363,6 +384,7 @@ class _$LogIn implements LogIn {
     TResult Function(LogIn value)? logIn,
     TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
     TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
     required TResult orElse(),
   }) {
     if (logIn != null) {
@@ -451,6 +473,7 @@ class _$NavigateLoggedIn implements NavigateLoggedIn {
     required TResult Function(String login, String password) logIn,
     required TResult Function(UserType userType) navigateLoggedIn,
     required TResult Function() navigateLoggedOut,
+    required TResult Function() navigateToRegister,
   }) {
     return navigateLoggedIn(userType);
   }
@@ -462,6 +485,7 @@ class _$NavigateLoggedIn implements NavigateLoggedIn {
     TResult Function(String login, String password)? logIn,
     TResult Function(UserType userType)? navigateLoggedIn,
     TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
   }) {
     return navigateLoggedIn?.call(userType);
   }
@@ -473,6 +497,7 @@ class _$NavigateLoggedIn implements NavigateLoggedIn {
     TResult Function(String login, String password)? logIn,
     TResult Function(UserType userType)? navigateLoggedIn,
     TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
     required TResult orElse(),
   }) {
     if (navigateLoggedIn != null) {
@@ -488,6 +513,7 @@ class _$NavigateLoggedIn implements NavigateLoggedIn {
     required TResult Function(LogIn value) logIn,
     required TResult Function(NavigateLoggedIn value) navigateLoggedIn,
     required TResult Function(NavigateLoggedOut value) navigateLoggedOut,
+    required TResult Function(NavigateToRegister value) navigateToRegister,
   }) {
     return navigateLoggedIn(this);
   }
@@ -499,6 +525,7 @@ class _$NavigateLoggedIn implements NavigateLoggedIn {
     TResult Function(LogIn value)? logIn,
     TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
     TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
   }) {
     return navigateLoggedIn?.call(this);
   }
@@ -510,6 +537,7 @@ class _$NavigateLoggedIn implements NavigateLoggedIn {
     TResult Function(LogIn value)? logIn,
     TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
     TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
     required TResult orElse(),
   }) {
     if (navigateLoggedIn != null) {
@@ -574,6 +602,7 @@ class _$NavigateLoggedOut implements NavigateLoggedOut {
     required TResult Function(String login, String password) logIn,
     required TResult Function(UserType userType) navigateLoggedIn,
     required TResult Function() navigateLoggedOut,
+    required TResult Function() navigateToRegister,
   }) {
     return navigateLoggedOut();
   }
@@ -585,6 +614,7 @@ class _$NavigateLoggedOut implements NavigateLoggedOut {
     TResult Function(String login, String password)? logIn,
     TResult Function(UserType userType)? navigateLoggedIn,
     TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
   }) {
     return navigateLoggedOut?.call();
   }
@@ -596,6 +626,7 @@ class _$NavigateLoggedOut implements NavigateLoggedOut {
     TResult Function(String login, String password)? logIn,
     TResult Function(UserType userType)? navigateLoggedIn,
     TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
     required TResult orElse(),
   }) {
     if (navigateLoggedOut != null) {
@@ -611,6 +642,7 @@ class _$NavigateLoggedOut implements NavigateLoggedOut {
     required TResult Function(LogIn value) logIn,
     required TResult Function(NavigateLoggedIn value) navigateLoggedIn,
     required TResult Function(NavigateLoggedOut value) navigateLoggedOut,
+    required TResult Function(NavigateToRegister value) navigateToRegister,
   }) {
     return navigateLoggedOut(this);
   }
@@ -622,6 +654,7 @@ class _$NavigateLoggedOut implements NavigateLoggedOut {
     TResult Function(LogIn value)? logIn,
     TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
     TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
   }) {
     return navigateLoggedOut?.call(this);
   }
@@ -633,6 +666,7 @@ class _$NavigateLoggedOut implements NavigateLoggedOut {
     TResult Function(LogIn value)? logIn,
     TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
     TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
     required TResult orElse(),
   }) {
     if (navigateLoggedOut != null) {
@@ -644,4 +678,127 @@ class _$NavigateLoggedOut implements NavigateLoggedOut {
 
 abstract class NavigateLoggedOut implements LoginEvent {
   const factory NavigateLoggedOut() = _$NavigateLoggedOut;
+}
+
+/// @nodoc
+abstract class $NavigateToRegisterCopyWith<$Res> {
+  factory $NavigateToRegisterCopyWith(
+          NavigateToRegister value, $Res Function(NavigateToRegister) then) =
+      _$NavigateToRegisterCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$NavigateToRegisterCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res>
+    implements $NavigateToRegisterCopyWith<$Res> {
+  _$NavigateToRegisterCopyWithImpl(
+      NavigateToRegister _value, $Res Function(NavigateToRegister) _then)
+      : super(_value, (v) => _then(v as NavigateToRegister));
+
+  @override
+  NavigateToRegister get _value => super._value as NavigateToRegister;
+}
+
+/// @nodoc
+
+class _$NavigateToRegister implements NavigateToRegister {
+  const _$NavigateToRegister();
+
+  @override
+  String toString() {
+    return 'LoginEvent.navigateToRegister()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is NavigateToRegister);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initFirebase,
+    required TResult Function(String login, String password) logIn,
+    required TResult Function(UserType userType) navigateLoggedIn,
+    required TResult Function() navigateLoggedOut,
+    required TResult Function() navigateToRegister,
+  }) {
+    return navigateToRegister();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initFirebase,
+    TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
+  }) {
+    return navigateToRegister?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initFirebase,
+    TResult Function(String login, String password)? logIn,
+    TResult Function(UserType userType)? navigateLoggedIn,
+    TResult Function()? navigateLoggedOut,
+    TResult Function()? navigateToRegister,
+    required TResult orElse(),
+  }) {
+    if (navigateToRegister != null) {
+      return navigateToRegister();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitFirebase value) initFirebase,
+    required TResult Function(LogIn value) logIn,
+    required TResult Function(NavigateLoggedIn value) navigateLoggedIn,
+    required TResult Function(NavigateLoggedOut value) navigateLoggedOut,
+    required TResult Function(NavigateToRegister value) navigateToRegister,
+  }) {
+    return navigateToRegister(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
+  }) {
+    return navigateToRegister?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitFirebase value)? initFirebase,
+    TResult Function(LogIn value)? logIn,
+    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult Function(NavigateToRegister value)? navigateToRegister,
+    required TResult orElse(),
+  }) {
+    if (navigateToRegister != null) {
+      return navigateToRegister(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NavigateToRegister implements LoginEvent {
+  const factory NavigateToRegister() = _$NavigateToRegister;
 }

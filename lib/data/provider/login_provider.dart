@@ -8,7 +8,13 @@ class LoginProvider {
   Future<UserType> loginUser(String email, String password) async {
     UserCredential credentials = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
-    return getUserType(credentials.user?.uid);
+
+    if (credentials.user?.emailVerified == true) {
+      UserType userType = await getUserType(credentials.user?.uid);
+      return Future.value(userType);
+    } else {
+      return Future.error("Email not verified");
+    }
   }
 
 //todo add signOut feature

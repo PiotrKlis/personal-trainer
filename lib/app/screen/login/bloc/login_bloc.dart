@@ -48,5 +48,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<NavigateLoggedOut>((event, emit) async {
       _autoRouteNavigator.navigateToLoginScreen();
     });
+
+    on<NavigateToRegister>((event, emit) async {
+      _autoRouteNavigator.navigateToRegister();
+    });
   }
 }
