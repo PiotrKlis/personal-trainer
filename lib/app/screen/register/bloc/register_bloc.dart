@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:personal_trainer/app/screen/register/register_state.dart';
+import 'package:personal_trainer/app/screen/register/state/register_state.dart';
 import 'package:personal_trainer/data/provider/register_provider.dart';
 import 'package:personal_trainer/domain/model/register_data.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
-class RegisterCubit extends Cubit<RegisterState> {
+class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final RegisterProvider registerProvider = GetIt.I.get<RegisterProvider>();
 
-  RegisterCubit(RegisterState initialState) : super(initialState);
+  RegisterBloc(RegisterState initialState) : super(initialState);
 
   void register(RegisterData registerData) async {
     switch (registerData.userType) {

@@ -7,6 +7,7 @@ class LoginState with _$LoginState {
   const factory LoginState.initial() = Initial;
 
   const factory LoginState.success({required UserType userType}) = Success;
+  const factory LoginState.loading() = Loading;
 
   const factory LoginState.error({required String error}) = Error;
 }

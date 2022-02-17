@@ -1,11 +1,8 @@
-import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:personal_trainer/app/screen/register/register_cubit.dart';
-import 'package:personal_trainer/app/screen/register/register_state.dart';
-import 'package:personal_trainer/app/widget/toast_message.dart';
+import 'package:personal_trainer/app/screen/register/bloc/register_bloc.dart';
+import 'package:personal_trainer/app/screen/register/state/register_state.dart';
 import 'package:personal_trainer/domain/model/register_data.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
@@ -13,7 +10,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterCubit(RegisterInit()),
+      create: (context) => RegisterBloc(RegisterState.initial()),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -39,17 +36,14 @@ class RegisterForm extends StatelessWidget {
     return Form(
       key: _formKey,
       child:
-          BlocBuilder<RegisterCubit, RegisterState>(builder: (context, state) {
-        if (state is Registered) {
-          context.popRoute();
-        } else if (state is RegisterFailed) {
-          ToastMessage.show(state.error.toString());
-        }
+          BlocBuilder<RegisterBloc, RegisterState>(builder: (context, state) {
+        state.when(
+            initial: () {}, success: () {}, error: (error) {}, loading: () {});
         return Column(
           children: [
-            Visibility(
-                visible: state is RegisterLoading,
-                child: Center(child: CircularProgressIndicator())),
+            // Visibility(
+            //     visible: state is RegisterLoading,
+            //     child: Center(child: CircularProgressIndicator())),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
@@ -107,7 +101,7 @@ class RegisterForm extends StatelessWidget {
                 groupValue: _userType,
                 onChanged: (UserType? value) {
                   _userType = value!;
-                  BlocProvider.of<RegisterCubit>(context).changeUserType();
+                  BlocProvider.of<RegisterBloc>(context).changeUserType();
                 },
               ),
             ),
@@ -118,7 +112,7 @@ class RegisterForm extends StatelessWidget {
                 groupValue: _userType,
                 onChanged: (UserType? value) {
                   _userType = value!;
-                  BlocProvider.of<RegisterCubit>(context).changeUserType();
+                  BlocProvider.of<RegisterBloc>(context).changeUserType();
                 },
               ),
             ),
@@ -126,10 +120,10 @@ class RegisterForm extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  if (state != RegisterLoading() &&
-                      _formKey.currentState!.validate()) {
-                    validateInputs(context);
-                  }
+                  // if (state != RegisterLoading() &&
+                  //     _formKey.currentState!.validate()) {
+                  //   validateInputs(context);
+                  // }
                 },
                 child: Text('Register'),
               ),
@@ -141,7 +135,7 @@ class RegisterForm extends StatelessWidget {
   }
 
   void validateInputs(BuildContext context) {
-    var registerCubit = BlocProvider.of<RegisterCubit>(context);
+    var registerCubit = BlocProvider.of<RegisterBloc>(context);
     registerCubit.register(RegisterData(
         _displayName, _password, _userType!, _email, _trainerEmail));
   }

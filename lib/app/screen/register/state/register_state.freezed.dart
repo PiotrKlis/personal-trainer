@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'login_state.dart';
+part of 'register_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,17 +14,15 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$LoginStateTearOff {
-  const _$LoginStateTearOff();
+class _$RegisterStateTearOff {
+  const _$RegisterStateTearOff();
 
   Initial initial() {
     return const Initial();
   }
 
-  Success success({required UserType userType}) {
-    return Success(
-      userType: userType,
-    );
+  Succes success() {
+    return const Succes();
   }
 
   Loading loading() {
@@ -39,14 +37,14 @@ class _$LoginStateTearOff {
 }
 
 /// @nodoc
-const $LoginState = _$LoginStateTearOff();
+const $RegisterState = _$RegisterStateTearOff();
 
 /// @nodoc
-mixin _$LoginState {
+mixin _$RegisterState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(UserType userType) success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(String error) error,
   }) =>
@@ -54,7 +52,7 @@ mixin _$LoginState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserType userType)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String error)? error,
   }) =>
@@ -62,7 +60,7 @@ mixin _$LoginState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserType userType)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -71,7 +69,7 @@ mixin _$LoginState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Success value) success,
+    required TResult Function(Succes value) success,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) =>
@@ -79,7 +77,7 @@ mixin _$LoginState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
+    TResult Function(Succes value)? success,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
   }) =>
@@ -87,7 +85,7 @@ mixin _$LoginState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
+    TResult Function(Succes value)? success,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -96,19 +94,20 @@ mixin _$LoginState {
 }
 
 /// @nodoc
-abstract class $LoginStateCopyWith<$Res> {
-  factory $LoginStateCopyWith(
-          LoginState value, $Res Function(LoginState) then) =
-      _$LoginStateCopyWithImpl<$Res>;
+abstract class $RegisterStateCopyWith<$Res> {
+  factory $RegisterStateCopyWith(
+          RegisterState value, $Res Function(RegisterState) then) =
+      _$RegisterStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
-  _$LoginStateCopyWithImpl(this._value, this._then);
+class _$RegisterStateCopyWithImpl<$Res>
+    implements $RegisterStateCopyWith<$Res> {
+  _$RegisterStateCopyWithImpl(this._value, this._then);
 
-  final LoginState _value;
+  final RegisterState _value;
   // ignore: unused_field
-  final $Res Function(LoginState) _then;
+  final $Res Function(RegisterState) _then;
 }
 
 /// @nodoc
@@ -118,7 +117,7 @@ abstract class $InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$InitialCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
+class _$InitialCopyWithImpl<$Res> extends _$RegisterStateCopyWithImpl<$Res>
     implements $InitialCopyWith<$Res> {
   _$InitialCopyWithImpl(Initial _value, $Res Function(Initial) _then)
       : super(_value, (v) => _then(v as Initial));
@@ -134,7 +133,7 @@ class _$Initial implements Initial {
 
   @override
   String toString() {
-    return 'LoginState.initial()';
+    return 'RegisterState.initial()';
   }
 
   @override
@@ -150,7 +149,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(UserType userType) success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(String error) error,
   }) {
@@ -161,7 +160,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserType userType)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String error)? error,
   }) {
@@ -172,7 +171,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserType userType)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -187,7 +186,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Success value) success,
+    required TResult Function(Succes value) success,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) {
@@ -198,7 +197,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
+    TResult Function(Succes value)? success,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
   }) {
@@ -209,7 +208,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
+    TResult Function(Succes value)? success,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -221,102 +220,78 @@ class _$Initial implements Initial {
   }
 }
 
-abstract class Initial implements LoginState {
+abstract class Initial implements RegisterState {
   const factory Initial() = _$Initial;
 }
 
 /// @nodoc
-abstract class $SuccessCopyWith<$Res> {
-  factory $SuccessCopyWith(Success value, $Res Function(Success) then) =
-      _$SuccessCopyWithImpl<$Res>;
-  $Res call({UserType userType});
+abstract class $SuccesCopyWith<$Res> {
+  factory $SuccesCopyWith(Succes value, $Res Function(Succes) then) =
+      _$SuccesCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$SuccessCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
-    implements $SuccessCopyWith<$Res> {
-  _$SuccessCopyWithImpl(Success _value, $Res Function(Success) _then)
-      : super(_value, (v) => _then(v as Success));
+class _$SuccesCopyWithImpl<$Res> extends _$RegisterStateCopyWithImpl<$Res>
+    implements $SuccesCopyWith<$Res> {
+  _$SuccesCopyWithImpl(Succes _value, $Res Function(Succes) _then)
+      : super(_value, (v) => _then(v as Succes));
 
   @override
-  Success get _value => super._value as Success;
-
-  @override
-  $Res call({
-    Object? userType = freezed,
-  }) {
-    return _then(Success(
-      userType: userType == freezed
-          ? _value.userType
-          : userType // ignore: cast_nullable_to_non_nullable
-              as UserType,
-    ));
-  }
+  Succes get _value => super._value as Succes;
 }
 
 /// @nodoc
 
-class _$Success implements Success {
-  const _$Success({required this.userType});
-
-  @override
-  final UserType userType;
+class _$Succes implements Succes {
+  const _$Succes();
 
   @override
   String toString() {
-    return 'LoginState.success(userType: $userType)';
+    return 'RegisterState.success()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is Success &&
-            const DeepCollectionEquality().equals(other.userType, userType));
+        (other.runtimeType == runtimeType && other is Succes);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(userType));
-
-  @JsonKey(ignore: true)
-  @override
-  $SuccessCopyWith<Success> get copyWith =>
-      _$SuccessCopyWithImpl<Success>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(UserType userType) success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(String error) error,
   }) {
-    return success(userType);
+    return success();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserType userType)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String error)? error,
   }) {
-    return success?.call(userType);
+    return success?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserType userType)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(userType);
+      return success();
     }
     return orElse();
   }
@@ -325,7 +300,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Success value) success,
+    required TResult Function(Succes value) success,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) {
@@ -336,7 +311,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
+    TResult Function(Succes value)? success,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
   }) {
@@ -347,7 +322,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
+    TResult Function(Succes value)? success,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -359,12 +334,8 @@ class _$Success implements Success {
   }
 }
 
-abstract class Success implements LoginState {
-  const factory Success({required UserType userType}) = _$Success;
-
-  UserType get userType;
-  @JsonKey(ignore: true)
-  $SuccessCopyWith<Success> get copyWith => throw _privateConstructorUsedError;
+abstract class Succes implements RegisterState {
+  const factory Succes() = _$Succes;
 }
 
 /// @nodoc
@@ -374,7 +345,7 @@ abstract class $LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LoadingCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
+class _$LoadingCopyWithImpl<$Res> extends _$RegisterStateCopyWithImpl<$Res>
     implements $LoadingCopyWith<$Res> {
   _$LoadingCopyWithImpl(Loading _value, $Res Function(Loading) _then)
       : super(_value, (v) => _then(v as Loading));
@@ -390,7 +361,7 @@ class _$Loading implements Loading {
 
   @override
   String toString() {
-    return 'LoginState.loading()';
+    return 'RegisterState.loading()';
   }
 
   @override
@@ -406,7 +377,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(UserType userType) success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(String error) error,
   }) {
@@ -417,7 +388,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserType userType)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String error)? error,
   }) {
@@ -428,7 +399,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserType userType)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -443,7 +414,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Success value) success,
+    required TResult Function(Succes value) success,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) {
@@ -454,7 +425,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
+    TResult Function(Succes value)? success,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
   }) {
@@ -465,7 +436,7 @@ class _$Loading implements Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
+    TResult Function(Succes value)? success,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -477,7 +448,7 @@ class _$Loading implements Loading {
   }
 }
 
-abstract class Loading implements LoginState {
+abstract class Loading implements RegisterState {
   const factory Loading() = _$Loading;
 }
 
@@ -489,7 +460,7 @@ abstract class $ErrorCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ErrorCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
+class _$ErrorCopyWithImpl<$Res> extends _$RegisterStateCopyWithImpl<$Res>
     implements $ErrorCopyWith<$Res> {
   _$ErrorCopyWithImpl(Error _value, $Res Function(Error) _then)
       : super(_value, (v) => _then(v as Error));
@@ -520,7 +491,7 @@ class _$Error implements Error {
 
   @override
   String toString() {
-    return 'LoginState.error(error: $error)';
+    return 'RegisterState.error(error: $error)';
   }
 
   @override
@@ -544,7 +515,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(UserType userType) success,
+    required TResult Function() success,
     required TResult Function() loading,
     required TResult Function(String error) error,
   }) {
@@ -555,7 +526,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserType userType)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String error)? error,
   }) {
@@ -566,7 +537,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(UserType userType)? success,
+    TResult Function()? success,
     TResult Function()? loading,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -581,7 +552,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Success value) success,
+    required TResult Function(Succes value) success,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
   }) {
@@ -592,7 +563,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
+    TResult Function(Succes value)? success,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
   }) {
@@ -603,7 +574,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Success value)? success,
+    TResult Function(Succes value)? success,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -615,7 +586,7 @@ class _$Error implements Error {
   }
 }
 
-abstract class Error implements LoginState {
+abstract class Error implements RegisterState {
   const factory Error({required String error}) = _$Error;
 
   String get error;
