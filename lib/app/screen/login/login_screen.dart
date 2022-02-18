@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/app/screen/login/bloc/login_bloc.dart';
 import 'package:personal_trainer/app/screen/login/event/login_event.dart';
 import 'package:personal_trainer/app/screen/login/state/login_state.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
+import 'package:personal_trainer/app/widget/snackbar.dart';
 import 'package:personal_trainer/data/util/const.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -23,37 +24,70 @@ class LoginScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.login),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(Dimens.smallPadding),
-            child: LoginForm(),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(Dimens.smallPadding),
-            child: Divider(),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(Dimens.smallPadding),
-            child: Text(AppLocalizations.of(context)!.register_encourage),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(Dimens.smallPadding),
-            child: ElevatedButton(
-              onPressed: () {
-                context.read<LoginBloc>().add(LoginEvent.navigateToRegister());
-              },
-              child: Text(AppLocalizations.of(context)!.register),
+    return BlocConsumer<LoginBloc, LoginState>(builder: (context, state) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(AppLocalizations.of(context)!.login),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(Dimens.smallPadding),
+              child: LoginForm(),
             ),
-          ),
-        ],
-      ),
-    );
+            Padding(
+              padding: const EdgeInsets.all(Dimens.smallPadding),
+              child: Divider(),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(Dimens.smallPadding),
+              child: Text(AppLocalizations.of(context)!.register_encourage),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(Dimens.smallPadding),
+              child: ElevatedButton(
+                onPressed: () {
+                  context
+                      .read<LoginBloc>()
+                      .add(LoginEvent.navigateToRegister());
+                },
+                child: Text(AppLocalizations.of(context)!.register),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(Dimens.smallPadding),
+              child: Visibility(
+                  visible: state is Loading,
+                  child: CircularProgressIndicator()),
+            )
+          ],
+        ),
+      );
+    }, listener: (context, state) {
+      state.whenOrNull(success: (userType) {
+        context.read<LoginBloc>().add(NavigateLoggedIn(userType: userType));
+      }, error: (error) {
+        switch (error) {
+          case FirebaseAuthExceptionCodeConst.NETWORK_REQUEST_FAILED_EXCEPTION:
+            return customSnackBar(
+                context: context,
+                visibilityTime: DurationConst.snackbarVisibilityLongerDuration,
+                text: AppLocalizations.of(context)!.network_exception);
+          case FirebaseAuthExceptionCodeConst.USER_NOT_FOUND_EXCEPTION:
+            return customSnackBar(
+                context: context,
+                visibilityTime: DurationConst.snackbarVisibilityLongerDuration,
+                text: AppLocalizations.of(context)!.user_not_found_exception);
+          case FirebaseAuthExceptionCodeConst.EMAIL_NOT_VERIFIED_EXCEPTION:
+            return customSnackBar(
+                context: context,
+                visibilityTime: DurationConst.snackbarVisibilityLongerDuration,
+                text:
+                    AppLocalizations.of(context)!.email_not_verified_exception);
+        }
+      });
+    });
   }
 }
 
@@ -74,30 +108,37 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(Dimens.smallPadding),
             child: TextFormField(
               validator: MultiValidator([
-                EmailValidator(errorText: AppLocalizations.of(context)!.invalid_email_error),
-                RequiredValidator(errorText: AppLocalizations.of(context)!.email_required_error)
+                EmailValidator(
+                    errorText:
+                        AppLocalizations.of(context)!.invalid_email_error),
+                RequiredValidator(
+                    errorText:
+                        AppLocalizations.of(context)!.email_required_error)
               ]),
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: AppLocalizations.of(context)!.email),
+                  border: OutlineInputBorder(),
+                  hintText: AppLocalizations.of(context)!.email),
               onChanged: (value) => _login = value,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(Dimens.smallPadding),
             child: TextFormField(
               obscureText: true,
-              validator: MinLengthValidator(6,
-                  errorText: AppLocalizations.of(context)!.password_length_error),
+              validator: MinLengthValidator(ValidatorConst.minPasswordLength,
+                  errorText:
+                      AppLocalizations.of(context)!.password_length_error),
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: AppLocalizations.of(context)!.password),
+                  border: OutlineInputBorder(),
+                  hintText: AppLocalizations.of(context)!.password),
               onChanged: (value) => _password = value,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(Dimens.smallPadding),
             child: ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
@@ -107,23 +148,6 @@ class _LoginFormState extends State<LoginForm> {
               },
               child: Text(AppLocalizations.of(context)!.login),
             ),
-          ),
-          BlocListener<LoginBloc, LoginState>(
-            listener: (context, state) {
-              state.when(initial: () {
-                //no-op
-              }, success: (userType) {
-                context
-                    .read<LoginBloc>()
-                    .add(NavigateLoggedIn(userType: userType));
-              }, error: (error) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    duration: Duration(
-                        milliseconds: DurationConst.snackbarVisibilityDuration),
-                    content: Text(error)));
-              });
-            },
-            child: Container(),
           ),
         ],
       ),

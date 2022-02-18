@@ -1,19 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:personal_trainer/data/util/const.dart';
-import 'package:personal_trainer/domain/model/app_user.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
 class LoginProvider {
   Future<UserType> loginUser(String email, String password) async {
     UserCredential credentials = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
-
     if (credentials.user?.emailVerified == true) {
       UserType userType = await getUserType(credentials.user?.uid);
       return Future.value(userType);
     } else {
-      return Future.error("Email not verified");
+      return Future.error(throw FirebaseAuthException(
+          code: FirebaseAuthExceptionCodeConst.EMAIL_NOT_VERIFIED_EXCEPTION));
     }
   }
 

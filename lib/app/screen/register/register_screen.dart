@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:personal_trainer/app/screen/register/bloc/register_bloc.dart';
+import 'package:personal_trainer/app/screen/register/event/register_event.dart';
 import 'package:personal_trainer/app/screen/register/state/register_state.dart';
+import 'package:personal_trainer/app/util/dimens.dart';
+import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/register_data.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
@@ -14,15 +18,43 @@ class RegisterScreen extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('Register'),
+          title: Text(AppLocalizations.of(context)!.register),
         ),
-        body: RegisterForm(),
+        body: RegisterScreenContent(),
       ),
     );
   }
 }
 
-class RegisterForm extends StatelessWidget {
+class RegisterScreenContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<RegisterBloc, RegisterState>(builder: (context, state) {
+      return RegisterForm(state: state);
+    }, listener: (context, state) {
+      state.whenOrNull(
+          success: () {
+            Navigator.pop(context);
+          },
+          error: (error) =>
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  duration: Duration(
+                      milliseconds: DurationConst.snackbarVisibilityDuration),
+                  content: Text(AppLocalizations.of(context)!.error))));
+    });
+  }
+}
+
+class RegisterForm extends StatefulWidget {
+  final RegisterState state;
+
+  const RegisterForm({Key? key, required this.state}) : super(key: key);
+
+  @override
+  _RegisterFormState createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<RegisterForm> {
   final _formKey = GlobalKey<FormState>();
   UserType? _userType = UserType.CLIENT;
   String _email = "";
@@ -33,110 +65,113 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child:
-          BlocBuilder<RegisterBloc, RegisterState>(builder: (context, state) {
-        state.when(
-            initial: () {}, success: () {}, error: (error) {}, loading: () {});
-        return Column(
-          children: [
-            // Visibility(
-            //     visible: state is RegisterLoading,
-            //     child: Center(child: CircularProgressIndicator())),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                validator: RequiredValidator(errorText: 'Name is required'),
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Name'),
-                onChanged: (value) => _displayName = value,
+    return Column(
+      children: [
+        Visibility(
+            visible: widget.state is Loading,
+            child: Center(child: CircularProgressIndicator())),
+        Padding(
+          padding: const EdgeInsets.all(Dimens.smallPadding),
+          child: TextFormField(
+            validator: RequiredValidator(
+                errorText: AppLocalizations.of(context)!.name_required_error),
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: AppLocalizations.of(context)!.name),
+            onChanged: (value) => _displayName = value,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(Dimens.smallPadding),
+          child: TextFormField(
+            validator: MultiValidator([
+              EmailValidator(
+                  errorText: AppLocalizations.of(context)!.invalid_email_error),
+              RequiredValidator(
+                  errorText: AppLocalizations.of(context)!.email_required_error)
+            ]),
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: AppLocalizations.of(context)!.email),
+            onChanged: (value) => _email = value,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(Dimens.smallPadding),
+          child: TextFormField(
+            obscureText: true,
+            controller: _passwordController,
+            validator: MinLengthValidator(ValidatorConst.minPasswordLength,
+                errorText: AppLocalizations.of(context)!.password_length_error),
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: AppLocalizations.of(context)!.password),
+            onChanged: (value) => _password = value,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(Dimens.smallPadding),
+          child: Visibility(
+            visible: _userType == UserType.CLIENT,
+            child: TextFormField(
+              validator: MultiValidator([
+                EmailValidator(
+                    errorText:
+                    AppLocalizations.of(context)!.email_required_error),
+                RequiredValidator(
+                    errorText: AppLocalizations.of(context)!
+                        .trainer_email_required_error)
+              ]),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: AppLocalizations.of(context)!.trainer_email,
               ),
+              onChanged: (value) => _trainerEmail = value,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                validator: MultiValidator([
-                  EmailValidator(errorText: "Enter valid email"),
-                  RequiredValidator(errorText: 'Email is required')
-                ]),
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Email'),
-                onChanged: (value) => _email = value,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                obscureText: true,
-                controller: _passwordController,
-                validator: MinLengthValidator(6,
-                    errorText: "Password should be at least 6 characters"),
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: 'Password'),
-                onChanged: (value) => _password = value,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Visibility(
-                visible: _userType == UserType.CLIENT,
-                child: TextFormField(
-                  validator: MultiValidator([
-                    EmailValidator(errorText: "Enter valid email"),
-                    RequiredValidator(errorText: 'Trainer email is required')
-                  ]),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Trainer email',
-                  ),
-                  onChanged: (value) => _trainerEmail = value,
-                ),
-              ),
-            ),
-            ListTile(
-              title: Text('${(UserType.CLIENT.name)}'),
-              leading: Radio<UserType>(
-                value: UserType.CLIENT,
-                groupValue: _userType,
-                onChanged: (UserType? value) {
-                  _userType = value!;
-                  BlocProvider.of<RegisterBloc>(context).changeUserType();
-                },
-              ),
-            ),
-            ListTile(
-              title: Text('${(UserType.TRAINER.name)}'),
-              leading: Radio<UserType>(
-                value: UserType.TRAINER,
-                groupValue: _userType,
-                onChanged: (UserType? value) {
-                  _userType = value!;
-                  BlocProvider.of<RegisterBloc>(context).changeUserType();
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // if (state != RegisterLoading() &&
-                  //     _formKey.currentState!.validate()) {
-                  //   validateInputs(context);
-                  // }
-                },
-                child: Text('Register'),
-              ),
-            )
-          ],
-        );
-      }),
+          ),
+        ),
+        RadioListTile<UserType>(
+          title: Text(UserType.CLIENT.name),
+          value: UserType.CLIENT,
+          groupValue: _userType,
+          onChanged: (UserType? value) {
+            setState(() {
+              _userType = value!;
+            });
+          },
+        ),
+        RadioListTile<UserType>(
+          title: Text(UserType.TRAINER.name),
+          value: UserType.TRAINER,
+          groupValue: _userType,
+          onChanged: (UserType? value) {
+            setState(() {
+              _userType = value!;
+            });
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.all(Dimens.smallPadding),
+          child: ElevatedButton(
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                registerUser(context);
+              }
+            },
+            child: Text(AppLocalizations.of(context)!.register),
+          ),
+        )
+      ],
     );
   }
 
-  void validateInputs(BuildContext context) {
-    var registerCubit = BlocProvider.of<RegisterBloc>(context);
-    registerCubit.register(RegisterData(
-        _displayName, _password, _userType!, _email, _trainerEmail));
+  void registerUser(BuildContext context) {
+    context.read<RegisterBloc>().add(RegisterEvent.register(
+        registerData: RegisterData(
+            displayName: _displayName,
+            password: _password,
+            userType: _userType!,
+            email: _email,
+            trainerEmail: _trainerEmail)));
   }
 }

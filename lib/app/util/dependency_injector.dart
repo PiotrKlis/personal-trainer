@@ -36,8 +36,13 @@ class GetItInjector implements DependencyInjector {
         () => ClientChooseProvider());
     _getIt.registerLazySingleton<CalendarProvider>(() => CalendarProvider());
     _getIt.registerLazySingleton<AppRouter>(() => AppRouter());
-
-    // _getIt.registerLazySingleton<AutoRouteNavigator>(
-    //     () => AutoRouteNavigator(context));
   }
 }
+
+// class StringProvider {
+//   final BuildContext context;
+//
+//   StringProvider(this.context);
+//
+//   AppLocalizations? getAppLocalization() => AppLocalizations.of(context);
+// }

@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:personal_trainer/app/screen/login/event/login_event.dart';
 import 'package:personal_trainer/app/screen/login/state/login_state.dart';
 import 'package:personal_trainer/app/util/auto_route_navigator.dart';
+import 'package:personal_trainer/app/util/event_transformer.dart';
 import 'package:personal_trainer/data/provider/firebase_provider.dart';
 import 'package:personal_trainer/data/provider/login_provider.dart';
+import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -26,13 +29,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     on<LogIn>((event, emit) async {
       try {
+        emit(LoginState.loading());
         UserType userType =
             await loginProvider.loginUser(event.login, event.password);
         emit(LoginState.success(userType: userType));
       } catch (error) {
-        emit(LoginState.error(error: error.toString()));
+        if (error is FirebaseAuthException) {
+          return emit(LoginState.error(error: error.code));
+        } else {
+          return emit(LoginState.error(error: error.toString()));
+        }
       }
-    });
+    },
+        transformer:
+            debounce(Duration(milliseconds: DurationConst.longerDebounceTime)));
 
     on<NavigateLoggedIn>((event, emit) async {
       switch (event.userType) {

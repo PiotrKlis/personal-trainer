@@ -1,12 +1,14 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
-class RegisterData {
-  final String id = "";
-  final String email;
-  final String displayName;
-  final String password;
-  final String trainerEmail;
-  final UserType userType;
+part 'register_data.freezed.dart';
 
-  RegisterData(this.displayName, this.password, this.userType, this.email, this.trainerEmail);
+@freezed
+class RegisterData with _$RegisterData {
+  const factory RegisterData(
+      {required String email,
+      required String displayName,
+      required String password,
+      required String trainerEmail,
+      required UserType userType}) = _RegisterData;
 }

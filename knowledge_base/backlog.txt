@@ -28,7 +28,8 @@ MVP
 - Show proper shortened calendar exercise screen
 - Check feature
 
-
+//Other
+- String provider
 
 --------------------
 Done:

@@ -18,7 +18,7 @@ class FirebaseHandler extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
       LoginBloc loginBloc = context.read<LoginBloc>();
-      state.when(initial: () {
+      state.whenOrNull(initial: () {
         loginBloc.add(LoginEvent.initFirebase());
       }, success: (userType) {
         loginBloc.add(LoginEvent.navigateLoggedIn(userType: userType));

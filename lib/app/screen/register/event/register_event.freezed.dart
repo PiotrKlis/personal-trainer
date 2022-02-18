@@ -17,18 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$RegisterEventTearOff {
   const _$RegisterEventTearOff();
 
-  Register register(
-      {required String userEmail,
-      required String name,
-      required String password,
-      required String trainerEmail,
-      required UserType userType}) {
+  Register register({required RegisterData registerData}) {
     return Register(
-      userEmail: userEmail,
-      name: name,
-      password: password,
-      trainerEmail: trainerEmail,
-      userType: userType,
+      registerData: registerData,
     );
   }
 }
@@ -38,31 +29,21 @@ const $RegisterEvent = _$RegisterEventTearOff();
 
 /// @nodoc
 mixin _$RegisterEvent {
-  String get userEmail => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
-  String get trainerEmail => throw _privateConstructorUsedError;
-  UserType get userType => throw _privateConstructorUsedError;
+  RegisterData get registerData => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userEmail, String name, String password,
-            String trainerEmail, UserType userType)
-        register,
+    required TResult Function(RegisterData registerData) register,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String userEmail, String name, String password,
-            String trainerEmail, UserType userType)?
-        register,
+    TResult Function(RegisterData registerData)? register,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userEmail, String name, String password,
-            String trainerEmail, UserType userType)?
-        register,
+    TResult Function(RegisterData registerData)? register,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -93,12 +74,9 @@ abstract class $RegisterEventCopyWith<$Res> {
   factory $RegisterEventCopyWith(
           RegisterEvent value, $Res Function(RegisterEvent) then) =
       _$RegisterEventCopyWithImpl<$Res>;
-  $Res call(
-      {String userEmail,
-      String name,
-      String password,
-      String trainerEmail,
-      UserType userType});
+  $Res call({RegisterData registerData});
+
+  $RegisterDataCopyWith<$Res> get registerData;
 }
 
 /// @nodoc
@@ -112,34 +90,21 @@ class _$RegisterEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userEmail = freezed,
-    Object? name = freezed,
-    Object? password = freezed,
-    Object? trainerEmail = freezed,
-    Object? userType = freezed,
+    Object? registerData = freezed,
   }) {
     return _then(_value.copyWith(
-      userEmail: userEmail == freezed
-          ? _value.userEmail
-          : userEmail // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      trainerEmail: trainerEmail == freezed
-          ? _value.trainerEmail
-          : trainerEmail // ignore: cast_nullable_to_non_nullable
-              as String,
-      userType: userType == freezed
-          ? _value.userType
-          : userType // ignore: cast_nullable_to_non_nullable
-              as UserType,
+      registerData: registerData == freezed
+          ? _value.registerData
+          : registerData // ignore: cast_nullable_to_non_nullable
+              as RegisterData,
     ));
+  }
+
+  @override
+  $RegisterDataCopyWith<$Res> get registerData {
+    return $RegisterDataCopyWith<$Res>(_value.registerData, (value) {
+      return _then(_value.copyWith(registerData: value));
+    });
   }
 }
 
@@ -148,12 +113,10 @@ abstract class $RegisterCopyWith<$Res> implements $RegisterEventCopyWith<$Res> {
   factory $RegisterCopyWith(Register value, $Res Function(Register) then) =
       _$RegisterCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String userEmail,
-      String name,
-      String password,
-      String trainerEmail,
-      UserType userType});
+  $Res call({RegisterData registerData});
+
+  @override
+  $RegisterDataCopyWith<$Res> get registerData;
 }
 
 /// @nodoc
@@ -167,33 +130,13 @@ class _$RegisterCopyWithImpl<$Res> extends _$RegisterEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userEmail = freezed,
-    Object? name = freezed,
-    Object? password = freezed,
-    Object? trainerEmail = freezed,
-    Object? userType = freezed,
+    Object? registerData = freezed,
   }) {
     return _then(Register(
-      userEmail: userEmail == freezed
-          ? _value.userEmail
-          : userEmail // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: password == freezed
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      trainerEmail: trainerEmail == freezed
-          ? _value.trainerEmail
-          : trainerEmail // ignore: cast_nullable_to_non_nullable
-              as String,
-      userType: userType == freezed
-          ? _value.userType
-          : userType // ignore: cast_nullable_to_non_nullable
-              as UserType,
+      registerData: registerData == freezed
+          ? _value.registerData
+          : registerData // ignore: cast_nullable_to_non_nullable
+              as RegisterData,
     ));
   }
 }
@@ -201,27 +144,14 @@ class _$RegisterCopyWithImpl<$Res> extends _$RegisterEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Register implements Register {
-  const _$Register(
-      {required this.userEmail,
-      required this.name,
-      required this.password,
-      required this.trainerEmail,
-      required this.userType});
+  const _$Register({required this.registerData});
 
   @override
-  final String userEmail;
-  @override
-  final String name;
-  @override
-  final String password;
-  @override
-  final String trainerEmail;
-  @override
-  final UserType userType;
+  final RegisterData registerData;
 
   @override
   String toString() {
-    return 'RegisterEvent.register(userEmail: $userEmail, name: $name, password: $password, trainerEmail: $trainerEmail, userType: $userType)';
+    return 'RegisterEvent.register(registerData: $registerData)';
   }
 
   @override
@@ -229,22 +159,13 @@ class _$Register implements Register {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Register &&
-            const DeepCollectionEquality().equals(other.userEmail, userEmail) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality()
-                .equals(other.trainerEmail, trainerEmail) &&
-            const DeepCollectionEquality().equals(other.userType, userType));
+                .equals(other.registerData, registerData));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(userEmail),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(trainerEmail),
-      const DeepCollectionEquality().hash(userType));
+      runtimeType, const DeepCollectionEquality().hash(registerData));
 
   @JsonKey(ignore: true)
   @override
@@ -254,33 +175,27 @@ class _$Register implements Register {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userEmail, String name, String password,
-            String trainerEmail, UserType userType)
-        register,
+    required TResult Function(RegisterData registerData) register,
   }) {
-    return register(userEmail, name, password, trainerEmail, userType);
+    return register(registerData);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String userEmail, String name, String password,
-            String trainerEmail, UserType userType)?
-        register,
+    TResult Function(RegisterData registerData)? register,
   }) {
-    return register?.call(userEmail, name, password, trainerEmail, userType);
+    return register?.call(registerData);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userEmail, String name, String password,
-            String trainerEmail, UserType userType)?
-        register,
+    TResult Function(RegisterData registerData)? register,
     required TResult orElse(),
   }) {
     if (register != null) {
-      return register(userEmail, name, password, trainerEmail, userType);
+      return register(registerData);
     }
     return orElse();
   }
@@ -315,23 +230,10 @@ class _$Register implements Register {
 }
 
 abstract class Register implements RegisterEvent {
-  const factory Register(
-      {required String userEmail,
-      required String name,
-      required String password,
-      required String trainerEmail,
-      required UserType userType}) = _$Register;
+  const factory Register({required RegisterData registerData}) = _$Register;
 
   @override
-  String get userEmail;
-  @override
-  String get name;
-  @override
-  String get password;
-  @override
-  String get trainerEmail;
-  @override
-  UserType get userType;
+  RegisterData get registerData;
   @override
   @JsonKey(ignore: true)
   $RegisterCopyWith<Register> get copyWith =>

@@ -20,5 +20,12 @@
     "email": "Email",
     "password_length_error": "Password should be at least 6 characters",
     "password": "Password",
+    "name_required_error": "Name is required",
+    "name": "Name",
+    "trainer_email_required_error": "Trainer email is required",
+    "trainer_email": "Trainer email",
+    "network_exception": "Network issue, check your internet connection",
+    "user_not_found_exception": "User not found, check credentials or register new user",
+    "email_not_verified_exception": "Email not verified",
     "login": "Login"
 }
