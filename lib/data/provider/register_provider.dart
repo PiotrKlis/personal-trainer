@@ -11,6 +11,7 @@ class RegisterProvider {
           registerData.email, registerData.displayName, registerData.password);
       await _addClientDataToDB(registerData.email, registerData.displayName,
           registerData.password, registerData.trainerEmail);
+      FirebaseAuth.instance.currentUser!.sendEmailVerification();
       return Future.value();
     } catch (error) {
       if (error is FirebaseAuthException) {

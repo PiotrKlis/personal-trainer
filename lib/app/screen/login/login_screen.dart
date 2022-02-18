@@ -38,6 +38,14 @@ class LoginScreenContent extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(Dimens.smallPadding),
+              child: TextButton(
+                  onPressed: () {
+                    context.read<LoginBloc>().add(LoginEvent.navigateToPasswordReset());
+                  },
+                  child: Text("Forgot password? Click here to reset")),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(Dimens.smallPadding),
               child: Divider(),
             ),
             Padding(

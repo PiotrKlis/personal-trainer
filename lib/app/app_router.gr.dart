@@ -8,9 +8,8 @@
 // AutoRouteGenerator
 // **************************************************************************
 
-import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:flutter/cupertino.dart' as _i11;
-import 'package:flutter/material.dart' as _i10;
+import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
 
 import 'screen/account_choose/account_choose_screen.dart' as _i4;
 import 'screen/calendar_exercises/calendar_exercises_screen.dart' as _i7;
@@ -18,103 +17,110 @@ import 'screen/client/client_screen.dart' as _i6;
 import 'screen/client_choose/client_choose_screen.dart' as _i5;
 import 'screen/exercise_search/exercise_search_screen.dart' as _i8;
 import 'screen/login/login_screen.dart' as _i2;
+import 'screen/login/password_reset_screen.dart' as _i9;
 import 'screen/register/register_screen.dart' as _i3;
 import 'screen/splash/splash_screen.dart' as _i1;
 
-class AppRouter extends _i9.RootStackRouter {
-  AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
+class AppRouter extends _i10.RootStackRouter {
+  AppRouter([_i11.GlobalKey<_i11.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i9.PageFactory> pagesMap = {
+  final Map<String, _i10.PageFactory> pagesMap = {
     SplashRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
           routeData: routeData, child: _i1.SplashScreen());
     },
     LoginRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
           routeData: routeData, child: _i2.LoginScreen());
     },
     RegisterRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
           routeData: routeData, child: _i3.RegisterScreen());
     },
     AccountChooseRoute.name: (routeData) {
       final args = routeData.argsAs<AccountChooseRouteArgs>(
           orElse: () => const AccountChooseRouteArgs());
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i4.AccountChooseScreen(trainerId: args.trainerId));
     },
     ClientChooseRoute.name: (routeData) {
       final args = routeData.argsAs<ClientChooseRouteArgs>();
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
           routeData: routeData,
           child:
               _i5.ClientChooseScreen(key: args.key, trainerId: args.trainerId));
     },
     ClientRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
           routeData: routeData, child: _i6.ClientScreen());
     },
     CalendarExercisesRoute.name: (routeData) {
       final args = routeData.argsAs<CalendarExercisesRouteArgs>();
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i7.CalendarExercisesScreen(
               key: args.key, clientId: args.clientId));
     },
     ExerciseSearchRoute.name: (routeData) {
       final args = routeData.argsAs<ExerciseSearchRouteArgs>();
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i8.ExerciseSearchScreen(
               key: args.key,
               selectedDate: args.selectedDate,
               clientId: args.clientId,
               listLength: args.listLength));
+    },
+    PasswordResetRoute.name: (routeData) {
+      return _i10.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i9.PasswordResetScreen());
     }
   };
 
   @override
-  List<_i9.RouteConfig> get routes => [
-        _i9.RouteConfig(SplashRoute.name, path: '/'),
-        _i9.RouteConfig(LoginRoute.name, path: '/login-screen'),
-        _i9.RouteConfig(RegisterRoute.name, path: '/register-screen'),
-        _i9.RouteConfig(AccountChooseRoute.name,
+  List<_i10.RouteConfig> get routes => [
+        _i10.RouteConfig(SplashRoute.name, path: '/'),
+        _i10.RouteConfig(LoginRoute.name, path: '/login-screen'),
+        _i10.RouteConfig(RegisterRoute.name, path: '/register-screen'),
+        _i10.RouteConfig(AccountChooseRoute.name,
             path: '/account-choose-screen'),
-        _i9.RouteConfig(ClientChooseRoute.name, path: '/client-choose-screen'),
-        _i9.RouteConfig(ClientRoute.name, path: '/client-screen'),
-        _i9.RouteConfig(CalendarExercisesRoute.name,
+        _i10.RouteConfig(ClientChooseRoute.name, path: '/client-choose-screen'),
+        _i10.RouteConfig(ClientRoute.name, path: '/client-screen'),
+        _i10.RouteConfig(CalendarExercisesRoute.name,
             path: '/calendar-exercises-screen'),
-        _i9.RouteConfig(ExerciseSearchRoute.name,
-            path: '/exercise-search-screen')
+        _i10.RouteConfig(ExerciseSearchRoute.name,
+            path: '/exercise-search-screen'),
+        _i10.RouteConfig(PasswordResetRoute.name,
+            path: '/password-reset-screen')
       ];
 }
 
 /// generated route for [_i1.SplashScreen]
-class SplashRoute extends _i9.PageRouteInfo<void> {
+class SplashRoute extends _i10.PageRouteInfo<void> {
   const SplashRoute() : super(name, path: '/');
 
   static const String name = 'SplashRoute';
 }
 
 /// generated route for [_i2.LoginScreen]
-class LoginRoute extends _i9.PageRouteInfo<void> {
+class LoginRoute extends _i10.PageRouteInfo<void> {
   const LoginRoute() : super(name, path: '/login-screen');
 
   static const String name = 'LoginRoute';
 }
 
 /// generated route for [_i3.RegisterScreen]
-class RegisterRoute extends _i9.PageRouteInfo<void> {
+class RegisterRoute extends _i10.PageRouteInfo<void> {
   const RegisterRoute() : super(name, path: '/register-screen');
 
   static const String name = 'RegisterRoute';
 }
 
 /// generated route for [_i4.AccountChooseScreen]
-class AccountChooseRoute extends _i9.PageRouteInfo<AccountChooseRouteArgs> {
+class AccountChooseRoute extends _i10.PageRouteInfo<AccountChooseRouteArgs> {
   AccountChooseRoute({dynamic trainerId})
       : super(name,
             path: '/account-choose-screen',
@@ -135,7 +141,7 @@ class AccountChooseRouteArgs {
 }
 
 /// generated route for [_i5.ClientChooseScreen]
-class ClientChooseRoute extends _i9.PageRouteInfo<ClientChooseRouteArgs> {
+class ClientChooseRoute extends _i10.PageRouteInfo<ClientChooseRouteArgs> {
   ClientChooseRoute({_i11.Key? key, required String trainerId})
       : super(name,
             path: '/client-choose-screen',
@@ -158,7 +164,7 @@ class ClientChooseRouteArgs {
 }
 
 /// generated route for [_i6.ClientScreen]
-class ClientRoute extends _i9.PageRouteInfo<void> {
+class ClientRoute extends _i10.PageRouteInfo<void> {
   const ClientRoute() : super(name, path: '/client-screen');
 
   static const String name = 'ClientRoute';
@@ -166,7 +172,7 @@ class ClientRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for [_i7.CalendarExercisesScreen]
 class CalendarExercisesRoute
-    extends _i9.PageRouteInfo<CalendarExercisesRouteArgs> {
+    extends _i10.PageRouteInfo<CalendarExercisesRouteArgs> {
   CalendarExercisesRoute({_i11.Key? key, required String clientId})
       : super(name,
             path: '/calendar-exercises-screen',
@@ -189,7 +195,7 @@ class CalendarExercisesRouteArgs {
 }
 
 /// generated route for [_i8.ExerciseSearchScreen]
-class ExerciseSearchRoute extends _i9.PageRouteInfo<ExerciseSearchRouteArgs> {
+class ExerciseSearchRoute extends _i10.PageRouteInfo<ExerciseSearchRouteArgs> {
   ExerciseSearchRoute(
       {_i11.Key? key,
       required DateTime selectedDate,
@@ -225,4 +231,11 @@ class ExerciseSearchRouteArgs {
   String toString() {
     return 'ExerciseSearchRouteArgs{key: $key, selectedDate: $selectedDate, clientId: $clientId, listLength: $listLength}';
   }
+}
+
+/// generated route for [_i9.PasswordResetScreen]
+class PasswordResetRoute extends _i10.PageRouteInfo<void> {
+  const PasswordResetRoute() : super(name, path: '/password-reset-screen');
+
+  static const String name = 'PasswordResetRoute';
 }

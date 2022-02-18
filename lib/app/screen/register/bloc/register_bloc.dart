@@ -11,6 +11,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   RegisterBloc(RegisterState initialState) : super(initialState) {
     on<Register>((state, emit) async {
+      emit(RegisterState.loading());
       switch (state.registerData.userType) {
         case UserType.TRAINER:
           try {

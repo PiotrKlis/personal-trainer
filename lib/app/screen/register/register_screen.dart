@@ -29,19 +29,20 @@ class RegisterScreen extends StatelessWidget {
 class RegisterScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RegisterBloc, RegisterState>(builder: (context, state) {
-      return RegisterForm(state: state);
-    }, listener: (context, state) {
-      state.whenOrNull(
-          success: () {
-            Navigator.pop(context);
-          },
-          error: (error) =>
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  duration: Duration(
-                      milliseconds: DurationConst.snackbarVisibilityDuration),
-                  content: Text(AppLocalizations.of(context)!.error))));
-    });
+    return BlocConsumer<RegisterBloc, RegisterState>(
+        builder: (context, state) => RegisterForm(state: state),
+        listener: (context, state) {
+          state.whenOrNull(
+              success: () {
+                Navigator.pop(context);
+              },
+              error: (error) => ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      duration: Duration(
+                          milliseconds:
+                              DurationConst.snackbarVisibilityDuration),
+                      content: Text(AppLocalizations.of(context)!.error))));
+        });
   }
 }
 
@@ -65,103 +66,112 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Visibility(
-            visible: widget.state is Loading,
-            child: Center(child: CircularProgressIndicator())),
-        Padding(
-          padding: const EdgeInsets.all(Dimens.smallPadding),
-          child: TextFormField(
-            validator: RequiredValidator(
-                errorText: AppLocalizations.of(context)!.name_required_error),
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: AppLocalizations.of(context)!.name),
-            onChanged: (value) => _displayName = value,
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(Dimens.smallPadding),
+            child: TextFormField(
+              validator: RequiredValidator(
+                  errorText: AppLocalizations.of(context)!.name_required_error),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: AppLocalizations.of(context)!.name),
+              onChanged: (value) => _displayName = value,
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(Dimens.smallPadding),
-          child: TextFormField(
-            validator: MultiValidator([
-              EmailValidator(
-                  errorText: AppLocalizations.of(context)!.invalid_email_error),
-              RequiredValidator(
-                  errorText: AppLocalizations.of(context)!.email_required_error)
-            ]),
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: AppLocalizations.of(context)!.email),
-            onChanged: (value) => _email = value,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(Dimens.smallPadding),
-          child: TextFormField(
-            obscureText: true,
-            controller: _passwordController,
-            validator: MinLengthValidator(ValidatorConst.minPasswordLength,
-                errorText: AppLocalizations.of(context)!.password_length_error),
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: AppLocalizations.of(context)!.password),
-            onChanged: (value) => _password = value,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(Dimens.smallPadding),
-          child: Visibility(
-            visible: _userType == UserType.CLIENT,
+          Padding(
+            padding: const EdgeInsets.all(Dimens.smallPadding),
             child: TextFormField(
               validator: MultiValidator([
                 EmailValidator(
                     errorText:
-                    AppLocalizations.of(context)!.email_required_error),
+                        AppLocalizations.of(context)!.invalid_email_error),
                 RequiredValidator(
-                    errorText: AppLocalizations.of(context)!
-                        .trainer_email_required_error)
+                    errorText:
+                        AppLocalizations.of(context)!.email_required_error)
               ]),
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: AppLocalizations.of(context)!.trainer_email,
-              ),
-              onChanged: (value) => _trainerEmail = value,
+                  border: OutlineInputBorder(),
+                  hintText: AppLocalizations.of(context)!.email),
+              onChanged: (value) => _email = value,
             ),
           ),
-        ),
-        RadioListTile<UserType>(
-          title: Text(UserType.CLIENT.name),
-          value: UserType.CLIENT,
-          groupValue: _userType,
-          onChanged: (UserType? value) {
-            setState(() {
-              _userType = value!;
-            });
-          },
-        ),
-        RadioListTile<UserType>(
-          title: Text(UserType.TRAINER.name),
-          value: UserType.TRAINER,
-          groupValue: _userType,
-          onChanged: (UserType? value) {
-            setState(() {
-              _userType = value!;
-            });
-          },
-        ),
-        Padding(
-          padding: const EdgeInsets.all(Dimens.smallPadding),
-          child: ElevatedButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                registerUser(context);
-              }
-            },
-            child: Text(AppLocalizations.of(context)!.register),
+          Padding(
+            padding: const EdgeInsets.all(Dimens.smallPadding),
+            child: TextFormField(
+              obscureText: true,
+              controller: _passwordController,
+              validator: MinLengthValidator(ValidatorConst.minPasswordLength,
+                  errorText:
+                      AppLocalizations.of(context)!.password_length_error),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: AppLocalizations.of(context)!.password),
+              onChanged: (value) => _password = value,
+            ),
           ),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.all(Dimens.smallPadding),
+            child: Visibility(
+              visible: _userType == UserType.CLIENT,
+              child: TextFormField(
+                validator: MultiValidator([
+                  EmailValidator(
+                      errorText:
+                          AppLocalizations.of(context)!.email_required_error),
+                  RequiredValidator(
+                      errorText: AppLocalizations.of(context)!
+                          .trainer_email_required_error)
+                ]),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: AppLocalizations.of(context)!.trainer_email,
+                ),
+                onChanged: (value) => _trainerEmail = value,
+              ),
+            ),
+          ),
+          RadioListTile<UserType>(
+            title: Text(UserType.CLIENT.name),
+            value: UserType.CLIENT,
+            groupValue: _userType,
+            onChanged: (UserType? value) {
+              setState(() {
+                _userType = value!;
+              });
+            },
+          ),
+          RadioListTile<UserType>(
+            title: Text(UserType.TRAINER.name),
+            value: UserType.TRAINER,
+            groupValue: _userType,
+            onChanged: (UserType? value) {
+              setState(() {
+                _userType = value!;
+              });
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.all(Dimens.smallPadding),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  registerUser(context);
+                }
+              },
+              child: Text(AppLocalizations.of(context)!.register),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(Dimens.smallPadding),
+            child: Visibility(
+                visible: widget.state is Loading,
+                child: CircularProgressIndicator()),
+          )
+        ],
+      ),
     );
   }
 

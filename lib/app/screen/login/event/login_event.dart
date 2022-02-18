@@ -15,4 +15,5 @@ class LoginEvent with _$LoginEvent {
 
   const factory LoginEvent.navigateLoggedOut() = NavigateLoggedOut;
   const factory LoginEvent.navigateToRegister() = NavigateToRegister;
+  const factory LoginEvent.navigateToPasswordReset() = NavigateToPasswordReset;
 }

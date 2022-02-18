@@ -22,4 +22,7 @@ class AutoRouteNavigator {
   Future navigateToLoginScreen() => GetIt.I<AppRouter>().replace(LoginRoute());
 
   Future navigateToRegister() => GetIt.I<AppRouter>().push(RegisterRoute());
+
+  Future navigateToPasswordReset() =>
+      GetIt.I<AppRouter>().push(PasswordResetRoute());
 }
