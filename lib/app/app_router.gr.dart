@@ -7,6 +7,8 @@
 // **************************************************************************
 // AutoRouteGenerator
 // **************************************************************************
+//
+// ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i10;
 import 'package:flutter/material.dart' as _i11;
@@ -98,31 +100,35 @@ class AppRouter extends _i10.RootStackRouter {
       ];
 }
 
-/// generated route for [_i1.SplashScreen]
+/// generated route for
+/// [_i1.SplashScreen]
 class SplashRoute extends _i10.PageRouteInfo<void> {
-  const SplashRoute() : super(name, path: '/');
+  const SplashRoute() : super(SplashRoute.name, path: '/');
 
   static const String name = 'SplashRoute';
 }
 
-/// generated route for [_i2.LoginScreen]
+/// generated route for
+/// [_i2.LoginScreen]
 class LoginRoute extends _i10.PageRouteInfo<void> {
-  const LoginRoute() : super(name, path: '/login-screen');
+  const LoginRoute() : super(LoginRoute.name, path: '/login-screen');
 
   static const String name = 'LoginRoute';
 }
 
-/// generated route for [_i3.RegisterScreen]
+/// generated route for
+/// [_i3.RegisterScreen]
 class RegisterRoute extends _i10.PageRouteInfo<void> {
-  const RegisterRoute() : super(name, path: '/register-screen');
+  const RegisterRoute() : super(RegisterRoute.name, path: '/register-screen');
 
   static const String name = 'RegisterRoute';
 }
 
-/// generated route for [_i4.AccountChooseScreen]
+/// generated route for
+/// [_i4.AccountChooseScreen]
 class AccountChooseRoute extends _i10.PageRouteInfo<AccountChooseRouteArgs> {
   AccountChooseRoute({dynamic trainerId})
-      : super(name,
+      : super(AccountChooseRoute.name,
             path: '/account-choose-screen',
             args: AccountChooseRouteArgs(trainerId: trainerId));
 
@@ -140,10 +146,11 @@ class AccountChooseRouteArgs {
   }
 }
 
-/// generated route for [_i5.ClientChooseScreen]
+/// generated route for
+/// [_i5.ClientChooseScreen]
 class ClientChooseRoute extends _i10.PageRouteInfo<ClientChooseRouteArgs> {
   ClientChooseRoute({_i11.Key? key, required String trainerId})
-      : super(name,
+      : super(ClientChooseRoute.name,
             path: '/client-choose-screen',
             args: ClientChooseRouteArgs(key: key, trainerId: trainerId));
 
@@ -163,18 +170,20 @@ class ClientChooseRouteArgs {
   }
 }
 
-/// generated route for [_i6.ClientScreen]
+/// generated route for
+/// [_i6.ClientScreen]
 class ClientRoute extends _i10.PageRouteInfo<void> {
-  const ClientRoute() : super(name, path: '/client-screen');
+  const ClientRoute() : super(ClientRoute.name, path: '/client-screen');
 
   static const String name = 'ClientRoute';
 }
 
-/// generated route for [_i7.CalendarExercisesScreen]
+/// generated route for
+/// [_i7.CalendarExercisesScreen]
 class CalendarExercisesRoute
     extends _i10.PageRouteInfo<CalendarExercisesRouteArgs> {
   CalendarExercisesRoute({_i11.Key? key, required String clientId})
-      : super(name,
+      : super(CalendarExercisesRoute.name,
             path: '/calendar-exercises-screen',
             args: CalendarExercisesRouteArgs(key: key, clientId: clientId));
 
@@ -194,14 +203,15 @@ class CalendarExercisesRouteArgs {
   }
 }
 
-/// generated route for [_i8.ExerciseSearchScreen]
+/// generated route for
+/// [_i8.ExerciseSearchScreen]
 class ExerciseSearchRoute extends _i10.PageRouteInfo<ExerciseSearchRouteArgs> {
   ExerciseSearchRoute(
       {_i11.Key? key,
       required DateTime selectedDate,
       required String clientId,
       required int listLength})
-      : super(name,
+      : super(ExerciseSearchRoute.name,
             path: '/exercise-search-screen',
             args: ExerciseSearchRouteArgs(
                 key: key,
@@ -233,9 +243,11 @@ class ExerciseSearchRouteArgs {
   }
 }
 
-/// generated route for [_i9.PasswordResetScreen]
+/// generated route for
+/// [_i9.PasswordResetScreen]
 class PasswordResetRoute extends _i10.PageRouteInfo<void> {
-  const PasswordResetRoute() : super(name, path: '/password-reset-screen');
+  const PasswordResetRoute()
+      : super(PasswordResetRoute.name, path: '/password-reset-screen');
 
   static const String name = 'PasswordResetRoute';
 }

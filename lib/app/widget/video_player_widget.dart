@@ -21,7 +21,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     super.initState();
     String path = '$muxStreamBaseUrl/${widget.playbackId}.$videoExtension';
     _videoPlayerController = VideoPlayerController.network(path,
-        useCache: true,
+        // useCache: true,
         videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true))
       ..initialize().then((_) {
         setState(() {
