@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'exercise_search_add_exercise_state.dart';
@@ -11,32 +12,7 @@ part of 'exercise_search_add_exercise_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ExerciseSearchAddExerciseStateTearOff {
-  const _$ExerciseSearchAddExerciseStateTearOff();
-
-  _Initial initial() {
-    return const _Initial();
-  }
-
-  _ExerciseAddedSuccess exerciseAddedSuccess({required String exerciseName}) {
-    return _ExerciseAddedSuccess(
-      exerciseName: exerciseName,
-    );
-  }
-
-  _ExerciseAddedFailure exerciseAddedFailure({required String exerciseName}) {
-    return _ExerciseAddedFailure(
-      exerciseName: exerciseName,
-    );
-  }
-}
-
-/// @nodoc
-const $ExerciseSearchAddExerciseState =
-    _$ExerciseSearchAddExerciseStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ExerciseSearchAddExerciseState {
@@ -347,10 +323,10 @@ class _$_ExerciseAddedSuccess implements _ExerciseAddedSuccess {
 }
 
 abstract class _ExerciseAddedSuccess implements ExerciseSearchAddExerciseState {
-  const factory _ExerciseAddedSuccess({required String exerciseName}) =
+  const factory _ExerciseAddedSuccess({required final String exerciseName}) =
       _$_ExerciseAddedSuccess;
 
-  String get exerciseName;
+  String get exerciseName => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ExerciseAddedSuccessCopyWith<_ExerciseAddedSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -490,10 +466,10 @@ class _$_ExerciseAddedFailure implements _ExerciseAddedFailure {
 }
 
 abstract class _ExerciseAddedFailure implements ExerciseSearchAddExerciseState {
-  const factory _ExerciseAddedFailure({required String exerciseName}) =
+  const factory _ExerciseAddedFailure({required final String exerciseName}) =
       _$_ExerciseAddedFailure;
 
-  String get exerciseName;
+  String get exerciseName => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ExerciseAddedFailureCopyWith<_ExerciseAddedFailure> get copyWith =>
       throw _privateConstructorUsedError;

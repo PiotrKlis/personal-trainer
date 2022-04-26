@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'calendar_exercises_state.dart';
@@ -11,35 +12,7 @@ part of 'calendar_exercises_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$CalendarExercisesStateTearOff {
-  const _$CalendarExercisesStateTearOff();
-
-  _Started started() {
-    return const _Started();
-  }
-
-  _Loading loading() {
-    return const _Loading();
-  }
-
-  _Error error({required String error}) {
-    return _Error(
-      error: error,
-    );
-  }
-
-  _Content content({required List<UserExercise> userExercises}) {
-    return _Content(
-      userExercises: userExercises,
-    );
-  }
-}
-
-/// @nodoc
-const $CalendarExercisesState = _$CalendarExercisesStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CalendarExercisesState {
@@ -143,7 +116,7 @@ class _$_Started with DiagnosticableTreeMixin implements _Started {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'CalendarExercisesState.started'));
+        .add(DiagnosticsProperty('type', 'CalendarExercisesState.started'));
   }
 
   @override
@@ -265,7 +238,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'CalendarExercisesState.loading'));
+        .add(DiagnosticsProperty('type', 'CalendarExercisesState.loading'));
   }
 
   @override
@@ -500,9 +473,9 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
 }
 
 abstract class _Error implements CalendarExercisesState {
-  const factory _Error({required String error}) = _$_Error;
+  const factory _Error({required final String error}) = _$_Error;
 
-  String get error;
+  String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
 }
@@ -540,10 +513,15 @@ class __$ContentCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Content with DiagnosticableTreeMixin implements _Content {
-  const _$_Content({required this.userExercises});
+  const _$_Content({required final List<UserExercise> userExercises})
+      : _userExercises = userExercises;
 
+  final List<UserExercise> _userExercises;
   @override
-  final List<UserExercise> userExercises;
+  List<UserExercise> get userExercises {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userExercises);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -652,26 +630,14 @@ class _$_Content with DiagnosticableTreeMixin implements _Content {
 }
 
 abstract class _Content implements CalendarExercisesState {
-  const factory _Content({required List<UserExercise> userExercises}) =
+  const factory _Content({required final List<UserExercise> userExercises}) =
       _$_Content;
 
-  List<UserExercise> get userExercises;
+  List<UserExercise> get userExercises => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ContentCopyWith<_Content> get copyWith =>
       throw _privateConstructorUsedError;
 }
-
-/// @nodoc
-class _$MyClassTearOff {
-  const _$MyClassTearOff();
-
-  _MyClass call() {
-    return _MyClass();
-  }
-}
-
-/// @nodoc
-const $MyClass = _$MyClassTearOff();
 
 /// @nodoc
 mixin _$MyClass {}
@@ -720,7 +686,7 @@ class _$_MyClass with DiagnosticableTreeMixin implements _MyClass {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'MyClass'));
+    properties.add(DiagnosticsProperty('type', 'MyClass'));
   }
 
   @override

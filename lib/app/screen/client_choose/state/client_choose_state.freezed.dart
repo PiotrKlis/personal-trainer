@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'client_choose_state.dart';
@@ -11,35 +12,7 @@ part of 'client_choose_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ClientChooseStateTearOff {
-  const _$ClientChooseStateTearOff();
-
-  _Initial initial() {
-    return const _Initial();
-  }
-
-  _Loading loading() {
-    return const _Loading();
-  }
-
-  _Content content({required List<Client> clients}) {
-    return _Content(
-      clients: clients,
-    );
-  }
-
-  _Error error({required String error}) {
-    return _Error(
-      error: error,
-    );
-  }
-}
-
-/// @nodoc
-const $ClientChooseState = _$ClientChooseStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ClientChooseState {
@@ -372,10 +345,14 @@ class __$ContentCopyWithImpl<$Res> extends _$ClientChooseStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Content implements _Content {
-  const _$_Content({required this.clients});
+  const _$_Content({required final List<Client> clients}) : _clients = clients;
 
+  final List<Client> _clients;
   @override
-  final List<Client> clients;
+  List<Client> get clients {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_clients);
+  }
 
   @override
   String toString() {
@@ -475,9 +452,9 @@ class _$_Content implements _Content {
 }
 
 abstract class _Content implements ClientChooseState {
-  const factory _Content({required List<Client> clients}) = _$_Content;
+  const factory _Content({required final List<Client> clients}) = _$_Content;
 
-  List<Client> get clients;
+  List<Client> get clients => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ContentCopyWith<_Content> get copyWith =>
       throw _privateConstructorUsedError;
@@ -618,9 +595,9 @@ class _$_Error implements _Error {
 }
 
 abstract class _Error implements ClientChooseState {
-  const factory _Error({required String error}) = _$_Error;
+  const factory _Error({required final String error}) = _$_Error;
 
-  String get error;
+  String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
 }

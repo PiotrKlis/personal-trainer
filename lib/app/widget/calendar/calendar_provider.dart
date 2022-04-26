@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:personal_trainer/data/util/const.dart';
 
+@injectable
 class CalendarProvider {
   Future<Map<DateTime, bool>> getExerciseMarkerFor(
       {required DateTime dateTime, required String clientId}) async {

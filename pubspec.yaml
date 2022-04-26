@@ -51,11 +51,14 @@ dependencies:
   json_annotation: ^4.4.0
   firebase_core: ^1.15.0
   flutterfire_ui: ^0.4.0+3
+  injectable: ^1.5.3
+  flutter_flavor: ^3.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   auto_route_generator: ^3.2.3
+  injectable_generator: ^1.5.3
   build_runner: ^2.1.10
   freezed: ^2.0.2
 

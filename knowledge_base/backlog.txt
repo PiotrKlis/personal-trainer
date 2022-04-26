@@ -1,9 +1,6 @@
 Backlog
 
 MVP
-// Search
-//Calendar
-
 // Firebase screen
 
 - Disable back to firebase screen
@@ -30,6 +27,8 @@ MVP
 
 //Other
 - String provider
+- Check app on API 31
+- Flavors
 
 --------------------
 Done:

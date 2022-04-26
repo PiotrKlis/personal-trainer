@@ -1,20 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:injectable/injectable.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/model/user_type.dart';
 
-class LoginProvider {
+@injectable
+class AuthProvider {
   Future<UserType> loginUser(String email, String password) async {
     UserCredential credentials = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
-    if (credentials.user?.emailVerified == true) {
+    // if (credentials.user?.emailVerified == true) {
       UserType userType = await getUserType(credentials.user?.uid);
       return Future.value(userType);
-    } else {
-      return Future.error(throw FirebaseAuthException(
-          code: FirebaseAuthExceptionCodeConst.EMAIL_NOT_VERIFIED_EXCEPTION));
-    }
+    // } else {
+    //   return Future.error(throw FirebaseAuthException(
+    //       code: FirebaseAuthExceptionCodeConst.EMAIL_NOT_VERIFIED_EXCEPTION));
+    // }
   }
+
+  bool isUserLoggedIn() => FirebaseAuth.instance.currentUser != null;
 
 //todo add signOut feature
 // Future<Response> signOut() async {

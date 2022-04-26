@@ -13,6 +13,7 @@
 import 'package:auto_route/auto_route.dart' as _i10;
 import 'package:flutter/material.dart' as _i11;
 
+import 'core/auth_guard.dart' as _i12;
 import 'screen/account_choose/account_choose_screen.dart' as _i4;
 import 'screen/calendar_exercises/calendar_exercises_screen.dart' as _i7;
 import 'screen/client/client_screen.dart' as _i6;
@@ -24,8 +25,12 @@ import 'screen/register/register_screen.dart' as _i3;
 import 'screen/splash/splash_screen.dart' as _i1;
 
 class AppRouter extends _i10.RootStackRouter {
-  AppRouter([_i11.GlobalKey<_i11.NavigatorState>? navigatorKey])
+  AppRouter(
+      {_i11.GlobalKey<_i11.NavigatorState>? navigatorKey,
+      required this.authGuard})
       : super(navigatorKey);
+
+  final _i12.AuthGuard authGuard;
 
   @override
   final Map<String, _i10.PageFactory> pagesMap = {
@@ -84,7 +89,7 @@ class AppRouter extends _i10.RootStackRouter {
 
   @override
   List<_i10.RouteConfig> get routes => [
-        _i10.RouteConfig(SplashRoute.name, path: '/'),
+        _i10.RouteConfig(SplashRoute.name, path: '/', guards: [authGuard]),
         _i10.RouteConfig(LoginRoute.name, path: '/login-screen'),
         _i10.RouteConfig(RegisterRoute.name, path: '/register-screen'),
         _i10.RouteConfig(AccountChooseRoute.name,

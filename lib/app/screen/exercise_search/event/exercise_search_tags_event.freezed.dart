@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'exercise_search_tags_event.dart';
@@ -11,25 +12,7 @@ part of 'exercise_search_tags_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ExerciseSearchTagsEventTearOff {
-  const _$ExerciseSearchTagsEventTearOff();
-
-  GetTags getTags() {
-    return const GetTags();
-  }
-
-  ApplyFilter applyFilter({required String name}) {
-    return ApplyFilter(
-      name: name,
-    );
-  }
-}
-
-/// @nodoc
-const $ExerciseSearchTagsEvent = _$ExerciseSearchTagsEventTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ExerciseSearchTagsEvent {
@@ -319,9 +302,9 @@ class _$ApplyFilter implements ApplyFilter {
 }
 
 abstract class ApplyFilter implements ExerciseSearchTagsEvent {
-  const factory ApplyFilter({required String name}) = _$ApplyFilter;
+  const factory ApplyFilter({required final String name}) = _$ApplyFilter;
 
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ApplyFilterCopyWith<ApplyFilter> get copyWith =>
       throw _privateConstructorUsedError;

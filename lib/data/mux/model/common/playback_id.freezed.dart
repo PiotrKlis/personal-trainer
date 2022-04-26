@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'playback_id.dart';
@@ -11,30 +12,11 @@ part of 'playback_id.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 PlaybackId _$PlaybackIdFromJson(Map<String, dynamic> json) {
   return _PlaybackId.fromJson(json);
 }
-
-/// @nodoc
-class _$PlaybackIdTearOff {
-  const _$PlaybackIdTearOff();
-
-  _PlaybackId call({String? policy, String? id}) {
-    return _PlaybackId(
-      policy: policy,
-      id: id,
-    );
-  }
-
-  PlaybackId fromJson(Map<String, Object?> json) {
-    return PlaybackId.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $PlaybackId = _$PlaybackIdTearOff();
 
 /// @nodoc
 mixin _$PlaybackId {
@@ -145,6 +127,7 @@ class _$_PlaybackId implements _PlaybackId {
             const DeepCollectionEquality().equals(other.id, id));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -163,15 +146,16 @@ class _$_PlaybackId implements _PlaybackId {
 }
 
 abstract class _PlaybackId implements PlaybackId {
-  const factory _PlaybackId({String? policy, String? id}) = _$_PlaybackId;
+  const factory _PlaybackId({final String? policy, final String? id}) =
+      _$_PlaybackId;
 
   factory _PlaybackId.fromJson(Map<String, dynamic> json) =
       _$_PlaybackId.fromJson;
 
   @override
-  String? get policy;
+  String? get policy => throw _privateConstructorUsedError;
   @override
-  String? get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PlaybackIdCopyWith<_PlaybackId> get copyWith =>

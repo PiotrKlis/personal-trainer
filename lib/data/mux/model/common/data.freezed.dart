@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'data.dart';
@@ -11,52 +12,11 @@ part of 'data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Data _$DataFromJson(Map<String, dynamic> json) {
   return _Data.fromJson(json);
 }
-
-/// @nodoc
-class _$DataTearOff {
-  const _$DataTearOff();
-
-  _Data call(
-      {bool? test,
-      double? maxStoredFrameRate,
-      String? status,
-      List<Track>? tracks,
-      String? id,
-      String? maxStoredResolution,
-      String? masterAccess,
-      List<PlaybackId>? playbackIds,
-      String? createdAt,
-      double? duration,
-      String? mp4Support,
-      String? aspectRatio}) {
-    return _Data(
-      test: test,
-      maxStoredFrameRate: maxStoredFrameRate,
-      status: status,
-      tracks: tracks,
-      id: id,
-      maxStoredResolution: maxStoredResolution,
-      masterAccess: masterAccess,
-      playbackIds: playbackIds,
-      createdAt: createdAt,
-      duration: duration,
-      mp4Support: mp4Support,
-      aspectRatio: aspectRatio,
-    );
-  }
-
-  Data fromJson(Map<String, Object?> json) {
-    return Data.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Data = _$DataTearOff();
 
 /// @nodoc
 mixin _$Data {
@@ -277,15 +237,17 @@ class _$_Data implements _Data {
       {this.test,
       this.maxStoredFrameRate,
       this.status,
-      this.tracks,
+      final List<Track>? tracks,
       this.id,
       this.maxStoredResolution,
       this.masterAccess,
-      this.playbackIds,
+      final List<PlaybackId>? playbackIds,
       this.createdAt,
       this.duration,
       this.mp4Support,
-      this.aspectRatio});
+      this.aspectRatio})
+      : _tracks = tracks,
+        _playbackIds = playbackIds;
 
   factory _$_Data.fromJson(Map<String, dynamic> json) => _$$_DataFromJson(json);
 
@@ -295,16 +257,30 @@ class _$_Data implements _Data {
   final double? maxStoredFrameRate;
   @override
   final String? status;
+  final List<Track>? _tracks;
   @override
-  final List<Track>? tracks;
+  List<Track>? get tracks {
+    final value = _tracks;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final String? id;
   @override
   final String? maxStoredResolution;
   @override
   final String? masterAccess;
+  final List<PlaybackId>? _playbackIds;
   @override
-  final List<PlaybackId>? playbackIds;
+  List<PlaybackId>? get playbackIds {
+    final value = _playbackIds;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final String? createdAt;
   @override
@@ -344,6 +320,7 @@ class _$_Data implements _Data {
                 .equals(other.aspectRatio, aspectRatio));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -373,45 +350,45 @@ class _$_Data implements _Data {
 
 abstract class _Data implements Data {
   const factory _Data(
-      {bool? test,
-      double? maxStoredFrameRate,
-      String? status,
-      List<Track>? tracks,
-      String? id,
-      String? maxStoredResolution,
-      String? masterAccess,
-      List<PlaybackId>? playbackIds,
-      String? createdAt,
-      double? duration,
-      String? mp4Support,
-      String? aspectRatio}) = _$_Data;
+      {final bool? test,
+      final double? maxStoredFrameRate,
+      final String? status,
+      final List<Track>? tracks,
+      final String? id,
+      final String? maxStoredResolution,
+      final String? masterAccess,
+      final List<PlaybackId>? playbackIds,
+      final String? createdAt,
+      final double? duration,
+      final String? mp4Support,
+      final String? aspectRatio}) = _$_Data;
 
   factory _Data.fromJson(Map<String, dynamic> json) = _$_Data.fromJson;
 
   @override
-  bool? get test;
+  bool? get test => throw _privateConstructorUsedError;
   @override
-  double? get maxStoredFrameRate;
+  double? get maxStoredFrameRate => throw _privateConstructorUsedError;
   @override
-  String? get status;
+  String? get status => throw _privateConstructorUsedError;
   @override
-  List<Track>? get tracks;
+  List<Track>? get tracks => throw _privateConstructorUsedError;
   @override
-  String? get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String? get maxStoredResolution;
+  String? get maxStoredResolution => throw _privateConstructorUsedError;
   @override
-  String? get masterAccess;
+  String? get masterAccess => throw _privateConstructorUsedError;
   @override
-  List<PlaybackId>? get playbackIds;
+  List<PlaybackId>? get playbackIds => throw _privateConstructorUsedError;
   @override
-  String? get createdAt;
+  String? get createdAt => throw _privateConstructorUsedError;
   @override
-  double? get duration;
+  double? get duration => throw _privateConstructorUsedError;
   @override
-  String? get mp4Support;
+  String? get mp4Support => throw _privateConstructorUsedError;
   @override
-  String? get aspectRatio;
+  String? get aspectRatio => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$DataCopyWith<_Data> get copyWith => throw _privateConstructorUsedError;

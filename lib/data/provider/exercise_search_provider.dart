@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
 import 'package:personal_trainer/data/util/const.dart';
 import 'package:personal_trainer/domain/mapper/exercise_mapper.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
+@injectable
 class ExerciseSearchProvider {
   final _exerciseMapper = GetIt.I.get<ExerciseMapper>();
 

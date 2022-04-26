@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'register_state.dart';
@@ -11,33 +12,7 @@ part of 'register_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$RegisterStateTearOff {
-  const _$RegisterStateTearOff();
-
-  Initial initial() {
-    return const Initial();
-  }
-
-  Succes success() {
-    return const Succes();
-  }
-
-  Loading loading() {
-    return const Loading();
-  }
-
-  Error error({required String error}) {
-    return Error(
-      error: error,
-    );
-  }
-}
-
-/// @nodoc
-const $RegisterState = _$RegisterStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$RegisterState {
@@ -587,9 +562,9 @@ class _$Error implements Error {
 }
 
 abstract class Error implements RegisterState {
-  const factory Error({required String error}) = _$Error;
+  const factory Error({required final String error}) = _$Error;
 
-  String get error;
+  String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ErrorCopyWith<Error> get copyWith => throw _privateConstructorUsedError;
 }

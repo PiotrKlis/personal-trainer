@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'login_event.dart';
@@ -11,44 +12,7 @@ part of 'login_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$LoginEventTearOff {
-  const _$LoginEventTearOff();
-
-  InitFirebase initFirebase() {
-    return const InitFirebase();
-  }
-
-  LogIn logIn({required String login, required String password}) {
-    return LogIn(
-      login: login,
-      password: password,
-    );
-  }
-
-  NavigateLoggedIn navigateLoggedIn({required UserType userType}) {
-    return NavigateLoggedIn(
-      userType: userType,
-    );
-  }
-
-  NavigateLoggedOut navigateLoggedOut() {
-    return const NavigateLoggedOut();
-  }
-
-  NavigateToRegister navigateToRegister() {
-    return const NavigateToRegister();
-  }
-
-  NavigateToPasswordReset navigateToPasswordReset() {
-    return const NavigateToPasswordReset();
-  }
-}
-
-/// @nodoc
-const $LoginEvent = _$LoginEventTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$LoginEvent {
@@ -420,11 +384,11 @@ class _$LogIn implements LogIn {
 }
 
 abstract class LogIn implements LoginEvent {
-  const factory LogIn({required String login, required String password}) =
-      _$LogIn;
+  const factory LogIn(
+      {required final String login, required final String password}) = _$LogIn;
 
-  String get login;
-  String get password;
+  String get login => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $LogInCopyWith<LogIn> get copyWith => throw _privateConstructorUsedError;
 }
@@ -580,10 +544,10 @@ class _$NavigateLoggedIn implements NavigateLoggedIn {
 }
 
 abstract class NavigateLoggedIn implements LoginEvent {
-  const factory NavigateLoggedIn({required UserType userType}) =
+  const factory NavigateLoggedIn({required final UserType userType}) =
       _$NavigateLoggedIn;
 
-  UserType get userType;
+  UserType get userType => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $NavigateLoggedInCopyWith<NavigateLoggedIn> get copyWith =>
       throw _privateConstructorUsedError;

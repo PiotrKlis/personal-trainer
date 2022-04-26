@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:personal_trainer/app/app_router.gr.dart';
+import 'package:personal_trainer/app/core/get_it_config.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_event.dart';
-import 'package:personal_trainer/app/util/auto_route_navigator.dart';
 import 'package:personal_trainer/app/util/event_transformer.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
 import 'package:personal_trainer/data/util/const.dart';
@@ -14,7 +15,6 @@ class CalendarExercisesBloc
     extends Bloc<CalendarExerciseEvent, CalendarExercisesState> {
   final CalendarExerciseProvider _calendarExerciseProvider =
       GetIt.I.get<CalendarExerciseProvider>();
-  final AutoRouteNavigator _navigator = AutoRouteNavigator();
   DateTime _selectedDate = DateTime.now();
   List<UserExercise> _userExercises = [];
 
@@ -107,10 +107,11 @@ class CalendarExercisesBloc
 
     on<SearchNavigation>((event, emitter) async {
       try {
-        await _navigator.navigateToExerciseSearch(
+        getIt.get<AppRouter>().push(ExerciseSearchRoute(
             selectedDate: _selectedDate,
             clientId: event.clientId,
-            listLength: _userExercises.length);
+            listLength: _userExercises.length
+        ));
         emitter(CalendarExercisesState.loading());
         await _updateExercisesOnBackFromSearch(event);
         emitter(CalendarExercisesState.content(userExercises: _userExercises));

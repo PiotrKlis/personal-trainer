@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'exercise.dart';
@@ -11,28 +12,7 @@ part of 'exercise.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ExerciseTearOff {
-  const _$ExerciseTearOff();
-
-  _Exercise call(
-      {required String id,
-      required String title,
-      required String playbackId,
-      required List<String> tags}) {
-    return _Exercise(
-      id: id,
-      title: title,
-      playbackId: playbackId,
-      tags: tags,
-    );
-  }
-}
-
-/// @nodoc
-const $Exercise = _$ExerciseTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$Exercise {
@@ -141,7 +121,8 @@ class _$_Exercise implements _Exercise {
       {required this.id,
       required this.title,
       required this.playbackId,
-      required this.tags});
+      required final List<String> tags})
+      : _tags = tags;
 
   @override
   final String id;
@@ -149,8 +130,12 @@ class _$_Exercise implements _Exercise {
   final String title;
   @override
   final String playbackId;
+  final List<String> _tags;
   @override
-  final List<String> tags;
+  List<String> get tags {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
 
   @override
   String toString() {
@@ -185,19 +170,19 @@ class _$_Exercise implements _Exercise {
 
 abstract class _Exercise implements Exercise {
   const factory _Exercise(
-      {required String id,
-      required String title,
-      required String playbackId,
-      required List<String> tags}) = _$_Exercise;
+      {required final String id,
+      required final String title,
+      required final String playbackId,
+      required final List<String> tags}) = _$_Exercise;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @override
-  String get playbackId;
+  String get playbackId => throw _privateConstructorUsedError;
   @override
-  List<String> get tags;
+  List<String> get tags => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ExerciseCopyWith<_Exercise> get copyWith =>

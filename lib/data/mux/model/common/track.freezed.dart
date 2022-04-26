@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'track.dart';
@@ -11,44 +12,11 @@ part of 'track.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Track _$TrackFromJson(Map<String, dynamic> json) {
   return _Track.fromJson(json);
 }
-
-/// @nodoc
-class _$TrackTearOff {
-  const _$TrackTearOff();
-
-  _Track call(
-      {int? maxWidth,
-      String? type,
-      String? id,
-      double? duration,
-      double? maxFrameRate,
-      int? maxHeight,
-      String? maxChannelLayout,
-      int? maxChannels}) {
-    return _Track(
-      maxWidth: maxWidth,
-      type: type,
-      id: id,
-      duration: duration,
-      maxFrameRate: maxFrameRate,
-      maxHeight: maxHeight,
-      maxChannelLayout: maxChannelLayout,
-      maxChannels: maxChannels,
-    );
-  }
-
-  Track fromJson(Map<String, Object?> json) {
-    return Track.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Track = _$TrackTearOff();
 
 /// @nodoc
 mixin _$Track {
@@ -266,6 +234,7 @@ class _$_Track implements _Track {
                 .equals(other.maxChannels, maxChannels));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -291,33 +260,33 @@ class _$_Track implements _Track {
 
 abstract class _Track implements Track {
   const factory _Track(
-      {int? maxWidth,
-      String? type,
-      String? id,
-      double? duration,
-      double? maxFrameRate,
-      int? maxHeight,
-      String? maxChannelLayout,
-      int? maxChannels}) = _$_Track;
+      {final int? maxWidth,
+      final String? type,
+      final String? id,
+      final double? duration,
+      final double? maxFrameRate,
+      final int? maxHeight,
+      final String? maxChannelLayout,
+      final int? maxChannels}) = _$_Track;
 
   factory _Track.fromJson(Map<String, dynamic> json) = _$_Track.fromJson;
 
   @override
-  int? get maxWidth;
+  int? get maxWidth => throw _privateConstructorUsedError;
   @override
-  String? get type;
+  String? get type => throw _privateConstructorUsedError;
   @override
-  String? get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  double? get duration;
+  double? get duration => throw _privateConstructorUsedError;
   @override
-  double? get maxFrameRate;
+  double? get maxFrameRate => throw _privateConstructorUsedError;
   @override
-  int? get maxHeight;
+  int? get maxHeight => throw _privateConstructorUsedError;
   @override
-  String? get maxChannelLayout;
+  String? get maxChannelLayout => throw _privateConstructorUsedError;
   @override
-  int? get maxChannels;
+  int? get maxChannels => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TrackCopyWith<_Track> get copyWith => throw _privateConstructorUsedError;

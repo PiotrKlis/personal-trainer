@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'calendar_state.dart';
@@ -11,33 +12,7 @@ part of 'calendar_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$CalendarStateTearOff {
-  const _$CalendarStateTearOff();
-
-  _EventForDate eventMarkersData({required Map<DateTime, bool> eventMarkers}) {
-    return _EventForDate(
-      eventMarkers: eventMarkers,
-    );
-  }
-
-  _LoadEvents loadEventMarkers({required Map<DateTime, bool> events}) {
-    return _LoadEvents(
-      events: events,
-    );
-  }
-
-  _Error error({required String error}) {
-    return _Error(
-      error: error,
-    );
-  }
-}
-
-/// @nodoc
-const $CalendarState = _$CalendarStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CalendarState {
@@ -140,10 +115,15 @@ class __$EventForDateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_EventForDate implements _EventForDate {
-  const _$_EventForDate({required this.eventMarkers});
+  const _$_EventForDate({required final Map<DateTime, bool> eventMarkers})
+      : _eventMarkers = eventMarkers;
 
+  final Map<DateTime, bool> _eventMarkers;
   @override
-  final Map<DateTime, bool> eventMarkers;
+  Map<DateTime, bool> get eventMarkers {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_eventMarkers);
+  }
 
   @override
   String toString() {
@@ -239,10 +219,10 @@ class _$_EventForDate implements _EventForDate {
 }
 
 abstract class _EventForDate implements CalendarState {
-  const factory _EventForDate({required Map<DateTime, bool> eventMarkers}) =
-      _$_EventForDate;
+  const factory _EventForDate(
+      {required final Map<DateTime, bool> eventMarkers}) = _$_EventForDate;
 
-  Map<DateTime, bool> get eventMarkers;
+  Map<DateTime, bool> get eventMarkers => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$EventForDateCopyWith<_EventForDate> get copyWith =>
       throw _privateConstructorUsedError;
@@ -282,10 +262,15 @@ class __$LoadEventsCopyWithImpl<$Res> extends _$CalendarStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LoadEvents implements _LoadEvents {
-  const _$_LoadEvents({required this.events});
+  const _$_LoadEvents({required final Map<DateTime, bool> events})
+      : _events = events;
 
+  final Map<DateTime, bool> _events;
   @override
-  final Map<DateTime, bool> events;
+  Map<DateTime, bool> get events {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_events);
+  }
 
   @override
   String toString() {
@@ -380,10 +365,10 @@ class _$_LoadEvents implements _LoadEvents {
 }
 
 abstract class _LoadEvents implements CalendarState {
-  const factory _LoadEvents({required Map<DateTime, bool> events}) =
+  const factory _LoadEvents({required final Map<DateTime, bool> events}) =
       _$_LoadEvents;
 
-  Map<DateTime, bool> get events;
+  Map<DateTime, bool> get events => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$LoadEventsCopyWith<_LoadEvents> get copyWith =>
       throw _privateConstructorUsedError;
@@ -519,9 +504,9 @@ class _$_Error implements _Error {
 }
 
 abstract class _Error implements CalendarState {
-  const factory _Error({required String error}) = _$_Error;
+  const factory _Error({required final String error}) = _$_Error;
 
-  String get error;
+  String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
 }

@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'exercise_search_tags_state.dart';
@@ -11,31 +12,7 @@ part of 'exercise_search_tags_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$ExerciseSearchTagsStateTearOff {
-  const _$ExerciseSearchTagsStateTearOff();
-
-  _Initial initial() {
-    return const _Initial();
-  }
-
-  _Content content({required List<String> tags}) {
-    return _Content(
-      tags: tags,
-    );
-  }
-
-  _Error error({required String error}) {
-    return _Error(
-      error: error,
-    );
-  }
-}
-
-/// @nodoc
-const $ExerciseSearchTagsState = _$ExerciseSearchTagsStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ExerciseSearchTagsState {
@@ -244,10 +221,14 @@ class __$ContentCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Content implements _Content {
-  const _$_Content({required this.tags});
+  const _$_Content({required final List<String> tags}) : _tags = tags;
 
+  final List<String> _tags;
   @override
-  final List<String> tags;
+  List<String> get tags {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
 
   @override
   String toString() {
@@ -341,9 +322,9 @@ class _$_Content implements _Content {
 }
 
 abstract class _Content implements ExerciseSearchTagsState {
-  const factory _Content({required List<String> tags}) = _$_Content;
+  const factory _Content({required final List<String> tags}) = _$_Content;
 
-  List<String> get tags;
+  List<String> get tags => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ContentCopyWith<_Content> get copyWith =>
       throw _privateConstructorUsedError;
@@ -479,9 +460,9 @@ class _$_Error implements _Error {
 }
 
 abstract class _Error implements ExerciseSearchTagsState {
-  const factory _Error({required String error}) = _$_Error;
+  const factory _Error({required final String error}) = _$_Error;
 
-  String get error;
+  String get error => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
 }

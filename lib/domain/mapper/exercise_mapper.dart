@@ -1,5 +1,7 @@
+import 'package:injectable/injectable.dart';
 import 'package:personal_trainer/domain/model/exercise.dart';
 
+@injectable
 class ExerciseMapper {
   Exercise mapToExercise(Map<String, dynamic> data) {
     return Exercise(

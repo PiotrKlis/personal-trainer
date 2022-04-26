@@ -1,5 +1,6 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'calendar_exercises_event.dart';
@@ -11,86 +12,11 @@ part of 'calendar_exercises_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$CalendarExerciseEventTearOff {
-  const _$CalendarExerciseEventTearOff();
-
-  NewDateSelected newDateSelected(
-      {required DateTime selectedDate, required String clientId}) {
-    return NewDateSelected(
-      selectedDate: selectedDate,
-      clientId: clientId,
-    );
-  }
-
-  SearchNavigation navigateToSearchScreen({required String clientId}) {
-    return SearchNavigation(
-      clientId: clientId,
-    );
-  }
-
-  ExerciseDeleted exerciseDeleted(
-      {required String userExerciseId,
-      required String clientId,
-      required int index}) {
-    return ExerciseDeleted(
-      userExerciseId: userExerciseId,
-      clientId: clientId,
-      index: index,
-    );
-  }
-
-  SetsSubmit setsSubmit(
-      {required String clientId,
-      required String setsNumber,
-      required String userExerciseId}) {
-    return SetsSubmit(
-      clientId: clientId,
-      setsNumber: setsNumber,
-      userExerciseId: userExerciseId,
-    );
-  }
-
-  RepsSubmit repsSubmit(
-      {required String clientId,
-      required String repsNumber,
-      required String userExerciseId}) {
-    return RepsSubmit(
-      clientId: clientId,
-      repsNumber: repsNumber,
-      userExerciseId: userExerciseId,
-    );
-  }
-
-  ReorderExercises reorderExercises(
-      {required int oldIndex,
-      required int newIndex,
-      required String clientId}) {
-    return ReorderExercises(
-      oldIndex: oldIndex,
-      newIndex: newIndex,
-      clientId: clientId,
-    );
-  }
-
-  NewDateFormatSelected newDateFormatSelected(
-      {required CalendarFormat calendarFormat, required String clientId}) {
-    return NewDateFormatSelected(
-      calendarFormat: calendarFormat,
-      clientId: clientId,
-    );
-  }
-}
-
-/// @nodoc
-const $CalendarExerciseEvent = _$CalendarExerciseEventTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CalendarExerciseEvent {
   String get clientId => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime selectedDate, String clientId)
@@ -403,12 +329,12 @@ class _$NewDateSelected implements NewDateSelected {
 
 abstract class NewDateSelected implements CalendarExerciseEvent {
   const factory NewDateSelected(
-      {required DateTime selectedDate,
-      required String clientId}) = _$NewDateSelected;
+      {required final DateTime selectedDate,
+      required final String clientId}) = _$NewDateSelected;
 
-  DateTime get selectedDate;
+  DateTime get selectedDate => throw _privateConstructorUsedError;
   @override
-  String get clientId;
+  String get clientId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $NewDateSelectedCopyWith<NewDateSelected> get copyWith =>
@@ -592,11 +518,11 @@ class _$SearchNavigation implements SearchNavigation {
 }
 
 abstract class SearchNavigation implements CalendarExerciseEvent {
-  const factory SearchNavigation({required String clientId}) =
+  const factory SearchNavigation({required final String clientId}) =
       _$SearchNavigation;
 
   @override
-  String get clientId;
+  String get clientId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $SearchNavigationCopyWith<SearchNavigation> get copyWith =>
@@ -804,14 +730,14 @@ class _$ExerciseDeleted implements ExerciseDeleted {
 
 abstract class ExerciseDeleted implements CalendarExerciseEvent {
   const factory ExerciseDeleted(
-      {required String userExerciseId,
-      required String clientId,
-      required int index}) = _$ExerciseDeleted;
+      {required final String userExerciseId,
+      required final String clientId,
+      required final int index}) = _$ExerciseDeleted;
 
-  String get userExerciseId;
+  String get userExerciseId => throw _privateConstructorUsedError;
   @override
-  String get clientId;
-  int get index;
+  String get clientId => throw _privateConstructorUsedError;
+  int get index => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $ExerciseDeletedCopyWith<ExerciseDeleted> get copyWith =>
@@ -1019,14 +945,14 @@ class _$SetsSubmit implements SetsSubmit {
 
 abstract class SetsSubmit implements CalendarExerciseEvent {
   const factory SetsSubmit(
-      {required String clientId,
-      required String setsNumber,
-      required String userExerciseId}) = _$SetsSubmit;
+      {required final String clientId,
+      required final String setsNumber,
+      required final String userExerciseId}) = _$SetsSubmit;
 
   @override
-  String get clientId;
-  String get setsNumber;
-  String get userExerciseId;
+  String get clientId => throw _privateConstructorUsedError;
+  String get setsNumber => throw _privateConstructorUsedError;
+  String get userExerciseId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $SetsSubmitCopyWith<SetsSubmit> get copyWith =>
@@ -1234,14 +1160,14 @@ class _$RepsSubmit implements RepsSubmit {
 
 abstract class RepsSubmit implements CalendarExerciseEvent {
   const factory RepsSubmit(
-      {required String clientId,
-      required String repsNumber,
-      required String userExerciseId}) = _$RepsSubmit;
+      {required final String clientId,
+      required final String repsNumber,
+      required final String userExerciseId}) = _$RepsSubmit;
 
   @override
-  String get clientId;
-  String get repsNumber;
-  String get userExerciseId;
+  String get clientId => throw _privateConstructorUsedError;
+  String get repsNumber => throw _privateConstructorUsedError;
+  String get userExerciseId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $RepsSubmitCopyWith<RepsSubmit> get copyWith =>
@@ -1446,14 +1372,14 @@ class _$ReorderExercises implements ReorderExercises {
 
 abstract class ReorderExercises implements CalendarExerciseEvent {
   const factory ReorderExercises(
-      {required int oldIndex,
-      required int newIndex,
-      required String clientId}) = _$ReorderExercises;
+      {required final int oldIndex,
+      required final int newIndex,
+      required final String clientId}) = _$ReorderExercises;
 
-  int get oldIndex;
-  int get newIndex;
+  int get oldIndex => throw _privateConstructorUsedError;
+  int get newIndex => throw _privateConstructorUsedError;
   @override
-  String get clientId;
+  String get clientId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $ReorderExercisesCopyWith<ReorderExercises> get copyWith =>
@@ -1651,12 +1577,12 @@ class _$NewDateFormatSelected implements NewDateFormatSelected {
 
 abstract class NewDateFormatSelected implements CalendarExerciseEvent {
   const factory NewDateFormatSelected(
-      {required CalendarFormat calendarFormat,
-      required String clientId}) = _$NewDateFormatSelected;
+      {required final CalendarFormat calendarFormat,
+      required final String clientId}) = _$NewDateFormatSelected;
 
-  CalendarFormat get calendarFormat;
+  CalendarFormat get calendarFormat => throw _privateConstructorUsedError;
   @override
-  String get clientId;
+  String get clientId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $NewDateFormatSelectedCopyWith<NewDateFormatSelected> get copyWith =>
