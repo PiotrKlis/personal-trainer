@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:personal_trainer/app/model/exercise.dart';
 import 'package:personal_trainer/app/screen/exercise_search/bloc/exercise_search_add_exercise_bloc.dart';
 import 'package:personal_trainer/app/screen/exercise_search/bloc/exercise_search_tags_bloc.dart';
 import 'package:personal_trainer/app/screen/exercise_search/event/exercise_search_add_exercise_event.dart';
@@ -13,8 +14,6 @@ import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/app/widget/error_view.dart';
 import 'package:personal_trainer/app/widget/video_player_widget.dart';
 import 'package:personal_trainer/data/util/const.dart';
-import 'package:personal_trainer/domain/model/exercise.dart';
-
 import 'bloc/exercise_search_bloc.dart';
 import 'state/exercise_search_state.dart';
 

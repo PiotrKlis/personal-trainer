@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:personal_trainer/app/model/register_data.dart';
+import 'package:personal_trainer/app/model/user_type.dart';
 import 'package:personal_trainer/app/screen/register/bloc/register_bloc.dart';
 import 'package:personal_trainer/app/screen/register/event/register_event.dart';
 import 'package:personal_trainer/app/screen/register/state/register_state.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
 import 'package:personal_trainer/data/util/const.dart';
-import 'package:personal_trainer/domain/model/register_data.dart';
-import 'package:personal_trainer/domain/model/user_type.dart';
 
 class RegisterScreen extends StatelessWidget {
   @override

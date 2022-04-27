@@ -1,14 +1,10 @@
-import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:personal_trainer/app/app_router.gr.dart';
 import 'package:personal_trainer/app/screen/client_choose/bloc/client_choose_cubit.dart';
 import 'package:personal_trainer/app/screen/client_choose/state/client_choose_state.dart';
-import 'package:personal_trainer/app/widget/toast_message.dart';
-import 'package:personal_trainer/domain/model/client.dart';
 
 class ClientChooseScreen extends StatelessWidget {
   final String trainerId;

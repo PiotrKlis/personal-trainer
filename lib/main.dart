@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:personal_trainer/app/app_router.gr.dart';
-import 'package:personal_trainer/app/core/get_it_config.dart';
+import 'package:personal_trainer/app/core/dependency_injection/get_it_config.dart';
+import 'package:personal_trainer/app/core/navigation/app_router.gr.dart';
 import 'package:personal_trainer/app/util/localisation_keys.dart';
 
 void main() async {

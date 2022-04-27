@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:personal_trainer/domain/model/exercise.dart';
+import 'package:personal_trainer/app/model/exercise.dart';
 
 @injectable
 class ExerciseMapper {

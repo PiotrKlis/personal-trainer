@@ -1,6 +1,6 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:personal_trainer/domain/model/client.dart';
+import 'package:personal_trainer/app/model/client.dart';
 
 part 'client_choose_state.freezed.dart';
 

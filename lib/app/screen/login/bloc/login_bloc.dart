@@ -1,15 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:personal_trainer/app/app_router.gr.dart';
-import 'package:personal_trainer/app/core/get_it_config.dart';
+import 'package:personal_trainer/app/core/dependency_injection/get_it_config.dart';
+import 'package:personal_trainer/app/core/navigation/app_router.gr.dart';
+import 'package:personal_trainer/app/model/user_type.dart';
 import 'package:personal_trainer/app/screen/login/event/login_event.dart';
 import 'package:personal_trainer/app/screen/login/state/login_state.dart';
 import 'package:personal_trainer/app/util/event_transformer.dart';
 import 'package:personal_trainer/data/provider/firebase_provider.dart';
 import 'package:personal_trainer/data/provider/auth_provider.dart';
 import 'package:personal_trainer/data/util/const.dart';
-import 'package:personal_trainer/domain/model/user_type.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthProvider _authProvider = GetIt.I.get<AuthProvider>();
@@ -56,15 +56,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
 
     on<NavigateLoggedOut>((event, emit) async {
-      GetIt.I<AppRouter>().replace(LoginRoute());
+      getIt.get<AppRouter>().replace(LoginRoute());
     });
 
     on<NavigateToRegister>((event, emit) async {
-      GetIt.I<AppRouter>().push(RegisterRoute());
+      getIt.get<AppRouter>().push(RegisterRoute());
     });
 
     on<NavigateToPasswordReset>((event, emit) async {
-      GetIt.I<AppRouter>().push(PasswordResetRoute());
+      getIt.get<AppRouter>().push(PasswordResetRoute());
     });
   }
 }

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:personal_trainer/domain/model/exercise.dart';
+import 'package:personal_trainer/app/model/exercise.dart';
 
 part 'exercise_search_state.freezed.dart';
 

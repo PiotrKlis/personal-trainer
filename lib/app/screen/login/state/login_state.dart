@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:personal_trainer/domain/model/user_type.dart';
+import '../../../model/user_type.dart';
 part 'login_state.freezed.dart';
 
 @freezed

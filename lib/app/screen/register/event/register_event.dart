@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:personal_trainer/domain/model/register_data.dart';
-import 'package:personal_trainer/domain/model/user_type.dart';
+import 'package:personal_trainer/app/model/register_data.dart';
 part 'register_event.freezed.dart';
 
 @freezed
