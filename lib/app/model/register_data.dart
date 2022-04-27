@@ -7,7 +7,7 @@ part 'register_data.freezed.dart';
 class RegisterData with _$RegisterData {
   const factory RegisterData(
       {required String email,
-      required String displayName,
+      required String name,
       required String password,
       required String trainerEmail,
       required UserType userType}) = _RegisterData;

@@ -2,36 +2,42 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:personal_trainer/app/model/register_data.dart';
+import 'package:personal_trainer/app/model/user_type.dart';
+import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/util/const.dart';
 
 @injectable
 class RegisterProvider {
-  Future registerTrainerAndClient(RegisterData registerData) async {
+  Future registerTrainerAndClient({required RegisterData registerData}) async {
     try {
-      await _createUser(registerData.email, registerData.password);
-      await _addTrainerDataToDB(
-          registerData.email, registerData.displayName, registerData.password);
-      await _addClientDataToDB(registerData.email, registerData.displayName,
-          registerData.password, registerData.trainerEmail);
+      await _createUser(
+          email: registerData.email, password: registerData.password);
+      await _createTrainerDataInDB(
+          userEmail: registerData.email,
+          name: registerData.name,
+          password: registerData.password);
       FirebaseAuth.instance.currentUser!.sendEmailVerification();
-      return Future.value();
+      //TODO: Check if below sends Future.value() anyway
+      // return Future.value();
     } catch (error) {
-      if (error is FirebaseAuthException) {
-        if (error.code != 'email-already-in-use') {
-          return Future.error(error, StackTrace.current);
-        }
-      }
-      FirebaseAuth.instance.currentUser?.delete();
+      //TODO: not sure why below is needed, check it out
+      // if (error is FirebaseAuthException) {
+      //   if (error.code != 'email-already-in-use') {
+      //     return Future.error(error, StackTrace.current);
+      //   }
+      // }
       _deleteUserData();
+      FirebaseAuth.instance.currentUser?.delete();
       return Future.error(error, StackTrace.current);
     }
   }
 
-  Future registerClient(String userEmail, String name, String password,
-      String trainerEmail) async {
+  Future registerClient({required RegisterData registerData}) async {
     try {
-      await _createUser(userEmail, password);
-      await _addClientDataToDB(userEmail, name, password, trainerEmail);
+      await _createUser(
+          email: registerData.email, password: registerData.password);
+      await _addClientDataToDB(registerData: registerData);
+      FirebaseAuth.instance.currentUser!.sendEmailVerification();
       return Future.value();
     } catch (error) {
       _deleteUserData();
@@ -43,101 +49,73 @@ class RegisterProvider {
   _deleteUserData() async {
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
-        .doc(FirebaseAuth.instance.currentUser?.email ?? "")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .delete()
-        .then((value) => print("User Deleted"))
-        .catchError((error) => print("Failed to delete user: $error"));
+        .then((value) => Log.d("User Deleted"))
+        .catchError((error) => Log.e("Failed to delete user: $error"));
   }
 
-  _createUser(String email, String password) async {
+  _createUser({required String email, required String password}) async {
     await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
   }
 
-  _addClientDataToDB(String userEmail, String name, String password,
-      String trainerEmail) async {
-    await _createClientDataInDb(userEmail, name, trainerEmail);
-    await _updateTrainerDataWithNewClientData(trainerEmail);
+  _addClientDataToDB({required RegisterData registerData}) async {
+    await _createClientDataInDb(registerData: registerData);
+    await _updateTrainerDataWithNewClientData(registerData.trainerEmail);
   }
 
-  _addTrainerDataToDB(String userEmail, String name, String password) async {
+  _createTrainerDataInDB(
+      {required String userEmail,
+      required String name,
+      required String password}) async {
     var id = FirebaseAuth.instance.currentUser!.uid;
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
         .doc(id)
-        .collection(FirebaseConstants.trainerCollection)
-        .doc(FirebaseConstants.dataCollection)
         .set({
       'id': id,
       'name': name,
       'email': userEmail,
-      'userType': 'trainer'
+      'userType': UserType.TRAINER.name,
+      "clients": FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
     });
-
-    await FirebaseFirestore.instance
-        .collection(FirebaseConstants.usersCollection)
-        .doc(id)
-        .set({'email': userEmail, 'id': id});
   }
 
-  _createClientDataInDb(
-      String userEmail, String name, String trainerEmail) async {
-    if (trainerEmail.isEmpty) {
-      trainerEmail = FirebaseAuth.instance.currentUser!.email!;
-    }
-    await FirebaseFirestore.instance
+  _createClientDataInDb({required RegisterData registerData}) async {
+    var trainerId =
+        await _getTrainerId(trainerEmail: registerData.trainerEmail);
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+
+    FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
-        .where('email', isEqualTo: trainerEmail)
-        .get()
-        .then((trainerData) {
-      var trainerId = trainerData.docs.single.get('id');
-      var userId = FirebaseAuth.instance.currentUser!.uid;
-
-      FirebaseFirestore.instance
-          .collection(FirebaseConstants.usersCollection)
-          .doc(userId)
-          .collection(FirebaseConstants.clientCollection)
-          .doc(FirebaseConstants.dataCollection)
-          .set({
-        'id': userId,
-        'name': name,
-        'email': userEmail,
-        'trainerEmail': trainerEmail,
-        'trainerId': trainerId,
-        'userType': 'client'
-      });
-
-      FirebaseFirestore.instance
-          .collection(FirebaseConstants.usersCollection)
-          .doc(userId)
-          .set({'email': userEmail, 'id': userId});
-    }).catchError((error) {
-      throw Exception("Wrong trainer email");
+        .doc(userId)
+        .set({
+      'id': userId,
+      'name': registerData.name,
+      'email': registerData.email,
+      'trainerEmail': registerData.trainerEmail,
+      'trainerId': trainerId,
+      'userType': UserType.CLIENT.name
     });
   }
 
   _updateTrainerDataWithNewClientData(String trainerEmail) async {
-    if (trainerEmail.isEmpty) {
-      trainerEmail = FirebaseAuth.instance.currentUser!.email!;
-    }
-    await FirebaseFirestore.instance
+    var trainerId = await _getTrainerId(trainerEmail: trainerEmail);
+
+    FirebaseFirestore.instance
+        .collection(FirebaseConstants.usersCollection)
+        .doc(trainerId)
+        .set({
+      "clients": FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
+    }, SetOptions(merge: true));
+  }
+
+  Future<String> _getTrainerId({required String trainerEmail}) async {
+    var trainerData = await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
         .where('email', isEqualTo: trainerEmail)
-        .get()
-        .then((trainerData) {
-      var trainerId = trainerData.docs.single.get('id');
-
-      FirebaseFirestore.instance
-          .collection(FirebaseConstants.usersCollection)
-          .doc(trainerId)
-          .collection(FirebaseConstants.trainerCollection)
-          .doc(FirebaseConstants.dataCollection)
-          .set({
-        "clients":
-            FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
-      }, SetOptions(merge: true));
-    }).catchError((error) {
-      throw Exception("Wrong trainer email");
-    });
+        .get();
+    return trainerData.docs.single.get('id');
   }
 }

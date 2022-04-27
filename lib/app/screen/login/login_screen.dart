@@ -14,13 +14,13 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginBloc(LoginState.initial()),
-      child: LoginScreenContent(),
+      child: LoginScreenView(),
     );
   }
 }
 
-class LoginScreenContent extends StatelessWidget {
-  const LoginScreenContent({Key? key}) : super(key: key);
+class LoginScreenView extends StatelessWidget {
+  const LoginScreenView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -61,6 +61,8 @@ abstract class $RegisterEventCopyWith<$Res> {
           RegisterEvent value, $Res Function(RegisterEvent) then) =
       _$RegisterEventCopyWithImpl<$Res>;
   $Res call({RegisterData registerData});
+
+  $RegisterDataCopyWith<$Res> get registerData;
 }
 
 /// @nodoc
@@ -83,6 +85,13 @@ class _$RegisterEventCopyWithImpl<$Res>
               as RegisterData,
     ));
   }
+
+  @override
+  $RegisterDataCopyWith<$Res> get registerData {
+    return $RegisterDataCopyWith<$Res>(_value.registerData, (value) {
+      return _then(_value.copyWith(registerData: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -91,6 +100,9 @@ abstract class $RegisterCopyWith<$Res> implements $RegisterEventCopyWith<$Res> {
       _$RegisterCopyWithImpl<$Res>;
   @override
   $Res call({RegisterData registerData});
+
+  @override
+  $RegisterDataCopyWith<$Res> get registerData;
 }
 
 /// @nodoc

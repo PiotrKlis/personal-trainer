@@ -1,5 +1,12 @@
 Test cases
 
+/// App open
+
+// Firebase
+- When first app open without internet, Then should navigate to login and show network issue on login click
+- When first app open with internet,Then should be navigated to login screen
+- W
+
 /// Search Exercise
 
 // Tags

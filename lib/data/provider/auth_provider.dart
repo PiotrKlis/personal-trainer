@@ -9,6 +9,7 @@ class AuthProvider {
   Future<UserType> loginUser(String email, String password) async {
     UserCredential credentials = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
+    //TODO: Uncomment code email verification before release
     // if (credentials.user?.emailVerified == true) {
     UserType userType = await getUserType(credentials.user?.uid);
     return Future.value(userType);

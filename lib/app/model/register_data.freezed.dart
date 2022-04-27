@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RegisterData {
   String get email => throw _privateConstructorUsedError;
-  String get displayName => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get trainerEmail => throw _privateConstructorUsedError;
   UserType get userType => throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ abstract class $RegisterDataCopyWith<$Res> {
       _$RegisterDataCopyWithImpl<$Res>;
   $Res call(
       {String email,
-      String displayName,
+      String name,
       String password,
       String trainerEmail,
       UserType userType});
@@ -51,7 +51,7 @@ class _$RegisterDataCopyWithImpl<$Res> implements $RegisterDataCopyWith<$Res> {
   @override
   $Res call({
     Object? email = freezed,
-    Object? displayName = freezed,
+    Object? name = freezed,
     Object? password = freezed,
     Object? trainerEmail = freezed,
     Object? userType = freezed,
@@ -61,9 +61,9 @@ class _$RegisterDataCopyWithImpl<$Res> implements $RegisterDataCopyWith<$Res> {
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      displayName: displayName == freezed
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       password: password == freezed
           ? _value.password
@@ -90,7 +90,7 @@ abstract class _$RegisterDataCopyWith<$Res>
   @override
   $Res call(
       {String email,
-      String displayName,
+      String name,
       String password,
       String trainerEmail,
       UserType userType});
@@ -109,7 +109,7 @@ class __$RegisterDataCopyWithImpl<$Res> extends _$RegisterDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? email = freezed,
-    Object? displayName = freezed,
+    Object? name = freezed,
     Object? password = freezed,
     Object? trainerEmail = freezed,
     Object? userType = freezed,
@@ -119,9 +119,9 @@ class __$RegisterDataCopyWithImpl<$Res> extends _$RegisterDataCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      displayName: displayName == freezed
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       password: password == freezed
           ? _value.password
@@ -144,7 +144,7 @@ class __$RegisterDataCopyWithImpl<$Res> extends _$RegisterDataCopyWithImpl<$Res>
 class _$_RegisterData implements _RegisterData {
   const _$_RegisterData(
       {required this.email,
-      required this.displayName,
+      required this.name,
       required this.password,
       required this.trainerEmail,
       required this.userType});
@@ -152,7 +152,7 @@ class _$_RegisterData implements _RegisterData {
   @override
   final String email;
   @override
-  final String displayName;
+  final String name;
   @override
   final String password;
   @override
@@ -162,7 +162,7 @@ class _$_RegisterData implements _RegisterData {
 
   @override
   String toString() {
-    return 'RegisterData(email: $email, displayName: $displayName, password: $password, trainerEmail: $trainerEmail, userType: $userType)';
+    return 'RegisterData(email: $email, name: $name, password: $password, trainerEmail: $trainerEmail, userType: $userType)';
   }
 
   @override
@@ -171,8 +171,7 @@ class _$_RegisterData implements _RegisterData {
         (other.runtimeType == runtimeType &&
             other is _RegisterData &&
             const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality()
-                .equals(other.displayName, displayName) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality()
                 .equals(other.trainerEmail, trainerEmail) &&
@@ -183,7 +182,7 @@ class _$_RegisterData implements _RegisterData {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(displayName),
+      const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(trainerEmail),
       const DeepCollectionEquality().hash(userType));
@@ -197,7 +196,7 @@ class _$_RegisterData implements _RegisterData {
 abstract class _RegisterData implements RegisterData {
   const factory _RegisterData(
       {required final String email,
-      required final String displayName,
+      required final String name,
       required final String password,
       required final String trainerEmail,
       required final UserType userType}) = _$_RegisterData;
@@ -205,7 +204,7 @@ abstract class _RegisterData implements RegisterData {
   @override
   String get email => throw _privateConstructorUsedError;
   @override
-  String get displayName => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @override
   String get password => throw _privateConstructorUsedError;
   @override

@@ -20,13 +20,13 @@ class RegisterScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.register),
         ),
-        body: RegisterScreenContent(),
+        body: RegisterScreenView(),
       ),
     );
   }
 }
 
-class RegisterScreenContent extends StatelessWidget {
+class RegisterScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterBloc, RegisterState>(
@@ -176,9 +176,12 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void registerUser(BuildContext context) {
+    if (_trainerEmail.isEmpty) {
+      _trainerEmail = _email;
+    }
     context.read<RegisterBloc>().add(RegisterEvent.register(
         registerData: RegisterData(
-            displayName: _displayName,
+            name: _displayName,
             password: _password,
             userType: _userType!,
             email: _email,

@@ -11,26 +11,20 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc(RegisterState initialState) : super(initialState) {
     on<Register>((state, emit) async {
       emit(RegisterState.loading());
-      switch (state.registerData.userType) {
-        case UserType.TRAINER:
-          try {
-            await registerProvider.registerTrainerAndClient(state.registerData);
+      try {
+        switch (state.registerData.userType) {
+          case UserType.TRAINER:
+            await registerProvider.registerTrainerAndClient(
+                registerData: state.registerData);
             emit(RegisterState.success());
-          } catch (error) {
-            emit(RegisterState.error(error: error.toString()));
-          }
-          break;
-        case UserType.CLIENT:
-          try {
-            registerProvider.registerClient(
-                state.registerData.email,
-                state.registerData.displayName,
-                state.registerData.password,
-                state.registerData.trainerEmail);
-          } catch (error) {
-            emit(RegisterState.error(error: error.toString()));
-          }
-          break;
+            break;
+          case UserType.CLIENT:
+            registerProvider.registerClient(registerData: state.registerData);
+            emit(RegisterState.success());
+            break;
+        }
+      } catch (error) {
+        emit(RegisterState.error(error: error.toString()));
       }
     });
   }
