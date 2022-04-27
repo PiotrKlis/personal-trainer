@@ -1,6 +1,7 @@
 import 'package:flutter_flavor/flutter_flavor.dart';
 import 'package:injectable/injectable.dart';
 
+//TODO For flavors
 enum Env { acceptance, prod }
 
 const envFlavorVar = "env";

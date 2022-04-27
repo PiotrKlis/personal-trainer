@@ -1,13 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:personal_trainer/app/app_router.gr.dart';
-import 'package:personal_trainer/app/core/get_it_config.dart';
+import 'package:personal_trainer/app/core/dependency_injection/get_it_config.dart';
+import 'package:personal_trainer/app/core/navigation/app_router.gr.dart';
+import 'package:personal_trainer/app/model/user_exercise.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_event.dart';
 import 'package:personal_trainer/app/util/event_transformer.dart';
 import 'package:personal_trainer/data/provider/calendar_exercise_provider.dart';
 import 'package:personal_trainer/data/util/const.dart';
-import 'package:personal_trainer/domain/model/user_exercise.dart';
-
 import 'calendar_exercises_event.dart';
 import 'calendar_exercises_state.dart';
 

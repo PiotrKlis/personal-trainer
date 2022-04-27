@@ -1,6 +1,8 @@
 Backlog
 
 MVP
+- Fix firestore saving values
+
 // Firebase screen
 
 - Disable back to firebase screen

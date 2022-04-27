@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:injectable/injectable.dart';
+import 'package:personal_trainer/app/model/user_type.dart';
 import 'package:personal_trainer/data/util/const.dart';
-import 'package:personal_trainer/domain/model/user_type.dart';
 
 @injectable
 class AuthProvider {
@@ -11,8 +10,8 @@ class AuthProvider {
     UserCredential credentials = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
     // if (credentials.user?.emailVerified == true) {
-      UserType userType = await getUserType(credentials.user?.uid);
-      return Future.value(userType);
+    UserType userType = await getUserType(credentials.user?.uid);
+    return Future.value(userType);
     // } else {
     //   return Future.error(throw FirebaseAuthException(
     //       code: FirebaseAuthExceptionCodeConst.EMAIL_NOT_VERIFIED_EXCEPTION));

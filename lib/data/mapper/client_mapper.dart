@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:personal_trainer/domain/model/client.dart';
+import 'package:personal_trainer/app/model/client.dart';
 
 @injectable
 class ClientMapper {

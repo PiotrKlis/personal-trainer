@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:personal_trainer/app/model/client.dart';
+import 'package:personal_trainer/data/mapper/client_mapper.dart';
 import 'package:personal_trainer/data/util/const.dart';
-import 'package:personal_trainer/domain/mapper/client_mapper.dart';
-import 'package:personal_trainer/domain/model/client.dart';
 
 @injectable
 class ClientChooseProvider {
 
-  ClientMapper _clientMapper = GetIt.I.get<ClientMapper>();
+  final ClientMapper _clientMapper = GetIt.I.get<ClientMapper>();
 
   Future<List<Client>> getClientsFor(String trainerId) async {
     try {

@@ -13,16 +13,16 @@
 import 'package:auto_route/auto_route.dart' as _i10;
 import 'package:flutter/material.dart' as _i11;
 
-import 'core/auth_guard.dart' as _i12;
-import 'screen/account_choose/account_choose_screen.dart' as _i4;
-import 'screen/calendar_exercises/calendar_exercises_screen.dart' as _i7;
-import 'screen/client/client_screen.dart' as _i6;
-import 'screen/client_choose/client_choose_screen.dart' as _i5;
-import 'screen/exercise_search/exercise_search_screen.dart' as _i8;
-import 'screen/login/login_screen.dart' as _i2;
-import 'screen/login/password_reset_screen.dart' as _i9;
-import 'screen/register/register_screen.dart' as _i3;
-import 'screen/splash/splash_screen.dart' as _i1;
+import '../../screen/account_choose/account_choose_screen.dart' as _i4;
+import '../../screen/calendar_exercises/calendar_exercises_screen.dart' as _i7;
+import '../../screen/client/client_screen.dart' as _i6;
+import '../../screen/client_choose/client_choose_screen.dart' as _i5;
+import '../../screen/exercise_search/exercise_search_screen.dart' as _i8;
+import '../../screen/login/login_screen.dart' as _i2;
+import '../../screen/login/password_reset_screen.dart' as _i9;
+import '../../screen/register/register_screen.dart' as _i3;
+import '../../screen/splash/splash_screen.dart' as _i1;
+import '../auth_guard.dart' as _i12;
 
 class AppRouter extends _i10.RootStackRouter {
   AppRouter(
@@ -89,8 +89,8 @@ class AppRouter extends _i10.RootStackRouter {
 
   @override
   List<_i10.RouteConfig> get routes => [
-        _i10.RouteConfig(SplashRoute.name, path: '/', guards: [authGuard]),
-        _i10.RouteConfig(LoginRoute.name, path: '/login-screen'),
+        _i10.RouteConfig(SplashRoute.name, path: '/splash-screen'),
+        _i10.RouteConfig(LoginRoute.name, path: '/', guards: [authGuard]),
         _i10.RouteConfig(RegisterRoute.name, path: '/register-screen'),
         _i10.RouteConfig(AccountChooseRoute.name,
             path: '/account-choose-screen'),
@@ -108,7 +108,7 @@ class AppRouter extends _i10.RootStackRouter {
 /// generated route for
 /// [_i1.SplashScreen]
 class SplashRoute extends _i10.PageRouteInfo<void> {
-  const SplashRoute() : super(SplashRoute.name, path: '/');
+  const SplashRoute() : super(SplashRoute.name, path: '/splash-screen');
 
   static const String name = 'SplashRoute';
 }
@@ -116,7 +116,7 @@ class SplashRoute extends _i10.PageRouteInfo<void> {
 /// generated route for
 /// [_i2.LoginScreen]
 class LoginRoute extends _i10.PageRouteInfo<void> {
-  const LoginRoute() : super(LoginRoute.name, path: '/login-screen');
+  const LoginRoute() : super(LoginRoute.name, path: '/');
 
   static const String name = 'LoginRoute';
 }

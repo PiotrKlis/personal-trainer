@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:injectable/injectable.dart';
-import 'package:personal_trainer/app/app_router.gr.dart';
-import 'package:personal_trainer/app/core/get_it_config.dart';
+import 'package:personal_trainer/app/core/dependency_injection/get_it_config.dart';
+import 'package:personal_trainer/app/core/navigation/app_router.gr.dart';
+import 'package:personal_trainer/app/model/user_type.dart';
 import 'package:personal_trainer/data/provider/auth_provider.dart';
-import 'package:personal_trainer/domain/model/user_type.dart';
 
 @injectable
 class AuthGuard extends AutoRouteGuard {

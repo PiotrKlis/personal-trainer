@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:personal_trainer/app/model/user_exercise.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_bloc.dart';
-import 'package:personal_trainer/domain/model/user_exercise.dart';
 
 import 'calendar_event.dart';
 import 'calendar_provider.dart';

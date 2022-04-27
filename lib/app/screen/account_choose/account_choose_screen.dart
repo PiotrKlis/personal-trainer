@@ -1,8 +1,6 @@
-import 'package:auto_route/src/router/auto_router_x.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../app_router.gr.dart';
+import 'package:personal_trainer/app/core/dependency_injection/get_it_config.dart';
+import 'package:personal_trainer/app/core/navigation/app_router.gr.dart';
 
 class AccountChooseScreen extends StatelessWidget {
   final trainerId;
@@ -24,15 +22,16 @@ class AccountChooseScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                     onPressed: () {
-                      context
-                          .pushRoute(ClientChooseRoute(trainerId: trainerId));
+                      getIt
+                          .get<AppRouter>()
+                          .push(ClientChooseRoute(trainerId: trainerId));
                     },
                     child: Text('TRAINER'))),
             Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                     onPressed: () {
-                      context.pushRoute(ClientRoute());
+                      getIt.get<AppRouter>().push(ClientRoute());
                     },
                     child: Text('CLIENT'))),
           ],
