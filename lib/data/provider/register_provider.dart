@@ -62,7 +62,8 @@ class RegisterProvider {
 
   _addClientDataToDB({required RegisterData registerData}) async {
     await _createClientDataInDb(registerData: registerData);
-    await _updateTrainerDataWithNewClientData(registerData.trainerEmail);
+    await _updateTrainerDataWithNewClientData(
+        trainerEmail: registerData.trainerEmail, email: registerData.email);
   }
 
   _createTrainerDataInDB(
@@ -100,7 +101,8 @@ class RegisterProvider {
     });
   }
 
-  _updateTrainerDataWithNewClientData(String trainerEmail) async {
+  _updateTrainerDataWithNewClientData(
+      {required String trainerEmail, required String email}) async {
     var trainerId = await _getTrainerId(trainerEmail: trainerEmail);
 
     FirebaseFirestore.instance
@@ -108,7 +110,7 @@ class RegisterProvider {
         .doc(trainerId)
         .set({
       "clients": FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
-    }, SetOptions(merge: true));
+    });
   }
 
   Future<String> _getTrainerId({required String trainerEmail}) async {

@@ -34,10 +34,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<NavigateLoggedIn>((event, emit) async {
       switch (event.userType) {
         case UserType.TRAINER:
-          getIt.get<AppRouter>().push(AccountChooseRoute());
+          getIt.get<AppRouter>().replace(AccountChooseRoute());
           break;
         case UserType.CLIENT:
-          getIt.get<AppRouter>().push(ClientRoute());
+          getIt.get<AppRouter>().replace(ClientRoute());
           break;
       }
     });
