@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:personal_trainer/app/model/register_data.dart';
 import 'package:personal_trainer/app/model/user_type.dart';
-import 'package:personal_trainer/app/util/logger.dart';
 import 'package:personal_trainer/data/util/const.dart';
 
 @injectable
@@ -17,18 +16,15 @@ class RegisterProvider {
           name: registerData.name,
           password: registerData.password);
       FirebaseAuth.instance.currentUser!.sendEmailVerification();
-      //TODO: Check if below sends Future.value() anyway
-      // return Future.value();
     } catch (error) {
-      //TODO: not sure why below is needed, check it out
-      // if (error is FirebaseAuthException) {
-      //   if (error.code != 'email-already-in-use') {
-      //     return Future.error(error, StackTrace.current);
-      //   }
-      // }
+      if (error is FirebaseAuthException) {
+        if (error.code == 'email-already-in-use') {
+          return Future.error(MessageException("Email already in use"));
+        }
+      }
       _deleteUserData();
       FirebaseAuth.instance.currentUser?.delete();
-      return Future.error(error, StackTrace.current);
+      return Future.error(error);
     }
   }
 
@@ -38,11 +34,10 @@ class RegisterProvider {
           email: registerData.email, password: registerData.password);
       await _addClientDataToDB(registerData: registerData);
       FirebaseAuth.instance.currentUser!.sendEmailVerification();
-      return Future.value();
     } catch (error) {
       _deleteUserData();
       FirebaseAuth.instance.currentUser?.delete();
-      return Future.error(error, StackTrace.current);
+      return Future.error(error);
     }
   }
 
@@ -50,9 +45,7 @@ class RegisterProvider {
     await FirebaseFirestore.instance
         .collection(FirebaseConstants.usersCollection)
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .delete()
-        .then((value) => Log.d("User Deleted"))
-        .catchError((error) => Log.e("Failed to delete user: $error"));
+        .delete();
   }
 
   _createUser({required String email, required String password}) async {
@@ -121,7 +114,13 @@ class RegisterProvider {
           .get();
       return trainerData.docs.single.get('id');
     } catch (error) {
-      return Future.error("Invalid trainer email");
+      return Future.error(MessageException("Invalid trainer email"));
     }
   }
+}
+
+class MessageException implements Exception {
+  String message;
+
+  MessageException(this.message);
 }

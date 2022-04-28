@@ -8,7 +8,17 @@ Test cases
 
 /// Register
 - When fields are empty or whatever validator is not satisfied, Then show validation errors
--
+- When trainer email is invalid, Then show snackbar with proper message
+- When unsuccessful register, Then not create an user
+- When successful register as Trainer, check if its properly populated in db and auth (?)
+- When successful register as Client, check if its properly populated in db and auth (?)
+
+/// Login
+- When click on register, Then navigate to register
+- When click on forgot pswd, Then should navigate to forgot password
+- When click on login, Then should login
+- When fields are empty or whatever validator is not satisfied, Then show validation errors
+
 
 /// Search Exercise
 
