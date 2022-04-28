@@ -110,14 +110,18 @@ class RegisterProvider {
         .doc(trainerId)
         .set({
       "clients": FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
-    });
+    }, SetOptions(merge: true));
   }
 
   Future<String> _getTrainerId({required String trainerEmail}) async {
-    var trainerData = await FirebaseFirestore.instance
-        .collection(FirebaseConstants.usersCollection)
-        .where('email', isEqualTo: trainerEmail)
-        .get();
-    return trainerData.docs.single.get('id');
+    try {
+      var trainerData = await FirebaseFirestore.instance
+          .collection(FirebaseConstants.usersCollection)
+          .where('email', isEqualTo: trainerEmail)
+          .get();
+      return trainerData.docs.single.get('id');
+    } catch (error) {
+      return Future.error("Invalid trainer email");
+    }
   }
 }

@@ -40,8 +40,8 @@ class RegisterScreenView extends StatelessWidget {
                   SnackBar(
                       duration: Duration(
                           milliseconds:
-                              DurationConst.snackbarVisibilityDuration),
-                      content: Text(AppLocalizations.of(context)!.error))));
+                              DurationConst.snackbarVisibilityLongerDuration),
+                      content: Text(error))));
         });
   }
 }
@@ -60,9 +60,12 @@ class _RegisterFormState extends State<RegisterForm> {
   UserType? _userType = UserType.CLIENT;
   String _email = "";
   String _password = "";
+  String _confirmPassword = "";
   String _displayName = "";
   String _trainerEmail = "";
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -114,13 +117,33 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
           Padding(
             padding: const EdgeInsets.all(Dimens.smallPadding),
+            child: TextFormField(
+              obscureText: true,
+              controller: _confirmPasswordController,
+              validator: (value) {
+                if (value != _passwordController.text) {
+                  return AppLocalizations.of(context)!.password_unmatched;
+                } else if (value!.length < ValidatorConst.minPasswordLength) {
+                  return AppLocalizations.of(context)!.password_length_error;
+                } else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: AppLocalizations.of(context)!.confirm_password),
+              onChanged: (value) => _confirmPassword = value,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(Dimens.smallPadding),
             child: Visibility(
               visible: _userType == UserType.CLIENT,
               child: TextFormField(
                 validator: MultiValidator([
                   EmailValidator(
                       errorText:
-                          AppLocalizations.of(context)!.email_required_error),
+                          AppLocalizations.of(context)!.invalid_email_error),
                   RequiredValidator(
                       errorText: AppLocalizations.of(context)!
                           .trainer_email_required_error)

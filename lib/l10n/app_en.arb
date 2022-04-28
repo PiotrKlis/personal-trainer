@@ -27,5 +27,7 @@
     "network_exception": "Network issue, check your internet connection",
     "user_not_found_exception": "User not found, check credentials or register new user",
     "email_not_verified_exception": "Email not verified",
-    "login": "Login"
+    "login": "Login",
+    "confirm_password": "Confirm password",
+    "password_unmatched": "Passwords do not match"
 }

@@ -19,7 +19,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             emit(RegisterState.success());
             break;
           case UserType.CLIENT:
-            registerProvider.registerClient(registerData: state.registerData);
+            await registerProvider.registerClient(registerData: state.registerData);
             emit(RegisterState.success());
             break;
         }
