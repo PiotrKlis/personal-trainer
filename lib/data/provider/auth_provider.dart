@@ -18,7 +18,7 @@ class AuthProvider {
     //       code: FirebaseAuthExceptionCodeConst.EMAIL_NOT_VERIFIED_EXCEPTION));
     // }
   }
-
+  //TODO: Add check if email is confirmed
   bool isUserLoggedIn() => FirebaseAuth.instance.currentUser != null;
 
 //todo add signOut feature

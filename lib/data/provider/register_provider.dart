@@ -35,6 +35,11 @@ class RegisterProvider {
       await _addClientDataToDB(registerData: registerData);
       FirebaseAuth.instance.currentUser!.sendEmailVerification();
     } catch (error) {
+      if (error is FirebaseAuthException) {
+        if (error.code == 'email-already-in-use') {
+          return Future.error(MessageException("Email already in use"));
+        }
+      }
       _deleteUserData();
       FirebaseAuth.instance.currentUser?.delete();
       return Future.error(error);
