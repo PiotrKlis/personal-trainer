@@ -24,8 +24,8 @@ mixin _$ClientChooseEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String trainerId)? getClients,
-    TResult Function()? inviteClient,
+    TResult? Function(String trainerId)? getClients,
+    TResult? Function()? inviteClient,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,8 +43,8 @@ mixin _$ClientChooseEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetClients value)? getClients,
-    TResult Function(InviteClient value)? inviteClient,
+    TResult? Function(GetClients value)? getClients,
+    TResult? Function(InviteClient value)? inviteClient,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,43 +60,44 @@ mixin _$ClientChooseEvent {
 abstract class $ClientChooseEventCopyWith<$Res> {
   factory $ClientChooseEventCopyWith(
           ClientChooseEvent value, $Res Function(ClientChooseEvent) then) =
-      _$ClientChooseEventCopyWithImpl<$Res>;
+      _$ClientChooseEventCopyWithImpl<$Res, ClientChooseEvent>;
 }
 
 /// @nodoc
-class _$ClientChooseEventCopyWithImpl<$Res>
+class _$ClientChooseEventCopyWithImpl<$Res, $Val extends ClientChooseEvent>
     implements $ClientChooseEventCopyWith<$Res> {
   _$ClientChooseEventCopyWithImpl(this._value, this._then);
 
-  final ClientChooseEvent _value;
   // ignore: unused_field
-  final $Res Function(ClientChooseEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
-abstract class $GetClientsCopyWith<$Res> {
-  factory $GetClientsCopyWith(
-          GetClients value, $Res Function(GetClients) then) =
-      _$GetClientsCopyWithImpl<$Res>;
+abstract class _$$GetClientsCopyWith<$Res> {
+  factory _$$GetClientsCopyWith(
+          _$GetClients value, $Res Function(_$GetClients) then) =
+      __$$GetClientsCopyWithImpl<$Res>;
+  @useResult
   $Res call({String trainerId});
 }
 
 /// @nodoc
-class _$GetClientsCopyWithImpl<$Res>
-    extends _$ClientChooseEventCopyWithImpl<$Res>
-    implements $GetClientsCopyWith<$Res> {
-  _$GetClientsCopyWithImpl(GetClients _value, $Res Function(GetClients) _then)
-      : super(_value, (v) => _then(v as GetClients));
+class __$$GetClientsCopyWithImpl<$Res>
+    extends _$ClientChooseEventCopyWithImpl<$Res, _$GetClients>
+    implements _$$GetClientsCopyWith<$Res> {
+  __$$GetClientsCopyWithImpl(
+      _$GetClients _value, $Res Function(_$GetClients) _then)
+      : super(_value, _then);
 
-  @override
-  GetClients get _value => super._value as GetClients;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? trainerId = freezed,
+    Object? trainerId = null,
   }) {
-    return _then(GetClients(
-      trainerId: trainerId == freezed
+    return _then(_$GetClients(
+      trainerId: null == trainerId
           ? _value.trainerId
           : trainerId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -121,18 +122,19 @@ class _$GetClients implements GetClients {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is GetClients &&
-            const DeepCollectionEquality().equals(other.trainerId, trainerId));
+            other is _$GetClients &&
+            (identical(other.trainerId, trainerId) ||
+                other.trainerId == trainerId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(trainerId));
+  int get hashCode => Object.hash(runtimeType, trainerId);
 
   @JsonKey(ignore: true)
   @override
-  $GetClientsCopyWith<GetClients> get copyWith =>
-      _$GetClientsCopyWithImpl<GetClients>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$GetClientsCopyWith<_$GetClients> get copyWith =>
+      __$$GetClientsCopyWithImpl<_$GetClients>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -146,8 +148,8 @@ class _$GetClients implements GetClients {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String trainerId)? getClients,
-    TResult Function()? inviteClient,
+    TResult? Function(String trainerId)? getClients,
+    TResult? Function()? inviteClient,
   }) {
     return getClients?.call(trainerId);
   }
@@ -177,8 +179,8 @@ class _$GetClients implements GetClients {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetClients value)? getClients,
-    TResult Function(InviteClient value)? inviteClient,
+    TResult? Function(GetClients value)? getClients,
+    TResult? Function(InviteClient value)? inviteClient,
   }) {
     return getClients?.call(this);
   }
@@ -200,29 +202,26 @@ class _$GetClients implements GetClients {
 abstract class GetClients implements ClientChooseEvent {
   const factory GetClients({required final String trainerId}) = _$GetClients;
 
-  String get trainerId => throw _privateConstructorUsedError;
+  String get trainerId;
   @JsonKey(ignore: true)
-  $GetClientsCopyWith<GetClients> get copyWith =>
+  _$$GetClientsCopyWith<_$GetClients> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $InviteClientCopyWith<$Res> {
-  factory $InviteClientCopyWith(
-          InviteClient value, $Res Function(InviteClient) then) =
-      _$InviteClientCopyWithImpl<$Res>;
+abstract class _$$InviteClientCopyWith<$Res> {
+  factory _$$InviteClientCopyWith(
+          _$InviteClient value, $Res Function(_$InviteClient) then) =
+      __$$InviteClientCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$InviteClientCopyWithImpl<$Res>
-    extends _$ClientChooseEventCopyWithImpl<$Res>
-    implements $InviteClientCopyWith<$Res> {
-  _$InviteClientCopyWithImpl(
-      InviteClient _value, $Res Function(InviteClient) _then)
-      : super(_value, (v) => _then(v as InviteClient));
-
-  @override
-  InviteClient get _value => super._value as InviteClient;
+class __$$InviteClientCopyWithImpl<$Res>
+    extends _$ClientChooseEventCopyWithImpl<$Res, _$InviteClient>
+    implements _$$InviteClientCopyWith<$Res> {
+  __$$InviteClientCopyWithImpl(
+      _$InviteClient _value, $Res Function(_$InviteClient) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -238,7 +237,7 @@ class _$InviteClient implements InviteClient {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is InviteClient);
+        (other.runtimeType == runtimeType && other is _$InviteClient);
   }
 
   @override
@@ -256,8 +255,8 @@ class _$InviteClient implements InviteClient {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String trainerId)? getClients,
-    TResult Function()? inviteClient,
+    TResult? Function(String trainerId)? getClients,
+    TResult? Function()? inviteClient,
   }) {
     return inviteClient?.call();
   }
@@ -287,8 +286,8 @@ class _$InviteClient implements InviteClient {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetClients value)? getClients,
-    TResult Function(InviteClient value)? inviteClient,
+    TResult? Function(GetClients value)? getClients,
+    TResult? Function(InviteClient value)? inviteClient,
   }) {
     return inviteClient?.call(this);
   }

@@ -33,66 +33,71 @@ mixin _$PlaybackId {
 abstract class $PlaybackIdCopyWith<$Res> {
   factory $PlaybackIdCopyWith(
           PlaybackId value, $Res Function(PlaybackId) then) =
-      _$PlaybackIdCopyWithImpl<$Res>;
+      _$PlaybackIdCopyWithImpl<$Res, PlaybackId>;
+  @useResult
   $Res call({String? policy, String? id});
 }
 
 /// @nodoc
-class _$PlaybackIdCopyWithImpl<$Res> implements $PlaybackIdCopyWith<$Res> {
+class _$PlaybackIdCopyWithImpl<$Res, $Val extends PlaybackId>
+    implements $PlaybackIdCopyWith<$Res> {
   _$PlaybackIdCopyWithImpl(this._value, this._then);
 
-  final PlaybackId _value;
   // ignore: unused_field
-  final $Res Function(PlaybackId) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? policy = freezed,
     Object? id = freezed,
   }) {
     return _then(_value.copyWith(
-      policy: policy == freezed
+      policy: freezed == policy
           ? _value.policy
           : policy // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$PlaybackIdCopyWith<$Res> implements $PlaybackIdCopyWith<$Res> {
-  factory _$PlaybackIdCopyWith(
-          _PlaybackId value, $Res Function(_PlaybackId) then) =
-      __$PlaybackIdCopyWithImpl<$Res>;
+abstract class _$$_PlaybackIdCopyWith<$Res>
+    implements $PlaybackIdCopyWith<$Res> {
+  factory _$$_PlaybackIdCopyWith(
+          _$_PlaybackId value, $Res Function(_$_PlaybackId) then) =
+      __$$_PlaybackIdCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String? policy, String? id});
 }
 
 /// @nodoc
-class __$PlaybackIdCopyWithImpl<$Res> extends _$PlaybackIdCopyWithImpl<$Res>
-    implements _$PlaybackIdCopyWith<$Res> {
-  __$PlaybackIdCopyWithImpl(
-      _PlaybackId _value, $Res Function(_PlaybackId) _then)
-      : super(_value, (v) => _then(v as _PlaybackId));
+class __$$_PlaybackIdCopyWithImpl<$Res>
+    extends _$PlaybackIdCopyWithImpl<$Res, _$_PlaybackId>
+    implements _$$_PlaybackIdCopyWith<$Res> {
+  __$$_PlaybackIdCopyWithImpl(
+      _$_PlaybackId _value, $Res Function(_$_PlaybackId) _then)
+      : super(_value, _then);
 
-  @override
-  _PlaybackId get _value => super._value as _PlaybackId;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? policy = freezed,
     Object? id = freezed,
   }) {
-    return _then(_PlaybackId(
-      policy: policy == freezed
+    return _then(_$_PlaybackId(
+      policy: freezed == policy
           ? _value.policy
           : policy // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -122,26 +127,26 @@ class _$_PlaybackId implements _PlaybackId {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PlaybackId &&
-            const DeepCollectionEquality().equals(other.policy, policy) &&
-            const DeepCollectionEquality().equals(other.id, id));
+            other is _$_PlaybackId &&
+            (identical(other.policy, policy) || other.policy == policy) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(policy),
-      const DeepCollectionEquality().hash(id));
+  int get hashCode => Object.hash(runtimeType, policy, id);
 
   @JsonKey(ignore: true)
   @override
-  _$PlaybackIdCopyWith<_PlaybackId> get copyWith =>
-      __$PlaybackIdCopyWithImpl<_PlaybackId>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_PlaybackIdCopyWith<_$_PlaybackId> get copyWith =>
+      __$$_PlaybackIdCopyWithImpl<_$_PlaybackId>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PlaybackIdToJson(this);
+    return _$$_PlaybackIdToJson(
+      this,
+    );
   }
 }
 
@@ -153,11 +158,11 @@ abstract class _PlaybackId implements PlaybackId {
       _$_PlaybackId.fromJson;
 
   @override
-  String? get policy => throw _privateConstructorUsedError;
+  String? get policy;
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
   @JsonKey(ignore: true)
-  _$PlaybackIdCopyWith<_PlaybackId> get copyWith =>
+  _$$_PlaybackIdCopyWith<_$_PlaybackId> get copyWith =>
       throw _privateConstructorUsedError;
 }

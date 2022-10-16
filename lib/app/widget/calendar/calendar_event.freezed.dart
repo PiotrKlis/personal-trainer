@@ -26,9 +26,10 @@ mixin _$CalendarEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId, DateTime dateTime)?
+    TResult? Function(
+            DateTime selectedDate, String clientId, DateTime dateTime)?
         getEventMarker,
-    TResult Function()? reloadEventMarkersOnPageChanged,
+    TResult? Function()? reloadEventMarkersOnPageChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,8 +49,8 @@ mixin _$CalendarEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetEventMarker value)? getEventMarker,
-    TResult Function(ReloadEventMarkersOnPageChange value)?
+    TResult? Function(GetEventMarker value)? getEventMarker,
+    TResult? Function(ReloadEventMarkersOnPageChange value)?
         reloadEventMarkersOnPageChanged,
   }) =>
       throw _privateConstructorUsedError;
@@ -67,54 +68,54 @@ mixin _$CalendarEvent {
 abstract class $CalendarEventCopyWith<$Res> {
   factory $CalendarEventCopyWith(
           CalendarEvent value, $Res Function(CalendarEvent) then) =
-      _$CalendarEventCopyWithImpl<$Res>;
+      _$CalendarEventCopyWithImpl<$Res, CalendarEvent>;
 }
 
 /// @nodoc
-class _$CalendarEventCopyWithImpl<$Res>
+class _$CalendarEventCopyWithImpl<$Res, $Val extends CalendarEvent>
     implements $CalendarEventCopyWith<$Res> {
   _$CalendarEventCopyWithImpl(this._value, this._then);
 
-  final CalendarEvent _value;
   // ignore: unused_field
-  final $Res Function(CalendarEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
-abstract class $GetEventMarkerCopyWith<$Res> {
-  factory $GetEventMarkerCopyWith(
-          GetEventMarker value, $Res Function(GetEventMarker) then) =
-      _$GetEventMarkerCopyWithImpl<$Res>;
+abstract class _$$GetEventMarkerCopyWith<$Res> {
+  factory _$$GetEventMarkerCopyWith(
+          _$GetEventMarker value, $Res Function(_$GetEventMarker) then) =
+      __$$GetEventMarkerCopyWithImpl<$Res>;
+  @useResult
   $Res call({DateTime selectedDate, String clientId, DateTime dateTime});
 }
 
 /// @nodoc
-class _$GetEventMarkerCopyWithImpl<$Res>
-    extends _$CalendarEventCopyWithImpl<$Res>
-    implements $GetEventMarkerCopyWith<$Res> {
-  _$GetEventMarkerCopyWithImpl(
-      GetEventMarker _value, $Res Function(GetEventMarker) _then)
-      : super(_value, (v) => _then(v as GetEventMarker));
+class __$$GetEventMarkerCopyWithImpl<$Res>
+    extends _$CalendarEventCopyWithImpl<$Res, _$GetEventMarker>
+    implements _$$GetEventMarkerCopyWith<$Res> {
+  __$$GetEventMarkerCopyWithImpl(
+      _$GetEventMarker _value, $Res Function(_$GetEventMarker) _then)
+      : super(_value, _then);
 
-  @override
-  GetEventMarker get _value => super._value as GetEventMarker;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? selectedDate = freezed,
-    Object? clientId = freezed,
-    Object? dateTime = freezed,
+    Object? selectedDate = null,
+    Object? clientId = null,
+    Object? dateTime = null,
   }) {
-    return _then(GetEventMarker(
-      selectedDate: selectedDate == freezed
+    return _then(_$GetEventMarker(
+      selectedDate: null == selectedDate
           ? _value.selectedDate
           : selectedDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      clientId: clientId == freezed
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
-      dateTime: dateTime == freezed
+      dateTime: null == dateTime
           ? _value.dateTime
           : dateTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -146,24 +147,24 @@ class _$GetEventMarker implements GetEventMarker {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is GetEventMarker &&
-            const DeepCollectionEquality()
-                .equals(other.selectedDate, selectedDate) &&
-            const DeepCollectionEquality().equals(other.clientId, clientId) &&
-            const DeepCollectionEquality().equals(other.dateTime, dateTime));
+            other is _$GetEventMarker &&
+            (identical(other.selectedDate, selectedDate) ||
+                other.selectedDate == selectedDate) &&
+            (identical(other.clientId, clientId) ||
+                other.clientId == clientId) &&
+            (identical(other.dateTime, dateTime) ||
+                other.dateTime == dateTime));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(selectedDate),
-      const DeepCollectionEquality().hash(clientId),
-      const DeepCollectionEquality().hash(dateTime));
+  int get hashCode =>
+      Object.hash(runtimeType, selectedDate, clientId, dateTime);
 
   @JsonKey(ignore: true)
   @override
-  $GetEventMarkerCopyWith<GetEventMarker> get copyWith =>
-      _$GetEventMarkerCopyWithImpl<GetEventMarker>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$GetEventMarkerCopyWith<_$GetEventMarker> get copyWith =>
+      __$$GetEventMarkerCopyWithImpl<_$GetEventMarker>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -179,9 +180,10 @@ class _$GetEventMarker implements GetEventMarker {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId, DateTime dateTime)?
+    TResult? Function(
+            DateTime selectedDate, String clientId, DateTime dateTime)?
         getEventMarker,
-    TResult Function()? reloadEventMarkersOnPageChanged,
+    TResult? Function()? reloadEventMarkersOnPageChanged,
   }) {
     return getEventMarker?.call(selectedDate, clientId, dateTime);
   }
@@ -213,8 +215,8 @@ class _$GetEventMarker implements GetEventMarker {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetEventMarker value)? getEventMarker,
-    TResult Function(ReloadEventMarkersOnPageChange value)?
+    TResult? Function(GetEventMarker value)? getEventMarker,
+    TResult? Function(ReloadEventMarkersOnPageChange value)?
         reloadEventMarkersOnPageChanged,
   }) {
     return getEventMarker?.call(this);
@@ -241,34 +243,30 @@ abstract class GetEventMarker implements CalendarEvent {
       required final String clientId,
       required final DateTime dateTime}) = _$GetEventMarker;
 
-  DateTime get selectedDate => throw _privateConstructorUsedError;
-  String get clientId => throw _privateConstructorUsedError;
-  DateTime get dateTime => throw _privateConstructorUsedError;
+  DateTime get selectedDate;
+  String get clientId;
+  DateTime get dateTime;
   @JsonKey(ignore: true)
-  $GetEventMarkerCopyWith<GetEventMarker> get copyWith =>
+  _$$GetEventMarkerCopyWith<_$GetEventMarker> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ReloadEventMarkersOnPageChangeCopyWith<$Res> {
-  factory $ReloadEventMarkersOnPageChangeCopyWith(
-          ReloadEventMarkersOnPageChange value,
-          $Res Function(ReloadEventMarkersOnPageChange) then) =
-      _$ReloadEventMarkersOnPageChangeCopyWithImpl<$Res>;
+abstract class _$$ReloadEventMarkersOnPageChangeCopyWith<$Res> {
+  factory _$$ReloadEventMarkersOnPageChangeCopyWith(
+          _$ReloadEventMarkersOnPageChange value,
+          $Res Function(_$ReloadEventMarkersOnPageChange) then) =
+      __$$ReloadEventMarkersOnPageChangeCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ReloadEventMarkersOnPageChangeCopyWithImpl<$Res>
-    extends _$CalendarEventCopyWithImpl<$Res>
-    implements $ReloadEventMarkersOnPageChangeCopyWith<$Res> {
-  _$ReloadEventMarkersOnPageChangeCopyWithImpl(
-      ReloadEventMarkersOnPageChange _value,
-      $Res Function(ReloadEventMarkersOnPageChange) _then)
-      : super(_value, (v) => _then(v as ReloadEventMarkersOnPageChange));
-
-  @override
-  ReloadEventMarkersOnPageChange get _value =>
-      super._value as ReloadEventMarkersOnPageChange;
+class __$$ReloadEventMarkersOnPageChangeCopyWithImpl<$Res>
+    extends _$CalendarEventCopyWithImpl<$Res, _$ReloadEventMarkersOnPageChange>
+    implements _$$ReloadEventMarkersOnPageChangeCopyWith<$Res> {
+  __$$ReloadEventMarkersOnPageChangeCopyWithImpl(
+      _$ReloadEventMarkersOnPageChange _value,
+      $Res Function(_$ReloadEventMarkersOnPageChange) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -286,7 +284,7 @@ class _$ReloadEventMarkersOnPageChange
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ReloadEventMarkersOnPageChange);
+            other is _$ReloadEventMarkersOnPageChange);
   }
 
   @override
@@ -306,9 +304,10 @@ class _$ReloadEventMarkersOnPageChange
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId, DateTime dateTime)?
+    TResult? Function(
+            DateTime selectedDate, String clientId, DateTime dateTime)?
         getEventMarker,
-    TResult Function()? reloadEventMarkersOnPageChanged,
+    TResult? Function()? reloadEventMarkersOnPageChanged,
   }) {
     return reloadEventMarkersOnPageChanged?.call();
   }
@@ -340,8 +339,8 @@ class _$ReloadEventMarkersOnPageChange
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetEventMarker value)? getEventMarker,
-    TResult Function(ReloadEventMarkersOnPageChange value)?
+    TResult? Function(GetEventMarker value)? getEventMarker,
+    TResult? Function(ReloadEventMarkersOnPageChange value)?
         reloadEventMarkersOnPageChanged,
   }) {
     return reloadEventMarkersOnPageChanged?.call(this);

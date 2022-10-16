@@ -38,17 +38,19 @@ mixin _$CalendarExerciseEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId, int index)?
+    TResult? Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult? Function(String clientId)? navigateToSearchScreen,
+    TResult? Function(String userExerciseId, String clientId, int index)?
         exerciseDeleted,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(int oldIndex, int newIndex, String clientId)?
+    TResult? Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
-    TResult Function(CalendarFormat calendarFormat, String clientId)?
+    TResult? Function(CalendarFormat calendarFormat, String clientId)?
         newDateFormatSelected,
   }) =>
       throw _privateConstructorUsedError;
@@ -83,13 +85,13 @@ mixin _$CalendarExerciseEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NewDateSelected value)? newDateSelected,
-    TResult Function(SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(ExerciseDeleted value)? exerciseDeleted,
-    TResult Function(SetsSubmit value)? setsSubmit,
-    TResult Function(RepsSubmit value)? repsSubmit,
-    TResult Function(ReorderExercises value)? reorderExercises,
-    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
+    TResult? Function(NewDateSelected value)? newDateSelected,
+    TResult? Function(SearchNavigation value)? navigateToSearchScreen,
+    TResult? Function(ExerciseDeleted value)? exerciseDeleted,
+    TResult? Function(SetsSubmit value)? setsSubmit,
+    TResult? Function(RepsSubmit value)? repsSubmit,
+    TResult? Function(ReorderExercises value)? reorderExercises,
+    TResult? Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -114,64 +116,67 @@ mixin _$CalendarExerciseEvent {
 abstract class $CalendarExerciseEventCopyWith<$Res> {
   factory $CalendarExerciseEventCopyWith(CalendarExerciseEvent value,
           $Res Function(CalendarExerciseEvent) then) =
-      _$CalendarExerciseEventCopyWithImpl<$Res>;
+      _$CalendarExerciseEventCopyWithImpl<$Res, CalendarExerciseEvent>;
+  @useResult
   $Res call({String clientId});
 }
 
 /// @nodoc
-class _$CalendarExerciseEventCopyWithImpl<$Res>
+class _$CalendarExerciseEventCopyWithImpl<$Res,
+        $Val extends CalendarExerciseEvent>
     implements $CalendarExerciseEventCopyWith<$Res> {
   _$CalendarExerciseEventCopyWithImpl(this._value, this._then);
 
-  final CalendarExerciseEvent _value;
   // ignore: unused_field
-  final $Res Function(CalendarExerciseEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? clientId = freezed,
+    Object? clientId = null,
   }) {
     return _then(_value.copyWith(
-      clientId: clientId == freezed
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class $NewDateSelectedCopyWith<$Res>
+abstract class _$$NewDateSelectedCopyWith<$Res>
     implements $CalendarExerciseEventCopyWith<$Res> {
-  factory $NewDateSelectedCopyWith(
-          NewDateSelected value, $Res Function(NewDateSelected) then) =
-      _$NewDateSelectedCopyWithImpl<$Res>;
+  factory _$$NewDateSelectedCopyWith(
+          _$NewDateSelected value, $Res Function(_$NewDateSelected) then) =
+      __$$NewDateSelectedCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({DateTime selectedDate, String clientId});
 }
 
 /// @nodoc
-class _$NewDateSelectedCopyWithImpl<$Res>
-    extends _$CalendarExerciseEventCopyWithImpl<$Res>
-    implements $NewDateSelectedCopyWith<$Res> {
-  _$NewDateSelectedCopyWithImpl(
-      NewDateSelected _value, $Res Function(NewDateSelected) _then)
-      : super(_value, (v) => _then(v as NewDateSelected));
+class __$$NewDateSelectedCopyWithImpl<$Res>
+    extends _$CalendarExerciseEventCopyWithImpl<$Res, _$NewDateSelected>
+    implements _$$NewDateSelectedCopyWith<$Res> {
+  __$$NewDateSelectedCopyWithImpl(
+      _$NewDateSelected _value, $Res Function(_$NewDateSelected) _then)
+      : super(_value, _then);
 
-  @override
-  NewDateSelected get _value => super._value as NewDateSelected;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? selectedDate = freezed,
-    Object? clientId = freezed,
+    Object? selectedDate = null,
+    Object? clientId = null,
   }) {
-    return _then(NewDateSelected(
-      selectedDate: selectedDate == freezed
+    return _then(_$NewDateSelected(
+      selectedDate: null == selectedDate
           ? _value.selectedDate
           : selectedDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      clientId: clientId == freezed
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -198,22 +203,21 @@ class _$NewDateSelected implements NewDateSelected {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is NewDateSelected &&
-            const DeepCollectionEquality()
-                .equals(other.selectedDate, selectedDate) &&
-            const DeepCollectionEquality().equals(other.clientId, clientId));
+            other is _$NewDateSelected &&
+            (identical(other.selectedDate, selectedDate) ||
+                other.selectedDate == selectedDate) &&
+            (identical(other.clientId, clientId) ||
+                other.clientId == clientId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(selectedDate),
-      const DeepCollectionEquality().hash(clientId));
+  int get hashCode => Object.hash(runtimeType, selectedDate, clientId);
 
   @JsonKey(ignore: true)
   @override
-  $NewDateSelectedCopyWith<NewDateSelected> get copyWith =>
-      _$NewDateSelectedCopyWithImpl<NewDateSelected>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$NewDateSelectedCopyWith<_$NewDateSelected> get copyWith =>
+      __$$NewDateSelectedCopyWithImpl<_$NewDateSelected>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -240,17 +244,19 @@ class _$NewDateSelected implements NewDateSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId, int index)?
+    TResult? Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult? Function(String clientId)? navigateToSearchScreen,
+    TResult? Function(String userExerciseId, String clientId, int index)?
         exerciseDeleted,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(int oldIndex, int newIndex, String clientId)?
+    TResult? Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
-    TResult Function(CalendarFormat calendarFormat, String clientId)?
+    TResult? Function(CalendarFormat calendarFormat, String clientId)?
         newDateFormatSelected,
   }) {
     return newDateSelected?.call(selectedDate, clientId);
@@ -297,13 +303,13 @@ class _$NewDateSelected implements NewDateSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NewDateSelected value)? newDateSelected,
-    TResult Function(SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(ExerciseDeleted value)? exerciseDeleted,
-    TResult Function(SetsSubmit value)? setsSubmit,
-    TResult Function(RepsSubmit value)? repsSubmit,
-    TResult Function(ReorderExercises value)? reorderExercises,
-    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
+    TResult? Function(NewDateSelected value)? newDateSelected,
+    TResult? Function(SearchNavigation value)? navigateToSearchScreen,
+    TResult? Function(ExerciseDeleted value)? exerciseDeleted,
+    TResult? Function(SetsSubmit value)? setsSubmit,
+    TResult? Function(RepsSubmit value)? repsSubmit,
+    TResult? Function(ReorderExercises value)? reorderExercises,
+    TResult? Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return newDateSelected?.call(this);
   }
@@ -332,42 +338,41 @@ abstract class NewDateSelected implements CalendarExerciseEvent {
       {required final DateTime selectedDate,
       required final String clientId}) = _$NewDateSelected;
 
-  DateTime get selectedDate => throw _privateConstructorUsedError;
+  DateTime get selectedDate;
   @override
-  String get clientId => throw _privateConstructorUsedError;
+  String get clientId;
   @override
   @JsonKey(ignore: true)
-  $NewDateSelectedCopyWith<NewDateSelected> get copyWith =>
+  _$$NewDateSelectedCopyWith<_$NewDateSelected> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SearchNavigationCopyWith<$Res>
+abstract class _$$SearchNavigationCopyWith<$Res>
     implements $CalendarExerciseEventCopyWith<$Res> {
-  factory $SearchNavigationCopyWith(
-          SearchNavigation value, $Res Function(SearchNavigation) then) =
-      _$SearchNavigationCopyWithImpl<$Res>;
+  factory _$$SearchNavigationCopyWith(
+          _$SearchNavigation value, $Res Function(_$SearchNavigation) then) =
+      __$$SearchNavigationCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String clientId});
 }
 
 /// @nodoc
-class _$SearchNavigationCopyWithImpl<$Res>
-    extends _$CalendarExerciseEventCopyWithImpl<$Res>
-    implements $SearchNavigationCopyWith<$Res> {
-  _$SearchNavigationCopyWithImpl(
-      SearchNavigation _value, $Res Function(SearchNavigation) _then)
-      : super(_value, (v) => _then(v as SearchNavigation));
+class __$$SearchNavigationCopyWithImpl<$Res>
+    extends _$CalendarExerciseEventCopyWithImpl<$Res, _$SearchNavigation>
+    implements _$$SearchNavigationCopyWith<$Res> {
+  __$$SearchNavigationCopyWithImpl(
+      _$SearchNavigation _value, $Res Function(_$SearchNavigation) _then)
+      : super(_value, _then);
 
-  @override
-  SearchNavigation get _value => super._value as SearchNavigation;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? clientId = freezed,
+    Object? clientId = null,
   }) {
-    return _then(SearchNavigation(
-      clientId: clientId == freezed
+    return _then(_$SearchNavigation(
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -392,18 +397,19 @@ class _$SearchNavigation implements SearchNavigation {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is SearchNavigation &&
-            const DeepCollectionEquality().equals(other.clientId, clientId));
+            other is _$SearchNavigation &&
+            (identical(other.clientId, clientId) ||
+                other.clientId == clientId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(clientId));
+  int get hashCode => Object.hash(runtimeType, clientId);
 
   @JsonKey(ignore: true)
   @override
-  $SearchNavigationCopyWith<SearchNavigation> get copyWith =>
-      _$SearchNavigationCopyWithImpl<SearchNavigation>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$SearchNavigationCopyWith<_$SearchNavigation> get copyWith =>
+      __$$SearchNavigationCopyWithImpl<_$SearchNavigation>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -430,17 +436,19 @@ class _$SearchNavigation implements SearchNavigation {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId, int index)?
+    TResult? Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult? Function(String clientId)? navigateToSearchScreen,
+    TResult? Function(String userExerciseId, String clientId, int index)?
         exerciseDeleted,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(int oldIndex, int newIndex, String clientId)?
+    TResult? Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
-    TResult Function(CalendarFormat calendarFormat, String clientId)?
+    TResult? Function(CalendarFormat calendarFormat, String clientId)?
         newDateFormatSelected,
   }) {
     return navigateToSearchScreen?.call(clientId);
@@ -487,13 +495,13 @@ class _$SearchNavigation implements SearchNavigation {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NewDateSelected value)? newDateSelected,
-    TResult Function(SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(ExerciseDeleted value)? exerciseDeleted,
-    TResult Function(SetsSubmit value)? setsSubmit,
-    TResult Function(RepsSubmit value)? repsSubmit,
-    TResult Function(ReorderExercises value)? reorderExercises,
-    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
+    TResult? Function(NewDateSelected value)? newDateSelected,
+    TResult? Function(SearchNavigation value)? navigateToSearchScreen,
+    TResult? Function(ExerciseDeleted value)? exerciseDeleted,
+    TResult? Function(SetsSubmit value)? setsSubmit,
+    TResult? Function(RepsSubmit value)? repsSubmit,
+    TResult? Function(ReorderExercises value)? reorderExercises,
+    TResult? Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return navigateToSearchScreen?.call(this);
   }
@@ -522,50 +530,49 @@ abstract class SearchNavigation implements CalendarExerciseEvent {
       _$SearchNavigation;
 
   @override
-  String get clientId => throw _privateConstructorUsedError;
+  String get clientId;
   @override
   @JsonKey(ignore: true)
-  $SearchNavigationCopyWith<SearchNavigation> get copyWith =>
+  _$$SearchNavigationCopyWith<_$SearchNavigation> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ExerciseDeletedCopyWith<$Res>
+abstract class _$$ExerciseDeletedCopyWith<$Res>
     implements $CalendarExerciseEventCopyWith<$Res> {
-  factory $ExerciseDeletedCopyWith(
-          ExerciseDeleted value, $Res Function(ExerciseDeleted) then) =
-      _$ExerciseDeletedCopyWithImpl<$Res>;
+  factory _$$ExerciseDeletedCopyWith(
+          _$ExerciseDeleted value, $Res Function(_$ExerciseDeleted) then) =
+      __$$ExerciseDeletedCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String userExerciseId, String clientId, int index});
 }
 
 /// @nodoc
-class _$ExerciseDeletedCopyWithImpl<$Res>
-    extends _$CalendarExerciseEventCopyWithImpl<$Res>
-    implements $ExerciseDeletedCopyWith<$Res> {
-  _$ExerciseDeletedCopyWithImpl(
-      ExerciseDeleted _value, $Res Function(ExerciseDeleted) _then)
-      : super(_value, (v) => _then(v as ExerciseDeleted));
+class __$$ExerciseDeletedCopyWithImpl<$Res>
+    extends _$CalendarExerciseEventCopyWithImpl<$Res, _$ExerciseDeleted>
+    implements _$$ExerciseDeletedCopyWith<$Res> {
+  __$$ExerciseDeletedCopyWithImpl(
+      _$ExerciseDeleted _value, $Res Function(_$ExerciseDeleted) _then)
+      : super(_value, _then);
 
-  @override
-  ExerciseDeleted get _value => super._value as ExerciseDeleted;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userExerciseId = freezed,
-    Object? clientId = freezed,
-    Object? index = freezed,
+    Object? userExerciseId = null,
+    Object? clientId = null,
+    Object? index = null,
   }) {
-    return _then(ExerciseDeleted(
-      userExerciseId: userExerciseId == freezed
+    return _then(_$ExerciseDeleted(
+      userExerciseId: null == userExerciseId
           ? _value.userExerciseId
           : userExerciseId // ignore: cast_nullable_to_non_nullable
               as String,
-      clientId: clientId == freezed
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
@@ -597,24 +604,22 @@ class _$ExerciseDeleted implements ExerciseDeleted {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ExerciseDeleted &&
-            const DeepCollectionEquality()
-                .equals(other.userExerciseId, userExerciseId) &&
-            const DeepCollectionEquality().equals(other.clientId, clientId) &&
-            const DeepCollectionEquality().equals(other.index, index));
+            other is _$ExerciseDeleted &&
+            (identical(other.userExerciseId, userExerciseId) ||
+                other.userExerciseId == userExerciseId) &&
+            (identical(other.clientId, clientId) ||
+                other.clientId == clientId) &&
+            (identical(other.index, index) || other.index == index));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(userExerciseId),
-      const DeepCollectionEquality().hash(clientId),
-      const DeepCollectionEquality().hash(index));
+  int get hashCode => Object.hash(runtimeType, userExerciseId, clientId, index);
 
   @JsonKey(ignore: true)
   @override
-  $ExerciseDeletedCopyWith<ExerciseDeleted> get copyWith =>
-      _$ExerciseDeletedCopyWithImpl<ExerciseDeleted>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ExerciseDeletedCopyWith<_$ExerciseDeleted> get copyWith =>
+      __$$ExerciseDeletedCopyWithImpl<_$ExerciseDeleted>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -641,17 +646,19 @@ class _$ExerciseDeleted implements ExerciseDeleted {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId, int index)?
+    TResult? Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult? Function(String clientId)? navigateToSearchScreen,
+    TResult? Function(String userExerciseId, String clientId, int index)?
         exerciseDeleted,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(int oldIndex, int newIndex, String clientId)?
+    TResult? Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
-    TResult Function(CalendarFormat calendarFormat, String clientId)?
+    TResult? Function(CalendarFormat calendarFormat, String clientId)?
         newDateFormatSelected,
   }) {
     return exerciseDeleted?.call(userExerciseId, clientId, index);
@@ -698,13 +705,13 @@ class _$ExerciseDeleted implements ExerciseDeleted {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NewDateSelected value)? newDateSelected,
-    TResult Function(SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(ExerciseDeleted value)? exerciseDeleted,
-    TResult Function(SetsSubmit value)? setsSubmit,
-    TResult Function(RepsSubmit value)? repsSubmit,
-    TResult Function(ReorderExercises value)? reorderExercises,
-    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
+    TResult? Function(NewDateSelected value)? newDateSelected,
+    TResult? Function(SearchNavigation value)? navigateToSearchScreen,
+    TResult? Function(ExerciseDeleted value)? exerciseDeleted,
+    TResult? Function(SetsSubmit value)? setsSubmit,
+    TResult? Function(RepsSubmit value)? repsSubmit,
+    TResult? Function(ReorderExercises value)? reorderExercises,
+    TResult? Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return exerciseDeleted?.call(this);
   }
@@ -734,52 +741,52 @@ abstract class ExerciseDeleted implements CalendarExerciseEvent {
       required final String clientId,
       required final int index}) = _$ExerciseDeleted;
 
-  String get userExerciseId => throw _privateConstructorUsedError;
+  String get userExerciseId;
   @override
-  String get clientId => throw _privateConstructorUsedError;
-  int get index => throw _privateConstructorUsedError;
+  String get clientId;
+  int get index;
   @override
   @JsonKey(ignore: true)
-  $ExerciseDeletedCopyWith<ExerciseDeleted> get copyWith =>
+  _$$ExerciseDeletedCopyWith<_$ExerciseDeleted> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SetsSubmitCopyWith<$Res>
+abstract class _$$SetsSubmitCopyWith<$Res>
     implements $CalendarExerciseEventCopyWith<$Res> {
-  factory $SetsSubmitCopyWith(
-          SetsSubmit value, $Res Function(SetsSubmit) then) =
-      _$SetsSubmitCopyWithImpl<$Res>;
+  factory _$$SetsSubmitCopyWith(
+          _$SetsSubmit value, $Res Function(_$SetsSubmit) then) =
+      __$$SetsSubmitCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String clientId, String setsNumber, String userExerciseId});
 }
 
 /// @nodoc
-class _$SetsSubmitCopyWithImpl<$Res>
-    extends _$CalendarExerciseEventCopyWithImpl<$Res>
-    implements $SetsSubmitCopyWith<$Res> {
-  _$SetsSubmitCopyWithImpl(SetsSubmit _value, $Res Function(SetsSubmit) _then)
-      : super(_value, (v) => _then(v as SetsSubmit));
+class __$$SetsSubmitCopyWithImpl<$Res>
+    extends _$CalendarExerciseEventCopyWithImpl<$Res, _$SetsSubmit>
+    implements _$$SetsSubmitCopyWith<$Res> {
+  __$$SetsSubmitCopyWithImpl(
+      _$SetsSubmit _value, $Res Function(_$SetsSubmit) _then)
+      : super(_value, _then);
 
-  @override
-  SetsSubmit get _value => super._value as SetsSubmit;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? clientId = freezed,
-    Object? setsNumber = freezed,
-    Object? userExerciseId = freezed,
+    Object? clientId = null,
+    Object? setsNumber = null,
+    Object? userExerciseId = null,
   }) {
-    return _then(SetsSubmit(
-      clientId: clientId == freezed
+    return _then(_$SetsSubmit(
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
-      setsNumber: setsNumber == freezed
+      setsNumber: null == setsNumber
           ? _value.setsNumber
           : setsNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      userExerciseId: userExerciseId == freezed
+      userExerciseId: null == userExerciseId
           ? _value.userExerciseId
           : userExerciseId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -811,25 +818,24 @@ class _$SetsSubmit implements SetsSubmit {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is SetsSubmit &&
-            const DeepCollectionEquality().equals(other.clientId, clientId) &&
-            const DeepCollectionEquality()
-                .equals(other.setsNumber, setsNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.userExerciseId, userExerciseId));
+            other is _$SetsSubmit &&
+            (identical(other.clientId, clientId) ||
+                other.clientId == clientId) &&
+            (identical(other.setsNumber, setsNumber) ||
+                other.setsNumber == setsNumber) &&
+            (identical(other.userExerciseId, userExerciseId) ||
+                other.userExerciseId == userExerciseId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(clientId),
-      const DeepCollectionEquality().hash(setsNumber),
-      const DeepCollectionEquality().hash(userExerciseId));
+  int get hashCode =>
+      Object.hash(runtimeType, clientId, setsNumber, userExerciseId);
 
   @JsonKey(ignore: true)
   @override
-  $SetsSubmitCopyWith<SetsSubmit> get copyWith =>
-      _$SetsSubmitCopyWithImpl<SetsSubmit>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$SetsSubmitCopyWith<_$SetsSubmit> get copyWith =>
+      __$$SetsSubmitCopyWithImpl<_$SetsSubmit>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -856,17 +862,19 @@ class _$SetsSubmit implements SetsSubmit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId, int index)?
+    TResult? Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult? Function(String clientId)? navigateToSearchScreen,
+    TResult? Function(String userExerciseId, String clientId, int index)?
         exerciseDeleted,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(int oldIndex, int newIndex, String clientId)?
+    TResult? Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
-    TResult Function(CalendarFormat calendarFormat, String clientId)?
+    TResult? Function(CalendarFormat calendarFormat, String clientId)?
         newDateFormatSelected,
   }) {
     return setsSubmit?.call(clientId, setsNumber, userExerciseId);
@@ -913,13 +921,13 @@ class _$SetsSubmit implements SetsSubmit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NewDateSelected value)? newDateSelected,
-    TResult Function(SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(ExerciseDeleted value)? exerciseDeleted,
-    TResult Function(SetsSubmit value)? setsSubmit,
-    TResult Function(RepsSubmit value)? repsSubmit,
-    TResult Function(ReorderExercises value)? reorderExercises,
-    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
+    TResult? Function(NewDateSelected value)? newDateSelected,
+    TResult? Function(SearchNavigation value)? navigateToSearchScreen,
+    TResult? Function(ExerciseDeleted value)? exerciseDeleted,
+    TResult? Function(SetsSubmit value)? setsSubmit,
+    TResult? Function(RepsSubmit value)? repsSubmit,
+    TResult? Function(ReorderExercises value)? reorderExercises,
+    TResult? Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return setsSubmit?.call(this);
   }
@@ -950,51 +958,51 @@ abstract class SetsSubmit implements CalendarExerciseEvent {
       required final String userExerciseId}) = _$SetsSubmit;
 
   @override
-  String get clientId => throw _privateConstructorUsedError;
-  String get setsNumber => throw _privateConstructorUsedError;
-  String get userExerciseId => throw _privateConstructorUsedError;
+  String get clientId;
+  String get setsNumber;
+  String get userExerciseId;
   @override
   @JsonKey(ignore: true)
-  $SetsSubmitCopyWith<SetsSubmit> get copyWith =>
+  _$$SetsSubmitCopyWith<_$SetsSubmit> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RepsSubmitCopyWith<$Res>
+abstract class _$$RepsSubmitCopyWith<$Res>
     implements $CalendarExerciseEventCopyWith<$Res> {
-  factory $RepsSubmitCopyWith(
-          RepsSubmit value, $Res Function(RepsSubmit) then) =
-      _$RepsSubmitCopyWithImpl<$Res>;
+  factory _$$RepsSubmitCopyWith(
+          _$RepsSubmit value, $Res Function(_$RepsSubmit) then) =
+      __$$RepsSubmitCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String clientId, String repsNumber, String userExerciseId});
 }
 
 /// @nodoc
-class _$RepsSubmitCopyWithImpl<$Res>
-    extends _$CalendarExerciseEventCopyWithImpl<$Res>
-    implements $RepsSubmitCopyWith<$Res> {
-  _$RepsSubmitCopyWithImpl(RepsSubmit _value, $Res Function(RepsSubmit) _then)
-      : super(_value, (v) => _then(v as RepsSubmit));
+class __$$RepsSubmitCopyWithImpl<$Res>
+    extends _$CalendarExerciseEventCopyWithImpl<$Res, _$RepsSubmit>
+    implements _$$RepsSubmitCopyWith<$Res> {
+  __$$RepsSubmitCopyWithImpl(
+      _$RepsSubmit _value, $Res Function(_$RepsSubmit) _then)
+      : super(_value, _then);
 
-  @override
-  RepsSubmit get _value => super._value as RepsSubmit;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? clientId = freezed,
-    Object? repsNumber = freezed,
-    Object? userExerciseId = freezed,
+    Object? clientId = null,
+    Object? repsNumber = null,
+    Object? userExerciseId = null,
   }) {
-    return _then(RepsSubmit(
-      clientId: clientId == freezed
+    return _then(_$RepsSubmit(
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
-      repsNumber: repsNumber == freezed
+      repsNumber: null == repsNumber
           ? _value.repsNumber
           : repsNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      userExerciseId: userExerciseId == freezed
+      userExerciseId: null == userExerciseId
           ? _value.userExerciseId
           : userExerciseId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1026,25 +1034,24 @@ class _$RepsSubmit implements RepsSubmit {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is RepsSubmit &&
-            const DeepCollectionEquality().equals(other.clientId, clientId) &&
-            const DeepCollectionEquality()
-                .equals(other.repsNumber, repsNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.userExerciseId, userExerciseId));
+            other is _$RepsSubmit &&
+            (identical(other.clientId, clientId) ||
+                other.clientId == clientId) &&
+            (identical(other.repsNumber, repsNumber) ||
+                other.repsNumber == repsNumber) &&
+            (identical(other.userExerciseId, userExerciseId) ||
+                other.userExerciseId == userExerciseId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(clientId),
-      const DeepCollectionEquality().hash(repsNumber),
-      const DeepCollectionEquality().hash(userExerciseId));
+  int get hashCode =>
+      Object.hash(runtimeType, clientId, repsNumber, userExerciseId);
 
   @JsonKey(ignore: true)
   @override
-  $RepsSubmitCopyWith<RepsSubmit> get copyWith =>
-      _$RepsSubmitCopyWithImpl<RepsSubmit>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$RepsSubmitCopyWith<_$RepsSubmit> get copyWith =>
+      __$$RepsSubmitCopyWithImpl<_$RepsSubmit>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1071,17 +1078,19 @@ class _$RepsSubmit implements RepsSubmit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId, int index)?
+    TResult? Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult? Function(String clientId)? navigateToSearchScreen,
+    TResult? Function(String userExerciseId, String clientId, int index)?
         exerciseDeleted,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(int oldIndex, int newIndex, String clientId)?
+    TResult? Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
-    TResult Function(CalendarFormat calendarFormat, String clientId)?
+    TResult? Function(CalendarFormat calendarFormat, String clientId)?
         newDateFormatSelected,
   }) {
     return repsSubmit?.call(clientId, repsNumber, userExerciseId);
@@ -1128,13 +1137,13 @@ class _$RepsSubmit implements RepsSubmit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NewDateSelected value)? newDateSelected,
-    TResult Function(SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(ExerciseDeleted value)? exerciseDeleted,
-    TResult Function(SetsSubmit value)? setsSubmit,
-    TResult Function(RepsSubmit value)? repsSubmit,
-    TResult Function(ReorderExercises value)? reorderExercises,
-    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
+    TResult? Function(NewDateSelected value)? newDateSelected,
+    TResult? Function(SearchNavigation value)? navigateToSearchScreen,
+    TResult? Function(ExerciseDeleted value)? exerciseDeleted,
+    TResult? Function(SetsSubmit value)? setsSubmit,
+    TResult? Function(RepsSubmit value)? repsSubmit,
+    TResult? Function(ReorderExercises value)? reorderExercises,
+    TResult? Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return repsSubmit?.call(this);
   }
@@ -1165,52 +1174,51 @@ abstract class RepsSubmit implements CalendarExerciseEvent {
       required final String userExerciseId}) = _$RepsSubmit;
 
   @override
-  String get clientId => throw _privateConstructorUsedError;
-  String get repsNumber => throw _privateConstructorUsedError;
-  String get userExerciseId => throw _privateConstructorUsedError;
+  String get clientId;
+  String get repsNumber;
+  String get userExerciseId;
   @override
   @JsonKey(ignore: true)
-  $RepsSubmitCopyWith<RepsSubmit> get copyWith =>
+  _$$RepsSubmitCopyWith<_$RepsSubmit> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ReorderExercisesCopyWith<$Res>
+abstract class _$$ReorderExercisesCopyWith<$Res>
     implements $CalendarExerciseEventCopyWith<$Res> {
-  factory $ReorderExercisesCopyWith(
-          ReorderExercises value, $Res Function(ReorderExercises) then) =
-      _$ReorderExercisesCopyWithImpl<$Res>;
+  factory _$$ReorderExercisesCopyWith(
+          _$ReorderExercises value, $Res Function(_$ReorderExercises) then) =
+      __$$ReorderExercisesCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int oldIndex, int newIndex, String clientId});
 }
 
 /// @nodoc
-class _$ReorderExercisesCopyWithImpl<$Res>
-    extends _$CalendarExerciseEventCopyWithImpl<$Res>
-    implements $ReorderExercisesCopyWith<$Res> {
-  _$ReorderExercisesCopyWithImpl(
-      ReorderExercises _value, $Res Function(ReorderExercises) _then)
-      : super(_value, (v) => _then(v as ReorderExercises));
+class __$$ReorderExercisesCopyWithImpl<$Res>
+    extends _$CalendarExerciseEventCopyWithImpl<$Res, _$ReorderExercises>
+    implements _$$ReorderExercisesCopyWith<$Res> {
+  __$$ReorderExercisesCopyWithImpl(
+      _$ReorderExercises _value, $Res Function(_$ReorderExercises) _then)
+      : super(_value, _then);
 
-  @override
-  ReorderExercises get _value => super._value as ReorderExercises;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? oldIndex = freezed,
-    Object? newIndex = freezed,
-    Object? clientId = freezed,
+    Object? oldIndex = null,
+    Object? newIndex = null,
+    Object? clientId = null,
   }) {
-    return _then(ReorderExercises(
-      oldIndex: oldIndex == freezed
+    return _then(_$ReorderExercises(
+      oldIndex: null == oldIndex
           ? _value.oldIndex
           : oldIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      newIndex: newIndex == freezed
+      newIndex: null == newIndex
           ? _value.newIndex
           : newIndex // ignore: cast_nullable_to_non_nullable
               as int,
-      clientId: clientId == freezed
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1240,23 +1248,23 @@ class _$ReorderExercises implements ReorderExercises {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ReorderExercises &&
-            const DeepCollectionEquality().equals(other.oldIndex, oldIndex) &&
-            const DeepCollectionEquality().equals(other.newIndex, newIndex) &&
-            const DeepCollectionEquality().equals(other.clientId, clientId));
+            other is _$ReorderExercises &&
+            (identical(other.oldIndex, oldIndex) ||
+                other.oldIndex == oldIndex) &&
+            (identical(other.newIndex, newIndex) ||
+                other.newIndex == newIndex) &&
+            (identical(other.clientId, clientId) ||
+                other.clientId == clientId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(oldIndex),
-      const DeepCollectionEquality().hash(newIndex),
-      const DeepCollectionEquality().hash(clientId));
+  int get hashCode => Object.hash(runtimeType, oldIndex, newIndex, clientId);
 
   @JsonKey(ignore: true)
   @override
-  $ReorderExercisesCopyWith<ReorderExercises> get copyWith =>
-      _$ReorderExercisesCopyWithImpl<ReorderExercises>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ReorderExercisesCopyWith<_$ReorderExercises> get copyWith =>
+      __$$ReorderExercisesCopyWithImpl<_$ReorderExercises>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1283,17 +1291,19 @@ class _$ReorderExercises implements ReorderExercises {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId, int index)?
+    TResult? Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult? Function(String clientId)? navigateToSearchScreen,
+    TResult? Function(String userExerciseId, String clientId, int index)?
         exerciseDeleted,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(int oldIndex, int newIndex, String clientId)?
+    TResult? Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
-    TResult Function(CalendarFormat calendarFormat, String clientId)?
+    TResult? Function(CalendarFormat calendarFormat, String clientId)?
         newDateFormatSelected,
   }) {
     return reorderExercises?.call(oldIndex, newIndex, clientId);
@@ -1340,13 +1350,13 @@ class _$ReorderExercises implements ReorderExercises {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NewDateSelected value)? newDateSelected,
-    TResult Function(SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(ExerciseDeleted value)? exerciseDeleted,
-    TResult Function(SetsSubmit value)? setsSubmit,
-    TResult Function(RepsSubmit value)? repsSubmit,
-    TResult Function(ReorderExercises value)? reorderExercises,
-    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
+    TResult? Function(NewDateSelected value)? newDateSelected,
+    TResult? Function(SearchNavigation value)? navigateToSearchScreen,
+    TResult? Function(ExerciseDeleted value)? exerciseDeleted,
+    TResult? Function(SetsSubmit value)? setsSubmit,
+    TResult? Function(RepsSubmit value)? repsSubmit,
+    TResult? Function(ReorderExercises value)? reorderExercises,
+    TResult? Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return reorderExercises?.call(this);
   }
@@ -1376,48 +1386,47 @@ abstract class ReorderExercises implements CalendarExerciseEvent {
       required final int newIndex,
       required final String clientId}) = _$ReorderExercises;
 
-  int get oldIndex => throw _privateConstructorUsedError;
-  int get newIndex => throw _privateConstructorUsedError;
+  int get oldIndex;
+  int get newIndex;
   @override
-  String get clientId => throw _privateConstructorUsedError;
+  String get clientId;
   @override
   @JsonKey(ignore: true)
-  $ReorderExercisesCopyWith<ReorderExercises> get copyWith =>
+  _$$ReorderExercisesCopyWith<_$ReorderExercises> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NewDateFormatSelectedCopyWith<$Res>
+abstract class _$$NewDateFormatSelectedCopyWith<$Res>
     implements $CalendarExerciseEventCopyWith<$Res> {
-  factory $NewDateFormatSelectedCopyWith(NewDateFormatSelected value,
-          $Res Function(NewDateFormatSelected) then) =
-      _$NewDateFormatSelectedCopyWithImpl<$Res>;
+  factory _$$NewDateFormatSelectedCopyWith(_$NewDateFormatSelected value,
+          $Res Function(_$NewDateFormatSelected) then) =
+      __$$NewDateFormatSelectedCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({CalendarFormat calendarFormat, String clientId});
 }
 
 /// @nodoc
-class _$NewDateFormatSelectedCopyWithImpl<$Res>
-    extends _$CalendarExerciseEventCopyWithImpl<$Res>
-    implements $NewDateFormatSelectedCopyWith<$Res> {
-  _$NewDateFormatSelectedCopyWithImpl(
-      NewDateFormatSelected _value, $Res Function(NewDateFormatSelected) _then)
-      : super(_value, (v) => _then(v as NewDateFormatSelected));
+class __$$NewDateFormatSelectedCopyWithImpl<$Res>
+    extends _$CalendarExerciseEventCopyWithImpl<$Res, _$NewDateFormatSelected>
+    implements _$$NewDateFormatSelectedCopyWith<$Res> {
+  __$$NewDateFormatSelectedCopyWithImpl(_$NewDateFormatSelected _value,
+      $Res Function(_$NewDateFormatSelected) _then)
+      : super(_value, _then);
 
-  @override
-  NewDateFormatSelected get _value => super._value as NewDateFormatSelected;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? calendarFormat = freezed,
-    Object? clientId = freezed,
+    Object? calendarFormat = null,
+    Object? clientId = null,
   }) {
-    return _then(NewDateFormatSelected(
-      calendarFormat: calendarFormat == freezed
+    return _then(_$NewDateFormatSelected(
+      calendarFormat: null == calendarFormat
           ? _value.calendarFormat
           : calendarFormat // ignore: cast_nullable_to_non_nullable
               as CalendarFormat,
-      clientId: clientId == freezed
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -1445,22 +1454,21 @@ class _$NewDateFormatSelected implements NewDateFormatSelected {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is NewDateFormatSelected &&
-            const DeepCollectionEquality()
-                .equals(other.calendarFormat, calendarFormat) &&
-            const DeepCollectionEquality().equals(other.clientId, clientId));
+            other is _$NewDateFormatSelected &&
+            (identical(other.calendarFormat, calendarFormat) ||
+                other.calendarFormat == calendarFormat) &&
+            (identical(other.clientId, clientId) ||
+                other.clientId == clientId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(calendarFormat),
-      const DeepCollectionEquality().hash(clientId));
+  int get hashCode => Object.hash(runtimeType, calendarFormat, clientId);
 
   @JsonKey(ignore: true)
   @override
-  $NewDateFormatSelectedCopyWith<NewDateFormatSelected> get copyWith =>
-      _$NewDateFormatSelectedCopyWithImpl<NewDateFormatSelected>(
+  @pragma('vm:prefer-inline')
+  _$$NewDateFormatSelectedCopyWith<_$NewDateFormatSelected> get copyWith =>
+      __$$NewDateFormatSelectedCopyWithImpl<_$NewDateFormatSelected>(
           this, _$identity);
 
   @override
@@ -1488,17 +1496,19 @@ class _$NewDateFormatSelected implements NewDateFormatSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime selectedDate, String clientId)? newDateSelected,
-    TResult Function(String clientId)? navigateToSearchScreen,
-    TResult Function(String userExerciseId, String clientId, int index)?
+    TResult? Function(DateTime selectedDate, String clientId)? newDateSelected,
+    TResult? Function(String clientId)? navigateToSearchScreen,
+    TResult? Function(String userExerciseId, String clientId, int index)?
         exerciseDeleted,
-    TResult Function(String clientId, String setsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String setsNumber, String userExerciseId)?
         setsSubmit,
-    TResult Function(String clientId, String repsNumber, String userExerciseId)?
+    TResult? Function(
+            String clientId, String repsNumber, String userExerciseId)?
         repsSubmit,
-    TResult Function(int oldIndex, int newIndex, String clientId)?
+    TResult? Function(int oldIndex, int newIndex, String clientId)?
         reorderExercises,
-    TResult Function(CalendarFormat calendarFormat, String clientId)?
+    TResult? Function(CalendarFormat calendarFormat, String clientId)?
         newDateFormatSelected,
   }) {
     return newDateFormatSelected?.call(calendarFormat, clientId);
@@ -1545,13 +1555,13 @@ class _$NewDateFormatSelected implements NewDateFormatSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(NewDateSelected value)? newDateSelected,
-    TResult Function(SearchNavigation value)? navigateToSearchScreen,
-    TResult Function(ExerciseDeleted value)? exerciseDeleted,
-    TResult Function(SetsSubmit value)? setsSubmit,
-    TResult Function(RepsSubmit value)? repsSubmit,
-    TResult Function(ReorderExercises value)? reorderExercises,
-    TResult Function(NewDateFormatSelected value)? newDateFormatSelected,
+    TResult? Function(NewDateSelected value)? newDateSelected,
+    TResult? Function(SearchNavigation value)? navigateToSearchScreen,
+    TResult? Function(ExerciseDeleted value)? exerciseDeleted,
+    TResult? Function(SetsSubmit value)? setsSubmit,
+    TResult? Function(RepsSubmit value)? repsSubmit,
+    TResult? Function(ReorderExercises value)? reorderExercises,
+    TResult? Function(NewDateFormatSelected value)? newDateFormatSelected,
   }) {
     return newDateFormatSelected?.call(this);
   }
@@ -1580,11 +1590,11 @@ abstract class NewDateFormatSelected implements CalendarExerciseEvent {
       {required final CalendarFormat calendarFormat,
       required final String clientId}) = _$NewDateFormatSelected;
 
-  CalendarFormat get calendarFormat => throw _privateConstructorUsedError;
+  CalendarFormat get calendarFormat;
   @override
-  String get clientId => throw _privateConstructorUsedError;
+  String get clientId;
   @override
   @JsonKey(ignore: true)
-  $NewDateFormatSelectedCopyWith<NewDateFormatSelected> get copyWith =>
+  _$$NewDateFormatSelectedCopyWith<_$NewDateFormatSelected> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -31,46 +31,52 @@ mixin _$VideoData {
 /// @nodoc
 abstract class $VideoDataCopyWith<$Res> {
   factory $VideoDataCopyWith(VideoData value, $Res Function(VideoData) then) =
-      _$VideoDataCopyWithImpl<$Res>;
+      _$VideoDataCopyWithImpl<$Res, VideoData>;
+  @useResult
   $Res call({Data data});
 
   $DataCopyWith<$Res> get data;
 }
 
 /// @nodoc
-class _$VideoDataCopyWithImpl<$Res> implements $VideoDataCopyWith<$Res> {
+class _$VideoDataCopyWithImpl<$Res, $Val extends VideoData>
+    implements $VideoDataCopyWith<$Res> {
   _$VideoDataCopyWithImpl(this._value, this._then);
 
-  final VideoData _value;
   // ignore: unused_field
-  final $Res Function(VideoData) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = freezed,
+    Object? data = null,
   }) {
     return _then(_value.copyWith(
-      data: data == freezed
+      data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as Data,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $DataCopyWith<$Res> get data {
     return $DataCopyWith<$Res>(_value.data, (value) {
-      return _then(_value.copyWith(data: value));
+      return _then(_value.copyWith(data: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$VideoDataCopyWith<$Res> implements $VideoDataCopyWith<$Res> {
-  factory _$VideoDataCopyWith(
-          _VideoData value, $Res Function(_VideoData) then) =
-      __$VideoDataCopyWithImpl<$Res>;
+abstract class _$$_VideoDataCopyWith<$Res> implements $VideoDataCopyWith<$Res> {
+  factory _$$_VideoDataCopyWith(
+          _$_VideoData value, $Res Function(_$_VideoData) then) =
+      __$$_VideoDataCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({Data data});
 
   @override
@@ -78,20 +84,20 @@ abstract class _$VideoDataCopyWith<$Res> implements $VideoDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$VideoDataCopyWithImpl<$Res> extends _$VideoDataCopyWithImpl<$Res>
-    implements _$VideoDataCopyWith<$Res> {
-  __$VideoDataCopyWithImpl(_VideoData _value, $Res Function(_VideoData) _then)
-      : super(_value, (v) => _then(v as _VideoData));
+class __$$_VideoDataCopyWithImpl<$Res>
+    extends _$VideoDataCopyWithImpl<$Res, _$_VideoData>
+    implements _$$_VideoDataCopyWith<$Res> {
+  __$$_VideoDataCopyWithImpl(
+      _$_VideoData _value, $Res Function(_$_VideoData) _then)
+      : super(_value, _then);
 
-  @override
-  _VideoData get _value => super._value as _VideoData;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = freezed,
+    Object? data = null,
   }) {
-    return _then(_VideoData(
-      data: data == freezed
+    return _then(_$_VideoData(
+      data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as Data,
@@ -119,23 +125,25 @@ class _$_VideoData implements _VideoData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _VideoData &&
-            const DeepCollectionEquality().equals(other.data, data));
+            other is _$_VideoData &&
+            (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(runtimeType, data);
 
   @JsonKey(ignore: true)
   @override
-  _$VideoDataCopyWith<_VideoData> get copyWith =>
-      __$VideoDataCopyWithImpl<_VideoData>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_VideoDataCopyWith<_$_VideoData> get copyWith =>
+      __$$_VideoDataCopyWithImpl<_$_VideoData>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VideoDataToJson(this);
+    return _$$_VideoDataToJson(
+      this,
+    );
   }
 }
 
@@ -146,9 +154,9 @@ abstract class _VideoData implements VideoData {
       _$_VideoData.fromJson;
 
   @override
-  Data get data => throw _privateConstructorUsedError;
+  Data get data;
   @override
   @JsonKey(ignore: true)
-  _$VideoDataCopyWith<_VideoData> get copyWith =>
+  _$$_VideoDataCopyWith<_$_VideoData> get copyWith =>
       throw _privateConstructorUsedError;
 }

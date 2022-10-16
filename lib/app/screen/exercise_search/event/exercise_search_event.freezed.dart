@@ -26,10 +26,10 @@ mixin _$ExerciseSearchEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? emptySearch,
-    TResult Function(String input)? searchForInput,
-    TResult Function(String filterName)? filterClick,
-    TResult Function()? reloadLastSearch,
+    TResult? Function()? emptySearch,
+    TResult? Function(String input)? searchForInput,
+    TResult? Function(String filterName)? filterClick,
+    TResult? Function()? reloadLastSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,10 +51,10 @@ mixin _$ExerciseSearchEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(EmptySearch value)? emptySearch,
-    TResult Function(SearchForInput value)? searchForInput,
-    TResult Function(FilterClick value)? filterClick,
-    TResult Function(ReloadLastSearch value)? reloadLastSearch,
+    TResult? Function(EmptySearch value)? emptySearch,
+    TResult? Function(SearchForInput value)? searchForInput,
+    TResult? Function(FilterClick value)? filterClick,
+    TResult? Function(ReloadLastSearch value)? reloadLastSearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,36 +72,34 @@ mixin _$ExerciseSearchEvent {
 abstract class $ExerciseSearchEventCopyWith<$Res> {
   factory $ExerciseSearchEventCopyWith(
           ExerciseSearchEvent value, $Res Function(ExerciseSearchEvent) then) =
-      _$ExerciseSearchEventCopyWithImpl<$Res>;
+      _$ExerciseSearchEventCopyWithImpl<$Res, ExerciseSearchEvent>;
 }
 
 /// @nodoc
-class _$ExerciseSearchEventCopyWithImpl<$Res>
+class _$ExerciseSearchEventCopyWithImpl<$Res, $Val extends ExerciseSearchEvent>
     implements $ExerciseSearchEventCopyWith<$Res> {
   _$ExerciseSearchEventCopyWithImpl(this._value, this._then);
 
-  final ExerciseSearchEvent _value;
   // ignore: unused_field
-  final $Res Function(ExerciseSearchEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
-abstract class $EmptySearchCopyWith<$Res> {
-  factory $EmptySearchCopyWith(
-          EmptySearch value, $Res Function(EmptySearch) then) =
-      _$EmptySearchCopyWithImpl<$Res>;
+abstract class _$$EmptySearchCopyWith<$Res> {
+  factory _$$EmptySearchCopyWith(
+          _$EmptySearch value, $Res Function(_$EmptySearch) then) =
+      __$$EmptySearchCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$EmptySearchCopyWithImpl<$Res>
-    extends _$ExerciseSearchEventCopyWithImpl<$Res>
-    implements $EmptySearchCopyWith<$Res> {
-  _$EmptySearchCopyWithImpl(
-      EmptySearch _value, $Res Function(EmptySearch) _then)
-      : super(_value, (v) => _then(v as EmptySearch));
-
-  @override
-  EmptySearch get _value => super._value as EmptySearch;
+class __$$EmptySearchCopyWithImpl<$Res>
+    extends _$ExerciseSearchEventCopyWithImpl<$Res, _$EmptySearch>
+    implements _$$EmptySearchCopyWith<$Res> {
+  __$$EmptySearchCopyWithImpl(
+      _$EmptySearch _value, $Res Function(_$EmptySearch) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -117,7 +115,7 @@ class _$EmptySearch implements EmptySearch {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is EmptySearch);
+        (other.runtimeType == runtimeType && other is _$EmptySearch);
   }
 
   @override
@@ -137,10 +135,10 @@ class _$EmptySearch implements EmptySearch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? emptySearch,
-    TResult Function(String input)? searchForInput,
-    TResult Function(String filterName)? filterClick,
-    TResult Function()? reloadLastSearch,
+    TResult? Function()? emptySearch,
+    TResult? Function(String input)? searchForInput,
+    TResult? Function(String filterName)? filterClick,
+    TResult? Function()? reloadLastSearch,
   }) {
     return emptySearch?.call();
   }
@@ -174,10 +172,10 @@ class _$EmptySearch implements EmptySearch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(EmptySearch value)? emptySearch,
-    TResult Function(SearchForInput value)? searchForInput,
-    TResult Function(FilterClick value)? filterClick,
-    TResult Function(ReloadLastSearch value)? reloadLastSearch,
+    TResult? Function(EmptySearch value)? emptySearch,
+    TResult? Function(SearchForInput value)? searchForInput,
+    TResult? Function(FilterClick value)? filterClick,
+    TResult? Function(ReloadLastSearch value)? reloadLastSearch,
   }) {
     return emptySearch?.call(this);
   }
@@ -203,30 +201,29 @@ abstract class EmptySearch implements ExerciseSearchEvent {
 }
 
 /// @nodoc
-abstract class $SearchForInputCopyWith<$Res> {
-  factory $SearchForInputCopyWith(
-          SearchForInput value, $Res Function(SearchForInput) then) =
-      _$SearchForInputCopyWithImpl<$Res>;
+abstract class _$$SearchForInputCopyWith<$Res> {
+  factory _$$SearchForInputCopyWith(
+          _$SearchForInput value, $Res Function(_$SearchForInput) then) =
+      __$$SearchForInputCopyWithImpl<$Res>;
+  @useResult
   $Res call({String input});
 }
 
 /// @nodoc
-class _$SearchForInputCopyWithImpl<$Res>
-    extends _$ExerciseSearchEventCopyWithImpl<$Res>
-    implements $SearchForInputCopyWith<$Res> {
-  _$SearchForInputCopyWithImpl(
-      SearchForInput _value, $Res Function(SearchForInput) _then)
-      : super(_value, (v) => _then(v as SearchForInput));
+class __$$SearchForInputCopyWithImpl<$Res>
+    extends _$ExerciseSearchEventCopyWithImpl<$Res, _$SearchForInput>
+    implements _$$SearchForInputCopyWith<$Res> {
+  __$$SearchForInputCopyWithImpl(
+      _$SearchForInput _value, $Res Function(_$SearchForInput) _then)
+      : super(_value, _then);
 
-  @override
-  SearchForInput get _value => super._value as SearchForInput;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? input = freezed,
+    Object? input = null,
   }) {
-    return _then(SearchForInput(
-      input: input == freezed
+    return _then(_$SearchForInput(
+      input: null == input
           ? _value.input
           : input // ignore: cast_nullable_to_non_nullable
               as String,
@@ -251,18 +248,18 @@ class _$SearchForInput implements SearchForInput {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is SearchForInput &&
-            const DeepCollectionEquality().equals(other.input, input));
+            other is _$SearchForInput &&
+            (identical(other.input, input) || other.input == input));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(input));
+  int get hashCode => Object.hash(runtimeType, input);
 
   @JsonKey(ignore: true)
   @override
-  $SearchForInputCopyWith<SearchForInput> get copyWith =>
-      _$SearchForInputCopyWithImpl<SearchForInput>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$SearchForInputCopyWith<_$SearchForInput> get copyWith =>
+      __$$SearchForInputCopyWithImpl<_$SearchForInput>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -278,10 +275,10 @@ class _$SearchForInput implements SearchForInput {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? emptySearch,
-    TResult Function(String input)? searchForInput,
-    TResult Function(String filterName)? filterClick,
-    TResult Function()? reloadLastSearch,
+    TResult? Function()? emptySearch,
+    TResult? Function(String input)? searchForInput,
+    TResult? Function(String filterName)? filterClick,
+    TResult? Function()? reloadLastSearch,
   }) {
     return searchForInput?.call(input);
   }
@@ -315,10 +312,10 @@ class _$SearchForInput implements SearchForInput {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(EmptySearch value)? emptySearch,
-    TResult Function(SearchForInput value)? searchForInput,
-    TResult Function(FilterClick value)? filterClick,
-    TResult Function(ReloadLastSearch value)? reloadLastSearch,
+    TResult? Function(EmptySearch value)? emptySearch,
+    TResult? Function(SearchForInput value)? searchForInput,
+    TResult? Function(FilterClick value)? filterClick,
+    TResult? Function(ReloadLastSearch value)? reloadLastSearch,
   }) {
     return searchForInput?.call(this);
   }
@@ -343,37 +340,36 @@ abstract class SearchForInput implements ExerciseSearchEvent {
   const factory SearchForInput({required final String input}) =
       _$SearchForInput;
 
-  String get input => throw _privateConstructorUsedError;
+  String get input;
   @JsonKey(ignore: true)
-  $SearchForInputCopyWith<SearchForInput> get copyWith =>
+  _$$SearchForInputCopyWith<_$SearchForInput> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FilterClickCopyWith<$Res> {
-  factory $FilterClickCopyWith(
-          FilterClick value, $Res Function(FilterClick) then) =
-      _$FilterClickCopyWithImpl<$Res>;
+abstract class _$$FilterClickCopyWith<$Res> {
+  factory _$$FilterClickCopyWith(
+          _$FilterClick value, $Res Function(_$FilterClick) then) =
+      __$$FilterClickCopyWithImpl<$Res>;
+  @useResult
   $Res call({String filterName});
 }
 
 /// @nodoc
-class _$FilterClickCopyWithImpl<$Res>
-    extends _$ExerciseSearchEventCopyWithImpl<$Res>
-    implements $FilterClickCopyWith<$Res> {
-  _$FilterClickCopyWithImpl(
-      FilterClick _value, $Res Function(FilterClick) _then)
-      : super(_value, (v) => _then(v as FilterClick));
+class __$$FilterClickCopyWithImpl<$Res>
+    extends _$ExerciseSearchEventCopyWithImpl<$Res, _$FilterClick>
+    implements _$$FilterClickCopyWith<$Res> {
+  __$$FilterClickCopyWithImpl(
+      _$FilterClick _value, $Res Function(_$FilterClick) _then)
+      : super(_value, _then);
 
-  @override
-  FilterClick get _value => super._value as FilterClick;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? filterName = freezed,
+    Object? filterName = null,
   }) {
-    return _then(FilterClick(
-      filterName: filterName == freezed
+    return _then(_$FilterClick(
+      filterName: null == filterName
           ? _value.filterName
           : filterName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -398,19 +394,19 @@ class _$FilterClick implements FilterClick {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is FilterClick &&
-            const DeepCollectionEquality()
-                .equals(other.filterName, filterName));
+            other is _$FilterClick &&
+            (identical(other.filterName, filterName) ||
+                other.filterName == filterName));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(filterName));
+  int get hashCode => Object.hash(runtimeType, filterName);
 
   @JsonKey(ignore: true)
   @override
-  $FilterClickCopyWith<FilterClick> get copyWith =>
-      _$FilterClickCopyWithImpl<FilterClick>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$FilterClickCopyWith<_$FilterClick> get copyWith =>
+      __$$FilterClickCopyWithImpl<_$FilterClick>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -426,10 +422,10 @@ class _$FilterClick implements FilterClick {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? emptySearch,
-    TResult Function(String input)? searchForInput,
-    TResult Function(String filterName)? filterClick,
-    TResult Function()? reloadLastSearch,
+    TResult? Function()? emptySearch,
+    TResult? Function(String input)? searchForInput,
+    TResult? Function(String filterName)? filterClick,
+    TResult? Function()? reloadLastSearch,
   }) {
     return filterClick?.call(filterName);
   }
@@ -463,10 +459,10 @@ class _$FilterClick implements FilterClick {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(EmptySearch value)? emptySearch,
-    TResult Function(SearchForInput value)? searchForInput,
-    TResult Function(FilterClick value)? filterClick,
-    TResult Function(ReloadLastSearch value)? reloadLastSearch,
+    TResult? Function(EmptySearch value)? emptySearch,
+    TResult? Function(SearchForInput value)? searchForInput,
+    TResult? Function(FilterClick value)? filterClick,
+    TResult? Function(ReloadLastSearch value)? reloadLastSearch,
   }) {
     return filterClick?.call(this);
   }
@@ -490,29 +486,26 @@ class _$FilterClick implements FilterClick {
 abstract class FilterClick implements ExerciseSearchEvent {
   const factory FilterClick({required final String filterName}) = _$FilterClick;
 
-  String get filterName => throw _privateConstructorUsedError;
+  String get filterName;
   @JsonKey(ignore: true)
-  $FilterClickCopyWith<FilterClick> get copyWith =>
+  _$$FilterClickCopyWith<_$FilterClick> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ReloadLastSearchCopyWith<$Res> {
-  factory $ReloadLastSearchCopyWith(
-          ReloadLastSearch value, $Res Function(ReloadLastSearch) then) =
-      _$ReloadLastSearchCopyWithImpl<$Res>;
+abstract class _$$ReloadLastSearchCopyWith<$Res> {
+  factory _$$ReloadLastSearchCopyWith(
+          _$ReloadLastSearch value, $Res Function(_$ReloadLastSearch) then) =
+      __$$ReloadLastSearchCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ReloadLastSearchCopyWithImpl<$Res>
-    extends _$ExerciseSearchEventCopyWithImpl<$Res>
-    implements $ReloadLastSearchCopyWith<$Res> {
-  _$ReloadLastSearchCopyWithImpl(
-      ReloadLastSearch _value, $Res Function(ReloadLastSearch) _then)
-      : super(_value, (v) => _then(v as ReloadLastSearch));
-
-  @override
-  ReloadLastSearch get _value => super._value as ReloadLastSearch;
+class __$$ReloadLastSearchCopyWithImpl<$Res>
+    extends _$ExerciseSearchEventCopyWithImpl<$Res, _$ReloadLastSearch>
+    implements _$$ReloadLastSearchCopyWith<$Res> {
+  __$$ReloadLastSearchCopyWithImpl(
+      _$ReloadLastSearch _value, $Res Function(_$ReloadLastSearch) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -528,7 +521,7 @@ class _$ReloadLastSearch implements ReloadLastSearch {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is ReloadLastSearch);
+        (other.runtimeType == runtimeType && other is _$ReloadLastSearch);
   }
 
   @override
@@ -548,10 +541,10 @@ class _$ReloadLastSearch implements ReloadLastSearch {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? emptySearch,
-    TResult Function(String input)? searchForInput,
-    TResult Function(String filterName)? filterClick,
-    TResult Function()? reloadLastSearch,
+    TResult? Function()? emptySearch,
+    TResult? Function(String input)? searchForInput,
+    TResult? Function(String filterName)? filterClick,
+    TResult? Function()? reloadLastSearch,
   }) {
     return reloadLastSearch?.call();
   }
@@ -585,10 +578,10 @@ class _$ReloadLastSearch implements ReloadLastSearch {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(EmptySearch value)? emptySearch,
-    TResult Function(SearchForInput value)? searchForInput,
-    TResult Function(FilterClick value)? filterClick,
-    TResult Function(ReloadLastSearch value)? reloadLastSearch,
+    TResult? Function(EmptySearch value)? emptySearch,
+    TResult? Function(SearchForInput value)? searchForInput,
+    TResult? Function(FilterClick value)? filterClick,
+    TResult? Function(ReloadLastSearch value)? reloadLastSearch,
   }) {
     return reloadLastSearch?.call(this);
   }

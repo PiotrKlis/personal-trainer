@@ -41,7 +41,8 @@ mixin _$Data {
 /// @nodoc
 abstract class $DataCopyWith<$Res> {
   factory $DataCopyWith(Data value, $Res Function(Data) then) =
-      _$DataCopyWithImpl<$Res>;
+      _$DataCopyWithImpl<$Res, Data>;
+  @useResult
   $Res call(
       {bool? test,
       double? maxStoredFrameRate,
@@ -58,13 +59,16 @@ abstract class $DataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DataCopyWithImpl<$Res> implements $DataCopyWith<$Res> {
+class _$DataCopyWithImpl<$Res, $Val extends Data>
+    implements $DataCopyWith<$Res> {
   _$DataCopyWithImpl(this._value, this._then);
 
-  final Data _value;
   // ignore: unused_field
-  final $Res Function(Data) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? test = freezed,
@@ -81,63 +85,64 @@ class _$DataCopyWithImpl<$Res> implements $DataCopyWith<$Res> {
     Object? aspectRatio = freezed,
   }) {
     return _then(_value.copyWith(
-      test: test == freezed
+      test: freezed == test
           ? _value.test
           : test // ignore: cast_nullable_to_non_nullable
               as bool?,
-      maxStoredFrameRate: maxStoredFrameRate == freezed
+      maxStoredFrameRate: freezed == maxStoredFrameRate
           ? _value.maxStoredFrameRate
           : maxStoredFrameRate // ignore: cast_nullable_to_non_nullable
               as double?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      tracks: tracks == freezed
+      tracks: freezed == tracks
           ? _value.tracks
           : tracks // ignore: cast_nullable_to_non_nullable
               as List<Track>?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      maxStoredResolution: maxStoredResolution == freezed
+      maxStoredResolution: freezed == maxStoredResolution
           ? _value.maxStoredResolution
           : maxStoredResolution // ignore: cast_nullable_to_non_nullable
               as String?,
-      masterAccess: masterAccess == freezed
+      masterAccess: freezed == masterAccess
           ? _value.masterAccess
           : masterAccess // ignore: cast_nullable_to_non_nullable
               as String?,
-      playbackIds: playbackIds == freezed
+      playbackIds: freezed == playbackIds
           ? _value.playbackIds
           : playbackIds // ignore: cast_nullable_to_non_nullable
               as List<PlaybackId>?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String?,
-      duration: duration == freezed
+      duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as double?,
-      mp4Support: mp4Support == freezed
+      mp4Support: freezed == mp4Support
           ? _value.mp4Support
           : mp4Support // ignore: cast_nullable_to_non_nullable
               as String?,
-      aspectRatio: aspectRatio == freezed
+      aspectRatio: freezed == aspectRatio
           ? _value.aspectRatio
           : aspectRatio // ignore: cast_nullable_to_non_nullable
               as String?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$DataCopyWith<$Res> implements $DataCopyWith<$Res> {
-  factory _$DataCopyWith(_Data value, $Res Function(_Data) then) =
-      __$DataCopyWithImpl<$Res>;
+abstract class _$$_DataCopyWith<$Res> implements $DataCopyWith<$Res> {
+  factory _$$_DataCopyWith(_$_Data value, $Res Function(_$_Data) then) =
+      __$$_DataCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {bool? test,
       double? maxStoredFrameRate,
@@ -154,14 +159,12 @@ abstract class _$DataCopyWith<$Res> implements $DataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$DataCopyWithImpl<$Res> extends _$DataCopyWithImpl<$Res>
-    implements _$DataCopyWith<$Res> {
-  __$DataCopyWithImpl(_Data _value, $Res Function(_Data) _then)
-      : super(_value, (v) => _then(v as _Data));
+class __$$_DataCopyWithImpl<$Res> extends _$DataCopyWithImpl<$Res, _$_Data>
+    implements _$$_DataCopyWith<$Res> {
+  __$$_DataCopyWithImpl(_$_Data _value, $Res Function(_$_Data) _then)
+      : super(_value, _then);
 
-  @override
-  _Data get _value => super._value as _Data;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? test = freezed,
@@ -177,52 +180,52 @@ class __$DataCopyWithImpl<$Res> extends _$DataCopyWithImpl<$Res>
     Object? mp4Support = freezed,
     Object? aspectRatio = freezed,
   }) {
-    return _then(_Data(
-      test: test == freezed
+    return _then(_$_Data(
+      test: freezed == test
           ? _value.test
           : test // ignore: cast_nullable_to_non_nullable
               as bool?,
-      maxStoredFrameRate: maxStoredFrameRate == freezed
+      maxStoredFrameRate: freezed == maxStoredFrameRate
           ? _value.maxStoredFrameRate
           : maxStoredFrameRate // ignore: cast_nullable_to_non_nullable
               as double?,
-      status: status == freezed
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
-      tracks: tracks == freezed
-          ? _value.tracks
+      tracks: freezed == tracks
+          ? _value._tracks
           : tracks // ignore: cast_nullable_to_non_nullable
               as List<Track>?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      maxStoredResolution: maxStoredResolution == freezed
+      maxStoredResolution: freezed == maxStoredResolution
           ? _value.maxStoredResolution
           : maxStoredResolution // ignore: cast_nullable_to_non_nullable
               as String?,
-      masterAccess: masterAccess == freezed
+      masterAccess: freezed == masterAccess
           ? _value.masterAccess
           : masterAccess // ignore: cast_nullable_to_non_nullable
               as String?,
-      playbackIds: playbackIds == freezed
-          ? _value.playbackIds
+      playbackIds: freezed == playbackIds
+          ? _value._playbackIds
           : playbackIds // ignore: cast_nullable_to_non_nullable
               as List<PlaybackId>?,
-      createdAt: createdAt == freezed
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String?,
-      duration: duration == freezed
+      duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as double?,
-      mp4Support: mp4Support == freezed
+      mp4Support: freezed == mp4Support
           ? _value.mp4Support
           : mp4Support // ignore: cast_nullable_to_non_nullable
               as String?,
-      aspectRatio: aspectRatio == freezed
+      aspectRatio: freezed == aspectRatio
           ? _value.aspectRatio
           : aspectRatio // ignore: cast_nullable_to_non_nullable
               as String?,
@@ -299,52 +302,57 @@ class _$_Data implements _Data {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Data &&
-            const DeepCollectionEquality().equals(other.test, test) &&
+            other is _$_Data &&
+            (identical(other.test, test) || other.test == test) &&
+            (identical(other.maxStoredFrameRate, maxStoredFrameRate) ||
+                other.maxStoredFrameRate == maxStoredFrameRate) &&
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality().equals(other._tracks, _tracks) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.maxStoredResolution, maxStoredResolution) ||
+                other.maxStoredResolution == maxStoredResolution) &&
+            (identical(other.masterAccess, masterAccess) ||
+                other.masterAccess == masterAccess) &&
             const DeepCollectionEquality()
-                .equals(other.maxStoredFrameRate, maxStoredFrameRate) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality().equals(other.tracks, tracks) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.maxStoredResolution, maxStoredResolution) &&
-            const DeepCollectionEquality()
-                .equals(other.masterAccess, masterAccess) &&
-            const DeepCollectionEquality()
-                .equals(other.playbackIds, playbackIds) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.duration, duration) &&
-            const DeepCollectionEquality()
-                .equals(other.mp4Support, mp4Support) &&
-            const DeepCollectionEquality()
-                .equals(other.aspectRatio, aspectRatio));
+                .equals(other._playbackIds, _playbackIds) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.mp4Support, mp4Support) ||
+                other.mp4Support == mp4Support) &&
+            (identical(other.aspectRatio, aspectRatio) ||
+                other.aspectRatio == aspectRatio));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(test),
-      const DeepCollectionEquality().hash(maxStoredFrameRate),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(tracks),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(maxStoredResolution),
-      const DeepCollectionEquality().hash(masterAccess),
-      const DeepCollectionEquality().hash(playbackIds),
-      const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(duration),
-      const DeepCollectionEquality().hash(mp4Support),
-      const DeepCollectionEquality().hash(aspectRatio));
+      test,
+      maxStoredFrameRate,
+      status,
+      const DeepCollectionEquality().hash(_tracks),
+      id,
+      maxStoredResolution,
+      masterAccess,
+      const DeepCollectionEquality().hash(_playbackIds),
+      createdAt,
+      duration,
+      mp4Support,
+      aspectRatio);
 
   @JsonKey(ignore: true)
   @override
-  _$DataCopyWith<_Data> get copyWith =>
-      __$DataCopyWithImpl<_Data>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_DataCopyWith<_$_Data> get copyWith =>
+      __$$_DataCopyWithImpl<_$_Data>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DataToJson(this);
+    return _$$_DataToJson(
+      this,
+    );
   }
 }
 
@@ -366,30 +374,30 @@ abstract class _Data implements Data {
   factory _Data.fromJson(Map<String, dynamic> json) = _$_Data.fromJson;
 
   @override
-  bool? get test => throw _privateConstructorUsedError;
+  bool? get test;
   @override
-  double? get maxStoredFrameRate => throw _privateConstructorUsedError;
+  double? get maxStoredFrameRate;
   @override
-  String? get status => throw _privateConstructorUsedError;
+  String? get status;
   @override
-  List<Track>? get tracks => throw _privateConstructorUsedError;
+  List<Track>? get tracks;
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  String? get maxStoredResolution => throw _privateConstructorUsedError;
+  String? get maxStoredResolution;
   @override
-  String? get masterAccess => throw _privateConstructorUsedError;
+  String? get masterAccess;
   @override
-  List<PlaybackId>? get playbackIds => throw _privateConstructorUsedError;
+  List<PlaybackId>? get playbackIds;
   @override
-  String? get createdAt => throw _privateConstructorUsedError;
+  String? get createdAt;
   @override
-  double? get duration => throw _privateConstructorUsedError;
+  double? get duration;
   @override
-  String? get mp4Support => throw _privateConstructorUsedError;
+  String? get mp4Support;
   @override
-  String? get aspectRatio => throw _privateConstructorUsedError;
+  String? get aspectRatio;
   @override
   @JsonKey(ignore: true)
-  _$DataCopyWith<_Data> get copyWith => throw _privateConstructorUsedError;
+  _$$_DataCopyWith<_$_Data> get copyWith => throw _privateConstructorUsedError;
 }

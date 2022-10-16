@@ -25,9 +25,9 @@ mixin _$ExerciseSearchAddExerciseState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(String exerciseName)? exerciseAddedSuccess,
-    TResult Function(String exerciseName)? exerciseAddedFailure,
+    TResult? Function()? initial,
+    TResult? Function(String exerciseName)? exerciseAddedSuccess,
+    TResult? Function(String exerciseName)? exerciseAddedFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,9 +47,9 @@ mixin _$ExerciseSearchAddExerciseState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_ExerciseAddedSuccess value)? exerciseAddedSuccess,
-    TResult Function(_ExerciseAddedFailure value)? exerciseAddedFailure,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_ExerciseAddedSuccess value)? exerciseAddedSuccess,
+    TResult? Function(_ExerciseAddedFailure value)? exerciseAddedFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,34 +67,35 @@ abstract class $ExerciseSearchAddExerciseStateCopyWith<$Res> {
   factory $ExerciseSearchAddExerciseStateCopyWith(
           ExerciseSearchAddExerciseState value,
           $Res Function(ExerciseSearchAddExerciseState) then) =
-      _$ExerciseSearchAddExerciseStateCopyWithImpl<$Res>;
+      _$ExerciseSearchAddExerciseStateCopyWithImpl<$Res,
+          ExerciseSearchAddExerciseState>;
 }
 
 /// @nodoc
-class _$ExerciseSearchAddExerciseStateCopyWithImpl<$Res>
+class _$ExerciseSearchAddExerciseStateCopyWithImpl<$Res,
+        $Val extends ExerciseSearchAddExerciseState>
     implements $ExerciseSearchAddExerciseStateCopyWith<$Res> {
   _$ExerciseSearchAddExerciseStateCopyWithImpl(this._value, this._then);
 
-  final ExerciseSearchAddExerciseState _value;
   // ignore: unused_field
-  final $Res Function(ExerciseSearchAddExerciseState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
-abstract class _$InitialCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
-      __$InitialCopyWithImpl<$Res>;
+abstract class _$$_InitialCopyWith<$Res> {
+  factory _$$_InitialCopyWith(
+          _$_Initial value, $Res Function(_$_Initial) then) =
+      __$$_InitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$InitialCopyWithImpl<$Res>
-    extends _$ExerciseSearchAddExerciseStateCopyWithImpl<$Res>
-    implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
-      : super(_value, (v) => _then(v as _Initial));
-
-  @override
-  _Initial get _value => super._value as _Initial;
+class __$$_InitialCopyWithImpl<$Res>
+    extends _$ExerciseSearchAddExerciseStateCopyWithImpl<$Res, _$_Initial>
+    implements _$$_InitialCopyWith<$Res> {
+  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -110,7 +111,7 @@ class _$_Initial implements _Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Initial);
+        (other.runtimeType == runtimeType && other is _$_Initial);
   }
 
   @override
@@ -129,9 +130,9 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(String exerciseName)? exerciseAddedSuccess,
-    TResult Function(String exerciseName)? exerciseAddedFailure,
+    TResult? Function()? initial,
+    TResult? Function(String exerciseName)? exerciseAddedSuccess,
+    TResult? Function(String exerciseName)? exerciseAddedFailure,
   }) {
     return initial?.call();
   }
@@ -163,9 +164,9 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_ExerciseAddedSuccess value)? exerciseAddedSuccess,
-    TResult Function(_ExerciseAddedFailure value)? exerciseAddedFailure,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_ExerciseAddedSuccess value)? exerciseAddedSuccess,
+    TResult? Function(_ExerciseAddedFailure value)? exerciseAddedFailure,
   }) {
     return initial?.call(this);
   }
@@ -190,30 +191,30 @@ abstract class _Initial implements ExerciseSearchAddExerciseState {
 }
 
 /// @nodoc
-abstract class _$ExerciseAddedSuccessCopyWith<$Res> {
-  factory _$ExerciseAddedSuccessCopyWith(_ExerciseAddedSuccess value,
-          $Res Function(_ExerciseAddedSuccess) then) =
-      __$ExerciseAddedSuccessCopyWithImpl<$Res>;
+abstract class _$$_ExerciseAddedSuccessCopyWith<$Res> {
+  factory _$$_ExerciseAddedSuccessCopyWith(_$_ExerciseAddedSuccess value,
+          $Res Function(_$_ExerciseAddedSuccess) then) =
+      __$$_ExerciseAddedSuccessCopyWithImpl<$Res>;
+  @useResult
   $Res call({String exerciseName});
 }
 
 /// @nodoc
-class __$ExerciseAddedSuccessCopyWithImpl<$Res>
-    extends _$ExerciseSearchAddExerciseStateCopyWithImpl<$Res>
-    implements _$ExerciseAddedSuccessCopyWith<$Res> {
-  __$ExerciseAddedSuccessCopyWithImpl(
-      _ExerciseAddedSuccess _value, $Res Function(_ExerciseAddedSuccess) _then)
-      : super(_value, (v) => _then(v as _ExerciseAddedSuccess));
+class __$$_ExerciseAddedSuccessCopyWithImpl<$Res>
+    extends _$ExerciseSearchAddExerciseStateCopyWithImpl<$Res,
+        _$_ExerciseAddedSuccess>
+    implements _$$_ExerciseAddedSuccessCopyWith<$Res> {
+  __$$_ExerciseAddedSuccessCopyWithImpl(_$_ExerciseAddedSuccess _value,
+      $Res Function(_$_ExerciseAddedSuccess) _then)
+      : super(_value, _then);
 
-  @override
-  _ExerciseAddedSuccess get _value => super._value as _ExerciseAddedSuccess;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? exerciseName = freezed,
+    Object? exerciseName = null,
   }) {
-    return _then(_ExerciseAddedSuccess(
-      exerciseName: exerciseName == freezed
+    return _then(_$_ExerciseAddedSuccess(
+      exerciseName: null == exerciseName
           ? _value.exerciseName
           : exerciseName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -238,19 +239,19 @@ class _$_ExerciseAddedSuccess implements _ExerciseAddedSuccess {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ExerciseAddedSuccess &&
-            const DeepCollectionEquality()
-                .equals(other.exerciseName, exerciseName));
+            other is _$_ExerciseAddedSuccess &&
+            (identical(other.exerciseName, exerciseName) ||
+                other.exerciseName == exerciseName));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(exerciseName));
+  int get hashCode => Object.hash(runtimeType, exerciseName);
 
   @JsonKey(ignore: true)
   @override
-  _$ExerciseAddedSuccessCopyWith<_ExerciseAddedSuccess> get copyWith =>
-      __$ExerciseAddedSuccessCopyWithImpl<_ExerciseAddedSuccess>(
+  @pragma('vm:prefer-inline')
+  _$$_ExerciseAddedSuccessCopyWith<_$_ExerciseAddedSuccess> get copyWith =>
+      __$$_ExerciseAddedSuccessCopyWithImpl<_$_ExerciseAddedSuccess>(
           this, _$identity);
 
   @override
@@ -266,9 +267,9 @@ class _$_ExerciseAddedSuccess implements _ExerciseAddedSuccess {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(String exerciseName)? exerciseAddedSuccess,
-    TResult Function(String exerciseName)? exerciseAddedFailure,
+    TResult? Function()? initial,
+    TResult? Function(String exerciseName)? exerciseAddedSuccess,
+    TResult? Function(String exerciseName)? exerciseAddedFailure,
   }) {
     return exerciseAddedSuccess?.call(exerciseName);
   }
@@ -300,9 +301,9 @@ class _$_ExerciseAddedSuccess implements _ExerciseAddedSuccess {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_ExerciseAddedSuccess value)? exerciseAddedSuccess,
-    TResult Function(_ExerciseAddedFailure value)? exerciseAddedFailure,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_ExerciseAddedSuccess value)? exerciseAddedSuccess,
+    TResult? Function(_ExerciseAddedFailure value)? exerciseAddedFailure,
   }) {
     return exerciseAddedSuccess?.call(this);
   }
@@ -326,37 +327,37 @@ abstract class _ExerciseAddedSuccess implements ExerciseSearchAddExerciseState {
   const factory _ExerciseAddedSuccess({required final String exerciseName}) =
       _$_ExerciseAddedSuccess;
 
-  String get exerciseName => throw _privateConstructorUsedError;
+  String get exerciseName;
   @JsonKey(ignore: true)
-  _$ExerciseAddedSuccessCopyWith<_ExerciseAddedSuccess> get copyWith =>
+  _$$_ExerciseAddedSuccessCopyWith<_$_ExerciseAddedSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$ExerciseAddedFailureCopyWith<$Res> {
-  factory _$ExerciseAddedFailureCopyWith(_ExerciseAddedFailure value,
-          $Res Function(_ExerciseAddedFailure) then) =
-      __$ExerciseAddedFailureCopyWithImpl<$Res>;
+abstract class _$$_ExerciseAddedFailureCopyWith<$Res> {
+  factory _$$_ExerciseAddedFailureCopyWith(_$_ExerciseAddedFailure value,
+          $Res Function(_$_ExerciseAddedFailure) then) =
+      __$$_ExerciseAddedFailureCopyWithImpl<$Res>;
+  @useResult
   $Res call({String exerciseName});
 }
 
 /// @nodoc
-class __$ExerciseAddedFailureCopyWithImpl<$Res>
-    extends _$ExerciseSearchAddExerciseStateCopyWithImpl<$Res>
-    implements _$ExerciseAddedFailureCopyWith<$Res> {
-  __$ExerciseAddedFailureCopyWithImpl(
-      _ExerciseAddedFailure _value, $Res Function(_ExerciseAddedFailure) _then)
-      : super(_value, (v) => _then(v as _ExerciseAddedFailure));
+class __$$_ExerciseAddedFailureCopyWithImpl<$Res>
+    extends _$ExerciseSearchAddExerciseStateCopyWithImpl<$Res,
+        _$_ExerciseAddedFailure>
+    implements _$$_ExerciseAddedFailureCopyWith<$Res> {
+  __$$_ExerciseAddedFailureCopyWithImpl(_$_ExerciseAddedFailure _value,
+      $Res Function(_$_ExerciseAddedFailure) _then)
+      : super(_value, _then);
 
-  @override
-  _ExerciseAddedFailure get _value => super._value as _ExerciseAddedFailure;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? exerciseName = freezed,
+    Object? exerciseName = null,
   }) {
-    return _then(_ExerciseAddedFailure(
-      exerciseName: exerciseName == freezed
+    return _then(_$_ExerciseAddedFailure(
+      exerciseName: null == exerciseName
           ? _value.exerciseName
           : exerciseName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -381,19 +382,19 @@ class _$_ExerciseAddedFailure implements _ExerciseAddedFailure {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ExerciseAddedFailure &&
-            const DeepCollectionEquality()
-                .equals(other.exerciseName, exerciseName));
+            other is _$_ExerciseAddedFailure &&
+            (identical(other.exerciseName, exerciseName) ||
+                other.exerciseName == exerciseName));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(exerciseName));
+  int get hashCode => Object.hash(runtimeType, exerciseName);
 
   @JsonKey(ignore: true)
   @override
-  _$ExerciseAddedFailureCopyWith<_ExerciseAddedFailure> get copyWith =>
-      __$ExerciseAddedFailureCopyWithImpl<_ExerciseAddedFailure>(
+  @pragma('vm:prefer-inline')
+  _$$_ExerciseAddedFailureCopyWith<_$_ExerciseAddedFailure> get copyWith =>
+      __$$_ExerciseAddedFailureCopyWithImpl<_$_ExerciseAddedFailure>(
           this, _$identity);
 
   @override
@@ -409,9 +410,9 @@ class _$_ExerciseAddedFailure implements _ExerciseAddedFailure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(String exerciseName)? exerciseAddedSuccess,
-    TResult Function(String exerciseName)? exerciseAddedFailure,
+    TResult? Function()? initial,
+    TResult? Function(String exerciseName)? exerciseAddedSuccess,
+    TResult? Function(String exerciseName)? exerciseAddedFailure,
   }) {
     return exerciseAddedFailure?.call(exerciseName);
   }
@@ -443,9 +444,9 @@ class _$_ExerciseAddedFailure implements _ExerciseAddedFailure {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_ExerciseAddedSuccess value)? exerciseAddedSuccess,
-    TResult Function(_ExerciseAddedFailure value)? exerciseAddedFailure,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_ExerciseAddedSuccess value)? exerciseAddedSuccess,
+    TResult? Function(_ExerciseAddedFailure value)? exerciseAddedFailure,
   }) {
     return exerciseAddedFailure?.call(this);
   }
@@ -469,8 +470,8 @@ abstract class _ExerciseAddedFailure implements ExerciseSearchAddExerciseState {
   const factory _ExerciseAddedFailure({required final String exerciseName}) =
       _$_ExerciseAddedFailure;
 
-  String get exerciseName => throw _privateConstructorUsedError;
+  String get exerciseName;
   @JsonKey(ignore: true)
-  _$ExerciseAddedFailureCopyWith<_ExerciseAddedFailure> get copyWith =>
+  _$$_ExerciseAddedFailureCopyWith<_$_ExerciseAddedFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -26,10 +26,10 @@ mixin _$CalendarExercisesState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(List<UserExercise> userExercises)? content,
+    TResult? Function()? started,
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(List<UserExercise> userExercises)? content,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,10 +51,10 @@ mixin _$CalendarExercisesState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Error value)? error,
-    TResult Function(_Content value)? content,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Content value)? content,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,34 +72,34 @@ mixin _$CalendarExercisesState {
 abstract class $CalendarExercisesStateCopyWith<$Res> {
   factory $CalendarExercisesStateCopyWith(CalendarExercisesState value,
           $Res Function(CalendarExercisesState) then) =
-      _$CalendarExercisesStateCopyWithImpl<$Res>;
+      _$CalendarExercisesStateCopyWithImpl<$Res, CalendarExercisesState>;
 }
 
 /// @nodoc
-class _$CalendarExercisesStateCopyWithImpl<$Res>
+class _$CalendarExercisesStateCopyWithImpl<$Res,
+        $Val extends CalendarExercisesState>
     implements $CalendarExercisesStateCopyWith<$Res> {
   _$CalendarExercisesStateCopyWithImpl(this._value, this._then);
 
-  final CalendarExercisesState _value;
   // ignore: unused_field
-  final $Res Function(CalendarExercisesState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
-abstract class _$StartedCopyWith<$Res> {
-  factory _$StartedCopyWith(_Started value, $Res Function(_Started) then) =
-      __$StartedCopyWithImpl<$Res>;
+abstract class _$$_StartedCopyWith<$Res> {
+  factory _$$_StartedCopyWith(
+          _$_Started value, $Res Function(_$_Started) then) =
+      __$$_StartedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$StartedCopyWithImpl<$Res>
-    extends _$CalendarExercisesStateCopyWithImpl<$Res>
-    implements _$StartedCopyWith<$Res> {
-  __$StartedCopyWithImpl(_Started _value, $Res Function(_Started) _then)
-      : super(_value, (v) => _then(v as _Started));
-
-  @override
-  _Started get _value => super._value as _Started;
+class __$$_StartedCopyWithImpl<$Res>
+    extends _$CalendarExercisesStateCopyWithImpl<$Res, _$_Started>
+    implements _$$_StartedCopyWith<$Res> {
+  __$$_StartedCopyWithImpl(_$_Started _value, $Res Function(_$_Started) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -122,7 +122,7 @@ class _$_Started with DiagnosticableTreeMixin implements _Started {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Started);
+        (other.runtimeType == runtimeType && other is _$_Started);
   }
 
   @override
@@ -142,10 +142,10 @@ class _$_Started with DiagnosticableTreeMixin implements _Started {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(List<UserExercise> userExercises)? content,
+    TResult? Function()? started,
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(List<UserExercise> userExercises)? content,
   }) {
     return started?.call();
   }
@@ -179,10 +179,10 @@ class _$_Started with DiagnosticableTreeMixin implements _Started {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Error value)? error,
-    TResult Function(_Content value)? content,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Content value)? content,
   }) {
     return started?.call(this);
   }
@@ -208,20 +208,18 @@ abstract class _Started implements CalendarExercisesState {
 }
 
 /// @nodoc
-abstract class _$LoadingCopyWith<$Res> {
-  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
-      __$LoadingCopyWithImpl<$Res>;
+abstract class _$$_LoadingCopyWith<$Res> {
+  factory _$$_LoadingCopyWith(
+          _$_Loading value, $Res Function(_$_Loading) then) =
+      __$$_LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$LoadingCopyWithImpl<$Res>
-    extends _$CalendarExercisesStateCopyWithImpl<$Res>
-    implements _$LoadingCopyWith<$Res> {
-  __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
-      : super(_value, (v) => _then(v as _Loading));
-
-  @override
-  _Loading get _value => super._value as _Loading;
+class __$$_LoadingCopyWithImpl<$Res>
+    extends _$CalendarExercisesStateCopyWithImpl<$Res, _$_Loading>
+    implements _$$_LoadingCopyWith<$Res> {
+  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -244,7 +242,7 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Loading);
+        (other.runtimeType == runtimeType && other is _$_Loading);
   }
 
   @override
@@ -264,10 +262,10 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(List<UserExercise> userExercises)? content,
+    TResult? Function()? started,
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(List<UserExercise> userExercises)? content,
   }) {
     return loading?.call();
   }
@@ -301,10 +299,10 @@ class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Error value)? error,
-    TResult Function(_Content value)? content,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Content value)? content,
   }) {
     return loading?.call(this);
   }
@@ -330,28 +328,27 @@ abstract class _Loading implements CalendarExercisesState {
 }
 
 /// @nodoc
-abstract class _$ErrorCopyWith<$Res> {
-  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
-      __$ErrorCopyWithImpl<$Res>;
+abstract class _$$_ErrorCopyWith<$Res> {
+  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
+      __$$_ErrorCopyWithImpl<$Res>;
+  @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$ErrorCopyWithImpl<$Res>
-    extends _$CalendarExercisesStateCopyWithImpl<$Res>
-    implements _$ErrorCopyWith<$Res> {
-  __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
-      : super(_value, (v) => _then(v as _Error));
+class __$$_ErrorCopyWithImpl<$Res>
+    extends _$CalendarExercisesStateCopyWithImpl<$Res, _$_Error>
+    implements _$$_ErrorCopyWith<$Res> {
+  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
+      : super(_value, _then);
 
-  @override
-  _Error get _value => super._value as _Error;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
+    Object? error = null,
   }) {
-    return _then(_Error(
-      error: error == freezed
+    return _then(_$_Error(
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
@@ -384,18 +381,18 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Error &&
-            const DeepCollectionEquality().equals(other.error, error));
+            other is _$_Error &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(runtimeType, error);
 
   @JsonKey(ignore: true)
   @override
-  _$ErrorCopyWith<_Error> get copyWith =>
-      __$ErrorCopyWithImpl<_Error>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -411,10 +408,10 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(List<UserExercise> userExercises)? content,
+    TResult? Function()? started,
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(List<UserExercise> userExercises)? content,
   }) {
     return error?.call(this.error);
   }
@@ -448,10 +445,10 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Error value)? error,
-    TResult Function(_Content value)? content,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Content value)? content,
   }) {
     return error?.call(this);
   }
@@ -475,35 +472,36 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
 abstract class _Error implements CalendarExercisesState {
   const factory _Error({required final String error}) = _$_Error;
 
-  String get error => throw _privateConstructorUsedError;
+  String get error;
   @JsonKey(ignore: true)
-  _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
+  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$ContentCopyWith<$Res> {
-  factory _$ContentCopyWith(_Content value, $Res Function(_Content) then) =
-      __$ContentCopyWithImpl<$Res>;
+abstract class _$$_ContentCopyWith<$Res> {
+  factory _$$_ContentCopyWith(
+          _$_Content value, $Res Function(_$_Content) then) =
+      __$$_ContentCopyWithImpl<$Res>;
+  @useResult
   $Res call({List<UserExercise> userExercises});
 }
 
 /// @nodoc
-class __$ContentCopyWithImpl<$Res>
-    extends _$CalendarExercisesStateCopyWithImpl<$Res>
-    implements _$ContentCopyWith<$Res> {
-  __$ContentCopyWithImpl(_Content _value, $Res Function(_Content) _then)
-      : super(_value, (v) => _then(v as _Content));
+class __$$_ContentCopyWithImpl<$Res>
+    extends _$CalendarExercisesStateCopyWithImpl<$Res, _$_Content>
+    implements _$$_ContentCopyWith<$Res> {
+  __$$_ContentCopyWithImpl(_$_Content _value, $Res Function(_$_Content) _then)
+      : super(_value, _then);
 
-  @override
-  _Content get _value => super._value as _Content;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userExercises = freezed,
+    Object? userExercises = null,
   }) {
-    return _then(_Content(
-      userExercises: userExercises == freezed
-          ? _value.userExercises
+    return _then(_$_Content(
+      userExercises: null == userExercises
+          ? _value._userExercises
           : userExercises // ignore: cast_nullable_to_non_nullable
               as List<UserExercise>,
     ));
@@ -540,19 +538,20 @@ class _$_Content with DiagnosticableTreeMixin implements _Content {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Content &&
+            other is _$_Content &&
             const DeepCollectionEquality()
-                .equals(other.userExercises, userExercises));
+                .equals(other._userExercises, _userExercises));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(userExercises));
+      runtimeType, const DeepCollectionEquality().hash(_userExercises));
 
   @JsonKey(ignore: true)
   @override
-  _$ContentCopyWith<_Content> get copyWith =>
-      __$ContentCopyWithImpl<_Content>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_ContentCopyWith<_$_Content> get copyWith =>
+      __$$_ContentCopyWithImpl<_$_Content>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -568,10 +567,10 @@ class _$_Content with DiagnosticableTreeMixin implements _Content {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(List<UserExercise> userExercises)? content,
+    TResult? Function()? started,
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(List<UserExercise> userExercises)? content,
   }) {
     return content?.call(userExercises);
   }
@@ -605,10 +604,10 @@ class _$_Content with DiagnosticableTreeMixin implements _Content {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Error value)? error,
-    TResult Function(_Content value)? content,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_Content value)? content,
   }) {
     return content?.call(this);
   }
@@ -633,9 +632,9 @@ abstract class _Content implements CalendarExercisesState {
   const factory _Content({required final List<UserExercise> userExercises}) =
       _$_Content;
 
-  List<UserExercise> get userExercises => throw _privateConstructorUsedError;
+  List<UserExercise> get userExercises;
   @JsonKey(ignore: true)
-  _$ContentCopyWith<_Content> get copyWith =>
+  _$$_ContentCopyWith<_$_Content> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -645,32 +644,33 @@ mixin _$MyClass {}
 /// @nodoc
 abstract class $MyClassCopyWith<$Res> {
   factory $MyClassCopyWith(MyClass value, $Res Function(MyClass) then) =
-      _$MyClassCopyWithImpl<$Res>;
+      _$MyClassCopyWithImpl<$Res, MyClass>;
 }
 
 /// @nodoc
-class _$MyClassCopyWithImpl<$Res> implements $MyClassCopyWith<$Res> {
+class _$MyClassCopyWithImpl<$Res, $Val extends MyClass>
+    implements $MyClassCopyWith<$Res> {
   _$MyClassCopyWithImpl(this._value, this._then);
 
-  final MyClass _value;
   // ignore: unused_field
-  final $Res Function(MyClass) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
-abstract class _$MyClassCopyWith<$Res> {
-  factory _$MyClassCopyWith(_MyClass value, $Res Function(_MyClass) then) =
-      __$MyClassCopyWithImpl<$Res>;
+abstract class _$$_MyClassCopyWith<$Res> {
+  factory _$$_MyClassCopyWith(
+          _$_MyClass value, $Res Function(_$_MyClass) then) =
+      __$$_MyClassCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$MyClassCopyWithImpl<$Res> extends _$MyClassCopyWithImpl<$Res>
-    implements _$MyClassCopyWith<$Res> {
-  __$MyClassCopyWithImpl(_MyClass _value, $Res Function(_MyClass) _then)
-      : super(_value, (v) => _then(v as _MyClass));
-
-  @override
-  _MyClass get _value => super._value as _MyClass;
+class __$$_MyClassCopyWithImpl<$Res>
+    extends _$MyClassCopyWithImpl<$Res, _$_MyClass>
+    implements _$$_MyClassCopyWith<$Res> {
+  __$$_MyClassCopyWithImpl(_$_MyClass _value, $Res Function(_$_MyClass) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -692,7 +692,7 @@ class _$_MyClass with DiagnosticableTreeMixin implements _MyClass {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _MyClass);
+        (other.runtimeType == runtimeType && other is _$_MyClass);
   }
 
   @override

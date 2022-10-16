@@ -31,56 +31,61 @@ mixin _$AssetData {
 /// @nodoc
 abstract class $AssetDataCopyWith<$Res> {
   factory $AssetDataCopyWith(AssetData value, $Res Function(AssetData) then) =
-      _$AssetDataCopyWithImpl<$Res>;
+      _$AssetDataCopyWithImpl<$Res, AssetData>;
+  @useResult
   $Res call({List<Data> data});
 }
 
 /// @nodoc
-class _$AssetDataCopyWithImpl<$Res> implements $AssetDataCopyWith<$Res> {
+class _$AssetDataCopyWithImpl<$Res, $Val extends AssetData>
+    implements $AssetDataCopyWith<$Res> {
   _$AssetDataCopyWithImpl(this._value, this._then);
 
-  final AssetData _value;
   // ignore: unused_field
-  final $Res Function(AssetData) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = freezed,
+    Object? data = null,
   }) {
     return _then(_value.copyWith(
-      data: data == freezed
+      data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<Data>,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$AssetDataCopyWith<$Res> implements $AssetDataCopyWith<$Res> {
-  factory _$AssetDataCopyWith(
-          _AssetData value, $Res Function(_AssetData) then) =
-      __$AssetDataCopyWithImpl<$Res>;
+abstract class _$$_AssetDataCopyWith<$Res> implements $AssetDataCopyWith<$Res> {
+  factory _$$_AssetDataCopyWith(
+          _$_AssetData value, $Res Function(_$_AssetData) then) =
+      __$$_AssetDataCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<Data> data});
 }
 
 /// @nodoc
-class __$AssetDataCopyWithImpl<$Res> extends _$AssetDataCopyWithImpl<$Res>
-    implements _$AssetDataCopyWith<$Res> {
-  __$AssetDataCopyWithImpl(_AssetData _value, $Res Function(_AssetData) _then)
-      : super(_value, (v) => _then(v as _AssetData));
+class __$$_AssetDataCopyWithImpl<$Res>
+    extends _$AssetDataCopyWithImpl<$Res, _$_AssetData>
+    implements _$$_AssetDataCopyWith<$Res> {
+  __$$_AssetDataCopyWithImpl(
+      _$_AssetData _value, $Res Function(_$_AssetData) _then)
+      : super(_value, _then);
 
-  @override
-  _AssetData get _value => super._value as _AssetData;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = freezed,
+    Object? data = null,
   }) {
-    return _then(_AssetData(
-      data: data == freezed
-          ? _value.data
+    return _then(_$_AssetData(
+      data: null == data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<Data>,
     ));
@@ -111,23 +116,26 @@ class _$_AssetData implements _AssetData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AssetData &&
-            const DeepCollectionEquality().equals(other.data, data));
+            other is _$_AssetData &&
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
-  _$AssetDataCopyWith<_AssetData> get copyWith =>
-      __$AssetDataCopyWithImpl<_AssetData>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_AssetDataCopyWith<_$_AssetData> get copyWith =>
+      __$$_AssetDataCopyWithImpl<_$_AssetData>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AssetDataToJson(this);
+    return _$$_AssetDataToJson(
+      this,
+    );
   }
 }
 
@@ -138,9 +146,9 @@ abstract class _AssetData implements AssetData {
       _$_AssetData.fromJson;
 
   @override
-  List<Data> get data => throw _privateConstructorUsedError;
+  List<Data> get data;
   @override
   @JsonKey(ignore: true)
-  _$AssetDataCopyWith<_AssetData> get copyWith =>
+  _$$_AssetDataCopyWith<_$_AssetData> get copyWith =>
       throw _privateConstructorUsedError;
 }

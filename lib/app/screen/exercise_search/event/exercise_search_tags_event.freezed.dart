@@ -24,8 +24,8 @@ mixin _$ExerciseSearchTagsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getTags,
-    TResult Function(String name)? applyFilter,
+    TResult? Function()? getTags,
+    TResult? Function(String name)? applyFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,8 +43,8 @@ mixin _$ExerciseSearchTagsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetTags value)? getTags,
-    TResult Function(ApplyFilter value)? applyFilter,
+    TResult? Function(GetTags value)? getTags,
+    TResult? Function(ApplyFilter value)? applyFilter,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,34 +60,33 @@ mixin _$ExerciseSearchTagsEvent {
 abstract class $ExerciseSearchTagsEventCopyWith<$Res> {
   factory $ExerciseSearchTagsEventCopyWith(ExerciseSearchTagsEvent value,
           $Res Function(ExerciseSearchTagsEvent) then) =
-      _$ExerciseSearchTagsEventCopyWithImpl<$Res>;
+      _$ExerciseSearchTagsEventCopyWithImpl<$Res, ExerciseSearchTagsEvent>;
 }
 
 /// @nodoc
-class _$ExerciseSearchTagsEventCopyWithImpl<$Res>
+class _$ExerciseSearchTagsEventCopyWithImpl<$Res,
+        $Val extends ExerciseSearchTagsEvent>
     implements $ExerciseSearchTagsEventCopyWith<$Res> {
   _$ExerciseSearchTagsEventCopyWithImpl(this._value, this._then);
 
-  final ExerciseSearchTagsEvent _value;
   // ignore: unused_field
-  final $Res Function(ExerciseSearchTagsEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
-abstract class $GetTagsCopyWith<$Res> {
-  factory $GetTagsCopyWith(GetTags value, $Res Function(GetTags) then) =
-      _$GetTagsCopyWithImpl<$Res>;
+abstract class _$$GetTagsCopyWith<$Res> {
+  factory _$$GetTagsCopyWith(_$GetTags value, $Res Function(_$GetTags) then) =
+      __$$GetTagsCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$GetTagsCopyWithImpl<$Res>
-    extends _$ExerciseSearchTagsEventCopyWithImpl<$Res>
-    implements $GetTagsCopyWith<$Res> {
-  _$GetTagsCopyWithImpl(GetTags _value, $Res Function(GetTags) _then)
-      : super(_value, (v) => _then(v as GetTags));
-
-  @override
-  GetTags get _value => super._value as GetTags;
+class __$$GetTagsCopyWithImpl<$Res>
+    extends _$ExerciseSearchTagsEventCopyWithImpl<$Res, _$GetTags>
+    implements _$$GetTagsCopyWith<$Res> {
+  __$$GetTagsCopyWithImpl(_$GetTags _value, $Res Function(_$GetTags) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -103,7 +102,7 @@ class _$GetTags implements GetTags {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is GetTags);
+        (other.runtimeType == runtimeType && other is _$GetTags);
   }
 
   @override
@@ -121,8 +120,8 @@ class _$GetTags implements GetTags {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getTags,
-    TResult Function(String name)? applyFilter,
+    TResult? Function()? getTags,
+    TResult? Function(String name)? applyFilter,
   }) {
     return getTags?.call();
   }
@@ -152,8 +151,8 @@ class _$GetTags implements GetTags {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetTags value)? getTags,
-    TResult Function(ApplyFilter value)? applyFilter,
+    TResult? Function(GetTags value)? getTags,
+    TResult? Function(ApplyFilter value)? applyFilter,
   }) {
     return getTags?.call(this);
   }
@@ -177,30 +176,29 @@ abstract class GetTags implements ExerciseSearchTagsEvent {
 }
 
 /// @nodoc
-abstract class $ApplyFilterCopyWith<$Res> {
-  factory $ApplyFilterCopyWith(
-          ApplyFilter value, $Res Function(ApplyFilter) then) =
-      _$ApplyFilterCopyWithImpl<$Res>;
+abstract class _$$ApplyFilterCopyWith<$Res> {
+  factory _$$ApplyFilterCopyWith(
+          _$ApplyFilter value, $Res Function(_$ApplyFilter) then) =
+      __$$ApplyFilterCopyWithImpl<$Res>;
+  @useResult
   $Res call({String name});
 }
 
 /// @nodoc
-class _$ApplyFilterCopyWithImpl<$Res>
-    extends _$ExerciseSearchTagsEventCopyWithImpl<$Res>
-    implements $ApplyFilterCopyWith<$Res> {
-  _$ApplyFilterCopyWithImpl(
-      ApplyFilter _value, $Res Function(ApplyFilter) _then)
-      : super(_value, (v) => _then(v as ApplyFilter));
+class __$$ApplyFilterCopyWithImpl<$Res>
+    extends _$ExerciseSearchTagsEventCopyWithImpl<$Res, _$ApplyFilter>
+    implements _$$ApplyFilterCopyWith<$Res> {
+  __$$ApplyFilterCopyWithImpl(
+      _$ApplyFilter _value, $Res Function(_$ApplyFilter) _then)
+      : super(_value, _then);
 
-  @override
-  ApplyFilter get _value => super._value as ApplyFilter;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
+    Object? name = null,
   }) {
-    return _then(ApplyFilter(
-      name: name == freezed
+    return _then(_$ApplyFilter(
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
@@ -225,18 +223,18 @@ class _$ApplyFilter implements ApplyFilter {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ApplyFilter &&
-            const DeepCollectionEquality().equals(other.name, name));
+            other is _$ApplyFilter &&
+            (identical(other.name, name) || other.name == name));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(name));
+  int get hashCode => Object.hash(runtimeType, name);
 
   @JsonKey(ignore: true)
   @override
-  $ApplyFilterCopyWith<ApplyFilter> get copyWith =>
-      _$ApplyFilterCopyWithImpl<ApplyFilter>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$ApplyFilterCopyWith<_$ApplyFilter> get copyWith =>
+      __$$ApplyFilterCopyWithImpl<_$ApplyFilter>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -250,8 +248,8 @@ class _$ApplyFilter implements ApplyFilter {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? getTags,
-    TResult Function(String name)? applyFilter,
+    TResult? Function()? getTags,
+    TResult? Function(String name)? applyFilter,
   }) {
     return applyFilter?.call(name);
   }
@@ -281,8 +279,8 @@ class _$ApplyFilter implements ApplyFilter {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(GetTags value)? getTags,
-    TResult Function(ApplyFilter value)? applyFilter,
+    TResult? Function(GetTags value)? getTags,
+    TResult? Function(ApplyFilter value)? applyFilter,
   }) {
     return applyFilter?.call(this);
   }
@@ -304,8 +302,8 @@ class _$ApplyFilter implements ApplyFilter {
 abstract class ApplyFilter implements ExerciseSearchTagsEvent {
   const factory ApplyFilter({required final String name}) = _$ApplyFilter;
 
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @JsonKey(ignore: true)
-  $ApplyFilterCopyWith<ApplyFilter> get copyWith =>
+  _$$ApplyFilterCopyWith<_$ApplyFilter> get copyWith =>
       throw _privateConstructorUsedError;
 }

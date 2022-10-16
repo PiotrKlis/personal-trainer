@@ -26,9 +26,9 @@ mixin _$CalendarState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
-    TResult Function(Map<DateTime, bool> events)? loadEventMarkers,
-    TResult Function(String error)? error,
+    TResult? Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
+    TResult? Function(Map<DateTime, bool> events)? loadEventMarkers,
+    TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,9 +48,9 @@ mixin _$CalendarState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkersData,
-    TResult Function(_LoadEvents value)? loadEventMarkers,
-    TResult Function(_Error value)? error,
+    TResult? Function(_EventForDate value)? eventMarkersData,
+    TResult? Function(_LoadEvents value)? loadEventMarkers,
+    TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,45 +67,45 @@ mixin _$CalendarState {
 abstract class $CalendarStateCopyWith<$Res> {
   factory $CalendarStateCopyWith(
           CalendarState value, $Res Function(CalendarState) then) =
-      _$CalendarStateCopyWithImpl<$Res>;
+      _$CalendarStateCopyWithImpl<$Res, CalendarState>;
 }
 
 /// @nodoc
-class _$CalendarStateCopyWithImpl<$Res>
+class _$CalendarStateCopyWithImpl<$Res, $Val extends CalendarState>
     implements $CalendarStateCopyWith<$Res> {
   _$CalendarStateCopyWithImpl(this._value, this._then);
 
-  final CalendarState _value;
   // ignore: unused_field
-  final $Res Function(CalendarState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
-abstract class _$EventForDateCopyWith<$Res> {
-  factory _$EventForDateCopyWith(
-          _EventForDate value, $Res Function(_EventForDate) then) =
-      __$EventForDateCopyWithImpl<$Res>;
+abstract class _$$_EventForDateCopyWith<$Res> {
+  factory _$$_EventForDateCopyWith(
+          _$_EventForDate value, $Res Function(_$_EventForDate) then) =
+      __$$_EventForDateCopyWithImpl<$Res>;
+  @useResult
   $Res call({Map<DateTime, bool> eventMarkers});
 }
 
 /// @nodoc
-class __$EventForDateCopyWithImpl<$Res>
-    extends _$CalendarStateCopyWithImpl<$Res>
-    implements _$EventForDateCopyWith<$Res> {
-  __$EventForDateCopyWithImpl(
-      _EventForDate _value, $Res Function(_EventForDate) _then)
-      : super(_value, (v) => _then(v as _EventForDate));
+class __$$_EventForDateCopyWithImpl<$Res>
+    extends _$CalendarStateCopyWithImpl<$Res, _$_EventForDate>
+    implements _$$_EventForDateCopyWith<$Res> {
+  __$$_EventForDateCopyWithImpl(
+      _$_EventForDate _value, $Res Function(_$_EventForDate) _then)
+      : super(_value, _then);
 
-  @override
-  _EventForDate get _value => super._value as _EventForDate;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? eventMarkers = freezed,
+    Object? eventMarkers = null,
   }) {
-    return _then(_EventForDate(
-      eventMarkers: eventMarkers == freezed
-          ? _value.eventMarkers
+    return _then(_$_EventForDate(
+      eventMarkers: null == eventMarkers
+          ? _value._eventMarkers
           : eventMarkers // ignore: cast_nullable_to_non_nullable
               as Map<DateTime, bool>,
     ));
@@ -134,19 +134,20 @@ class _$_EventForDate implements _EventForDate {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _EventForDate &&
+            other is _$_EventForDate &&
             const DeepCollectionEquality()
-                .equals(other.eventMarkers, eventMarkers));
+                .equals(other._eventMarkers, _eventMarkers));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(eventMarkers));
+      runtimeType, const DeepCollectionEquality().hash(_eventMarkers));
 
   @JsonKey(ignore: true)
   @override
-  _$EventForDateCopyWith<_EventForDate> get copyWith =>
-      __$EventForDateCopyWithImpl<_EventForDate>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_EventForDateCopyWith<_$_EventForDate> get copyWith =>
+      __$$_EventForDateCopyWithImpl<_$_EventForDate>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -162,9 +163,9 @@ class _$_EventForDate implements _EventForDate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
-    TResult Function(Map<DateTime, bool> events)? loadEventMarkers,
-    TResult Function(String error)? error,
+    TResult? Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
+    TResult? Function(Map<DateTime, bool> events)? loadEventMarkers,
+    TResult? Function(String error)? error,
   }) {
     return eventMarkersData?.call(eventMarkers);
   }
@@ -196,9 +197,9 @@ class _$_EventForDate implements _EventForDate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkersData,
-    TResult Function(_LoadEvents value)? loadEventMarkers,
-    TResult Function(_Error value)? error,
+    TResult? Function(_EventForDate value)? eventMarkersData,
+    TResult? Function(_LoadEvents value)? loadEventMarkers,
+    TResult? Function(_Error value)? error,
   }) {
     return eventMarkersData?.call(this);
   }
@@ -222,37 +223,37 @@ abstract class _EventForDate implements CalendarState {
   const factory _EventForDate(
       {required final Map<DateTime, bool> eventMarkers}) = _$_EventForDate;
 
-  Map<DateTime, bool> get eventMarkers => throw _privateConstructorUsedError;
+  Map<DateTime, bool> get eventMarkers;
   @JsonKey(ignore: true)
-  _$EventForDateCopyWith<_EventForDate> get copyWith =>
+  _$$_EventForDateCopyWith<_$_EventForDate> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$LoadEventsCopyWith<$Res> {
-  factory _$LoadEventsCopyWith(
-          _LoadEvents value, $Res Function(_LoadEvents) then) =
-      __$LoadEventsCopyWithImpl<$Res>;
+abstract class _$$_LoadEventsCopyWith<$Res> {
+  factory _$$_LoadEventsCopyWith(
+          _$_LoadEvents value, $Res Function(_$_LoadEvents) then) =
+      __$$_LoadEventsCopyWithImpl<$Res>;
+  @useResult
   $Res call({Map<DateTime, bool> events});
 }
 
 /// @nodoc
-class __$LoadEventsCopyWithImpl<$Res> extends _$CalendarStateCopyWithImpl<$Res>
-    implements _$LoadEventsCopyWith<$Res> {
-  __$LoadEventsCopyWithImpl(
-      _LoadEvents _value, $Res Function(_LoadEvents) _then)
-      : super(_value, (v) => _then(v as _LoadEvents));
+class __$$_LoadEventsCopyWithImpl<$Res>
+    extends _$CalendarStateCopyWithImpl<$Res, _$_LoadEvents>
+    implements _$$_LoadEventsCopyWith<$Res> {
+  __$$_LoadEventsCopyWithImpl(
+      _$_LoadEvents _value, $Res Function(_$_LoadEvents) _then)
+      : super(_value, _then);
 
-  @override
-  _LoadEvents get _value => super._value as _LoadEvents;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? events = freezed,
+    Object? events = null,
   }) {
-    return _then(_LoadEvents(
-      events: events == freezed
-          ? _value.events
+    return _then(_$_LoadEvents(
+      events: null == events
+          ? _value._events
           : events // ignore: cast_nullable_to_non_nullable
               as Map<DateTime, bool>,
     ));
@@ -281,18 +282,19 @@ class _$_LoadEvents implements _LoadEvents {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LoadEvents &&
-            const DeepCollectionEquality().equals(other.events, events));
+            other is _$_LoadEvents &&
+            const DeepCollectionEquality().equals(other._events, _events));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(events));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_events));
 
   @JsonKey(ignore: true)
   @override
-  _$LoadEventsCopyWith<_LoadEvents> get copyWith =>
-      __$LoadEventsCopyWithImpl<_LoadEvents>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_LoadEventsCopyWith<_$_LoadEvents> get copyWith =>
+      __$$_LoadEventsCopyWithImpl<_$_LoadEvents>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -308,9 +310,9 @@ class _$_LoadEvents implements _LoadEvents {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
-    TResult Function(Map<DateTime, bool> events)? loadEventMarkers,
-    TResult Function(String error)? error,
+    TResult? Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
+    TResult? Function(Map<DateTime, bool> events)? loadEventMarkers,
+    TResult? Function(String error)? error,
   }) {
     return loadEventMarkers?.call(events);
   }
@@ -342,9 +344,9 @@ class _$_LoadEvents implements _LoadEvents {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkersData,
-    TResult Function(_LoadEvents value)? loadEventMarkers,
-    TResult Function(_Error value)? error,
+    TResult? Function(_EventForDate value)? eventMarkersData,
+    TResult? Function(_LoadEvents value)? loadEventMarkers,
+    TResult? Function(_Error value)? error,
   }) {
     return loadEventMarkers?.call(this);
   }
@@ -368,34 +370,34 @@ abstract class _LoadEvents implements CalendarState {
   const factory _LoadEvents({required final Map<DateTime, bool> events}) =
       _$_LoadEvents;
 
-  Map<DateTime, bool> get events => throw _privateConstructorUsedError;
+  Map<DateTime, bool> get events;
   @JsonKey(ignore: true)
-  _$LoadEventsCopyWith<_LoadEvents> get copyWith =>
+  _$$_LoadEventsCopyWith<_$_LoadEvents> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$ErrorCopyWith<$Res> {
-  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
-      __$ErrorCopyWithImpl<$Res>;
+abstract class _$$_ErrorCopyWith<$Res> {
+  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
+      __$$_ErrorCopyWithImpl<$Res>;
+  @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$ErrorCopyWithImpl<$Res> extends _$CalendarStateCopyWithImpl<$Res>
-    implements _$ErrorCopyWith<$Res> {
-  __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
-      : super(_value, (v) => _then(v as _Error));
+class __$$_ErrorCopyWithImpl<$Res>
+    extends _$CalendarStateCopyWithImpl<$Res, _$_Error>
+    implements _$$_ErrorCopyWith<$Res> {
+  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
+      : super(_value, _then);
 
-  @override
-  _Error get _value => super._value as _Error;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
+    Object? error = null,
   }) {
-    return _then(_Error(
-      error: error == freezed
+    return _then(_$_Error(
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
@@ -420,18 +422,18 @@ class _$_Error implements _Error {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Error &&
-            const DeepCollectionEquality().equals(other.error, error));
+            other is _$_Error &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(runtimeType, error);
 
   @JsonKey(ignore: true)
   @override
-  _$ErrorCopyWith<_Error> get copyWith =>
-      __$ErrorCopyWithImpl<_Error>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -447,9 +449,9 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
-    TResult Function(Map<DateTime, bool> events)? loadEventMarkers,
-    TResult Function(String error)? error,
+    TResult? Function(Map<DateTime, bool> eventMarkers)? eventMarkersData,
+    TResult? Function(Map<DateTime, bool> events)? loadEventMarkers,
+    TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
   }
@@ -481,9 +483,9 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_EventForDate value)? eventMarkersData,
-    TResult Function(_LoadEvents value)? loadEventMarkers,
-    TResult Function(_Error value)? error,
+    TResult? Function(_EventForDate value)? eventMarkersData,
+    TResult? Function(_LoadEvents value)? loadEventMarkers,
+    TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
   }
@@ -506,7 +508,8 @@ class _$_Error implements _Error {
 abstract class _Error implements CalendarState {
   const factory _Error({required final String error}) = _$_Error;
 
-  String get error => throw _privateConstructorUsedError;
+  String get error;
   @JsonKey(ignore: true)
-  _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
+  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+      throw _privateConstructorUsedError;
 }

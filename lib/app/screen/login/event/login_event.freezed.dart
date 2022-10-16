@@ -28,12 +28,12 @@ mixin _$LoginEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initFirebase,
-    TResult Function(String login, String password)? logIn,
-    TResult Function(UserType userType)? navigateLoggedIn,
-    TResult Function()? navigateLoggedOut,
-    TResult Function()? navigateToRegister,
-    TResult Function()? navigateToPasswordReset,
+    TResult? Function()? initFirebase,
+    TResult? Function(String login, String password)? logIn,
+    TResult? Function(UserType userType)? navigateLoggedIn,
+    TResult? Function()? navigateLoggedOut,
+    TResult? Function()? navigateToRegister,
+    TResult? Function()? navigateToPasswordReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,12 +60,12 @@ mixin _$LoginEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitFirebase value)? initFirebase,
-    TResult Function(LogIn value)? logIn,
-    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
-    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
-    TResult Function(NavigateToRegister value)? navigateToRegister,
-    TResult Function(NavigateToPasswordReset value)? navigateToPasswordReset,
+    TResult? Function(InitFirebase value)? initFirebase,
+    TResult? Function(LogIn value)? logIn,
+    TResult? Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult? Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult? Function(NavigateToRegister value)? navigateToRegister,
+    TResult? Function(NavigateToPasswordReset value)? navigateToPasswordReset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,34 +85,34 @@ mixin _$LoginEvent {
 abstract class $LoginEventCopyWith<$Res> {
   factory $LoginEventCopyWith(
           LoginEvent value, $Res Function(LoginEvent) then) =
-      _$LoginEventCopyWithImpl<$Res>;
+      _$LoginEventCopyWithImpl<$Res, LoginEvent>;
 }
 
 /// @nodoc
-class _$LoginEventCopyWithImpl<$Res> implements $LoginEventCopyWith<$Res> {
+class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
+    implements $LoginEventCopyWith<$Res> {
   _$LoginEventCopyWithImpl(this._value, this._then);
 
-  final LoginEvent _value;
   // ignore: unused_field
-  final $Res Function(LoginEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
-abstract class $InitFirebaseCopyWith<$Res> {
-  factory $InitFirebaseCopyWith(
-          InitFirebase value, $Res Function(InitFirebase) then) =
-      _$InitFirebaseCopyWithImpl<$Res>;
+abstract class _$$InitFirebaseCopyWith<$Res> {
+  factory _$$InitFirebaseCopyWith(
+          _$InitFirebase value, $Res Function(_$InitFirebase) then) =
+      __$$InitFirebaseCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$InitFirebaseCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
-    implements $InitFirebaseCopyWith<$Res> {
-  _$InitFirebaseCopyWithImpl(
-      InitFirebase _value, $Res Function(InitFirebase) _then)
-      : super(_value, (v) => _then(v as InitFirebase));
-
-  @override
-  InitFirebase get _value => super._value as InitFirebase;
+class __$$InitFirebaseCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$InitFirebase>
+    implements _$$InitFirebaseCopyWith<$Res> {
+  __$$InitFirebaseCopyWithImpl(
+      _$InitFirebase _value, $Res Function(_$InitFirebase) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -128,7 +128,7 @@ class _$InitFirebase implements InitFirebase {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is InitFirebase);
+        (other.runtimeType == runtimeType && other is _$InitFirebase);
   }
 
   @override
@@ -150,12 +150,12 @@ class _$InitFirebase implements InitFirebase {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initFirebase,
-    TResult Function(String login, String password)? logIn,
-    TResult Function(UserType userType)? navigateLoggedIn,
-    TResult Function()? navigateLoggedOut,
-    TResult Function()? navigateToRegister,
-    TResult Function()? navigateToPasswordReset,
+    TResult? Function()? initFirebase,
+    TResult? Function(String login, String password)? logIn,
+    TResult? Function(UserType userType)? navigateLoggedIn,
+    TResult? Function()? navigateLoggedOut,
+    TResult? Function()? navigateToRegister,
+    TResult? Function()? navigateToPasswordReset,
   }) {
     return initFirebase?.call();
   }
@@ -194,12 +194,12 @@ class _$InitFirebase implements InitFirebase {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitFirebase value)? initFirebase,
-    TResult Function(LogIn value)? logIn,
-    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
-    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
-    TResult Function(NavigateToRegister value)? navigateToRegister,
-    TResult Function(NavigateToPasswordReset value)? navigateToPasswordReset,
+    TResult? Function(InitFirebase value)? initFirebase,
+    TResult? Function(LogIn value)? logIn,
+    TResult? Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult? Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult? Function(NavigateToRegister value)? navigateToRegister,
+    TResult? Function(NavigateToPasswordReset value)? navigateToPasswordReset,
   }) {
     return initFirebase?.call(this);
   }
@@ -227,32 +227,32 @@ abstract class InitFirebase implements LoginEvent {
 }
 
 /// @nodoc
-abstract class $LogInCopyWith<$Res> {
-  factory $LogInCopyWith(LogIn value, $Res Function(LogIn) then) =
-      _$LogInCopyWithImpl<$Res>;
+abstract class _$$LogInCopyWith<$Res> {
+  factory _$$LogInCopyWith(_$LogIn value, $Res Function(_$LogIn) then) =
+      __$$LogInCopyWithImpl<$Res>;
+  @useResult
   $Res call({String login, String password});
 }
 
 /// @nodoc
-class _$LogInCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
-    implements $LogInCopyWith<$Res> {
-  _$LogInCopyWithImpl(LogIn _value, $Res Function(LogIn) _then)
-      : super(_value, (v) => _then(v as LogIn));
+class __$$LogInCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$LogIn>
+    implements _$$LogInCopyWith<$Res> {
+  __$$LogInCopyWithImpl(_$LogIn _value, $Res Function(_$LogIn) _then)
+      : super(_value, _then);
 
-  @override
-  LogIn get _value => super._value as LogIn;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? login = freezed,
-    Object? password = freezed,
+    Object? login = null,
+    Object? password = null,
   }) {
-    return _then(LogIn(
-      login: login == freezed
+    return _then(_$LogIn(
+      login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
@@ -279,21 +279,20 @@ class _$LogIn implements LogIn {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is LogIn &&
-            const DeepCollectionEquality().equals(other.login, login) &&
-            const DeepCollectionEquality().equals(other.password, password));
+            other is _$LogIn &&
+            (identical(other.login, login) || other.login == login) &&
+            (identical(other.password, password) ||
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(login),
-      const DeepCollectionEquality().hash(password));
+  int get hashCode => Object.hash(runtimeType, login, password);
 
   @JsonKey(ignore: true)
   @override
-  $LogInCopyWith<LogIn> get copyWith =>
-      _$LogInCopyWithImpl<LogIn>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$LogInCopyWith<_$LogIn> get copyWith =>
+      __$$LogInCopyWithImpl<_$LogIn>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -311,12 +310,12 @@ class _$LogIn implements LogIn {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initFirebase,
-    TResult Function(String login, String password)? logIn,
-    TResult Function(UserType userType)? navigateLoggedIn,
-    TResult Function()? navigateLoggedOut,
-    TResult Function()? navigateToRegister,
-    TResult Function()? navigateToPasswordReset,
+    TResult? Function()? initFirebase,
+    TResult? Function(String login, String password)? logIn,
+    TResult? Function(UserType userType)? navigateLoggedIn,
+    TResult? Function()? navigateLoggedOut,
+    TResult? Function()? navigateToRegister,
+    TResult? Function()? navigateToPasswordReset,
   }) {
     return logIn?.call(login, password);
   }
@@ -355,12 +354,12 @@ class _$LogIn implements LogIn {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitFirebase value)? initFirebase,
-    TResult Function(LogIn value)? logIn,
-    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
-    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
-    TResult Function(NavigateToRegister value)? navigateToRegister,
-    TResult Function(NavigateToPasswordReset value)? navigateToPasswordReset,
+    TResult? Function(InitFirebase value)? initFirebase,
+    TResult? Function(LogIn value)? logIn,
+    TResult? Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult? Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult? Function(NavigateToRegister value)? navigateToRegister,
+    TResult? Function(NavigateToPasswordReset value)? navigateToPasswordReset,
   }) {
     return logIn?.call(this);
   }
@@ -387,37 +386,36 @@ abstract class LogIn implements LoginEvent {
   const factory LogIn(
       {required final String login, required final String password}) = _$LogIn;
 
-  String get login => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
+  String get login;
+  String get password;
   @JsonKey(ignore: true)
-  $LogInCopyWith<LogIn> get copyWith => throw _privateConstructorUsedError;
+  _$$LogInCopyWith<_$LogIn> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NavigateLoggedInCopyWith<$Res> {
-  factory $NavigateLoggedInCopyWith(
-          NavigateLoggedIn value, $Res Function(NavigateLoggedIn) then) =
-      _$NavigateLoggedInCopyWithImpl<$Res>;
+abstract class _$$NavigateLoggedInCopyWith<$Res> {
+  factory _$$NavigateLoggedInCopyWith(
+          _$NavigateLoggedIn value, $Res Function(_$NavigateLoggedIn) then) =
+      __$$NavigateLoggedInCopyWithImpl<$Res>;
+  @useResult
   $Res call({UserType userType});
 }
 
 /// @nodoc
-class _$NavigateLoggedInCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res>
-    implements $NavigateLoggedInCopyWith<$Res> {
-  _$NavigateLoggedInCopyWithImpl(
-      NavigateLoggedIn _value, $Res Function(NavigateLoggedIn) _then)
-      : super(_value, (v) => _then(v as NavigateLoggedIn));
+class __$$NavigateLoggedInCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$NavigateLoggedIn>
+    implements _$$NavigateLoggedInCopyWith<$Res> {
+  __$$NavigateLoggedInCopyWithImpl(
+      _$NavigateLoggedIn _value, $Res Function(_$NavigateLoggedIn) _then)
+      : super(_value, _then);
 
-  @override
-  NavigateLoggedIn get _value => super._value as NavigateLoggedIn;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userType = freezed,
+    Object? userType = null,
   }) {
-    return _then(NavigateLoggedIn(
-      userType: userType == freezed
+    return _then(_$NavigateLoggedIn(
+      userType: null == userType
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as UserType,
@@ -442,18 +440,19 @@ class _$NavigateLoggedIn implements NavigateLoggedIn {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is NavigateLoggedIn &&
-            const DeepCollectionEquality().equals(other.userType, userType));
+            other is _$NavigateLoggedIn &&
+            (identical(other.userType, userType) ||
+                other.userType == userType));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(userType));
+  int get hashCode => Object.hash(runtimeType, userType);
 
   @JsonKey(ignore: true)
   @override
-  $NavigateLoggedInCopyWith<NavigateLoggedIn> get copyWith =>
-      _$NavigateLoggedInCopyWithImpl<NavigateLoggedIn>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$NavigateLoggedInCopyWith<_$NavigateLoggedIn> get copyWith =>
+      __$$NavigateLoggedInCopyWithImpl<_$NavigateLoggedIn>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -471,12 +470,12 @@ class _$NavigateLoggedIn implements NavigateLoggedIn {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initFirebase,
-    TResult Function(String login, String password)? logIn,
-    TResult Function(UserType userType)? navigateLoggedIn,
-    TResult Function()? navigateLoggedOut,
-    TResult Function()? navigateToRegister,
-    TResult Function()? navigateToPasswordReset,
+    TResult? Function()? initFirebase,
+    TResult? Function(String login, String password)? logIn,
+    TResult? Function(UserType userType)? navigateLoggedIn,
+    TResult? Function()? navigateLoggedOut,
+    TResult? Function()? navigateToRegister,
+    TResult? Function()? navigateToPasswordReset,
   }) {
     return navigateLoggedIn?.call(userType);
   }
@@ -515,12 +514,12 @@ class _$NavigateLoggedIn implements NavigateLoggedIn {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitFirebase value)? initFirebase,
-    TResult Function(LogIn value)? logIn,
-    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
-    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
-    TResult Function(NavigateToRegister value)? navigateToRegister,
-    TResult Function(NavigateToPasswordReset value)? navigateToPasswordReset,
+    TResult? Function(InitFirebase value)? initFirebase,
+    TResult? Function(LogIn value)? logIn,
+    TResult? Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult? Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult? Function(NavigateToRegister value)? navigateToRegister,
+    TResult? Function(NavigateToPasswordReset value)? navigateToPasswordReset,
   }) {
     return navigateLoggedIn?.call(this);
   }
@@ -547,29 +546,26 @@ abstract class NavigateLoggedIn implements LoginEvent {
   const factory NavigateLoggedIn({required final UserType userType}) =
       _$NavigateLoggedIn;
 
-  UserType get userType => throw _privateConstructorUsedError;
+  UserType get userType;
   @JsonKey(ignore: true)
-  $NavigateLoggedInCopyWith<NavigateLoggedIn> get copyWith =>
+  _$$NavigateLoggedInCopyWith<_$NavigateLoggedIn> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NavigateLoggedOutCopyWith<$Res> {
-  factory $NavigateLoggedOutCopyWith(
-          NavigateLoggedOut value, $Res Function(NavigateLoggedOut) then) =
-      _$NavigateLoggedOutCopyWithImpl<$Res>;
+abstract class _$$NavigateLoggedOutCopyWith<$Res> {
+  factory _$$NavigateLoggedOutCopyWith(
+          _$NavigateLoggedOut value, $Res Function(_$NavigateLoggedOut) then) =
+      __$$NavigateLoggedOutCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$NavigateLoggedOutCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res>
-    implements $NavigateLoggedOutCopyWith<$Res> {
-  _$NavigateLoggedOutCopyWithImpl(
-      NavigateLoggedOut _value, $Res Function(NavigateLoggedOut) _then)
-      : super(_value, (v) => _then(v as NavigateLoggedOut));
-
-  @override
-  NavigateLoggedOut get _value => super._value as NavigateLoggedOut;
+class __$$NavigateLoggedOutCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$NavigateLoggedOut>
+    implements _$$NavigateLoggedOutCopyWith<$Res> {
+  __$$NavigateLoggedOutCopyWithImpl(
+      _$NavigateLoggedOut _value, $Res Function(_$NavigateLoggedOut) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -585,7 +581,7 @@ class _$NavigateLoggedOut implements NavigateLoggedOut {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is NavigateLoggedOut);
+        (other.runtimeType == runtimeType && other is _$NavigateLoggedOut);
   }
 
   @override
@@ -607,12 +603,12 @@ class _$NavigateLoggedOut implements NavigateLoggedOut {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initFirebase,
-    TResult Function(String login, String password)? logIn,
-    TResult Function(UserType userType)? navigateLoggedIn,
-    TResult Function()? navigateLoggedOut,
-    TResult Function()? navigateToRegister,
-    TResult Function()? navigateToPasswordReset,
+    TResult? Function()? initFirebase,
+    TResult? Function(String login, String password)? logIn,
+    TResult? Function(UserType userType)? navigateLoggedIn,
+    TResult? Function()? navigateLoggedOut,
+    TResult? Function()? navigateToRegister,
+    TResult? Function()? navigateToPasswordReset,
   }) {
     return navigateLoggedOut?.call();
   }
@@ -651,12 +647,12 @@ class _$NavigateLoggedOut implements NavigateLoggedOut {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitFirebase value)? initFirebase,
-    TResult Function(LogIn value)? logIn,
-    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
-    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
-    TResult Function(NavigateToRegister value)? navigateToRegister,
-    TResult Function(NavigateToPasswordReset value)? navigateToPasswordReset,
+    TResult? Function(InitFirebase value)? initFirebase,
+    TResult? Function(LogIn value)? logIn,
+    TResult? Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult? Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult? Function(NavigateToRegister value)? navigateToRegister,
+    TResult? Function(NavigateToPasswordReset value)? navigateToPasswordReset,
   }) {
     return navigateLoggedOut?.call(this);
   }
@@ -684,22 +680,19 @@ abstract class NavigateLoggedOut implements LoginEvent {
 }
 
 /// @nodoc
-abstract class $NavigateToRegisterCopyWith<$Res> {
-  factory $NavigateToRegisterCopyWith(
-          NavigateToRegister value, $Res Function(NavigateToRegister) then) =
-      _$NavigateToRegisterCopyWithImpl<$Res>;
+abstract class _$$NavigateToRegisterCopyWith<$Res> {
+  factory _$$NavigateToRegisterCopyWith(_$NavigateToRegister value,
+          $Res Function(_$NavigateToRegister) then) =
+      __$$NavigateToRegisterCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$NavigateToRegisterCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res>
-    implements $NavigateToRegisterCopyWith<$Res> {
-  _$NavigateToRegisterCopyWithImpl(
-      NavigateToRegister _value, $Res Function(NavigateToRegister) _then)
-      : super(_value, (v) => _then(v as NavigateToRegister));
-
-  @override
-  NavigateToRegister get _value => super._value as NavigateToRegister;
+class __$$NavigateToRegisterCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$NavigateToRegister>
+    implements _$$NavigateToRegisterCopyWith<$Res> {
+  __$$NavigateToRegisterCopyWithImpl(
+      _$NavigateToRegister _value, $Res Function(_$NavigateToRegister) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -715,7 +708,7 @@ class _$NavigateToRegister implements NavigateToRegister {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is NavigateToRegister);
+        (other.runtimeType == runtimeType && other is _$NavigateToRegister);
   }
 
   @override
@@ -737,12 +730,12 @@ class _$NavigateToRegister implements NavigateToRegister {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initFirebase,
-    TResult Function(String login, String password)? logIn,
-    TResult Function(UserType userType)? navigateLoggedIn,
-    TResult Function()? navigateLoggedOut,
-    TResult Function()? navigateToRegister,
-    TResult Function()? navigateToPasswordReset,
+    TResult? Function()? initFirebase,
+    TResult? Function(String login, String password)? logIn,
+    TResult? Function(UserType userType)? navigateLoggedIn,
+    TResult? Function()? navigateLoggedOut,
+    TResult? Function()? navigateToRegister,
+    TResult? Function()? navigateToPasswordReset,
   }) {
     return navigateToRegister?.call();
   }
@@ -781,12 +774,12 @@ class _$NavigateToRegister implements NavigateToRegister {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitFirebase value)? initFirebase,
-    TResult Function(LogIn value)? logIn,
-    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
-    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
-    TResult Function(NavigateToRegister value)? navigateToRegister,
-    TResult Function(NavigateToPasswordReset value)? navigateToPasswordReset,
+    TResult? Function(InitFirebase value)? initFirebase,
+    TResult? Function(LogIn value)? logIn,
+    TResult? Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult? Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult? Function(NavigateToRegister value)? navigateToRegister,
+    TResult? Function(NavigateToPasswordReset value)? navigateToPasswordReset,
   }) {
     return navigateToRegister?.call(this);
   }
@@ -814,22 +807,19 @@ abstract class NavigateToRegister implements LoginEvent {
 }
 
 /// @nodoc
-abstract class $NavigateToPasswordResetCopyWith<$Res> {
-  factory $NavigateToPasswordResetCopyWith(NavigateToPasswordReset value,
-          $Res Function(NavigateToPasswordReset) then) =
-      _$NavigateToPasswordResetCopyWithImpl<$Res>;
+abstract class _$$NavigateToPasswordResetCopyWith<$Res> {
+  factory _$$NavigateToPasswordResetCopyWith(_$NavigateToPasswordReset value,
+          $Res Function(_$NavigateToPasswordReset) then) =
+      __$$NavigateToPasswordResetCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$NavigateToPasswordResetCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res>
-    implements $NavigateToPasswordResetCopyWith<$Res> {
-  _$NavigateToPasswordResetCopyWithImpl(NavigateToPasswordReset _value,
-      $Res Function(NavigateToPasswordReset) _then)
-      : super(_value, (v) => _then(v as NavigateToPasswordReset));
-
-  @override
-  NavigateToPasswordReset get _value => super._value as NavigateToPasswordReset;
+class __$$NavigateToPasswordResetCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$NavigateToPasswordReset>
+    implements _$$NavigateToPasswordResetCopyWith<$Res> {
+  __$$NavigateToPasswordResetCopyWithImpl(_$NavigateToPasswordReset _value,
+      $Res Function(_$NavigateToPasswordReset) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -845,7 +835,8 @@ class _$NavigateToPasswordReset implements NavigateToPasswordReset {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is NavigateToPasswordReset);
+        (other.runtimeType == runtimeType &&
+            other is _$NavigateToPasswordReset);
   }
 
   @override
@@ -867,12 +858,12 @@ class _$NavigateToPasswordReset implements NavigateToPasswordReset {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initFirebase,
-    TResult Function(String login, String password)? logIn,
-    TResult Function(UserType userType)? navigateLoggedIn,
-    TResult Function()? navigateLoggedOut,
-    TResult Function()? navigateToRegister,
-    TResult Function()? navigateToPasswordReset,
+    TResult? Function()? initFirebase,
+    TResult? Function(String login, String password)? logIn,
+    TResult? Function(UserType userType)? navigateLoggedIn,
+    TResult? Function()? navigateLoggedOut,
+    TResult? Function()? navigateToRegister,
+    TResult? Function()? navigateToPasswordReset,
   }) {
     return navigateToPasswordReset?.call();
   }
@@ -911,12 +902,12 @@ class _$NavigateToPasswordReset implements NavigateToPasswordReset {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitFirebase value)? initFirebase,
-    TResult Function(LogIn value)? logIn,
-    TResult Function(NavigateLoggedIn value)? navigateLoggedIn,
-    TResult Function(NavigateLoggedOut value)? navigateLoggedOut,
-    TResult Function(NavigateToRegister value)? navigateToRegister,
-    TResult Function(NavigateToPasswordReset value)? navigateToPasswordReset,
+    TResult? Function(InitFirebase value)? initFirebase,
+    TResult? Function(LogIn value)? logIn,
+    TResult? Function(NavigateLoggedIn value)? navigateLoggedIn,
+    TResult? Function(NavigateLoggedOut value)? navigateLoggedOut,
+    TResult? Function(NavigateToRegister value)? navigateToRegister,
+    TResult? Function(NavigateToPasswordReset value)? navigateToPasswordReset,
   }) {
     return navigateToPasswordReset?.call(this);
   }

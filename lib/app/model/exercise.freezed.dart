@@ -29,85 +29,91 @@ mixin _$Exercise {
 /// @nodoc
 abstract class $ExerciseCopyWith<$Res> {
   factory $ExerciseCopyWith(Exercise value, $Res Function(Exercise) then) =
-      _$ExerciseCopyWithImpl<$Res>;
+      _$ExerciseCopyWithImpl<$Res, Exercise>;
+  @useResult
   $Res call({String id, String title, String playbackId, List<String> tags});
 }
 
 /// @nodoc
-class _$ExerciseCopyWithImpl<$Res> implements $ExerciseCopyWith<$Res> {
+class _$ExerciseCopyWithImpl<$Res, $Val extends Exercise>
+    implements $ExerciseCopyWith<$Res> {
   _$ExerciseCopyWithImpl(this._value, this._then);
 
-  final Exercise _value;
   // ignore: unused_field
-  final $Res Function(Exercise) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? playbackId = freezed,
-    Object? tags = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? playbackId = null,
+    Object? tags = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      playbackId: playbackId == freezed
+      playbackId: null == playbackId
           ? _value.playbackId
           : playbackId // ignore: cast_nullable_to_non_nullable
               as String,
-      tags: tags == freezed
+      tags: null == tags
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$ExerciseCopyWith<$Res> implements $ExerciseCopyWith<$Res> {
-  factory _$ExerciseCopyWith(_Exercise value, $Res Function(_Exercise) then) =
-      __$ExerciseCopyWithImpl<$Res>;
+abstract class _$$_ExerciseCopyWith<$Res> implements $ExerciseCopyWith<$Res> {
+  factory _$$_ExerciseCopyWith(
+          _$_Exercise value, $Res Function(_$_Exercise) then) =
+      __$$_ExerciseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String id, String title, String playbackId, List<String> tags});
 }
 
 /// @nodoc
-class __$ExerciseCopyWithImpl<$Res> extends _$ExerciseCopyWithImpl<$Res>
-    implements _$ExerciseCopyWith<$Res> {
-  __$ExerciseCopyWithImpl(_Exercise _value, $Res Function(_Exercise) _then)
-      : super(_value, (v) => _then(v as _Exercise));
+class __$$_ExerciseCopyWithImpl<$Res>
+    extends _$ExerciseCopyWithImpl<$Res, _$_Exercise>
+    implements _$$_ExerciseCopyWith<$Res> {
+  __$$_ExerciseCopyWithImpl(
+      _$_Exercise _value, $Res Function(_$_Exercise) _then)
+      : super(_value, _then);
 
-  @override
-  _Exercise get _value => super._value as _Exercise;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? playbackId = freezed,
-    Object? tags = freezed,
+    Object? id = null,
+    Object? title = null,
+    Object? playbackId = null,
+    Object? tags = null,
   }) {
-    return _then(_Exercise(
-      id: id == freezed
+    return _then(_$_Exercise(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      playbackId: playbackId == freezed
+      playbackId: null == playbackId
           ? _value.playbackId
           : playbackId // ignore: cast_nullable_to_non_nullable
               as String,
-      tags: tags == freezed
-          ? _value.tags
+      tags: null == tags
+          ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
@@ -146,26 +152,23 @@ class _$_Exercise implements _Exercise {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Exercise &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality()
-                .equals(other.playbackId, playbackId) &&
-            const DeepCollectionEquality().equals(other.tags, tags));
+            other is _$_Exercise &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.playbackId, playbackId) ||
+                other.playbackId == playbackId) &&
+            const DeepCollectionEquality().equals(other._tags, _tags));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(playbackId),
-      const DeepCollectionEquality().hash(tags));
+  int get hashCode => Object.hash(runtimeType, id, title, playbackId,
+      const DeepCollectionEquality().hash(_tags));
 
   @JsonKey(ignore: true)
   @override
-  _$ExerciseCopyWith<_Exercise> get copyWith =>
-      __$ExerciseCopyWithImpl<_Exercise>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_ExerciseCopyWith<_$_Exercise> get copyWith =>
+      __$$_ExerciseCopyWithImpl<_$_Exercise>(this, _$identity);
 }
 
 abstract class _Exercise implements Exercise {
@@ -176,15 +179,15 @@ abstract class _Exercise implements Exercise {
       required final List<String> tags}) = _$_Exercise;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
-  String get playbackId => throw _privateConstructorUsedError;
+  String get playbackId;
   @override
-  List<String> get tags => throw _privateConstructorUsedError;
+  List<String> get tags;
   @override
   @JsonKey(ignore: true)
-  _$ExerciseCopyWith<_Exercise> get copyWith =>
+  _$$_ExerciseCopyWith<_$_Exercise> get copyWith =>
       throw _privateConstructorUsedError;
 }

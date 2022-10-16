@@ -29,7 +29,7 @@ mixin _$ExerciseSearchAddExerciseEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String exerciseId, DateTime selectedDate, String clientId,
+    TResult? Function(String exerciseId, DateTime selectedDate, String clientId,
             String exerciseName)?
         addExercise,
   }) =>
@@ -49,7 +49,7 @@ mixin _$ExerciseSearchAddExerciseEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(AddExercise value)? addExercise,
+    TResult? Function(AddExercise value)? addExercise,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,7 +69,9 @@ abstract class $ExerciseSearchAddExerciseEventCopyWith<$Res> {
   factory $ExerciseSearchAddExerciseEventCopyWith(
           ExerciseSearchAddExerciseEvent value,
           $Res Function(ExerciseSearchAddExerciseEvent) then) =
-      _$ExerciseSearchAddExerciseEventCopyWithImpl<$Res>;
+      _$ExerciseSearchAddExerciseEventCopyWithImpl<$Res,
+          ExerciseSearchAddExerciseEvent>;
+  @useResult
   $Res call(
       {String exerciseId,
       DateTime selectedDate,
@@ -78,49 +80,53 @@ abstract class $ExerciseSearchAddExerciseEventCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ExerciseSearchAddExerciseEventCopyWithImpl<$Res>
+class _$ExerciseSearchAddExerciseEventCopyWithImpl<$Res,
+        $Val extends ExerciseSearchAddExerciseEvent>
     implements $ExerciseSearchAddExerciseEventCopyWith<$Res> {
   _$ExerciseSearchAddExerciseEventCopyWithImpl(this._value, this._then);
 
-  final ExerciseSearchAddExerciseEvent _value;
   // ignore: unused_field
-  final $Res Function(ExerciseSearchAddExerciseEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? exerciseId = freezed,
-    Object? selectedDate = freezed,
-    Object? clientId = freezed,
-    Object? exerciseName = freezed,
+    Object? exerciseId = null,
+    Object? selectedDate = null,
+    Object? clientId = null,
+    Object? exerciseName = null,
   }) {
     return _then(_value.copyWith(
-      exerciseId: exerciseId == freezed
+      exerciseId: null == exerciseId
           ? _value.exerciseId
           : exerciseId // ignore: cast_nullable_to_non_nullable
               as String,
-      selectedDate: selectedDate == freezed
+      selectedDate: null == selectedDate
           ? _value.selectedDate
           : selectedDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      clientId: clientId == freezed
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
-      exerciseName: exerciseName == freezed
+      exerciseName: null == exerciseName
           ? _value.exerciseName
           : exerciseName // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class $AddExerciseCopyWith<$Res>
+abstract class _$$AddExerciseCopyWith<$Res>
     implements $ExerciseSearchAddExerciseEventCopyWith<$Res> {
-  factory $AddExerciseCopyWith(
-          AddExercise value, $Res Function(AddExercise) then) =
-      _$AddExerciseCopyWithImpl<$Res>;
+  factory _$$AddExerciseCopyWith(
+          _$AddExercise value, $Res Function(_$AddExercise) then) =
+      __$$AddExerciseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String exerciseId,
       DateTime selectedDate,
@@ -129,37 +135,35 @@ abstract class $AddExerciseCopyWith<$Res>
 }
 
 /// @nodoc
-class _$AddExerciseCopyWithImpl<$Res>
-    extends _$ExerciseSearchAddExerciseEventCopyWithImpl<$Res>
-    implements $AddExerciseCopyWith<$Res> {
-  _$AddExerciseCopyWithImpl(
-      AddExercise _value, $Res Function(AddExercise) _then)
-      : super(_value, (v) => _then(v as AddExercise));
+class __$$AddExerciseCopyWithImpl<$Res>
+    extends _$ExerciseSearchAddExerciseEventCopyWithImpl<$Res, _$AddExercise>
+    implements _$$AddExerciseCopyWith<$Res> {
+  __$$AddExerciseCopyWithImpl(
+      _$AddExercise _value, $Res Function(_$AddExercise) _then)
+      : super(_value, _then);
 
-  @override
-  AddExercise get _value => super._value as AddExercise;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? exerciseId = freezed,
-    Object? selectedDate = freezed,
-    Object? clientId = freezed,
-    Object? exerciseName = freezed,
+    Object? exerciseId = null,
+    Object? selectedDate = null,
+    Object? clientId = null,
+    Object? exerciseName = null,
   }) {
-    return _then(AddExercise(
-      exerciseId: exerciseId == freezed
+    return _then(_$AddExercise(
+      exerciseId: null == exerciseId
           ? _value.exerciseId
           : exerciseId // ignore: cast_nullable_to_non_nullable
               as String,
-      selectedDate: selectedDate == freezed
+      selectedDate: null == selectedDate
           ? _value.selectedDate
           : selectedDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      clientId: clientId == freezed
+      clientId: null == clientId
           ? _value.clientId
           : clientId // ignore: cast_nullable_to_non_nullable
               as String,
-      exerciseName: exerciseName == freezed
+      exerciseName: null == exerciseName
           ? _value.exerciseName
           : exerciseName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -194,28 +198,26 @@ class _$AddExercise implements AddExercise {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is AddExercise &&
-            const DeepCollectionEquality()
-                .equals(other.exerciseId, exerciseId) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedDate, selectedDate) &&
-            const DeepCollectionEquality().equals(other.clientId, clientId) &&
-            const DeepCollectionEquality()
-                .equals(other.exerciseName, exerciseName));
+            other is _$AddExercise &&
+            (identical(other.exerciseId, exerciseId) ||
+                other.exerciseId == exerciseId) &&
+            (identical(other.selectedDate, selectedDate) ||
+                other.selectedDate == selectedDate) &&
+            (identical(other.clientId, clientId) ||
+                other.clientId == clientId) &&
+            (identical(other.exerciseName, exerciseName) ||
+                other.exerciseName == exerciseName));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(exerciseId),
-      const DeepCollectionEquality().hash(selectedDate),
-      const DeepCollectionEquality().hash(clientId),
-      const DeepCollectionEquality().hash(exerciseName));
+      runtimeType, exerciseId, selectedDate, clientId, exerciseName);
 
   @JsonKey(ignore: true)
   @override
-  $AddExerciseCopyWith<AddExercise> get copyWith =>
-      _$AddExerciseCopyWithImpl<AddExercise>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$AddExerciseCopyWith<_$AddExercise> get copyWith =>
+      __$$AddExerciseCopyWithImpl<_$AddExercise>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -230,7 +232,7 @@ class _$AddExercise implements AddExercise {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String exerciseId, DateTime selectedDate, String clientId,
+    TResult? Function(String exerciseId, DateTime selectedDate, String clientId,
             String exerciseName)?
         addExercise,
   }) {
@@ -262,7 +264,7 @@ class _$AddExercise implements AddExercise {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(AddExercise value)? addExercise,
+    TResult? Function(AddExercise value)? addExercise,
   }) {
     return addExercise?.call(this);
   }
@@ -288,15 +290,15 @@ abstract class AddExercise implements ExerciseSearchAddExerciseEvent {
       required final String exerciseName}) = _$AddExercise;
 
   @override
-  String get exerciseId => throw _privateConstructorUsedError;
+  String get exerciseId;
   @override
-  DateTime get selectedDate => throw _privateConstructorUsedError;
+  DateTime get selectedDate;
   @override
-  String get clientId => throw _privateConstructorUsedError;
+  String get clientId;
   @override
-  String get exerciseName => throw _privateConstructorUsedError;
+  String get exerciseName;
   @override
   @JsonKey(ignore: true)
-  $AddExerciseCopyWith<AddExercise> get copyWith =>
+  _$$AddExerciseCopyWith<_$AddExercise> get copyWith =>
       throw _privateConstructorUsedError;
 }

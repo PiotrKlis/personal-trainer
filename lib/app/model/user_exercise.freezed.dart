@@ -31,67 +31,73 @@ mixin _$UserExercise {
 abstract class $UserExerciseCopyWith<$Res> {
   factory $UserExerciseCopyWith(
           UserExercise value, $Res Function(UserExercise) then) =
-      _$UserExerciseCopyWithImpl<$Res>;
+      _$UserExerciseCopyWithImpl<$Res, UserExercise>;
+  @useResult
   $Res call({String id, int index, int reps, int sets, Exercise exercise});
 
   $ExerciseCopyWith<$Res> get exercise;
 }
 
 /// @nodoc
-class _$UserExerciseCopyWithImpl<$Res> implements $UserExerciseCopyWith<$Res> {
+class _$UserExerciseCopyWithImpl<$Res, $Val extends UserExercise>
+    implements $UserExerciseCopyWith<$Res> {
   _$UserExerciseCopyWithImpl(this._value, this._then);
 
-  final UserExercise _value;
   // ignore: unused_field
-  final $Res Function(UserExercise) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? index = freezed,
-    Object? reps = freezed,
-    Object? sets = freezed,
-    Object? exercise = freezed,
+    Object? id = null,
+    Object? index = null,
+    Object? reps = null,
+    Object? sets = null,
+    Object? exercise = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
-      reps: reps == freezed
+      reps: null == reps
           ? _value.reps
           : reps // ignore: cast_nullable_to_non_nullable
               as int,
-      sets: sets == freezed
+      sets: null == sets
           ? _value.sets
           : sets // ignore: cast_nullable_to_non_nullable
               as int,
-      exercise: exercise == freezed
+      exercise: null == exercise
           ? _value.exercise
           : exercise // ignore: cast_nullable_to_non_nullable
               as Exercise,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ExerciseCopyWith<$Res> get exercise {
     return $ExerciseCopyWith<$Res>(_value.exercise, (value) {
-      return _then(_value.copyWith(exercise: value));
+      return _then(_value.copyWith(exercise: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$UserExerciseCopyWith<$Res>
+abstract class _$$_UserExerciseCopyWith<$Res>
     implements $UserExerciseCopyWith<$Res> {
-  factory _$UserExerciseCopyWith(
-          _UserExercise value, $Res Function(_UserExercise) then) =
-      __$UserExerciseCopyWithImpl<$Res>;
+  factory _$$_UserExerciseCopyWith(
+          _$_UserExercise value, $Res Function(_$_UserExercise) then) =
+      __$$_UserExerciseCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String id, int index, int reps, int sets, Exercise exercise});
 
   @override
@@ -99,41 +105,40 @@ abstract class _$UserExerciseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$UserExerciseCopyWithImpl<$Res> extends _$UserExerciseCopyWithImpl<$Res>
-    implements _$UserExerciseCopyWith<$Res> {
-  __$UserExerciseCopyWithImpl(
-      _UserExercise _value, $Res Function(_UserExercise) _then)
-      : super(_value, (v) => _then(v as _UserExercise));
+class __$$_UserExerciseCopyWithImpl<$Res>
+    extends _$UserExerciseCopyWithImpl<$Res, _$_UserExercise>
+    implements _$$_UserExerciseCopyWith<$Res> {
+  __$$_UserExerciseCopyWithImpl(
+      _$_UserExercise _value, $Res Function(_$_UserExercise) _then)
+      : super(_value, _then);
 
-  @override
-  _UserExercise get _value => super._value as _UserExercise;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? index = freezed,
-    Object? reps = freezed,
-    Object? sets = freezed,
-    Object? exercise = freezed,
+    Object? id = null,
+    Object? index = null,
+    Object? reps = null,
+    Object? sets = null,
+    Object? exercise = null,
   }) {
-    return _then(_UserExercise(
-      id: id == freezed
+    return _then(_$_UserExercise(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      index: index == freezed
+      index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
-      reps: reps == freezed
+      reps: null == reps
           ? _value.reps
           : reps // ignore: cast_nullable_to_non_nullable
               as int,
-      sets: sets == freezed
+      sets: null == sets
           ? _value.sets
           : sets // ignore: cast_nullable_to_non_nullable
               as int,
-      exercise: exercise == freezed
+      exercise: null == exercise
           ? _value.exercise
           : exercise // ignore: cast_nullable_to_non_nullable
               as Exercise,
@@ -171,27 +176,23 @@ class _$_UserExercise implements _UserExercise {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UserExercise &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.index, index) &&
-            const DeepCollectionEquality().equals(other.reps, reps) &&
-            const DeepCollectionEquality().equals(other.sets, sets) &&
-            const DeepCollectionEquality().equals(other.exercise, exercise));
+            other is _$_UserExercise &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.reps, reps) || other.reps == reps) &&
+            (identical(other.sets, sets) || other.sets == sets) &&
+            (identical(other.exercise, exercise) ||
+                other.exercise == exercise));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(index),
-      const DeepCollectionEquality().hash(reps),
-      const DeepCollectionEquality().hash(sets),
-      const DeepCollectionEquality().hash(exercise));
+  int get hashCode => Object.hash(runtimeType, id, index, reps, sets, exercise);
 
   @JsonKey(ignore: true)
   @override
-  _$UserExerciseCopyWith<_UserExercise> get copyWith =>
-      __$UserExerciseCopyWithImpl<_UserExercise>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_UserExerciseCopyWith<_$_UserExercise> get copyWith =>
+      __$$_UserExerciseCopyWithImpl<_$_UserExercise>(this, _$identity);
 }
 
 abstract class _UserExercise implements UserExercise {
@@ -203,17 +204,17 @@ abstract class _UserExercise implements UserExercise {
       required final Exercise exercise}) = _$_UserExercise;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  int get index => throw _privateConstructorUsedError;
+  int get index;
   @override
-  int get reps => throw _privateConstructorUsedError;
+  int get reps;
   @override
-  int get sets => throw _privateConstructorUsedError;
+  int get sets;
   @override
-  Exercise get exercise => throw _privateConstructorUsedError;
+  Exercise get exercise;
   @override
   @JsonKey(ignore: true)
-  _$UserExerciseCopyWith<_UserExercise> get copyWith =>
+  _$$_UserExerciseCopyWith<_$_UserExercise> get copyWith =>
       throw _privateConstructorUsedError;
 }

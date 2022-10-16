@@ -24,7 +24,7 @@ mixin _$RegisterEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(RegisterData registerData)? register,
+    TResult? Function(RegisterData registerData)? register,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +40,7 @@ mixin _$RegisterEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Register value)? register,
+    TResult? Function(Register value)? register,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,46 +59,53 @@ mixin _$RegisterEvent {
 abstract class $RegisterEventCopyWith<$Res> {
   factory $RegisterEventCopyWith(
           RegisterEvent value, $Res Function(RegisterEvent) then) =
-      _$RegisterEventCopyWithImpl<$Res>;
+      _$RegisterEventCopyWithImpl<$Res, RegisterEvent>;
+  @useResult
   $Res call({RegisterData registerData});
 
   $RegisterDataCopyWith<$Res> get registerData;
 }
 
 /// @nodoc
-class _$RegisterEventCopyWithImpl<$Res>
+class _$RegisterEventCopyWithImpl<$Res, $Val extends RegisterEvent>
     implements $RegisterEventCopyWith<$Res> {
   _$RegisterEventCopyWithImpl(this._value, this._then);
 
-  final RegisterEvent _value;
   // ignore: unused_field
-  final $Res Function(RegisterEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? registerData = freezed,
+    Object? registerData = null,
   }) {
     return _then(_value.copyWith(
-      registerData: registerData == freezed
+      registerData: null == registerData
           ? _value.registerData
           : registerData // ignore: cast_nullable_to_non_nullable
               as RegisterData,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $RegisterDataCopyWith<$Res> get registerData {
     return $RegisterDataCopyWith<$Res>(_value.registerData, (value) {
-      return _then(_value.copyWith(registerData: value));
+      return _then(_value.copyWith(registerData: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class $RegisterCopyWith<$Res> implements $RegisterEventCopyWith<$Res> {
-  factory $RegisterCopyWith(Register value, $Res Function(Register) then) =
-      _$RegisterCopyWithImpl<$Res>;
+abstract class _$$RegisterCopyWith<$Res>
+    implements $RegisterEventCopyWith<$Res> {
+  factory _$$RegisterCopyWith(
+          _$Register value, $Res Function(_$Register) then) =
+      __$$RegisterCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({RegisterData registerData});
 
   @override
@@ -106,20 +113,19 @@ abstract class $RegisterCopyWith<$Res> implements $RegisterEventCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RegisterCopyWithImpl<$Res> extends _$RegisterEventCopyWithImpl<$Res>
-    implements $RegisterCopyWith<$Res> {
-  _$RegisterCopyWithImpl(Register _value, $Res Function(Register) _then)
-      : super(_value, (v) => _then(v as Register));
+class __$$RegisterCopyWithImpl<$Res>
+    extends _$RegisterEventCopyWithImpl<$Res, _$Register>
+    implements _$$RegisterCopyWith<$Res> {
+  __$$RegisterCopyWithImpl(_$Register _value, $Res Function(_$Register) _then)
+      : super(_value, _then);
 
-  @override
-  Register get _value => super._value as Register;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? registerData = freezed,
+    Object? registerData = null,
   }) {
-    return _then(Register(
-      registerData: registerData == freezed
+    return _then(_$Register(
+      registerData: null == registerData
           ? _value.registerData
           : registerData // ignore: cast_nullable_to_non_nullable
               as RegisterData,
@@ -144,19 +150,19 @@ class _$Register implements Register {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is Register &&
-            const DeepCollectionEquality()
-                .equals(other.registerData, registerData));
+            other is _$Register &&
+            (identical(other.registerData, registerData) ||
+                other.registerData == registerData));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(registerData));
+  int get hashCode => Object.hash(runtimeType, registerData);
 
   @JsonKey(ignore: true)
   @override
-  $RegisterCopyWith<Register> get copyWith =>
-      _$RegisterCopyWithImpl<Register>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$RegisterCopyWith<_$Register> get copyWith =>
+      __$$RegisterCopyWithImpl<_$Register>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -169,7 +175,7 @@ class _$Register implements Register {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(RegisterData registerData)? register,
+    TResult? Function(RegisterData registerData)? register,
   }) {
     return register?.call(registerData);
   }
@@ -197,7 +203,7 @@ class _$Register implements Register {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(Register value)? register,
+    TResult? Function(Register value)? register,
   }) {
     return register?.call(this);
   }
@@ -220,9 +226,9 @@ abstract class Register implements RegisterEvent {
       _$Register;
 
   @override
-  RegisterData get registerData => throw _privateConstructorUsedError;
+  RegisterData get registerData;
   @override
   @JsonKey(ignore: true)
-  $RegisterCopyWith<Register> get copyWith =>
+  _$$RegisterCopyWith<_$Register> get copyWith =>
       throw _privateConstructorUsedError;
 }

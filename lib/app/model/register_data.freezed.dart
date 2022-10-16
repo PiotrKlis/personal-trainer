@@ -31,7 +31,8 @@ mixin _$RegisterData {
 abstract class $RegisterDataCopyWith<$Res> {
   factory $RegisterDataCopyWith(
           RegisterData value, $Res Function(RegisterData) then) =
-      _$RegisterDataCopyWithImpl<$Res>;
+      _$RegisterDataCopyWithImpl<$Res, RegisterData>;
+  @useResult
   $Res call(
       {String email,
       String name,
@@ -41,53 +42,57 @@ abstract class $RegisterDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RegisterDataCopyWithImpl<$Res> implements $RegisterDataCopyWith<$Res> {
+class _$RegisterDataCopyWithImpl<$Res, $Val extends RegisterData>
+    implements $RegisterDataCopyWith<$Res> {
   _$RegisterDataCopyWithImpl(this._value, this._then);
 
-  final RegisterData _value;
   // ignore: unused_field
-  final $Res Function(RegisterData) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? name = freezed,
-    Object? password = freezed,
-    Object? trainerEmail = freezed,
-    Object? userType = freezed,
+    Object? email = null,
+    Object? name = null,
+    Object? password = null,
+    Object? trainerEmail = null,
+    Object? userType = null,
   }) {
     return _then(_value.copyWith(
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      trainerEmail: trainerEmail == freezed
+      trainerEmail: null == trainerEmail
           ? _value.trainerEmail
           : trainerEmail // ignore: cast_nullable_to_non_nullable
               as String,
-      userType: userType == freezed
+      userType: null == userType
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as UserType,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$RegisterDataCopyWith<$Res>
+abstract class _$$_RegisterDataCopyWith<$Res>
     implements $RegisterDataCopyWith<$Res> {
-  factory _$RegisterDataCopyWith(
-          _RegisterData value, $Res Function(_RegisterData) then) =
-      __$RegisterDataCopyWithImpl<$Res>;
+  factory _$$_RegisterDataCopyWith(
+          _$_RegisterData value, $Res Function(_$_RegisterData) then) =
+      __$$_RegisterDataCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String email,
       String name,
@@ -97,41 +102,40 @@ abstract class _$RegisterDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$RegisterDataCopyWithImpl<$Res> extends _$RegisterDataCopyWithImpl<$Res>
-    implements _$RegisterDataCopyWith<$Res> {
-  __$RegisterDataCopyWithImpl(
-      _RegisterData _value, $Res Function(_RegisterData) _then)
-      : super(_value, (v) => _then(v as _RegisterData));
+class __$$_RegisterDataCopyWithImpl<$Res>
+    extends _$RegisterDataCopyWithImpl<$Res, _$_RegisterData>
+    implements _$$_RegisterDataCopyWith<$Res> {
+  __$$_RegisterDataCopyWithImpl(
+      _$_RegisterData _value, $Res Function(_$_RegisterData) _then)
+      : super(_value, _then);
 
-  @override
-  _RegisterData get _value => super._value as _RegisterData;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? name = freezed,
-    Object? password = freezed,
-    Object? trainerEmail = freezed,
-    Object? userType = freezed,
+    Object? email = null,
+    Object? name = null,
+    Object? password = null,
+    Object? trainerEmail = null,
+    Object? userType = null,
   }) {
-    return _then(_RegisterData(
-      email: email == freezed
+    return _then(_$_RegisterData(
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      trainerEmail: trainerEmail == freezed
+      trainerEmail: null == trainerEmail
           ? _value.trainerEmail
           : trainerEmail // ignore: cast_nullable_to_non_nullable
               as String,
-      userType: userType == freezed
+      userType: null == userType
           ? _value.userType
           : userType // ignore: cast_nullable_to_non_nullable
               as UserType,
@@ -169,28 +173,26 @@ class _$_RegisterData implements _RegisterData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _RegisterData &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.password, password) &&
-            const DeepCollectionEquality()
-                .equals(other.trainerEmail, trainerEmail) &&
-            const DeepCollectionEquality().equals(other.userType, userType));
+            other is _$_RegisterData &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.trainerEmail, trainerEmail) ||
+                other.trainerEmail == trainerEmail) &&
+            (identical(other.userType, userType) ||
+                other.userType == userType));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(password),
-      const DeepCollectionEquality().hash(trainerEmail),
-      const DeepCollectionEquality().hash(userType));
+  int get hashCode =>
+      Object.hash(runtimeType, email, name, password, trainerEmail, userType);
 
   @JsonKey(ignore: true)
   @override
-  _$RegisterDataCopyWith<_RegisterData> get copyWith =>
-      __$RegisterDataCopyWithImpl<_RegisterData>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_RegisterDataCopyWith<_$_RegisterData> get copyWith =>
+      __$$_RegisterDataCopyWithImpl<_$_RegisterData>(this, _$identity);
 }
 
 abstract class _RegisterData implements RegisterData {
@@ -202,17 +204,17 @@ abstract class _RegisterData implements RegisterData {
       required final UserType userType}) = _$_RegisterData;
 
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get password => throw _privateConstructorUsedError;
+  String get password;
   @override
-  String get trainerEmail => throw _privateConstructorUsedError;
+  String get trainerEmail;
   @override
-  UserType get userType => throw _privateConstructorUsedError;
+  UserType get userType;
   @override
   @JsonKey(ignore: true)
-  _$RegisterDataCopyWith<_RegisterData> get copyWith =>
+  _$$_RegisterDataCopyWith<_$_RegisterData> get copyWith =>
       throw _privateConstructorUsedError;
 }

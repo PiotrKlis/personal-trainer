@@ -37,7 +37,8 @@ mixin _$Track {
 /// @nodoc
 abstract class $TrackCopyWith<$Res> {
   factory $TrackCopyWith(Track value, $Res Function(Track) then) =
-      _$TrackCopyWithImpl<$Res>;
+      _$TrackCopyWithImpl<$Res, Track>;
+  @useResult
   $Res call(
       {int? maxWidth,
       String? type,
@@ -50,13 +51,16 @@ abstract class $TrackCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TrackCopyWithImpl<$Res> implements $TrackCopyWith<$Res> {
+class _$TrackCopyWithImpl<$Res, $Val extends Track>
+    implements $TrackCopyWith<$Res> {
   _$TrackCopyWithImpl(this._value, this._then);
 
-  final Track _value;
   // ignore: unused_field
-  final $Res Function(Track) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? maxWidth = freezed,
@@ -69,47 +73,48 @@ class _$TrackCopyWithImpl<$Res> implements $TrackCopyWith<$Res> {
     Object? maxChannels = freezed,
   }) {
     return _then(_value.copyWith(
-      maxWidth: maxWidth == freezed
+      maxWidth: freezed == maxWidth
           ? _value.maxWidth
           : maxWidth // ignore: cast_nullable_to_non_nullable
               as int?,
-      type: type == freezed
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      duration: duration == freezed
+      duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as double?,
-      maxFrameRate: maxFrameRate == freezed
+      maxFrameRate: freezed == maxFrameRate
           ? _value.maxFrameRate
           : maxFrameRate // ignore: cast_nullable_to_non_nullable
               as double?,
-      maxHeight: maxHeight == freezed
+      maxHeight: freezed == maxHeight
           ? _value.maxHeight
           : maxHeight // ignore: cast_nullable_to_non_nullable
               as int?,
-      maxChannelLayout: maxChannelLayout == freezed
+      maxChannelLayout: freezed == maxChannelLayout
           ? _value.maxChannelLayout
           : maxChannelLayout // ignore: cast_nullable_to_non_nullable
               as String?,
-      maxChannels: maxChannels == freezed
+      maxChannels: freezed == maxChannels
           ? _value.maxChannels
           : maxChannels // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$TrackCopyWith<$Res> implements $TrackCopyWith<$Res> {
-  factory _$TrackCopyWith(_Track value, $Res Function(_Track) then) =
-      __$TrackCopyWithImpl<$Res>;
+abstract class _$$_TrackCopyWith<$Res> implements $TrackCopyWith<$Res> {
+  factory _$$_TrackCopyWith(_$_Track value, $Res Function(_$_Track) then) =
+      __$$_TrackCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? maxWidth,
       String? type,
@@ -122,14 +127,12 @@ abstract class _$TrackCopyWith<$Res> implements $TrackCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$TrackCopyWithImpl<$Res> extends _$TrackCopyWithImpl<$Res>
-    implements _$TrackCopyWith<$Res> {
-  __$TrackCopyWithImpl(_Track _value, $Res Function(_Track) _then)
-      : super(_value, (v) => _then(v as _Track));
+class __$$_TrackCopyWithImpl<$Res> extends _$TrackCopyWithImpl<$Res, _$_Track>
+    implements _$$_TrackCopyWith<$Res> {
+  __$$_TrackCopyWithImpl(_$_Track _value, $Res Function(_$_Track) _then)
+      : super(_value, _then);
 
-  @override
-  _Track get _value => super._value as _Track;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? maxWidth = freezed,
@@ -141,36 +144,36 @@ class __$TrackCopyWithImpl<$Res> extends _$TrackCopyWithImpl<$Res>
     Object? maxChannelLayout = freezed,
     Object? maxChannels = freezed,
   }) {
-    return _then(_Track(
-      maxWidth: maxWidth == freezed
+    return _then(_$_Track(
+      maxWidth: freezed == maxWidth
           ? _value.maxWidth
           : maxWidth // ignore: cast_nullable_to_non_nullable
               as int?,
-      type: type == freezed
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      duration: duration == freezed
+      duration: freezed == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as double?,
-      maxFrameRate: maxFrameRate == freezed
+      maxFrameRate: freezed == maxFrameRate
           ? _value.maxFrameRate
           : maxFrameRate // ignore: cast_nullable_to_non_nullable
               as double?,
-      maxHeight: maxHeight == freezed
+      maxHeight: freezed == maxHeight
           ? _value.maxHeight
           : maxHeight // ignore: cast_nullable_to_non_nullable
               as int?,
-      maxChannelLayout: maxChannelLayout == freezed
+      maxChannelLayout: freezed == maxChannelLayout
           ? _value.maxChannelLayout
           : maxChannelLayout // ignore: cast_nullable_to_non_nullable
               as String?,
-      maxChannels: maxChannels == freezed
+      maxChannels: freezed == maxChannels
           ? _value.maxChannels
           : maxChannels // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -220,41 +223,39 @@ class _$_Track implements _Track {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Track &&
-            const DeepCollectionEquality().equals(other.maxWidth, maxWidth) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.duration, duration) &&
-            const DeepCollectionEquality()
-                .equals(other.maxFrameRate, maxFrameRate) &&
-            const DeepCollectionEquality().equals(other.maxHeight, maxHeight) &&
-            const DeepCollectionEquality()
-                .equals(other.maxChannelLayout, maxChannelLayout) &&
-            const DeepCollectionEquality()
-                .equals(other.maxChannels, maxChannels));
+            other is _$_Track &&
+            (identical(other.maxWidth, maxWidth) ||
+                other.maxWidth == maxWidth) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration) &&
+            (identical(other.maxFrameRate, maxFrameRate) ||
+                other.maxFrameRate == maxFrameRate) &&
+            (identical(other.maxHeight, maxHeight) ||
+                other.maxHeight == maxHeight) &&
+            (identical(other.maxChannelLayout, maxChannelLayout) ||
+                other.maxChannelLayout == maxChannelLayout) &&
+            (identical(other.maxChannels, maxChannels) ||
+                other.maxChannels == maxChannels));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(maxWidth),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(duration),
-      const DeepCollectionEquality().hash(maxFrameRate),
-      const DeepCollectionEquality().hash(maxHeight),
-      const DeepCollectionEquality().hash(maxChannelLayout),
-      const DeepCollectionEquality().hash(maxChannels));
+  int get hashCode => Object.hash(runtimeType, maxWidth, type, id, duration,
+      maxFrameRate, maxHeight, maxChannelLayout, maxChannels);
 
   @JsonKey(ignore: true)
   @override
-  _$TrackCopyWith<_Track> get copyWith =>
-      __$TrackCopyWithImpl<_Track>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_TrackCopyWith<_$_Track> get copyWith =>
+      __$$_TrackCopyWithImpl<_$_Track>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TrackToJson(this);
+    return _$$_TrackToJson(
+      this,
+    );
   }
 }
 
@@ -272,22 +273,23 @@ abstract class _Track implements Track {
   factory _Track.fromJson(Map<String, dynamic> json) = _$_Track.fromJson;
 
   @override
-  int? get maxWidth => throw _privateConstructorUsedError;
+  int? get maxWidth;
   @override
-  String? get type => throw _privateConstructorUsedError;
+  String? get type;
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  double? get duration => throw _privateConstructorUsedError;
+  double? get duration;
   @override
-  double? get maxFrameRate => throw _privateConstructorUsedError;
+  double? get maxFrameRate;
   @override
-  int? get maxHeight => throw _privateConstructorUsedError;
+  int? get maxHeight;
   @override
-  String? get maxChannelLayout => throw _privateConstructorUsedError;
+  String? get maxChannelLayout;
   @override
-  int? get maxChannels => throw _privateConstructorUsedError;
+  int? get maxChannels;
   @override
   @JsonKey(ignore: true)
-  _$TrackCopyWith<_Track> get copyWith => throw _privateConstructorUsedError;
+  _$$_TrackCopyWith<_$_Track> get copyWith =>
+      throw _privateConstructorUsedError;
 }

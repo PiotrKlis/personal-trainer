@@ -29,7 +29,8 @@ mixin _$Client {
 /// @nodoc
 abstract class $ClientCopyWith<$Res> {
   factory $ClientCopyWith(Client value, $Res Function(Client) then) =
-      _$ClientCopyWithImpl<$Res>;
+      _$ClientCopyWithImpl<$Res, Client>;
+  @useResult
   $Res call(
       {String phoneNumber,
       String id,
@@ -39,51 +40,55 @@ abstract class $ClientCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ClientCopyWithImpl<$Res> implements $ClientCopyWith<$Res> {
+class _$ClientCopyWithImpl<$Res, $Val extends Client>
+    implements $ClientCopyWith<$Res> {
   _$ClientCopyWithImpl(this._value, this._then);
 
-  final Client _value;
   // ignore: unused_field
-  final $Res Function(Client) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? phoneNumber = freezed,
-    Object? id = freezed,
-    Object? email = freezed,
-    Object? name = freezed,
-    Object? trainerEmail = freezed,
+    Object? phoneNumber = null,
+    Object? id = null,
+    Object? email = null,
+    Object? name = null,
+    Object? trainerEmail = null,
   }) {
     return _then(_value.copyWith(
-      phoneNumber: phoneNumber == freezed
+      phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      trainerEmail: trainerEmail == freezed
+      trainerEmail: null == trainerEmail
           ? _value.trainerEmail
           : trainerEmail // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$ClientCopyWith<$Res> implements $ClientCopyWith<$Res> {
-  factory _$ClientCopyWith(_Client value, $Res Function(_Client) then) =
-      __$ClientCopyWithImpl<$Res>;
+abstract class _$$_ClientCopyWith<$Res> implements $ClientCopyWith<$Res> {
+  factory _$$_ClientCopyWith(_$_Client value, $Res Function(_$_Client) then) =
+      __$$_ClientCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String phoneNumber,
       String id,
@@ -93,40 +98,39 @@ abstract class _$ClientCopyWith<$Res> implements $ClientCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ClientCopyWithImpl<$Res> extends _$ClientCopyWithImpl<$Res>
-    implements _$ClientCopyWith<$Res> {
-  __$ClientCopyWithImpl(_Client _value, $Res Function(_Client) _then)
-      : super(_value, (v) => _then(v as _Client));
+class __$$_ClientCopyWithImpl<$Res>
+    extends _$ClientCopyWithImpl<$Res, _$_Client>
+    implements _$$_ClientCopyWith<$Res> {
+  __$$_ClientCopyWithImpl(_$_Client _value, $Res Function(_$_Client) _then)
+      : super(_value, _then);
 
-  @override
-  _Client get _value => super._value as _Client;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? phoneNumber = freezed,
-    Object? id = freezed,
-    Object? email = freezed,
-    Object? name = freezed,
-    Object? trainerEmail = freezed,
+    Object? phoneNumber = null,
+    Object? id = null,
+    Object? email = null,
+    Object? name = null,
+    Object? trainerEmail = null,
   }) {
-    return _then(_Client(
-      phoneNumber: phoneNumber == freezed
+    return _then(_$_Client(
+      phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      trainerEmail: trainerEmail == freezed
+      trainerEmail: null == trainerEmail
           ? _value.trainerEmail
           : trainerEmail // ignore: cast_nullable_to_non_nullable
               as String,
@@ -165,29 +169,25 @@ class _$_Client implements _Client {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Client &&
-            const DeepCollectionEquality()
-                .equals(other.phoneNumber, phoneNumber) &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other.trainerEmail, trainerEmail));
+            other is _$_Client &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.trainerEmail, trainerEmail) ||
+                other.trainerEmail == trainerEmail));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(phoneNumber),
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(trainerEmail));
+  int get hashCode =>
+      Object.hash(runtimeType, phoneNumber, id, email, name, trainerEmail);
 
   @JsonKey(ignore: true)
   @override
-  _$ClientCopyWith<_Client> get copyWith =>
-      __$ClientCopyWithImpl<_Client>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_ClientCopyWith<_$_Client> get copyWith =>
+      __$$_ClientCopyWithImpl<_$_Client>(this, _$identity);
 }
 
 abstract class _Client implements Client {
@@ -199,16 +199,17 @@ abstract class _Client implements Client {
       required final String trainerEmail}) = _$_Client;
 
   @override
-  String get phoneNumber => throw _privateConstructorUsedError;
+  String get phoneNumber;
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get trainerEmail => throw _privateConstructorUsedError;
+  String get trainerEmail;
   @override
   @JsonKey(ignore: true)
-  _$ClientCopyWith<_Client> get copyWith => throw _privateConstructorUsedError;
+  _$$_ClientCopyWith<_$_Client> get copyWith =>
+      throw _privateConstructorUsedError;
 }
