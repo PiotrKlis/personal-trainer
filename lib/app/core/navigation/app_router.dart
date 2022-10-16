@@ -1,5 +1,4 @@
 import 'package:auto_route/annotations.dart';
-import 'package:personal_trainer/app/core/auth_guard.dart';
 import 'package:personal_trainer/app/screen/account_choose/account_choose_screen.dart';
 import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercises_screen.dart';
 import 'package:personal_trainer/app/screen/client/client_screen.dart';
@@ -12,7 +11,7 @@ import 'package:personal_trainer/app/screen/register/register_screen.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Screen,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: LoginScreen, guards: [AuthGuard], initial: true),
+    AutoRoute(page: LoginScreen, initial: true),
     AutoRoute(page: RegisterScreen),
     AutoRoute(page: AccountChooseScreen),
     AutoRoute(page: ClientChooseScreen),

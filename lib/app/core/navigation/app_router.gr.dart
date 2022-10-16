@@ -21,15 +21,10 @@ import '../../screen/exercise_search/exercise_search_screen.dart' as _i7;
 import '../../screen/login/login_screen.dart' as _i1;
 import '../../screen/login/password_reset_screen.dart' as _i8;
 import '../../screen/register/register_screen.dart' as _i2;
-import '../auth_guard.dart' as _i11;
 
 class AppRouter extends _i9.RootStackRouter {
-  AppRouter(
-      {_i10.GlobalKey<_i10.NavigatorState>? navigatorKey,
-      required this.authGuard})
+  AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
       : super(navigatorKey);
-
-  final _i11.AuthGuard authGuard;
 
   @override
   final Map<String, _i9.PageFactory> pagesMap = {
@@ -84,7 +79,7 @@ class AppRouter extends _i9.RootStackRouter {
 
   @override
   List<_i9.RouteConfig> get routes => [
-        _i9.RouteConfig(LoginRoute.name, path: '/', guards: [authGuard]),
+        _i9.RouteConfig(LoginRoute.name, path: '/'),
         _i9.RouteConfig(RegisterRoute.name, path: '/register-screen'),
         _i9.RouteConfig(AccountChooseRoute.name,
             path: '/account-choose-screen'),
