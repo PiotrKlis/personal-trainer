@@ -11,70 +11,72 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:flutter/material.dart' as _i10;
+import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
 
-import '../../screen/account_choose/account_choose_screen.dart' as _i3;
-import '../../screen/calendar_exercises/calendar_exercises_screen.dart' as _i6;
-import '../../screen/client/client_screen.dart' as _i5;
-import '../../screen/client_choose/client_choose_screen.dart' as _i4;
-import '../../screen/exercise_search/exercise_search_screen.dart' as _i7;
-import '../../screen/login/login_screen.dart' as _i1;
-import '../../screen/login/password_reset_screen.dart' as _i8;
-import '../../screen/register/register_screen.dart' as _i2;
-import '../auth_guard.dart' as _i11;
+import '../../screen/account_choose/account_choose_screen.dart' as _i4;
+import '../../screen/calendar_exercises/calendar_exercises_screen.dart' as _i7;
+import '../../screen/client/client_screen.dart' as _i6;
+import '../../screen/client_choose/client_choose_screen.dart' as _i5;
+import '../../screen/exercise_search/exercise_search_screen.dart' as _i8;
+import '../../screen/login/login_screen.dart' as _i2;
+import '../../screen/login/password_reset_screen.dart' as _i9;
+import '../../screen/register/register_screen.dart' as _i3;
+import '../../screen/trainer_search/trainer_search_screen.dart' as _i1;
 
-class AppRouter extends _i9.RootStackRouter {
-  AppRouter({
-    _i10.GlobalKey<_i10.NavigatorState>? navigatorKey,
-    required this.authGuard,
-  }) : super(navigatorKey);
-
-  final _i11.AuthGuard authGuard;
+class AppRouter extends _i10.RootStackRouter {
+  AppRouter([_i11.GlobalKey<_i11.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
-  final Map<String, _i9.PageFactory> pagesMap = {
-    LoginRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+  final Map<String, _i10.PageFactory> pagesMap = {
+    TrainerSearchRoute.name: (routeData) {
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i1.LoginScreen(),
+        child: _i1.TrainerSearchScreen(),
+      );
+    },
+    LoginRoute.name: (routeData) {
+      return _i10.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i2.LoginScreen(),
       );
     },
     RegisterRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i2.RegisterScreen(),
+        child: _i3.RegisterScreen(),
       );
     },
     AccountChooseRoute.name: (routeData) {
       final args = routeData.argsAs<AccountChooseRouteArgs>(
           orElse: () => const AccountChooseRouteArgs());
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i3.AccountChooseScreen(trainerId: args.trainerId),
+        child: _i4.AccountChooseScreen(trainerId: args.trainerId),
       );
     },
     ClientChooseRoute.name: (routeData) {
       final args = routeData.argsAs<ClientChooseRouteArgs>();
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i4.ClientChooseScreen(
+        child: _i5.ClientChooseScreen(
           key: args.key,
           trainerId: args.trainerId,
         ),
       );
     },
     ClientRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i5.ClientScreen(),
+        child: _i6.ClientScreen(),
       );
     },
     CalendarExercisesRoute.name: (routeData) {
       final args = routeData.argsAs<CalendarExercisesRouteArgs>();
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i6.CalendarExercisesScreen(
+        child: _i7.CalendarExercisesScreen(
           key: args.key,
           clientId: args.clientId,
         ),
@@ -82,9 +84,9 @@ class AppRouter extends _i9.RootStackRouter {
     },
     ExerciseSearchRoute.name: (routeData) {
       final args = routeData.argsAs<ExerciseSearchRouteArgs>();
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i7.ExerciseSearchScreen(
+        child: _i8.ExerciseSearchScreen(
           key: args.key,
           selectedDate: args.selectedDate,
           clientId: args.clientId,
@@ -93,45 +95,48 @@ class AppRouter extends _i9.RootStackRouter {
       );
     },
     PasswordResetRoute.name: (routeData) {
-      return _i9.MaterialPageX<dynamic>(
+      return _i10.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i8.PasswordResetScreen(),
+        child: const _i9.PasswordResetScreen(),
       );
     },
   };
 
   @override
-  List<_i9.RouteConfig> get routes => [
-        _i9.RouteConfig(
-          LoginRoute.name,
+  List<_i10.RouteConfig> get routes => [
+        _i10.RouteConfig(
+          TrainerSearchRoute.name,
           path: '/',
-          guards: [authGuard],
         ),
-        _i9.RouteConfig(
+        _i10.RouteConfig(
+          LoginRoute.name,
+          path: '/login-screen',
+        ),
+        _i10.RouteConfig(
           RegisterRoute.name,
           path: '/register-screen',
         ),
-        _i9.RouteConfig(
+        _i10.RouteConfig(
           AccountChooseRoute.name,
           path: '/account-choose-screen',
         ),
-        _i9.RouteConfig(
+        _i10.RouteConfig(
           ClientChooseRoute.name,
           path: '/client-choose-screen',
         ),
-        _i9.RouteConfig(
+        _i10.RouteConfig(
           ClientRoute.name,
           path: '/client-screen',
         ),
-        _i9.RouteConfig(
+        _i10.RouteConfig(
           CalendarExercisesRoute.name,
           path: '/calendar-exercises-screen',
         ),
-        _i9.RouteConfig(
+        _i10.RouteConfig(
           ExerciseSearchRoute.name,
           path: '/exercise-search-screen',
         ),
-        _i9.RouteConfig(
+        _i10.RouteConfig(
           PasswordResetRoute.name,
           path: '/password-reset-screen',
         ),
@@ -139,20 +144,32 @@ class AppRouter extends _i9.RootStackRouter {
 }
 
 /// generated route for
-/// [_i1.LoginScreen]
-class LoginRoute extends _i9.PageRouteInfo<void> {
+/// [_i1.TrainerSearchScreen]
+class TrainerSearchRoute extends _i10.PageRouteInfo<void> {
+  const TrainerSearchRoute()
+      : super(
+          TrainerSearchRoute.name,
+          path: '/',
+        );
+
+  static const String name = 'TrainerSearchRoute';
+}
+
+/// generated route for
+/// [_i2.LoginScreen]
+class LoginRoute extends _i10.PageRouteInfo<void> {
   const LoginRoute()
       : super(
           LoginRoute.name,
-          path: '/',
+          path: '/login-screen',
         );
 
   static const String name = 'LoginRoute';
 }
 
 /// generated route for
-/// [_i2.RegisterScreen]
-class RegisterRoute extends _i9.PageRouteInfo<void> {
+/// [_i3.RegisterScreen]
+class RegisterRoute extends _i10.PageRouteInfo<void> {
   const RegisterRoute()
       : super(
           RegisterRoute.name,
@@ -163,8 +180,8 @@ class RegisterRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.AccountChooseScreen]
-class AccountChooseRoute extends _i9.PageRouteInfo<AccountChooseRouteArgs> {
+/// [_i4.AccountChooseScreen]
+class AccountChooseRoute extends _i10.PageRouteInfo<AccountChooseRouteArgs> {
   AccountChooseRoute({dynamic trainerId})
       : super(
           AccountChooseRoute.name,
@@ -187,10 +204,10 @@ class AccountChooseRouteArgs {
 }
 
 /// generated route for
-/// [_i4.ClientChooseScreen]
-class ClientChooseRoute extends _i9.PageRouteInfo<ClientChooseRouteArgs> {
+/// [_i5.ClientChooseScreen]
+class ClientChooseRoute extends _i10.PageRouteInfo<ClientChooseRouteArgs> {
   ClientChooseRoute({
-    _i10.Key? key,
+    _i11.Key? key,
     required String trainerId,
   }) : super(
           ClientChooseRoute.name,
@@ -210,7 +227,7 @@ class ClientChooseRouteArgs {
     required this.trainerId,
   });
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   final String trainerId;
 
@@ -221,8 +238,8 @@ class ClientChooseRouteArgs {
 }
 
 /// generated route for
-/// [_i5.ClientScreen]
-class ClientRoute extends _i9.PageRouteInfo<void> {
+/// [_i6.ClientScreen]
+class ClientRoute extends _i10.PageRouteInfo<void> {
   const ClientRoute()
       : super(
           ClientRoute.name,
@@ -233,11 +250,11 @@ class ClientRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i6.CalendarExercisesScreen]
+/// [_i7.CalendarExercisesScreen]
 class CalendarExercisesRoute
-    extends _i9.PageRouteInfo<CalendarExercisesRouteArgs> {
+    extends _i10.PageRouteInfo<CalendarExercisesRouteArgs> {
   CalendarExercisesRoute({
-    _i10.Key? key,
+    _i11.Key? key,
     required String clientId,
   }) : super(
           CalendarExercisesRoute.name,
@@ -257,7 +274,7 @@ class CalendarExercisesRouteArgs {
     required this.clientId,
   });
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   final String clientId;
 
@@ -268,10 +285,10 @@ class CalendarExercisesRouteArgs {
 }
 
 /// generated route for
-/// [_i7.ExerciseSearchScreen]
-class ExerciseSearchRoute extends _i9.PageRouteInfo<ExerciseSearchRouteArgs> {
+/// [_i8.ExerciseSearchScreen]
+class ExerciseSearchRoute extends _i10.PageRouteInfo<ExerciseSearchRouteArgs> {
   ExerciseSearchRoute({
-    _i10.Key? key,
+    _i11.Key? key,
     required DateTime selectedDate,
     required String clientId,
     required int listLength,
@@ -297,7 +314,7 @@ class ExerciseSearchRouteArgs {
     required this.listLength,
   });
 
-  final _i10.Key? key;
+  final _i11.Key? key;
 
   final DateTime selectedDate;
 
@@ -312,8 +329,8 @@ class ExerciseSearchRouteArgs {
 }
 
 /// generated route for
-/// [_i8.PasswordResetScreen]
-class PasswordResetRoute extends _i9.PageRouteInfo<void> {
+/// [_i9.PasswordResetScreen]
+class PasswordResetRoute extends _i10.PageRouteInfo<void> {
   const PasswordResetRoute()
       : super(
           PasswordResetRoute.name,

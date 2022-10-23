@@ -10,7 +10,7 @@ class TrainerSearchScreen extends StatelessWidget {
       create: (context) => EmptyBloc(EmptyState.initial()),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("empty screen"),
+          title: Text("Personal Trainer"),
         ),
         body: TrainerSearchScreenView(),
       ),
