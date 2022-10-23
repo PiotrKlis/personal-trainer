@@ -8,7 +8,6 @@ import 'package:personal_trainer/app/screen/register/bloc/register_bloc.dart';
 import 'package:personal_trainer/app/screen/register/event/register_event.dart';
 import 'package:personal_trainer/app/screen/register/state/register_state.dart';
 import 'package:personal_trainer/app/util/dimens.dart';
-import 'package:personal_trainer/data/provider/register_provider.dart';
 import 'package:personal_trainer/data/util/const.dart';
 
 class RegisterScreen extends StatelessWidget {
