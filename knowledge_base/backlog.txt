@@ -3,6 +3,14 @@ Backlog
 MVP
 - Fix firestore saving values
 
+// Trainer search screen
+- add top bar
+- add bottom bar
+- add proper trainer card
+
+// Trainer details
+- add trainer details page
+
 // Firebase screen
 
 - Disable back to firebase screen
