@@ -4,7 +4,6 @@ MVP
 - Fix firestore saving values
 
 // Trainer search screen
-- add top bar
 - add bottom bar
 - add proper trainer card
 

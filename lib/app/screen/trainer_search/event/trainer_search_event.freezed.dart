@@ -19,32 +19,46 @@ mixin _$TrainerSearchEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() navigateToFilterScreen,
+    required TResult Function() navigateToExerciseScreen,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? navigateToFilterScreen,
+    TResult? Function()? navigateToExerciseScreen,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? navigateToFilterScreen,
+    TResult Function()? navigateToExerciseScreen,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(NavigateToFilterScreen value)
+        navigateToFilterScreen,
+    required TResult Function(NavigateToExerciseScreen value)
+        navigateToExerciseScreen,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Init value)? init,
+    TResult? Function(NavigateToFilterScreen value)? navigateToFilterScreen,
+    TResult? Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(NavigateToFilterScreen value)? navigateToFilterScreen,
+    TResult Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -105,6 +119,8 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() navigateToFilterScreen,
+    required TResult Function() navigateToExerciseScreen,
   }) {
     return init();
   }
@@ -113,6 +129,8 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? navigateToFilterScreen,
+    TResult? Function()? navigateToExerciseScreen,
   }) {
     return init?.call();
   }
@@ -121,6 +139,8 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? navigateToFilterScreen,
+    TResult Function()? navigateToExerciseScreen,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -133,6 +153,10 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(NavigateToFilterScreen value)
+        navigateToFilterScreen,
+    required TResult Function(NavigateToExerciseScreen value)
+        navigateToExerciseScreen,
   }) {
     return init(this);
   }
@@ -141,6 +165,8 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Init value)? init,
+    TResult? Function(NavigateToFilterScreen value)? navigateToFilterScreen,
+    TResult? Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
   }) {
     return init?.call(this);
   }
@@ -149,6 +175,8 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(NavigateToFilterScreen value)? navigateToFilterScreen,
+    TResult Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -160,4 +188,225 @@ class _$Init implements Init {
 
 abstract class Init implements TrainerSearchEvent {
   const factory Init() = _$Init;
+}
+
+/// @nodoc
+abstract class _$$NavigateToFilterScreenCopyWith<$Res> {
+  factory _$$NavigateToFilterScreenCopyWith(_$NavigateToFilterScreen value,
+          $Res Function(_$NavigateToFilterScreen) then) =
+      __$$NavigateToFilterScreenCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NavigateToFilterScreenCopyWithImpl<$Res>
+    extends _$TrainerSearchEventCopyWithImpl<$Res, _$NavigateToFilterScreen>
+    implements _$$NavigateToFilterScreenCopyWith<$Res> {
+  __$$NavigateToFilterScreenCopyWithImpl(_$NavigateToFilterScreen _value,
+      $Res Function(_$NavigateToFilterScreen) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$NavigateToFilterScreen implements NavigateToFilterScreen {
+  const _$NavigateToFilterScreen();
+
+  @override
+  String toString() {
+    return 'TrainerSearchEvent.navigateToFilterScreen()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NavigateToFilterScreen);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() navigateToFilterScreen,
+    required TResult Function() navigateToExerciseScreen,
+  }) {
+    return navigateToFilterScreen();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? navigateToFilterScreen,
+    TResult? Function()? navigateToExerciseScreen,
+  }) {
+    return navigateToFilterScreen?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? navigateToFilterScreen,
+    TResult Function()? navigateToExerciseScreen,
+    required TResult orElse(),
+  }) {
+    if (navigateToFilterScreen != null) {
+      return navigateToFilterScreen();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(NavigateToFilterScreen value)
+        navigateToFilterScreen,
+    required TResult Function(NavigateToExerciseScreen value)
+        navigateToExerciseScreen,
+  }) {
+    return navigateToFilterScreen(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Init value)? init,
+    TResult? Function(NavigateToFilterScreen value)? navigateToFilterScreen,
+    TResult? Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+  }) {
+    return navigateToFilterScreen?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(NavigateToFilterScreen value)? navigateToFilterScreen,
+    TResult Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    required TResult orElse(),
+  }) {
+    if (navigateToFilterScreen != null) {
+      return navigateToFilterScreen(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NavigateToFilterScreen implements TrainerSearchEvent {
+  const factory NavigateToFilterScreen() = _$NavigateToFilterScreen;
+}
+
+/// @nodoc
+abstract class _$$NavigateToExerciseScreenCopyWith<$Res> {
+  factory _$$NavigateToExerciseScreenCopyWith(_$NavigateToExerciseScreen value,
+          $Res Function(_$NavigateToExerciseScreen) then) =
+      __$$NavigateToExerciseScreenCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NavigateToExerciseScreenCopyWithImpl<$Res>
+    extends _$TrainerSearchEventCopyWithImpl<$Res, _$NavigateToExerciseScreen>
+    implements _$$NavigateToExerciseScreenCopyWith<$Res> {
+  __$$NavigateToExerciseScreenCopyWithImpl(_$NavigateToExerciseScreen _value,
+      $Res Function(_$NavigateToExerciseScreen) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$NavigateToExerciseScreen implements NavigateToExerciseScreen {
+  const _$NavigateToExerciseScreen();
+
+  @override
+  String toString() {
+    return 'TrainerSearchEvent.navigateToExerciseScreen()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NavigateToExerciseScreen);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() navigateToFilterScreen,
+    required TResult Function() navigateToExerciseScreen,
+  }) {
+    return navigateToExerciseScreen();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? navigateToFilterScreen,
+    TResult? Function()? navigateToExerciseScreen,
+  }) {
+    return navigateToExerciseScreen?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? navigateToFilterScreen,
+    TResult Function()? navigateToExerciseScreen,
+    required TResult orElse(),
+  }) {
+    if (navigateToExerciseScreen != null) {
+      return navigateToExerciseScreen();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(NavigateToFilterScreen value)
+        navigateToFilterScreen,
+    required TResult Function(NavigateToExerciseScreen value)
+        navigateToExerciseScreen,
+  }) {
+    return navigateToExerciseScreen(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Init value)? init,
+    TResult? Function(NavigateToFilterScreen value)? navigateToFilterScreen,
+    TResult? Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+  }) {
+    return navigateToExerciseScreen?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(NavigateToFilterScreen value)? navigateToFilterScreen,
+    TResult Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    required TResult orElse(),
+  }) {
+    if (navigateToExerciseScreen != null) {
+      return navigateToExerciseScreen(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NavigateToExerciseScreen implements TrainerSearchEvent {
+  const factory NavigateToExerciseScreen() = _$NavigateToExerciseScreen;
 }

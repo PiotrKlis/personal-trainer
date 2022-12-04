@@ -11,39 +11,40 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i10;
-import 'package:flutter/material.dart' as _i11;
+import 'package:auto_route/auto_route.dart' as _i11;
+import 'package:flutter/material.dart' as _i12;
 
 import '../../screen/account_choose/account_choose_screen.dart' as _i4;
 import '../../screen/calendar_exercises/calendar_exercises_screen.dart' as _i7;
 import '../../screen/client/client_screen.dart' as _i6;
 import '../../screen/client_choose/client_choose_screen.dart' as _i5;
 import '../../screen/exercise_search/exercise_search_screen.dart' as _i8;
+import '../../screen/filter_search/search_filter_screen.dart' as _i10;
 import '../../screen/login/login_screen.dart' as _i2;
 import '../../screen/login/password_reset_screen.dart' as _i9;
 import '../../screen/register/register_screen.dart' as _i3;
 import '../../screen/trainer_search/trainer_search_screen.dart' as _i1;
 
-class AppRouter extends _i10.RootStackRouter {
-  AppRouter([_i11.GlobalKey<_i11.NavigatorState>? navigatorKey])
+class AppRouter extends _i11.RootStackRouter {
+  AppRouter([_i12.GlobalKey<_i12.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i10.PageFactory> pagesMap = {
+  final Map<String, _i11.PageFactory> pagesMap = {
     TrainerSearchRoute.name: (routeData) {
-      return _i10.MaterialPageX<dynamic>(
+      return _i11.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i1.TrainerSearchScreen(),
       );
     },
     LoginRoute.name: (routeData) {
-      return _i10.MaterialPageX<dynamic>(
+      return _i11.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i2.LoginScreen(),
       );
     },
     RegisterRoute.name: (routeData) {
-      return _i10.MaterialPageX<dynamic>(
+      return _i11.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i3.RegisterScreen(),
       );
@@ -51,14 +52,14 @@ class AppRouter extends _i10.RootStackRouter {
     AccountChooseRoute.name: (routeData) {
       final args = routeData.argsAs<AccountChooseRouteArgs>(
           orElse: () => const AccountChooseRouteArgs());
-      return _i10.MaterialPageX<dynamic>(
+      return _i11.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i4.AccountChooseScreen(trainerId: args.trainerId),
       );
     },
     ClientChooseRoute.name: (routeData) {
       final args = routeData.argsAs<ClientChooseRouteArgs>();
-      return _i10.MaterialPageX<dynamic>(
+      return _i11.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i5.ClientChooseScreen(
           key: args.key,
@@ -67,14 +68,14 @@ class AppRouter extends _i10.RootStackRouter {
       );
     },
     ClientRoute.name: (routeData) {
-      return _i10.MaterialPageX<dynamic>(
+      return _i11.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i6.ClientScreen(),
       );
     },
     CalendarExercisesRoute.name: (routeData) {
       final args = routeData.argsAs<CalendarExercisesRouteArgs>();
-      return _i10.MaterialPageX<dynamic>(
+      return _i11.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i7.CalendarExercisesScreen(
           key: args.key,
@@ -84,7 +85,7 @@ class AppRouter extends _i10.RootStackRouter {
     },
     ExerciseSearchRoute.name: (routeData) {
       final args = routeData.argsAs<ExerciseSearchRouteArgs>();
-      return _i10.MaterialPageX<dynamic>(
+      return _i11.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i8.ExerciseSearchScreen(
           key: args.key,
@@ -95,57 +96,67 @@ class AppRouter extends _i10.RootStackRouter {
       );
     },
     PasswordResetRoute.name: (routeData) {
-      return _i10.MaterialPageX<dynamic>(
+      return _i11.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i9.PasswordResetScreen(),
+      );
+    },
+    SearchFilterRoute.name: (routeData) {
+      return _i11.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i10.SearchFilterScreen(),
       );
     },
   };
 
   @override
-  List<_i10.RouteConfig> get routes => [
-        _i10.RouteConfig(
+  List<_i11.RouteConfig> get routes => [
+        _i11.RouteConfig(
           TrainerSearchRoute.name,
           path: '/',
         ),
-        _i10.RouteConfig(
+        _i11.RouteConfig(
           LoginRoute.name,
           path: '/login-screen',
         ),
-        _i10.RouteConfig(
+        _i11.RouteConfig(
           RegisterRoute.name,
           path: '/register-screen',
         ),
-        _i10.RouteConfig(
+        _i11.RouteConfig(
           AccountChooseRoute.name,
           path: '/account-choose-screen',
         ),
-        _i10.RouteConfig(
+        _i11.RouteConfig(
           ClientChooseRoute.name,
           path: '/client-choose-screen',
         ),
-        _i10.RouteConfig(
+        _i11.RouteConfig(
           ClientRoute.name,
           path: '/client-screen',
         ),
-        _i10.RouteConfig(
+        _i11.RouteConfig(
           CalendarExercisesRoute.name,
           path: '/calendar-exercises-screen',
         ),
-        _i10.RouteConfig(
+        _i11.RouteConfig(
           ExerciseSearchRoute.name,
           path: '/exercise-search-screen',
         ),
-        _i10.RouteConfig(
+        _i11.RouteConfig(
           PasswordResetRoute.name,
           path: '/password-reset-screen',
+        ),
+        _i11.RouteConfig(
+          SearchFilterRoute.name,
+          path: '/search-filter-screen',
         ),
       ];
 }
 
 /// generated route for
 /// [_i1.TrainerSearchScreen]
-class TrainerSearchRoute extends _i10.PageRouteInfo<void> {
+class TrainerSearchRoute extends _i11.PageRouteInfo<void> {
   const TrainerSearchRoute()
       : super(
           TrainerSearchRoute.name,
@@ -157,7 +168,7 @@ class TrainerSearchRoute extends _i10.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.LoginScreen]
-class LoginRoute extends _i10.PageRouteInfo<void> {
+class LoginRoute extends _i11.PageRouteInfo<void> {
   const LoginRoute()
       : super(
           LoginRoute.name,
@@ -169,7 +180,7 @@ class LoginRoute extends _i10.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.RegisterScreen]
-class RegisterRoute extends _i10.PageRouteInfo<void> {
+class RegisterRoute extends _i11.PageRouteInfo<void> {
   const RegisterRoute()
       : super(
           RegisterRoute.name,
@@ -181,7 +192,7 @@ class RegisterRoute extends _i10.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.AccountChooseScreen]
-class AccountChooseRoute extends _i10.PageRouteInfo<AccountChooseRouteArgs> {
+class AccountChooseRoute extends _i11.PageRouteInfo<AccountChooseRouteArgs> {
   AccountChooseRoute({dynamic trainerId})
       : super(
           AccountChooseRoute.name,
@@ -205,9 +216,9 @@ class AccountChooseRouteArgs {
 
 /// generated route for
 /// [_i5.ClientChooseScreen]
-class ClientChooseRoute extends _i10.PageRouteInfo<ClientChooseRouteArgs> {
+class ClientChooseRoute extends _i11.PageRouteInfo<ClientChooseRouteArgs> {
   ClientChooseRoute({
-    _i11.Key? key,
+    _i12.Key? key,
     required String trainerId,
   }) : super(
           ClientChooseRoute.name,
@@ -227,7 +238,7 @@ class ClientChooseRouteArgs {
     required this.trainerId,
   });
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
   final String trainerId;
 
@@ -239,7 +250,7 @@ class ClientChooseRouteArgs {
 
 /// generated route for
 /// [_i6.ClientScreen]
-class ClientRoute extends _i10.PageRouteInfo<void> {
+class ClientRoute extends _i11.PageRouteInfo<void> {
   const ClientRoute()
       : super(
           ClientRoute.name,
@@ -252,9 +263,9 @@ class ClientRoute extends _i10.PageRouteInfo<void> {
 /// generated route for
 /// [_i7.CalendarExercisesScreen]
 class CalendarExercisesRoute
-    extends _i10.PageRouteInfo<CalendarExercisesRouteArgs> {
+    extends _i11.PageRouteInfo<CalendarExercisesRouteArgs> {
   CalendarExercisesRoute({
-    _i11.Key? key,
+    _i12.Key? key,
     required String clientId,
   }) : super(
           CalendarExercisesRoute.name,
@@ -274,7 +285,7 @@ class CalendarExercisesRouteArgs {
     required this.clientId,
   });
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
   final String clientId;
 
@@ -286,9 +297,9 @@ class CalendarExercisesRouteArgs {
 
 /// generated route for
 /// [_i8.ExerciseSearchScreen]
-class ExerciseSearchRoute extends _i10.PageRouteInfo<ExerciseSearchRouteArgs> {
+class ExerciseSearchRoute extends _i11.PageRouteInfo<ExerciseSearchRouteArgs> {
   ExerciseSearchRoute({
-    _i11.Key? key,
+    _i12.Key? key,
     required DateTime selectedDate,
     required String clientId,
     required int listLength,
@@ -314,7 +325,7 @@ class ExerciseSearchRouteArgs {
     required this.listLength,
   });
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
   final DateTime selectedDate;
 
@@ -330,7 +341,7 @@ class ExerciseSearchRouteArgs {
 
 /// generated route for
 /// [_i9.PasswordResetScreen]
-class PasswordResetRoute extends _i10.PageRouteInfo<void> {
+class PasswordResetRoute extends _i11.PageRouteInfo<void> {
   const PasswordResetRoute()
       : super(
           PasswordResetRoute.name,
@@ -338,4 +349,16 @@ class PasswordResetRoute extends _i10.PageRouteInfo<void> {
         );
 
   static const String name = 'PasswordResetRoute';
+}
+
+/// generated route for
+/// [_i10.SearchFilterScreen]
+class SearchFilterRoute extends _i11.PageRouteInfo<void> {
+  const SearchFilterRoute()
+      : super(
+          SearchFilterRoute.name,
+          path: '/search-filter-screen',
+        );
+
+  static const String name = 'SearchFilterRoute';
 }

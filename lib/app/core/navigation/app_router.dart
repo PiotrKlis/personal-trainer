@@ -4,6 +4,7 @@ import 'package:personal_trainer/app/screen/calendar_exercises/calendar_exercise
 import 'package:personal_trainer/app/screen/client/client_screen.dart';
 import 'package:personal_trainer/app/screen/client_choose/client_choose_screen.dart';
 import 'package:personal_trainer/app/screen/exercise_search/exercise_search_screen.dart';
+import 'package:personal_trainer/app/screen/filter_search/search_filter_screen.dart';
 import 'package:personal_trainer/app/screen/login/login_screen.dart';
 import 'package:personal_trainer/app/screen/login/password_reset_screen.dart';
 import 'package:personal_trainer/app/screen/register/register_screen.dart';
@@ -21,6 +22,9 @@ import 'package:personal_trainer/app/screen/trainer_search/trainer_search_screen
     AutoRoute(page: CalendarExercisesScreen),
     AutoRoute(page: ExerciseSearchScreen),
     AutoRoute(page: PasswordResetScreen),
+    AutoRoute(page: SearchFilterScreen),
   ],
 )
 class $AppRouter {}
+
+
