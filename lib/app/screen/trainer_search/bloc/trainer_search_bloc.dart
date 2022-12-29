@@ -13,5 +13,8 @@ class TrainerSearchBloc extends Bloc<TrainerSearchEvent, TrainerSearchState> {
     on<NavigateToExerciseScreen>((state, emit) async {
       getIt.get<AppRouter>().push(AccountChooseRoute());
     });
+    on<NavigateToLogin>((state, emit) async {
+      getIt.get<AppRouter>().push(LoginRoute());
+    });
   }
 }

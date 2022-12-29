@@ -2,25 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:personal_trainer/app/screen/empty/bloc/empty_bloc.dart';
-import 'package:personal_trainer/app/screen/empty/state/empty_state.dart';
 import 'package:personal_trainer/app/screen/trainer_search/bloc/trainer_search_bloc.dart';
 import 'package:personal_trainer/app/screen/trainer_search/event/trainer_search_event.dart';
 import 'package:personal_trainer/app/screen/trainer_search/state/trainer_search_state.dart';
 import 'package:share_plus/share_plus.dart';
 
 class TrainerSearchScreen extends StatelessWidget {
+  const TrainerSearchScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TrainerSearchBloc(TrainerSearchState.initial()),
-      child: Scaffold(
+        create: (BuildContext context) =>
+            TrainerSearchBloc(TrainerSearchState.initial()),
+        child: TrainerSearchScreenContent());
+  }
+}
+
+class TrainerSearchScreenContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<TrainerSearchBloc, TrainerSearchState>(
+        builder: (context, state) {
+      return Scaffold(
         appBar: AppBar(
           actions: [
             IconButton(
               icon: const Icon(Icons.person),
               onPressed: () {
-                //no-op
+                context
+                    .read<TrainerSearchBloc>()
+                    .add(TrainerSearchEvent.navigateToLogin());
               },
             ),
           ],
@@ -29,8 +41,8 @@ class TrainerSearchScreen extends StatelessWidget {
         body: TrainerSearchScreenView(),
         bottomNavigationBar: BottomNavigationBar(
           onTap: (position) {
-            //TODO I do not work :(
             if (position == 1) {
+              //navigates to account screen
               context
                   .read<TrainerSearchBloc>()
                   .add(TrainerSearchEvent.navigateToExerciseScreen());
@@ -44,12 +56,11 @@ class TrainerSearchScreen extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Icon(Icons.fitness_center),
               label: 'Exercise',
-
             ),
           ],
         ),
-      ),
-    );
+      );
+    });
   }
 }
 

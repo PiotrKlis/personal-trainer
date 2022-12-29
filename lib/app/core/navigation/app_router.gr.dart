@@ -34,7 +34,7 @@ class AppRouter extends _i11.RootStackRouter {
     TrainerSearchRoute.name: (routeData) {
       return _i11.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i1.TrainerSearchScreen(),
+        child: const _i1.TrainerSearchScreen(),
       );
     },
     LoginRoute.name: (routeData) {

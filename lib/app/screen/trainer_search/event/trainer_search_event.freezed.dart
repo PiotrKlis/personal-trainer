@@ -21,6 +21,7 @@ mixin _$TrainerSearchEvent {
     required TResult Function() init,
     required TResult Function() navigateToFilterScreen,
     required TResult Function() navigateToExerciseScreen,
+    required TResult Function() navigateToLogin,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$TrainerSearchEvent {
     TResult? Function()? init,
     TResult? Function()? navigateToFilterScreen,
     TResult? Function()? navigateToExerciseScreen,
+    TResult? Function()? navigateToLogin,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$TrainerSearchEvent {
     TResult Function()? init,
     TResult Function()? navigateToFilterScreen,
     TResult Function()? navigateToExerciseScreen,
+    TResult Function()? navigateToLogin,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,6 +48,7 @@ mixin _$TrainerSearchEvent {
         navigateToFilterScreen,
     required TResult Function(NavigateToExerciseScreen value)
         navigateToExerciseScreen,
+    required TResult Function(NavigateToLogin value) navigateToLogin,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -52,6 +56,7 @@ mixin _$TrainerSearchEvent {
     TResult? Function(Init value)? init,
     TResult? Function(NavigateToFilterScreen value)? navigateToFilterScreen,
     TResult? Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    TResult? Function(NavigateToLogin value)? navigateToLogin,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +64,7 @@ mixin _$TrainerSearchEvent {
     TResult Function(Init value)? init,
     TResult Function(NavigateToFilterScreen value)? navigateToFilterScreen,
     TResult Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    TResult Function(NavigateToLogin value)? navigateToLogin,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +127,7 @@ class _$Init implements Init {
     required TResult Function() init,
     required TResult Function() navigateToFilterScreen,
     required TResult Function() navigateToExerciseScreen,
+    required TResult Function() navigateToLogin,
   }) {
     return init();
   }
@@ -131,6 +138,7 @@ class _$Init implements Init {
     TResult? Function()? init,
     TResult? Function()? navigateToFilterScreen,
     TResult? Function()? navigateToExerciseScreen,
+    TResult? Function()? navigateToLogin,
   }) {
     return init?.call();
   }
@@ -141,6 +149,7 @@ class _$Init implements Init {
     TResult Function()? init,
     TResult Function()? navigateToFilterScreen,
     TResult Function()? navigateToExerciseScreen,
+    TResult Function()? navigateToLogin,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -157,6 +166,7 @@ class _$Init implements Init {
         navigateToFilterScreen,
     required TResult Function(NavigateToExerciseScreen value)
         navigateToExerciseScreen,
+    required TResult Function(NavigateToLogin value) navigateToLogin,
   }) {
     return init(this);
   }
@@ -167,6 +177,7 @@ class _$Init implements Init {
     TResult? Function(Init value)? init,
     TResult? Function(NavigateToFilterScreen value)? navigateToFilterScreen,
     TResult? Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    TResult? Function(NavigateToLogin value)? navigateToLogin,
   }) {
     return init?.call(this);
   }
@@ -177,6 +188,7 @@ class _$Init implements Init {
     TResult Function(Init value)? init,
     TResult Function(NavigateToFilterScreen value)? navigateToFilterScreen,
     TResult Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    TResult Function(NavigateToLogin value)? navigateToLogin,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -231,6 +243,7 @@ class _$NavigateToFilterScreen implements NavigateToFilterScreen {
     required TResult Function() init,
     required TResult Function() navigateToFilterScreen,
     required TResult Function() navigateToExerciseScreen,
+    required TResult Function() navigateToLogin,
   }) {
     return navigateToFilterScreen();
   }
@@ -241,6 +254,7 @@ class _$NavigateToFilterScreen implements NavigateToFilterScreen {
     TResult? Function()? init,
     TResult? Function()? navigateToFilterScreen,
     TResult? Function()? navigateToExerciseScreen,
+    TResult? Function()? navigateToLogin,
   }) {
     return navigateToFilterScreen?.call();
   }
@@ -251,6 +265,7 @@ class _$NavigateToFilterScreen implements NavigateToFilterScreen {
     TResult Function()? init,
     TResult Function()? navigateToFilterScreen,
     TResult Function()? navigateToExerciseScreen,
+    TResult Function()? navigateToLogin,
     required TResult orElse(),
   }) {
     if (navigateToFilterScreen != null) {
@@ -267,6 +282,7 @@ class _$NavigateToFilterScreen implements NavigateToFilterScreen {
         navigateToFilterScreen,
     required TResult Function(NavigateToExerciseScreen value)
         navigateToExerciseScreen,
+    required TResult Function(NavigateToLogin value) navigateToLogin,
   }) {
     return navigateToFilterScreen(this);
   }
@@ -277,6 +293,7 @@ class _$NavigateToFilterScreen implements NavigateToFilterScreen {
     TResult? Function(Init value)? init,
     TResult? Function(NavigateToFilterScreen value)? navigateToFilterScreen,
     TResult? Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    TResult? Function(NavigateToLogin value)? navigateToLogin,
   }) {
     return navigateToFilterScreen?.call(this);
   }
@@ -287,6 +304,7 @@ class _$NavigateToFilterScreen implements NavigateToFilterScreen {
     TResult Function(Init value)? init,
     TResult Function(NavigateToFilterScreen value)? navigateToFilterScreen,
     TResult Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    TResult Function(NavigateToLogin value)? navigateToLogin,
     required TResult orElse(),
   }) {
     if (navigateToFilterScreen != null) {
@@ -342,6 +360,7 @@ class _$NavigateToExerciseScreen implements NavigateToExerciseScreen {
     required TResult Function() init,
     required TResult Function() navigateToFilterScreen,
     required TResult Function() navigateToExerciseScreen,
+    required TResult Function() navigateToLogin,
   }) {
     return navigateToExerciseScreen();
   }
@@ -352,6 +371,7 @@ class _$NavigateToExerciseScreen implements NavigateToExerciseScreen {
     TResult? Function()? init,
     TResult? Function()? navigateToFilterScreen,
     TResult? Function()? navigateToExerciseScreen,
+    TResult? Function()? navigateToLogin,
   }) {
     return navigateToExerciseScreen?.call();
   }
@@ -362,6 +382,7 @@ class _$NavigateToExerciseScreen implements NavigateToExerciseScreen {
     TResult Function()? init,
     TResult Function()? navigateToFilterScreen,
     TResult Function()? navigateToExerciseScreen,
+    TResult Function()? navigateToLogin,
     required TResult orElse(),
   }) {
     if (navigateToExerciseScreen != null) {
@@ -378,6 +399,7 @@ class _$NavigateToExerciseScreen implements NavigateToExerciseScreen {
         navigateToFilterScreen,
     required TResult Function(NavigateToExerciseScreen value)
         navigateToExerciseScreen,
+    required TResult Function(NavigateToLogin value) navigateToLogin,
   }) {
     return navigateToExerciseScreen(this);
   }
@@ -388,6 +410,7 @@ class _$NavigateToExerciseScreen implements NavigateToExerciseScreen {
     TResult? Function(Init value)? init,
     TResult? Function(NavigateToFilterScreen value)? navigateToFilterScreen,
     TResult? Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    TResult? Function(NavigateToLogin value)? navigateToLogin,
   }) {
     return navigateToExerciseScreen?.call(this);
   }
@@ -398,6 +421,7 @@ class _$NavigateToExerciseScreen implements NavigateToExerciseScreen {
     TResult Function(Init value)? init,
     TResult Function(NavigateToFilterScreen value)? navigateToFilterScreen,
     TResult Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    TResult Function(NavigateToLogin value)? navigateToLogin,
     required TResult orElse(),
   }) {
     if (navigateToExerciseScreen != null) {
@@ -409,4 +433,120 @@ class _$NavigateToExerciseScreen implements NavigateToExerciseScreen {
 
 abstract class NavigateToExerciseScreen implements TrainerSearchEvent {
   const factory NavigateToExerciseScreen() = _$NavigateToExerciseScreen;
+}
+
+/// @nodoc
+abstract class _$$NavigateToLoginCopyWith<$Res> {
+  factory _$$NavigateToLoginCopyWith(
+          _$NavigateToLogin value, $Res Function(_$NavigateToLogin) then) =
+      __$$NavigateToLoginCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NavigateToLoginCopyWithImpl<$Res>
+    extends _$TrainerSearchEventCopyWithImpl<$Res, _$NavigateToLogin>
+    implements _$$NavigateToLoginCopyWith<$Res> {
+  __$$NavigateToLoginCopyWithImpl(
+      _$NavigateToLogin _value, $Res Function(_$NavigateToLogin) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$NavigateToLogin implements NavigateToLogin {
+  const _$NavigateToLogin();
+
+  @override
+  String toString() {
+    return 'TrainerSearchEvent.navigateToLogin()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NavigateToLogin);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() navigateToFilterScreen,
+    required TResult Function() navigateToExerciseScreen,
+    required TResult Function() navigateToLogin,
+  }) {
+    return navigateToLogin();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? navigateToFilterScreen,
+    TResult? Function()? navigateToExerciseScreen,
+    TResult? Function()? navigateToLogin,
+  }) {
+    return navigateToLogin?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? navigateToFilterScreen,
+    TResult Function()? navigateToExerciseScreen,
+    TResult Function()? navigateToLogin,
+    required TResult orElse(),
+  }) {
+    if (navigateToLogin != null) {
+      return navigateToLogin();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(NavigateToFilterScreen value)
+        navigateToFilterScreen,
+    required TResult Function(NavigateToExerciseScreen value)
+        navigateToExerciseScreen,
+    required TResult Function(NavigateToLogin value) navigateToLogin,
+  }) {
+    return navigateToLogin(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Init value)? init,
+    TResult? Function(NavigateToFilterScreen value)? navigateToFilterScreen,
+    TResult? Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    TResult? Function(NavigateToLogin value)? navigateToLogin,
+  }) {
+    return navigateToLogin?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(NavigateToFilterScreen value)? navigateToFilterScreen,
+    TResult Function(NavigateToExerciseScreen value)? navigateToExerciseScreen,
+    TResult Function(NavigateToLogin value)? navigateToLogin,
+    required TResult orElse(),
+  }) {
+    if (navigateToLogin != null) {
+      return navigateToLogin(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NavigateToLogin implements TrainerSearchEvent {
+  const factory NavigateToLogin() = _$NavigateToLogin;
 }

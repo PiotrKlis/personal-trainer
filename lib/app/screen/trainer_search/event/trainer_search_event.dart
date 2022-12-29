@@ -10,5 +10,7 @@ class TrainerSearchEvent with _$TrainerSearchEvent {
       NavigateToFilterScreen;
 
   const factory TrainerSearchEvent.navigateToExerciseScreen() =
-  NavigateToExerciseScreen;
+      NavigateToExerciseScreen;
+
+  const factory TrainerSearchEvent.navigateToLogin() = NavigateToLogin;
 }
