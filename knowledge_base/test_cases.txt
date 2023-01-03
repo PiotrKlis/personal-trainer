@@ -70,3 +70,6 @@ Test cases
 // Add exercise
 - navigation to add exercise screen works
 - screen reloads itself with new exercises when came back from add exercise screen
+
+/// Trainer search
+-

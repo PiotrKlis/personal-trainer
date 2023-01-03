@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:personal_trainer/app/core/dependency_injection/get_it_config.dart';
+import 'package:personal_trainer/app/core/navigation/app_router.gr.dart';
 import 'package:personal_trainer/app/screen/client_choose/bloc/client_choose_cubit.dart';
 import 'package:personal_trainer/app/screen/client_choose/state/client_choose_state.dart';
 
@@ -20,7 +22,18 @@ class ClientChooseScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text("Choose client"),
         ),
-        body: Container(),
+        body: ListView.builder(
+          itemCount: 8,
+            itemBuilder: (BuildContext context, int index) {
+          return Card(
+              child: ListTile(
+                  onTap: () {
+                    getIt
+                        .get<AppRouter>()
+                        .push(CalendarExercisesRoute(clientId: trainerId));
+                  },
+                  title: Text("Client name")));
+        }),
         // body: BlocBuilder<ClientChooseBloc, ClientChooseState>(
         //     builder: (BuildContext context, state) {
         //   if (state is ClientChooseLoading) {

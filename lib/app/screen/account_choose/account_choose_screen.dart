@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_trainer/app/core/dependency_injection/get_it_config.dart';
 import 'package:personal_trainer/app/core/navigation/app_router.gr.dart';
@@ -24,7 +25,7 @@ class AccountChooseScreen extends StatelessWidget {
                     onPressed: () {
                       getIt
                           .get<AppRouter>()
-                          .push(ClientChooseRoute(trainerId: trainerId));
+                          .push(ClientChooseRoute(trainerId: FirebaseAuth.instance.currentUser?.uid ?? ""));
                     },
                     child: Text('TRAINER'))),
             Padding(
