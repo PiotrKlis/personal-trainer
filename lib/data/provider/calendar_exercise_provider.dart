@@ -12,6 +12,7 @@ class CalendarExerciseProvider {
 
   Future<List<UserExercise>> getExercisesFor(
       {required DateTime selectedDay, required String clientId}) async {
+    // Test commit
     try {
       var formattedDate = DateUtils.dateOnly(selectedDay).toString();
       var userExercisesResult = await FirebaseFirestore.instance
